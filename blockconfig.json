@@ -1,3 +1,4 @@
 {
-  "title": "Hellouu!"
+  "title": "Hellouu!",
+  "allowedPostTypes": ["post", "page"]
 }

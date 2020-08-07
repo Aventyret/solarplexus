@@ -3,18 +3,26 @@ import "./ruled-display-block.scss";
 import { __ } from "@wordpress/i18n";
 import { registerBlockType } from "@wordpress/blocks";
 
+import { InspectorControls } from "@wordpress/block-editor";
+
+import { TabPanel } from "@wordpress/components";
+
+import RuledDisplayBlockEdit from "./edit";
 
 registerBlockType("rdb/ruled-display-block", {
   title: "Ruled display block",
   icon: "universal-access-alt",
   category: "layout",
   example: {},
-  edit() {
+  attributes: {
+    postTypes: {
+      type: "array",
+      default: []
+    },
+  },
+  edit(props) {
     return (
-      <div className="rdb-wrap">
-        Block w config from json first test. <pre>title</pre> from config is{" "}
-        <span className="rdb-test">{ruledDisplayBlockConfig.title}</span>
-      </div>
+      <RuledDisplayBlockEdit config={ruledDisplayBlockConfig} {...props} />
     );
   },
   save() {
