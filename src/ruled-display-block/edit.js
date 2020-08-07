@@ -1,32 +1,59 @@
 const { __ } = wp.i18n;
 
-import { PanelBody, CheckboxControl } from "@wordpress/components";
+import _ from "lodash";
+
+import {
+  PanelBody,
+  CheckboxControl,
+  RadioControl,
+} from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 
 import { useSelect } from "@wordpress/data";
 
 const RuledDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
   console.log("attributes", attributes);
+
+  // Get all the registered post types
   const availablePostTypes = useSelect((select) => {
     const { getPostTypes } = select("core");
 
     const postTypes = getPostTypes();
+
+    // Only return the ones allowed in config
     return postTypes && config.allowedPostTypes
       ? postTypes.filter((postType) => {
           return config.allowedPostTypes.includes(postType.slug);
         })
       : null;
-  });
+  }, []);
 
-  const onPostTypeCheckboxChange = (postTypeSlug) => {
-    const newSelectedPostTypes = attributes.postTypes.includes(postTypeSlug)
-      ? attributes.postTypes.filter((_postTypeSlug) => {
-          return _postTypeSlug !== postTypeSlug;
-        })
-      : [...attributes.postTypes, postTypeSlug];
+  const posts = useSelect((select) => {
+    const { getEntityRecords } = select("core");
 
+    const perType = getEntityRecords("postType", attributes.postType, {
+      status: "publish",
+      per_page: config.noOfPosts,
+    });
+
+    return perType;
+  }, [attributes.postType]);
+
+  // const onPostTypeCheckboxChange = (postTypeSlug) => {
+  //   const newSelectedPostTypes = attributes.postTypes.includes(postTypeSlug)
+  //     ? attributes.postTypes.filter((_postTypeSlug) => {
+  //         return _postTypeSlug !== postTypeSlug;
+  //       })
+  //     : [...attributes.postTypes, postTypeSlug];
+
+  //   setAttributes({
+  //     postTypes: newSelectedPostTypes,
+  //   });
+  // };
+
+  const onPostTypeRadioChange = (postTypeSlug) => {
     setAttributes({
-      postTypes: newSelectedPostTypes,
+      postType: postTypeSlug,
     });
   };
 
@@ -35,9 +62,17 @@ const RuledDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
 
   const inspectorControls = (
     <InspectorControls>
-      {availablePostTypes ? (
+      {availablePostTypes && availablePostTypes.length && (
         <PanelBody title={__("Post types", "rdb")}>
-          {availablePostTypes.map((postType) => {
+          <RadioControl
+            label={__("Show posts from:", "rdb")}
+            selected={attributes.postType}
+            options={availablePostTypes.map((postType) => {
+              return { label: postType.name, value: postType.slug };
+            })}
+            onChange={(value) => onPostTypeRadioChange(value)}
+          />
+          {/* {availablePostTypes.map((postType) => {
             return (
               <CheckboxControl
                 key={postType.slug}
@@ -46,9 +81,9 @@ const RuledDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
                 checked={attributes.postTypes.includes(postType.slug)}
               />
             );
-          })}
+          })} */}
         </PanelBody>
-      ) : null}
+      )}
     </InspectorControls>
   );
 
@@ -57,9 +92,13 @@ const RuledDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
       {inspectorControls}
       Block w config from json first test. <pre>title</pre> from config is{" "}
       <span className="rdb-test">{config.title}</span>
-      {/* {attributes.postTypes.map((postType) => {
-        return <span key={postType}>{postType}</span>;
-      })} */}
+      {posts && (
+        <ul>
+          {posts.map((post) => {
+            return <li key={post.id}>{post.title.rendered}</li>;
+          })}
+        </ul>
+      )}
     </div>
   );
 };

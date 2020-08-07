@@ -15,9 +15,9 @@ registerBlockType("rdb/ruled-display-block", {
   category: "layout",
   example: {},
   attributes: {
-    postTypes: {
-      type: "array",
-      default: []
+    postType: {
+      type: "string",
+      default: ""
     },
   },
   edit(props) {

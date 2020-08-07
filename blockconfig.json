@@ -1,4 +1,5 @@
 {
   "title": "Hellouu!",
-  "allowedPostTypes": ["post", "page"]
+  "allowedPostTypes": ["post", "page"],
+  "noOfPosts": 3
 }
