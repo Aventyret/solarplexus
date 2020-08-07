@@ -1,0 +1,13 @@
+$test: #ff0000;
+
+.rdb-wrap {
+  pre {
+    display: inline;
+    padding: 0;
+    margin: 0;
+  }
+}
+.rdb-test {
+  color: $test;
+}
+
