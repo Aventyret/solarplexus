@@ -11,9 +11,9 @@ import { InspectorControls } from "@wordpress/block-editor";
 
 import { useSelect } from "@wordpress/data";
 
-const RuledDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
-  console.log("attributes", attributes);
+const TERMS_DEFAULT_SELECT_VALUE = "";
 
+const RuledDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
   // Get all the registered post types
   const availablePostTypes = useSelect((select) => {
     const { getPostTypes } = select("core");
@@ -28,16 +28,65 @@ const RuledDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
       : null;
   }, []);
 
-  const posts = useSelect((select) => {
-    const { getEntityRecords } = select("core");
+  const availableTaxonomies = useSelect((select) => {
+    const { getTaxonomies } = select("core");
 
-    const perType = getEntityRecords("postType", attributes.postType, {
-      status: "publish",
-      per_page: config.noOfPosts,
-    });
+    const taxonomies = getTaxonomies();
 
-    return perType;
-  }, [attributes.postType]);
+    return taxonomies && config.allowedTaxonomies
+      ? taxonomies.filter((taxonomy) => {
+          // Weirdly, taxonomy.slug here refers to the initial key you
+          // give register_taxonomy, not the rewrite slug.
+          return config.allowedTaxonomies.includes(taxonomy.slug);
+        })
+      : null;
+  });
+
+  // Get all the terms for specified taxonomies
+  const availableTaxsAndTerms = useSelect(
+    (select) => {
+      if (!availableTaxonomies) return null;
+
+      const { getEntityRecords } = select("core");
+
+      const taxTree = availableTaxonomies.map((tax) => {
+        return {
+          slug: tax.slug,
+          name: tax.name,
+          terms: getEntityRecords("taxonomy", tax.slug, { per_page: -1 }),
+        };
+      });
+
+      return taxTree;
+    },
+    [availableTaxonomies]
+  );
+
+  const selectedTaxonomy = availableTaxsAndTerms
+    ? availableTaxsAndTerms.find((taxWTerms) => {
+        return taxWTerms.slug === attributes.taxonomy;
+      })
+    : null;
+
+  const posts = useSelect(
+    (select) => {
+      const { getEntityRecords } = select("core");
+
+      let q = {
+        status: "publish",
+        per_page: config.noOfPosts,
+      };
+
+      if (attributes.taxonomy && attributes.terms) {
+        q[attributes.taxonomy] = attributes.terms;
+      }
+
+      const perType = getEntityRecords("postType", attributes.postType, q);
+
+      return perType;
+    },
+    [attributes.postType, attributes.taxonomy, attributes.terms]
+  );
 
   // const onPostTypeCheckboxChange = (postTypeSlug) => {
   //   const newSelectedPostTypes = attributes.postTypes.includes(postTypeSlug)
@@ -51,10 +100,27 @@ const RuledDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
   //   });
   // };
 
+  const onTermCheckboxChange = (termId) => {
+    const newSelectedTerms = attributes.terms.includes(termId)
+      ? attributes.terms.filter((_termId) => {
+          return _termId !== termId;
+        })
+      : [...attributes.terms, termId];
+
+    setAttributes({
+      terms: newSelectedTerms,
+    });
+  };
+
   const onPostTypeRadioChange = (postTypeSlug) => {
     setAttributes({
       postType: postTypeSlug,
     });
+  };
+
+  const onTaxonomyRadioChange = (taxonomySlug) => {
+    // Clear the terms of previous selection when taxonomy changes
+    setAttributes({ terms: [], taxonomy: taxonomySlug });
   };
 
   if (!config.allowedPostTypes)
@@ -82,6 +148,34 @@ const RuledDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
               />
             );
           })} */}
+        </PanelBody>
+      )}
+      {availableTaxsAndTerms && availableTaxsAndTerms.length && (
+        <PanelBody title={__("Taxonomies", "rdb")}>
+          <RadioControl
+            label={__("Show posts from:", "rdb")}
+            selected={attributes.taxonomy}
+            options={[
+              { label: __("All", "rdb"), value: TERMS_DEFAULT_SELECT_VALUE },
+              ...availableTaxsAndTerms.map((taxWTerms) => {
+                return { label: taxWTerms.name, value: taxWTerms.slug };
+              }),
+            ]}
+            onChange={(value) => onTaxonomyRadioChange(value)}
+          />
+          {selectedTaxonomy &&
+            selectedTaxonomy.terms &&
+            selectedTaxonomy.terms.map((term) => {
+              // TODO force user to select at least 1 term somehow?
+              return (
+                <CheckboxControl
+                  key={term.id}
+                  checked={attributes.terms.includes(term.id)}
+                  label={term.name}
+                  onChange={() => onTermCheckboxChange(term.id)}
+                />
+              );
+            })}
         </PanelBody>
       )}
     </InspectorControls>

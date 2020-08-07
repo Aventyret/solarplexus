@@ -1,5 +1,6 @@
 {
   "title": "Hellouu!",
   "allowedPostTypes": ["post", "page"],
+  "allowedTaxonomies": ["location", "category"],
   "noOfPosts": 3
 }

@@ -19,6 +19,14 @@ registerBlockType("rdb/ruled-display-block", {
       type: "string",
       default: ""
     },
+    taxonomy: {
+      type: "string",
+      default: ""
+    },
+    terms: {
+      type: "array",
+      default: []
+    },
   },
   edit(props) {
     return (
