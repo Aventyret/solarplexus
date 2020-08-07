@@ -4,7 +4,7 @@ import { __ } from "@wordpress/i18n";
 import { registerBlockType } from "@wordpress/blocks";
 
 
-registerBlockType("ruled-display/block", {
+registerBlockType("rdb/ruled-display-block", {
   title: "Ruled display block",
   icon: "universal-access-alt",
   category: "layout",
