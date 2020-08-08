@@ -2,5 +2,6 @@
   "allowedPostTypes": ["post", "page"],
   "allowedTaxonomies": ["location", "category"],
   "noOfPosts": 3,
-  "noOfGridCols": 3
+  "noOfGridCols": 3,
+  "customFields": [{ "name": "andreas_custom", "type": "string" }]
 }

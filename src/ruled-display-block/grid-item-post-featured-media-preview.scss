@@ -1,0 +1,21 @@
+
+
+.rdb-gridItemPostFeaturedMediaPreview {
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  img {
+    max-width: 100%;
+  }
+  &:after {
+    content: " ";
+    position: absolute;
+    display: block;
+    background: none rgba(0,0,0,0.5);
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
