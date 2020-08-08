@@ -1,6 +1,6 @@
 {
-  "title": "Hellouu!",
   "allowedPostTypes": ["post", "page"],
   "allowedTaxonomies": ["location", "category"],
-  "noOfPosts": 3
+  "noOfPosts": 3,
+  "noOfGridCols": 3
 }

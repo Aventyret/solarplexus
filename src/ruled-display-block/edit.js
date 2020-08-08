@@ -11,9 +11,11 @@ import { InspectorControls } from "@wordpress/block-editor";
 
 import { useSelect } from "@wordpress/data";
 
+import GridItemPostPreview from "./grid-item-post-preview";
+
 const TERMS_DEFAULT_SELECT_VALUE = "";
 
-const RuledDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
+const Edit = ({ config, attributes, setAttributes }) => {
   // Get all the registered post types
   const availablePostTypes = useSelect((select) => {
     const { getPostTypes } = select("core");
@@ -87,6 +89,8 @@ const RuledDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
     },
     [attributes.postType, attributes.taxonomy, attributes.terms]
   );
+
+  console.log("posts", posts);
 
   // const onPostTypeCheckboxChange = (postTypeSlug) => {
   //   const newSelectedPostTypes = attributes.postTypes.includes(postTypeSlug)
@@ -181,20 +185,19 @@ const RuledDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
     </InspectorControls>
   );
 
+  const gridCls = `rdb-grid rdb-grid--cols${config.noOfGridCols}`;
   return (
     <div className="rdb-wrap">
       {inspectorControls}
-      Block w config from json first test. <pre>title</pre> from config is{" "}
-      <span className="rdb-test">{config.title}</span>
       {posts && (
-        <ul>
-          {posts.map((post) => {
-            return <li key={post.id}>{post.title.rendered}</li>;
-          })}
-        </ul>
+        <div className={gridCls}>
+          {posts.map((post) => (
+            <GridItemPostPreview key={post.id} post={post} config={config} />
+          ))}
+        </div>
       )}
     </div>
   );
 };
 
-export default RuledDisplayBlockEdit;
+export default Edit;

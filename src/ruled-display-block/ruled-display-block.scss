@@ -11,3 +11,10 @@ $test: #ff0000;
   color: $test;
 }
 
+.rdb-grid {
+  display: flex;
+  flex-wrap: wrap;
+  &--cols1 {
+    display: block;
+  }
+}

@@ -7,7 +7,7 @@ import { InspectorControls } from "@wordpress/block-editor";
 
 import { TabPanel } from "@wordpress/components";
 
-import RuledDisplayBlockEdit from "./edit";
+import Edit from "./edit";
 
 registerBlockType("rdb/ruled-display-block", {
   title: "Ruled display block",
@@ -30,7 +30,7 @@ registerBlockType("rdb/ruled-display-block", {
   },
   edit(props) {
     return (
-      <RuledDisplayBlockEdit config={ruledDisplayBlockConfig} {...props} />
+      <Edit config={ruledDisplayBlockConfig} {...props} />
     );
   },
   save() {
