@@ -9,19 +9,21 @@ registerBlockType("rdb/handpicked-display-block", {
   category: "layout",
   example: {},
   attributes: {
+    searchResults: {
+      type: "array",
+      default: [],
+    },
     layout: {
       type: "string",
-      default: ruledDisplayBlockConfig.allowedLayouts[0]
+      default: ruledDisplayBlockConfig.allowedLayouts[0],
     },
     itemLayout: {
       type: "string",
-      default: ruledDisplayBlockConfig.allowedItemLayouts[0]
-    }
+      default: ruledDisplayBlockConfig.allowedItemLayouts[0],
+    },
   },
   edit(props) {
-    return (
-      <Edit config={ruledDisplayBlockConfig} {...props} />
-    );
+    return <Edit config={ruledDisplayBlockConfig} {...props} />;
   },
   save() {
     return null;

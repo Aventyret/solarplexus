@@ -1,0 +1,16 @@
+h5.rdb-selectedSearchResultTitle {
+  margin-top: 0;
+}
+
+.rdb-selectedSearchResultButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.rdb-selectedSearchResults .components-card {
+  margin-bottom: 0.5em;
+  
+  .components-card__body {
+    padding: 0.7em;
+  }
+}

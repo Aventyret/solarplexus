@@ -5,7 +5,7 @@ import _ from "lodash";
 import {
   PanelBody,
   CheckboxControl,
-  RadioControl
+  RadioControl,
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 
@@ -15,8 +15,6 @@ import GridItemPostPreview from "../../components/grid-item-post-preview/grid-it
 import RdbBlockControls from "../../components/rdb-block-controls/rdb-block-controls";
 
 const TERMS_DEFAULT_SELECT_VALUE = "";
-
-import { LAYOUTS, ITEM_LAYOUTS } from "../../consts";
 
 const Edit = ({ config, attributes, setAttributes }) => {
   // Get all the registered post types

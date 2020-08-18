@@ -2,7 +2,7 @@
   "allowedPostTypes": ["post", "page"],
   "allowedTaxonomies": ["location", "category"],
   "noOfPosts": 3,
-  "noOfGridCols": 3,
+  "noOfGridCols": 2,
   "customFields": [{ "name": "andreas_custom", "type": "string" }],
   "allowedLayouts": ["horizontal", "vertical", "carousel"],
   "allowedItemLayouts": ["imagebg", "imagetop", "imageleft"]
