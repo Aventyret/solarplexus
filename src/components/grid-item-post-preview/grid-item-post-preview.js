@@ -1,7 +1,7 @@
 import "./grid-item-post-preview.scss";
 
-import GridItemPostFeaturedMediaPreview from "./grid-item-post-featured-media-preview";
-import GridItemPostCustomFieldsPreview from "./grid-item-post-custom-fields-preview";
+import GridItemPostFeaturedMediaPreview from "../grid-item-post-featured-media-preview/grid-item-post-featured-media-preview";
+import GridItemPostCustomFieldsPreview from "../grid-item-post-custom-fields-preview/grid-item-post-custom-fields-preview";
 
 const GridItemPostPreview = ({ post, config, layout, isCol }) => {
   console.log("GridItemPostPreview", post);

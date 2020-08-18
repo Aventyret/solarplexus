@@ -5,41 +5,18 @@ import _ from "lodash";
 import {
   PanelBody,
   CheckboxControl,
-  RadioControl,
-  Toolbar,
-  ToolbarButton,
-  ToolbarGroup,
+  RadioControl
 } from "@wordpress/components";
-import { InspectorControls, BlockControls } from "@wordpress/block-editor";
+import { InspectorControls } from "@wordpress/block-editor";
 
 import { useSelect } from "@wordpress/data";
 
-import GridItemPostPreview from "./grid-item-post-preview";
-
-import {
-  flipHorizontal,
-  flipVertical,
-  arrowRight,
-  stretchWide,
-  chevronUp,
-  chevronLeft,
-} from "@wordpress/icons";
+import GridItemPostPreview from "../../components/grid-item-post-preview/grid-item-post-preview";
+import RdbBlockControls from "../../components/rdb-block-controls/rdb-block-controls";
 
 const TERMS_DEFAULT_SELECT_VALUE = "";
 
-// TODO better carousel icon
-const LAYOUTS = {
-  horizontal: { label: __("Horizontal", "rdb"), icon: flipHorizontal },
-  vertical: { label: __("Vertical", "rdb"), icon: flipVertical },
-  carousel: { label: __("Carousel", "rdb"), icon: arrowRight },
-};
-
-// TODO better icons
-const ITEM_LAYOUTS = {
-  imagebg: { label: __("Image as background", "rdb"), icon: stretchWide },
-  imagetop: { label: __("Image on top", "rdb"), icon: chevronUp },
-  imageleft: { label: __("Image to the left", "rdb"), icon: chevronLeft },
-};
+import { LAYOUTS, ITEM_LAYOUTS } from "../../consts";
 
 const Edit = ({ config, attributes, setAttributes }) => {
   // Get all the registered post types
@@ -153,47 +130,8 @@ const Edit = ({ config, attributes, setAttributes }) => {
     setAttributes({ terms: [], taxonomy: taxonomySlug });
   };
 
-  const onLayoutButtonClick = (layout) => {
-    setAttributes({ layout });
-  };
-
-  const onItemLayoutButtonClick = (itemLayout) => {
-    setAttributes({ itemLayout });
-  };
-
   if (!config.allowedPostTypes)
     return <span>Error: allowedPostTypes not configured</span>;
-
-  const blockControls = (
-    <BlockControls>
-      <Toolbar>
-        <ToolbarGroup>
-          {config.allowedLayouts.map((layout) => (
-            <ToolbarButton
-              key={layout}
-              label={LAYOUTS[layout].label}
-              icon={LAYOUTS[layout].icon}
-              title={LAYOUTS[layout].label}
-              onClick={() => onLayoutButtonClick(layout)}
-              isActive={attributes.layout === layout}
-            />
-          ))}
-        </ToolbarGroup>
-        <ToolbarGroup>
-          {config.allowedItemLayouts.map((itemLayout) => (
-            <ToolbarButton
-              key={itemLayout}
-              label={ITEM_LAYOUTS[itemLayout].label}
-              icon={ITEM_LAYOUTS[itemLayout].icon}
-              title={ITEM_LAYOUTS[itemLayout].label}
-              onClick={() => onItemLayoutButtonClick(itemLayout)}
-              isActive={attributes.itemLayout === itemLayout}
-            />
-          ))}
-        </ToolbarGroup>
-      </Toolbar>
-    </BlockControls>
-  );
 
   const inspectorControls = (
     <InspectorControls>
@@ -258,7 +196,11 @@ const Edit = ({ config, attributes, setAttributes }) => {
 
   return (
     <div className="rdb-wrap">
-      {blockControls}
+      <RdbBlockControls
+        config={config}
+        attributes={attributes}
+        setAttributes={setAttributes}
+      />
       {inspectorControls}
       {posts &&
         (attributes.layout === "horizontal" ||

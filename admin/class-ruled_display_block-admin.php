@@ -136,6 +136,15 @@ class Ruled_display_block_Admin {
 				return "";
 			}
 		]);
+		register_block_type('rdb/handpicked-display-block', [
+			'editor_script' => 'ruled-display-block-script',
+			'style' => 'ruled-display-block-style',
+			'render_callback' => function($block_attributes, $content) {
+				// TODO this and functionality for theme override,
+				// I'm counting on you Filip...
+				return "";
+			}
+		]);
 	}
 
 }
