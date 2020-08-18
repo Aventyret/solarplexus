@@ -8,6 +8,7 @@ import {
   RadioControl,
   Toolbar,
   ToolbarButton,
+  ToolbarGroup,
 } from "@wordpress/components";
 import { InspectorControls, BlockControls } from "@wordpress/block-editor";
 
@@ -15,7 +16,14 @@ import { useSelect } from "@wordpress/data";
 
 import GridItemPostPreview from "./grid-item-post-preview";
 
-import { flipHorizontal, flipVertical, arrowRight } from "@wordpress/icons";
+import {
+  flipHorizontal,
+  flipVertical,
+  arrowRight,
+  stretchWide,
+  chevronUp,
+  chevronLeft,
+} from "@wordpress/icons";
 
 const TERMS_DEFAULT_SELECT_VALUE = "";
 
@@ -24,6 +32,13 @@ const LAYOUTS = {
   horizontal: { label: __("Horizontal", "rdb"), icon: flipHorizontal },
   vertical: { label: __("Vertical", "rdb"), icon: flipVertical },
   carousel: { label: __("Carousel", "rdb"), icon: arrowRight },
+};
+
+// TODO better icons
+const ITEM_LAYOUTS = {
+  imagebg: { label: __("Image as background", "rdb"), icon: stretchWide },
+  imagetop: { label: __("Image on top", "rdb"), icon: chevronUp },
+  imageleft: { label: __("Image to the left", "rdb"), icon: chevronLeft },
 };
 
 const Edit = ({ config, attributes, setAttributes }) => {
@@ -142,22 +157,40 @@ const Edit = ({ config, attributes, setAttributes }) => {
     setAttributes({ layout });
   };
 
+  const onItemLayoutButtonClick = (itemLayout) => {
+    setAttributes({ itemLayout });
+  };
+
   if (!config.allowedPostTypes)
     return <span>Error: allowedPostTypes not configured</span>;
 
   const blockControls = (
     <BlockControls>
       <Toolbar>
-        {config.allowedLayouts.map((layout) => (
-          <ToolbarButton
-            key={layout}
-            label={LAYOUTS[layout].label}
-            icon={LAYOUTS[layout].icon}
-            title={LAYOUTS[layout].label}
-            onClick={() => onLayoutButtonClick(layout)}
-            isActive={attributes.layout === layout}
-          />
-        ))}
+        <ToolbarGroup>
+          {config.allowedLayouts.map((layout) => (
+            <ToolbarButton
+              key={layout}
+              label={LAYOUTS[layout].label}
+              icon={LAYOUTS[layout].icon}
+              title={LAYOUTS[layout].label}
+              onClick={() => onLayoutButtonClick(layout)}
+              isActive={attributes.layout === layout}
+            />
+          ))}
+        </ToolbarGroup>
+        <ToolbarGroup>
+          {config.allowedItemLayouts.map((itemLayout) => (
+            <ToolbarButton
+              key={itemLayout}
+              label={ITEM_LAYOUTS[itemLayout].label}
+              icon={ITEM_LAYOUTS[itemLayout].icon}
+              title={ITEM_LAYOUTS[itemLayout].label}
+              onClick={() => onItemLayoutButtonClick(itemLayout)}
+              isActive={attributes.itemLayout === itemLayout}
+            />
+          ))}
+        </ToolbarGroup>
       </Toolbar>
     </BlockControls>
   );
@@ -218,7 +251,8 @@ const Edit = ({ config, attributes, setAttributes }) => {
   );
 
   let gridCls = `rdb-grid rdb-grid--layout-${attributes.layout}`;
-  if (attributes.layout === "horizontal") {
+  const isCol = attributes.layout === "horizontal";
+  if (isCol) {
     gridCls += ` rdb-grid--cols${config.noOfGridCols}`;
   }
 
@@ -231,7 +265,13 @@ const Edit = ({ config, attributes, setAttributes }) => {
           attributes.layout === "vertical") && (
           <div className={gridCls}>
             {posts.map((post) => (
-              <GridItemPostPreview key={post.id} post={post} config={config} />
+              <GridItemPostPreview
+                key={post.id}
+                post={post}
+                config={config}
+                layout={attributes.itemLayout}
+                isCol={isCol}
+              />
             ))}
           </div>
         )}

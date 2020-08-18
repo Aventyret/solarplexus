@@ -1,12 +1,10 @@
 
 
 .rdb-gridItemPostFeaturedMediaPreview {
-  position: absolute;
-  left: 0;
-  top: 50%;
-  transform: translateY(-50%);
+  position: relative;
   img {
     max-width: 100%;
+    vertical-align: bottom;
   }
   &:after {
     content: " ";

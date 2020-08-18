@@ -1,11 +1,7 @@
 .rdb-gridItemPostPreview {
   position: relative;
   overflow: hidden;
-  margin-bottom: 15px;
-  
-  &--hasImg {
-    color: #fff;
-  }
+  margin-bottom: 1em;
 
   // TODO responsive?
   &--cols2 {
@@ -20,9 +16,49 @@
   &--cols5 {
     flex: 1 0 20%;
   }
-  
+
   &__content {
     position: relative;
-    padding: 15px;
+    padding: 1em;
+  }
+
+  &.rdb-gridItemPostPreview--layout-imagebg.rdb-gridItemPostPreview--hasImg {
+    color: #fff;
+  }
+
+  &--layout-imagebg {
+    .rdb-gridItemPostPreview__image {
+      position: absolute;
+      left: 0;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+  }
+  &--layout-imagetop {
+    h3.rdb-gridItemPostPreview__heading {
+      margin-top: 0.5em;
+    }
+    .rdb-gridItemPostPreview__content {
+      padding-top: 0;
+    }
+  }
+  &--layout-imageleft {
+    display: flex;
+    h3.rdb-gridItemPostPreview__heading {
+      margin: 0;
+      font-size: 20px;
+    }
+    .rdb-gridItemPostPreview__image {
+      flex: 1 0 5em;
+      max-width: 5em;
+    }
+    .rdb-gridItemPostPreview__content {
+      padding-top: 0;
+      font-size: 16px;
+      p {
+        margin-top: 1em;
+      }
+    }
+    
   }
 }
