@@ -4,5 +4,5 @@
   "noOfPosts": 3,
   "noOfGridCols": 3,
   "customFields": [{ "name": "andreas_custom", "type": "string" }],
-  "allowedLayouts": ["horizontal", "vertical"]
+  "allowedLayouts": ["horizontal", "vertical", "carousel"]
 }

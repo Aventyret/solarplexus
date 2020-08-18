@@ -15,13 +15,15 @@ import { useSelect } from "@wordpress/data";
 
 import GridItemPostPreview from "./grid-item-post-preview";
 
-import { flipHorizontal, flipVertical } from "@wordpress/icons";
+import { flipHorizontal, flipVertical, arrowRight } from "@wordpress/icons";
 
 const TERMS_DEFAULT_SELECT_VALUE = "";
 
+// TODO better carousel icon
 const LAYOUTS = {
   horizontal: { label: __("Horizontal", "rdb"), icon: flipHorizontal },
   vertical: { label: __("Vertical", "rdb"), icon: flipVertical },
+  carousel: { label: __("Carousel", "rdb"), icon: arrowRight },
 };
 
 const Edit = ({ config, attributes, setAttributes }) => {
@@ -224,11 +226,18 @@ const Edit = ({ config, attributes, setAttributes }) => {
     <div className="rdb-wrap">
       {blockControls}
       {inspectorControls}
-      {posts && (
+      {posts &&
+        (attributes.layout === "horizontal" ||
+          attributes.layout === "vertical") && (
+          <div className={gridCls}>
+            {posts.map((post) => (
+              <GridItemPostPreview key={post.id} post={post} config={config} />
+            ))}
+          </div>
+        )}
+      {attributes.layout === "carousel" && (
         <div className={gridCls}>
-          {posts.map((post) => (
-            <GridItemPostPreview key={post.id} post={post} config={config} />
-          ))}
+          {__("Carousel preview not available.", "rdb")}
         </div>
       )}
     </div>
