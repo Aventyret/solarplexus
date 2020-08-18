@@ -121,27 +121,31 @@ const Edit = ({ config, attributes, setAttributes }) => {
         <TextControl onChange={(nextValue) => onSearchInputChange(nextValue)} />
         <ul>
           {searchResults.map((searchResult) => {
+            const isDisabled = !!find(
+              attributes.searchResults,
+              (_searchResult) => {
+                return searchResult.id === _searchResult.id;
+              }
+            );
             return (
-              <li key={searchResult.id}>
+              <li className="rdb-searchResult" key={searchResult.id}>
                 <span>{searchResult.title}</span>
                 <Button
                   isSecondary
                   isSmall
-                  disabled={
-                    !!find(attributes.searchResults, (_searchResult) => {
-                      return searchResult.id === _searchResult.id;
-                    })
-                  }
+                  disabled={isDisabled}
                   onClick={() => selectSearchResult(searchResult)}
                 >
-                  {__("Select", "rdb")}
+                  {isDisabled
+                    ? __("Already selected", "rdb")
+                    : __("Select", "rdb")}
                 </Button>
               </li>
             );
           })}
         </ul>
         {attributes.searchResults.length ? (
-          <div>
+          <div className="rdb-selectedSearchResultsWrap">
             <h4>{__("Selected posts", "rdb")}</h4>
             <div className="rdb-selectedSearchResults">
               {attributes.searchResults.map((searchResult) => {

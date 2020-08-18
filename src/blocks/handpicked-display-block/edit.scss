@@ -14,3 +14,19 @@ h5.rdb-selectedSearchResultTitle {
     padding: 0.7em;
   }
 }
+
+.rdb-selectedSearchResultsWrap {
+  margin-top: 3em;
+}
+
+.rdb-searchResult {
+  > span {
+    display: inline-block;
+    margin-right: 0.5em;
+  }
+  & + & {
+    margin-top: 0.5em;
+    padding-top: 0.5em;
+    border-top: 1px solid rgb(226, 228, 231);
+  }
+}
