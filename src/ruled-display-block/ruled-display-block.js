@@ -27,6 +27,10 @@ registerBlockType("rdb/ruled-display-block", {
       type: "array",
       default: []
     },
+    layout: {
+      type: "string",
+      default: ruledDisplayBlockConfig.allowedLayouts[0]
+    }
   },
   edit(props) {
     return (

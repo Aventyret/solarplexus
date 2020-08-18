@@ -12,8 +12,11 @@ $test: #ff0000;
 }
 
 .rdb-grid {
-  display: flex;
+  
   flex-wrap: wrap;
+  &--layout-horizontal {
+    display: flex;
+  }
   &--cols1 {
     display: block;
   }

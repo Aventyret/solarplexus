@@ -6,14 +6,23 @@ import {
   PanelBody,
   CheckboxControl,
   RadioControl,
+  Toolbar,
+  ToolbarButton,
 } from "@wordpress/components";
-import { InspectorControls } from "@wordpress/block-editor";
+import { InspectorControls, BlockControls } from "@wordpress/block-editor";
 
 import { useSelect } from "@wordpress/data";
 
 import GridItemPostPreview from "./grid-item-post-preview";
 
+import { flipHorizontal, flipVertical } from "@wordpress/icons";
+
 const TERMS_DEFAULT_SELECT_VALUE = "";
+
+const LAYOUTS = {
+  horizontal: { label: __("Horizontal", "rdb"), icon: flipHorizontal },
+  vertical: { label: __("Vertical", "rdb"), icon: flipVertical },
+};
 
 const Edit = ({ config, attributes, setAttributes }) => {
   // Get all the registered post types
@@ -127,8 +136,29 @@ const Edit = ({ config, attributes, setAttributes }) => {
     setAttributes({ terms: [], taxonomy: taxonomySlug });
   };
 
+  const onLayoutButtonClick = (layout) => {
+    setAttributes({ layout });
+  };
+
   if (!config.allowedPostTypes)
     return <span>Error: allowedPostTypes not configured</span>;
+
+  const blockControls = (
+    <BlockControls>
+      <Toolbar>
+        {config.allowedLayouts.map((layout) => (
+          <ToolbarButton
+            key={layout}
+            label={LAYOUTS[layout].label}
+            icon={LAYOUTS[layout].icon}
+            title={LAYOUTS[layout].label}
+            onClick={() => onLayoutButtonClick(layout)}
+            isActive={attributes.layout === layout}
+          />
+        ))}
+      </Toolbar>
+    </BlockControls>
+  );
 
   const inspectorControls = (
     <InspectorControls>
@@ -185,9 +215,14 @@ const Edit = ({ config, attributes, setAttributes }) => {
     </InspectorControls>
   );
 
-  const gridCls = `rdb-grid rdb-grid--cols${config.noOfGridCols}`;
+  let gridCls = `rdb-grid rdb-grid--layout-${attributes.layout}`;
+  if (attributes.layout === "horizontal") {
+    gridCls += ` rdb-grid--cols${config.noOfGridCols}`;
+  }
+
   return (
     <div className="rdb-wrap">
+      {blockControls}
       {inspectorControls}
       {posts && (
         <div className={gridCls}>
