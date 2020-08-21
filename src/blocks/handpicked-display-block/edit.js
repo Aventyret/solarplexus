@@ -1,6 +1,6 @@
 import "./edit.scss";
 
-const { __ } = wp.i18n;
+const { __, sprintf } = wp.i18n;
 
 import { debounce, find, findIndex } from "lodash";
 
@@ -121,23 +121,28 @@ const Edit = ({ config, attributes, setAttributes }) => {
         <TextControl onChange={(nextValue) => onSearchInputChange(nextValue)} />
         <ul>
           {searchResults.map((searchResult) => {
-            const isDisabled = !!find(
+            const alreadySelected = !!find(
               attributes.searchResults,
               (_searchResult) => {
                 return searchResult.id === _searchResult.id;
               }
             );
+
+            const maxReached =
+              attributes.searchResults.length >= config.noOfPosts;
             return (
               <li className="rdb-searchResult" key={searchResult.id}>
                 <span>{searchResult.title}</span>
                 <Button
                   isSecondary
                   isSmall
-                  disabled={isDisabled}
+                  disabled={alreadySelected || maxReached}
                   onClick={() => selectSearchResult(searchResult)}
                 >
-                  {isDisabled
+                  {alreadySelected
                     ? __("Already selected", "rdb")
+                    : maxReached
+                    ? sprintf(__("You can't select more than %d posts", "rdb"), config.noOfPosts)
                     : __("Select", "rdb")}
                 </Button>
               </li>
