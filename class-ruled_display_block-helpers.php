@@ -15,8 +15,6 @@ class Ruled_display_block_Helpers {
     $json = file_get_contents( $config_path );
     $config_data = json_decode( $json, true );
 
-    // TODO allow override from theme
-
     return $config_data;
   }
 }
