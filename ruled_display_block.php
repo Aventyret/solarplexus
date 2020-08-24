@@ -32,6 +32,7 @@ if ( ! defined( 'WPINC' ) ) {
 
 define( 'RDB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'RDB_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
+define( 'RDB_TEMPLATE_FOLDER', 'rdb-templates' );
 
 /**
  * Currently plugin version.
