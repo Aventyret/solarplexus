@@ -140,19 +140,22 @@ class Ruled_display_block_Admin {
 			'editor_script' => 'ruled-display-block-script',
 			'style' => 'ruled-display-block-style',
 			'render_callback' => function($block_attributes, $content) {
-				return '';
+				$args = self::block_args($block_attributes);
+				$template = self::template_loader('handpicked-display-block', $args);
+
+				return $template;
 			}
 		]);
 	}
 
 	public static function block_args($block_attributes) {
 		$args = [
-			'post_type'				=> 'post',
-			'post_status' 			=> 'publish'
+			'post_status' => 'publish'
 		];
 
 		if (array_key_exists('postType', $block_attributes)) {
 			$args['post_type'] = $block_attributes['postType'];
+			$args['posts_per_page'] = 3;
 		}
 
 		if (array_key_exists('taxonomy', $block_attributes)) {
@@ -166,6 +169,10 @@ class Ruled_display_block_Admin {
 					'terms' => $block_attributes['terms']
 				];
 			}
+		}
+
+		if (array_key_exists('searchResults', $block_attributes)) {
+			$args['post__in'] = wp_list_pluck($block_attributes['searchResults'], 'id');
 		}
 
 		$query = new WP_Query($args);
