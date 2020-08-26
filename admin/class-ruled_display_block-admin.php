@@ -132,8 +132,8 @@ class Ruled_display_block_Admin {
 			'editor_script' => 'ruled-display-block-script',
 			'style' => 'ruled-display-block-style',
 			'render_callback' => function($block_attributes, $content) {
-				$args = $this->block_args($block_attributes);
-				$template = $this->template_loader('ruled-display-block', $args);
+				$args = Ruled_display_block_Helpers::block_args($block_attributes);
+				$template = Ruled_display_block_Helpers::template_loader('ruled-display-block', $args);
 
 				return $template;
 			}
@@ -142,101 +142,11 @@ class Ruled_display_block_Admin {
 			'editor_script' => 'ruled-display-block-script',
 			'style' => 'ruled-display-block-style',
 			'render_callback' => function($block_attributes, $content) {
-				$args = $this->block_args($block_attributes);
-				$template = $this->template_loader('handpicked-display-block', $args);
+				$args = Ruled_display_block_Helpers::block_args($block_attributes);
+				$template = Ruled_display_block_Helpers::template_loader('handpicked-display-block', $args);
 
 				return $template;
 			}
 		]);
 	}
-
-	public function block_args($block_attributes) {
-		$current_post_id = get_the_id();
-
-		$args = [
-			'post_status' => 'publish'
-		];
-
-		if($current_post_id) {
-			$args['post__not_in'] = array($current_post_id);
-		}
-
-		if (array_key_exists('postType', $block_attributes)) {
-			$args['post_type'] = $block_attributes['postType'];
-
-			// TODO this may be an attribute later
-			// if editor should be able to select
-			$args['posts_per_page'] = $this->config['noOfPosts'];
-		}
-
-		if (array_key_exists('taxonomy', $block_attributes)) {
-			$args['tax_query'] = [
-				'taxonomy' => $block_attributes['taxonomy']
-			];
-
-			if (array_key_exists('terms', $block_attributes)) {
-				$args['tax_query'] = [
-					'field' => 'id',
-					'terms' => $block_attributes['terms']
-				];
-			}
-		}
-
-		if (array_key_exists('searchResults', $block_attributes)) {
-			$args['post__in'] = wp_list_pluck($block_attributes['searchResults'], 'id');
-		}
-
-		$query = new WP_Query($args);
-
-		return [
-			'posts' => $query->posts,
-			'block_attributes' => $block_attributes,
-
-			// Expose config so that template can
-			// adjust to noOfCols and such
-			'config' => $this->config
-		];
-	}
-
-	public function template_loader($block, $block_attributes) {
-		$loaded_template = '';
-		$template = $this->get_template($block);
-
-		if ($template && file_exists($template)) {
-			$validated_file = validate_file($template);
-			if (0 === $validated_file) {
-				ob_start();
-				load_template($template, false, $block_attributes);
-				$loaded_template = ob_get_clean();
-			} else {
-				error_log("Ruled Display Block: Unable to validate template path: \"$template\". Error Code: $validated_file.");
-			}
-		} else {
-			error_log("Ruled Display Block: Unable to load template for: \"$block\". File not found.");
-		}
-
-		return $loaded_template;
-	}
-
-	public function get_template($block) {
-		$template = locate_template(
-			sprintf(
-				'%s/%s.php',
-				RDB_TEMPLATE_FOLDER,
-				$block
-			)
-		);
-
-		if (!$template) {
-			$template = sprintf(
-				'%s%s/%s.php',
-				RDB_PLUGIN_PATH,
-				RDB_TEMPLATE_FOLDER,
-				$block
-			);
-		}
-
-		return $template;
-	}
-
 }
