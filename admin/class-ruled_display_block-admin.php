@@ -40,6 +40,8 @@ class Ruled_display_block_Admin {
 	 */
 	private $version;
 
+	private $config;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -51,6 +53,7 @@ class Ruled_display_block_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->config = Ruled_display_block_Helpers::retrieve_block_config();
 
 	}
 
@@ -101,7 +104,6 @@ class Ruled_display_block_Admin {
 	}
 
 	public function register_scripts() {
-		$config = Ruled_display_block_Helpers::retrieve_block_config();
 
 		wp_register_style(
 			'ruled-display-block-style',
@@ -119,7 +121,7 @@ class Ruled_display_block_Admin {
 
 		wp_add_inline_script(
 			'ruled-display-block-script',
-			'const ruledDisplayBlockConfig = ' . wp_json_encode( $config ),
+			'const ruledDisplayBlockConfig = ' . wp_json_encode( $this->config ),
 			'before'
 		);
 
