@@ -151,12 +151,21 @@ class Ruled_display_block_Admin {
 	}
 
 	public function block_args($block_attributes) {
+		$current_post_id = get_the_id();
+
 		$args = [
 			'post_status' => 'publish'
 		];
 
+		if($current_post_id) {
+			$args['post__not_in'] = array($current_post_id);
+		}
+
 		if (array_key_exists('postType', $block_attributes)) {
 			$args['post_type'] = $block_attributes['postType'];
+
+			// TODO this may be an attribute later
+			// if editor should be able to select
 			$args['posts_per_page'] = $this->config['noOfPosts'];
 		}
 
@@ -181,7 +190,11 @@ class Ruled_display_block_Admin {
 
 		return [
 			'posts' => $query->posts,
-			'block_attributes' => $block_attributes
+			'block_attributes' => $block_attributes,
+
+			// Expose config so that template can
+			// adjust to noOfCols and such
+			'config' => $this->config
 		];
 	}
 
