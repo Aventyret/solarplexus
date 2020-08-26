@@ -2,30 +2,38 @@
 /**
  * Available arguments
  *
- * $args['posts']
- * $args['block_attributes']
+ * $args['posts'] Array
+ * $args['block_attributes'] Array
+ * $args['classes_grid'] String
+ * $args['classes_item'] String
  *
  */
 ?>
 
 <?php if ($args['posts']) : ?>
-	<ul class="rdb-block">
-		<?php foreach ($args['posts'] as $post) : setup_postdata($post); ?>
-			<li>
-				<?php if (has_post_thumbnail()) : ?>
-					<figure class="rdb-block__thumbnail">
-						<?php the_post_thumbnail('medium'); ?>
-					</figure>
-				<?php endif; ?>
+	<div class="rdb-wrap">
+		<div class="rdb-grid <?php echo esc_attr($args['classes_grid']); ?>">
+			<?php foreach ($args['posts'] as $post) : setup_postdata($post); ?>
+				<div class="gridItemPostPreview rdb-gridItemPostPreview <?php echo esc_attr($args['classes_item']); ?> <?php echo has_post_thumbnail() ? 'rdb-gridItemPostPreview--hasImg' : ''; ?>">
+					<?php if (has_post_thumbnail()) : ?>
+						<div class="rdb-gridItemPostPreview__image">
+							<div class="rdb-gridItemPostFeaturedMediaPreview">
+								<?php the_post_thumbnail('large'); ?>
+							</div>
+						</div>
+					<?php endif; ?>
 
-				<a href="<?php echo esc_url(get_permalink()); ?>" class="rdb-block__title">
-					<?php the_title(); ?>
-				</a>
+					<div class="rdb-gridItemPostPreview__content">
+						<h3 class="rdb-gridItemPostPreview__heading">
+							<?php the_title(); ?>
+						</h3>
 
-				<div class="rdb-block__excerpt">
-					<?php the_excerpt(); ?>
+						<div class="rdb-gridItemPostPreview__excerpt">
+							<?php the_excerpt(); ?>
+						</div>
+					</div>
 				</div>
-			</li>
-		<?php endforeach; ?>
-	</ul>
+			<?php endforeach; ?>
+		</div>
+	</div>
 <?php wp_reset_postdata(); endif; ?>

@@ -21,13 +21,67 @@ class Ruled_display_block_Helpers {
   }
 
   public static function block_args($block_attributes) {
+    // Get config settings
+    $config = Ruled_display_block_Helpers::retrieve_block_config();
+
+    // Set grid and item classes from attributes
+    $allowed_layouts = $config['allowedLayouts'];
+    $allowed_item_layouts = $config['allowedItemLayouts'];
+
+    $classes_grid = [];
+    $classes_item = [];
+    $attrs_grid = [
+      'cols' => [
+        'class_base' => 'rdb-grid--cols',
+        'value' => $config['noOfGridCols'],
+        'divider' => ''
+      ],
+      'layout' => [
+        'class_base' => 'rdb-grid--layout',
+        'value' => $config['allowedLayouts'][0],
+        'divider' => '-'
+      ]
+    ];
+    $attrs_item = [
+      'cols' => [
+        'class_base' => 'rdb-gridItemPostPreview--cols',
+        'value' => $config['noOfGridCols'],
+        'divider' => ''
+      ],
+      'itemLayout' => [
+        'class_base' => 'rdb-gridItemPostPreview--layout',
+        'value' => $config['allowedItemLayouts'][0],
+        'divider' => '-'
+      ]
+    ];
+
+    foreach ($block_attributes as $key => $attribute) {
+      if (array_key_exists($key, $attrs_grid)) {
+        $attrs_grid[$key]['value'] = $attribute;
+      }
+
+      if (array_key_exists($key, $attrs_item)) {
+        $attrs_item[$key]['value'] = $attribute;
+      }
+    }
+
+    foreach ($attrs_grid as $attribute) {
+      $classes_grid[] = sprintf('%s%s%s', $attribute['class_base'], $attribute['divider'], $attribute['value']);
+    }
+
+    foreach ($attrs_item as $kery => $attribute) {
+      $classes_item[] = sprintf('%s%s%s', $attribute['class_base'], $attribute['divider'], $attribute['value']);
+    }
+
+    // Query posts
     $args = [
       'post_status' => 'publish'
     ];
 
     if (array_key_exists('postType', $block_attributes)) {
       $args['post_type'] = $block_attributes['postType'];
-      $args['posts_per_page'] = 3;
+      $args['posts_per_page'] = $config['noOfPosts'];
+      $args['orderby'] = 'date';
     }
 
     if (array_key_exists('taxonomy', $block_attributes)) {
@@ -49,10 +103,21 @@ class Ruled_display_block_Helpers {
 
     $query = new WP_Query($args);
 
+    // Return
     return [
       'posts' => $query->posts,
-      'block_attributes' => $block_attributes
+      'block_attributes' => $block_attributes,
+      'classes_grid' => self::block_classes($classes_grid),
+      'classes_item' => self::block_classes($classes_item),
     ];
+  }
+
+  public static function block_classes($classes) {
+    $classes = array_unique($classes);
+    $classes = join(' ', $classes);
+    $classes = ltrim($classes);
+
+    return $classes;
   }
 
   public static function template_loader($block, $block_attributes) {
