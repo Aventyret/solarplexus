@@ -40,6 +40,8 @@ class Ruled_display_block_Admin {
 	 */
 	private $version;
 
+	private $config;
+
 	/**
 	 * Initialize the class and set its properties.
 	 *
@@ -51,6 +53,7 @@ class Ruled_display_block_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
+		$this->config = Ruled_display_block_Helpers::retrieve_block_config();
 
 	}
 
@@ -101,7 +104,6 @@ class Ruled_display_block_Admin {
 	}
 
 	public function register_scripts() {
-		$config = Ruled_display_block_Helpers::retrieve_block_config();
 
 		wp_register_style(
 			'ruled-display-block-style',
@@ -119,7 +121,7 @@ class Ruled_display_block_Admin {
 
 		wp_add_inline_script(
 			'ruled-display-block-script',
-			'const ruledDisplayBlockConfig = ' . wp_json_encode( $config ),
+			'const ruledDisplayBlockConfig = ' . wp_json_encode( $this->config ),
 			'before'
 		);
 
@@ -130,8 +132,8 @@ class Ruled_display_block_Admin {
 			'editor_script' => 'ruled-display-block-script',
 			'style' => 'ruled-display-block-style',
 			'render_callback' => function($block_attributes, $content) {
-				$args = self::block_args($block_attributes);
-				$template = self::template_loader('ruled-display-block', $args);
+				$args = $this->block_args($block_attributes);
+				$template = $this->template_loader('ruled-display-block', $args);
 
 				return $template;
 			}
@@ -140,22 +142,22 @@ class Ruled_display_block_Admin {
 			'editor_script' => 'ruled-display-block-script',
 			'style' => 'ruled-display-block-style',
 			'render_callback' => function($block_attributes, $content) {
-				$args = self::block_args($block_attributes);
-				$template = self::template_loader('handpicked-display-block', $args);
+				$args = $this->block_args($block_attributes);
+				$template = $this->template_loader('handpicked-display-block', $args);
 
 				return $template;
 			}
 		]);
 	}
 
-	public static function block_args($block_attributes) {
+	public function block_args($block_attributes) {
 		$args = [
 			'post_status' => 'publish'
 		];
 
 		if (array_key_exists('postType', $block_attributes)) {
 			$args['post_type'] = $block_attributes['postType'];
-			$args['posts_per_page'] = 3;
+			$args['posts_per_page'] = $this->config['noOfPosts'];
 		}
 
 		if (array_key_exists('taxonomy', $block_attributes)) {
@@ -183,9 +185,9 @@ class Ruled_display_block_Admin {
 		];
 	}
 
-	public static function template_loader($block, $block_attributes) {
+	public function template_loader($block, $block_attributes) {
 		$loaded_template = '';
-		$template = self::get_template($block);
+		$template = $this->get_template($block);
 
 		if ($template && file_exists($template)) {
 			$validated_file = validate_file($template);
@@ -203,7 +205,7 @@ class Ruled_display_block_Admin {
 		return $loaded_template;
 	}
 
-	public static function get_template($block) {
+	public function get_template($block) {
 		$template = locate_template(
 			sprintf(
 				'%s/%s.php',
