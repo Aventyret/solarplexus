@@ -86,7 +86,7 @@ const Edit = ({ config, attributes, setAttributes }) => {
       let q = {
         status: "publish",
         per_page: config.noOfPosts,
-        exclude: currentPostId
+        exclude: currentPostId,
       };
 
       if (attributes.taxonomy && attributes.terms) {
@@ -97,7 +97,7 @@ const Edit = ({ config, attributes, setAttributes }) => {
 
       return perType;
     },
-    [attributes.postType, attributes.taxonomy, attributes.terms]
+    [attributes.postType, attributes.taxonomy, attributes.terms, currentPostId]
   );
 
   console.log("posts", posts);
