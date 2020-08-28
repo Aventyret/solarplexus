@@ -16,7 +16,7 @@ import RdbBlockControls from "../../components/rdb-block-controls/rdb-block-cont
 
 const TERMS_DEFAULT_SELECT_VALUE = "";
 
-const Edit = ({ config, attributes, setAttributes }) => {
+const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
   const currentPostId = useSelect((select) => {
     const { getCurrentPostId } = select("core/editor");
 
@@ -233,4 +233,4 @@ const Edit = ({ config, attributes, setAttributes }) => {
   );
 };
 
-export default Edit;
+export default DynamicDisplayBlockEdit;

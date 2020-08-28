@@ -1,7 +1,7 @@
 <?php
 
 class Ruled_display_block_Helpers {
-  public static function retrieve_block_config() {
+  public static function retrieve_block_configs() {
 
     $config_path = RDB_PLUGIN_PATH . 'rdb-config.json';
 
@@ -18,9 +18,23 @@ class Ruled_display_block_Helpers {
     return $config_data;
   }
 
-  public static function block_args($block_attributes) {
+  public static function find_block_config_by_id($configs, $block_type_id) {
+    $found_config = null;
+
+    foreach($configs as $config) {
+      if($config['id'] == $block_type_id) {
+        $found_config = $config;
+      }
+    }
+
+    return $found_config;
+
+  }
+
+  public static function block_args($block_type_id, $block_attributes) {
     // Get config settings
-    $config = Ruled_display_block_Helpers::retrieve_block_config();
+    $configs = self::retrieve_block_configs(); 
+    $config = self::find_block_config_by_id($configs, $block_type_id);
 
     // Set grid and item classes from attributes
     $allowed_layouts = $config['allowedLayouts'];
@@ -75,6 +89,12 @@ class Ruled_display_block_Helpers {
     $args = [
       'post_status' => 'publish'
     ];
+
+    $current_post_id = get_the_ID();
+
+    if($current_post_id) {
+			$args['post__not_in'] = array($current_post_id);
+		}
 
     if (array_key_exists('postType', $block_attributes)) {
       $args['post_type'] = $block_attributes['postType'];

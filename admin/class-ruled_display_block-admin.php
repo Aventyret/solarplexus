@@ -53,7 +53,7 @@ class Ruled_display_block_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		$this->config = Ruled_display_block_Helpers::retrieve_block_config();
+		$this->config = Ruled_display_block_Helpers::retrieve_block_configs();
 
 	}
 
@@ -128,25 +128,19 @@ class Ruled_display_block_Admin {
 	}
 
 	public function register_block() {
-		register_block_type('rdb/ruled-display-block', [
-			'editor_script' => 'ruled-display-block-script',
-			'style' => 'ruled-display-block-style',
-			'render_callback' => function($block_attributes, $content) {
-				$args = Ruled_display_block_Helpers::block_args($block_attributes);
-				$template = Ruled_display_block_Helpers::template_loader('ruled-display-block', $args);
 
-				return $template;
-			}
-		]);
-		register_block_type('rdb/handpicked-display-block', [
-			'editor_script' => 'ruled-display-block-script',
-			'style' => 'ruled-display-block-style',
-			'render_callback' => function($block_attributes, $content) {
-				$args = Ruled_display_block_Helpers::block_args($block_attributes);
-				$template = Ruled_display_block_Helpers::template_loader('handpicked-display-block', $args);
-
-				return $template;
-			}
-		]);
+		foreach($this->config as $blockconfig) {
+			$block_type_id = $blockconfig['id'];
+			register_block_type("rdb/{$blockconfig['id']}", [
+				'editor_script' => 'ruled-display-block-script',
+				'style' => 'ruled-display-block-style',
+				'render_callback' => function($block_attributes, $content) use ($block_type_id) {
+					$args = Ruled_display_block_Helpers::block_args($block_type_id, $block_attributes);
+					$template = Ruled_display_block_Helpers::template_loader($block_type_id, $args);
+	
+					return $template;
+				}
+			]);
+		};
 	}
 }

@@ -1,4 +1,4 @@
-import "./edit.scss";
+import "./hand-picked-display-block-edit.scss";
 
 const { __, sprintf } = wp.i18n;
 
@@ -42,7 +42,7 @@ const SearchResultPreview = ({ config, attributes, isCol, getUrl }) => {
   );
 };
 
-const Edit = ({ config, attributes, setAttributes }) => {
+const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
   const [isDirty, setIsDirty] = useState(false);
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
@@ -242,4 +242,4 @@ const Edit = ({ config, attributes, setAttributes }) => {
   );
 };
 
-export default Edit;
+export default HandPickedDisplayBlockEdit;

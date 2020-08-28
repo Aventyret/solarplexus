@@ -1,9 +1,26 @@
-{
-  "allowedPostTypes": ["post", "page"],
-  "allowedTaxonomies": ["category"],
-  "noOfPosts": 3,
-  "noOfGridCols": 2,
-  "customFields": [],
-  "allowedLayouts": ["horizontal", "vertical", "carousel"],
-  "allowedItemLayouts": ["imagebg", "imagetop", "imageleft"]
-}
+[
+  {
+    "id": "latest-default",
+    "title": "[RDB]: Latest posts and pages",
+    "type": "dynamic",
+    "allowedPostTypes": ["post", "page"],
+    "allowedTaxonomies": ["category"],
+    "noOfPosts": 3,
+    "noOfGridCols": 2,
+    "customFields": [],
+    "allowedLayouts": ["horizontal", "vertical", "carousel"],
+    "allowedItemLayouts": ["imagebg", "imagetop", "imageleft"]
+  },
+  {
+    "id": "handpicked-default",
+    "title": "[RDB]: Hand picked posts and pages",
+    "type": "handpicked",
+    "allowedPostTypes": ["post", "page"],
+    "allowedTaxonomies": ["category"],
+    "noOfPosts": 3,
+    "noOfGridCols": 2,
+    "customFields": [],
+    "allowedLayouts": ["horizontal", "vertical", "carousel"],
+    "allowedItemLayouts": ["imagebg", "imagetop", "imageleft"]
+  }
+]
