@@ -1,15 +1,17 @@
 const { __ } = wp.i18n;
 
-import _ from "lodash";
+import { isArray } from "lodash";
 
 import {
   PanelBody,
   CheckboxControl,
   RadioControl,
   SelectControl,
+  RangeControl,
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 
+import { useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
 import GridItemPostPreview from "../../components/grid-item-post-preview/grid-item-post-preview";
@@ -88,7 +90,7 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
 
       let q = {
         status: "publish",
-        per_page: config.noOfPosts,
+        per_page: attributes.noOfPosts,
         exclude: currentPostId,
         order: attributes.order,
       };
@@ -102,6 +104,7 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
       return perType;
     },
     [
+      attributes.noOfPosts,
       attributes.postType,
       attributes.taxonomy,
       attributes.terms,
@@ -109,6 +112,27 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
       currentPostId,
     ]
   );
+
+  // Set defaults. Can't use
+  // standard attribute defaults
+  // here, becase those keys
+  // won't get included in saved
+  // attrs if user selects the default
+  useEffect(() => {
+    if (!attributes.postType) {
+      setAttributes({
+        postType: config.allowedPostTypes[0]
+      });
+    }
+    if (!attributes.noOfPosts) {
+      setAttributes({
+        noOfPosts: isArray(config.noOfPosts)
+          ? config.noOfPosts[0]
+          : config.noOfPosts,
+      });
+    }
+
+  }, [config, attributes.noOfPosts, ]);
 
   // const onPostTypeCheckboxChange = (postTypeSlug) => {
   //   const newSelectedPostTypes = attributes.postTypes.includes(postTypeSlug)
@@ -147,6 +171,10 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
 
   const onOrderSelectChange = (order) => {
     setAttributes({ order });
+  };
+
+  const onNoOfPostsChange = (value) => {
+    setAttributes({ noOfPosts: value });
   };
 
   if (!config.allowedPostTypes)
@@ -217,6 +245,16 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
           })}
         />
       </PanelBody>
+      {isArray(config.noOfPosts) ? (
+        <PanelBody title={__("Number of items")}>
+          <RangeControl
+            value={attributes.noOfPosts}
+            min={config.noOfPosts[0]}
+            max={config.noOfPosts[1]}
+            onChange={(value) => onNoOfPostsChange(value)}
+          />
+        </PanelBody>
+      ) : null}
     </InspectorControls>
   );
 

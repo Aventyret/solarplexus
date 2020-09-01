@@ -1,5 +1,7 @@
 import "./shared.scss";
 
+import { isArray } from "lodash";
+
 import { __ } from "@wordpress/i18n";
 import { registerBlockType } from "@wordpress/blocks";
 
@@ -15,6 +17,9 @@ ruledDisplayBlockConfig.forEach((config) => {
     itemLayout: {
       type: "string",
       default: config.allowedItemLayouts[0],
+    },
+    noOfPosts: {
+      type: "integer"
     },
   };
   const attributes =

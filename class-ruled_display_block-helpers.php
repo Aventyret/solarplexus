@@ -81,7 +81,7 @@ class Ruled_display_block_Helpers {
 
     if (array_key_exists('postType', $block_attributes)) {
       $args['post_type'] = $block_attributes['postType'];
-      $args['posts_per_page'] = $block_config['noOfPosts'];
+      $args['posts_per_page'] = $block_attributes['noOfPosts'];
       $args['orderby'] = 'date';
     }
 

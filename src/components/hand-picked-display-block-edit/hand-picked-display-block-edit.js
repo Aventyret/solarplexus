@@ -2,7 +2,7 @@ import "./hand-picked-display-block-edit.scss";
 
 const { __, sprintf } = wp.i18n;
 
-import { debounce, find, findIndex } from "lodash";
+import { debounce, find, findIndex, isArray } from "lodash";
 
 import { useEffect, useState } from "@wordpress/element";
 
@@ -55,6 +55,17 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
     };
     if (searchInput.length > 2) search();
   }, [searchInput]);
+
+  // Effectively in the handpicked version,
+  // the number of posts is determined by the
+  // max value in the range
+  useEffect(() => {
+    setAttributes({
+      noOfPosts: isArray(config.noOfPosts)
+        ? config.noOfPosts[1]
+        : config.noOfPosts,
+    });
+  }, [config]);
 
   const onSearchInputChange = debounce((value) => {
     setSearchInput(value);
@@ -129,7 +140,7 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
             );
 
             const maxReached =
-              attributes.searchResults.length >= config.noOfPosts;
+              attributes.searchResults.length >= attributes.noOfPosts;
             return (
               <li className="rdb-searchResult" key={searchResult.id}>
                 <span>{searchResult.title}</span>
@@ -142,7 +153,10 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
                   {alreadySelected
                     ? __("Already selected", "rdb")
                     : maxReached
-                    ? sprintf(__("You can't select more than %d posts", "rdb"), config.noOfPosts)
+                    ? sprintf(
+                        __("You can't select more than %d posts", "rdb"),
+                        attributes.noOfPosts
+                      )
                     : __("Select", "rdb")}
                 </Button>
               </li>
