@@ -18,51 +18,34 @@ class Ruled_display_block_Helpers {
     return $config_data;
   }
 
-  public static function find_block_config_by_id($configs, $block_type_id) {
-    $found_config = null;
-
-    foreach($configs as $config) {
-      if($config['id'] == $block_type_id) {
-        $found_config = $config;
-      }
-    }
-
-    return $found_config;
-
-  }
-
-  public static function block_args($block_type_id, $block_attributes) {
-    // Get config settings
-    $configs = self::retrieve_block_configs(); 
-    $config = self::find_block_config_by_id($configs, $block_type_id);
-
+  public static function block_args($block_config, $block_type_id, $block_attributes) {
     // Set grid and item classes from attributes
-    $allowed_layouts = $config['allowedLayouts'];
-    $allowed_item_layouts = $config['allowedItemLayouts'];
+    $allowed_layouts = $block_config['allowedLayouts'];
+    $allowed_item_layouts = $block_config['allowedItemLayouts'];
 
     $classes_grid = [];
     $classes_item = [];
     $attrs_grid = [
       'cols' => [
         'class_base' => 'rdb-grid--cols',
-        'value' => $config['noOfGridCols'],
+        'value' => $block_config['noOfGridCols'],
         'divider' => ''
       ],
       'layout' => [
         'class_base' => 'rdb-grid--layout',
-        'value' => $config['allowedLayouts'][0],
+        'value' => $block_config['allowedLayouts'][0],
         'divider' => '-'
       ]
     ];
     $attrs_item = [
       'cols' => [
         'class_base' => 'rdb-gridItemPostPreview--cols',
-        'value' => $config['noOfGridCols'],
+        'value' => $block_config['noOfGridCols'],
         'divider' => ''
       ],
       'itemLayout' => [
         'class_base' => 'rdb-gridItemPostPreview--layout',
-        'value' => $config['allowedItemLayouts'][0],
+        'value' => $block_config['allowedItemLayouts'][0],
         'divider' => '-'
       ]
     ];
@@ -98,7 +81,7 @@ class Ruled_display_block_Helpers {
 
     if (array_key_exists('postType', $block_attributes)) {
       $args['post_type'] = $block_attributes['postType'];
-      $args['posts_per_page'] = $config['noOfPosts'];
+      $args['posts_per_page'] = $block_config['noOfPosts'];
       $args['orderby'] = 'date';
     }
 
