@@ -7,7 +7,6 @@ import DynamicDisplayBlockEdit from "./components/dynamic-display-block-edit/dyn
 import HandPickedDisplayBlockEdit from "./components/hand-picked-display-block-edit/hand-picked-display-block-edit";
 
 ruledDisplayBlockConfig.forEach((config) => {
-
   const commonAttributes = {
     layout: {
       type: "string",
@@ -33,6 +32,10 @@ ruledDisplayBlockConfig.forEach((config) => {
           terms: {
             type: "array",
             default: [],
+          },
+          order: {
+            type: "string",
+            default: "desc",
           },
         }
       : config.type === "handpicked"

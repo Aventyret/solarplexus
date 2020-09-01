@@ -22,3 +22,8 @@ export const ITEM_LAYOUTS = {
   imagetop: { label: __("Image on top", "rdb"), icon: chevronUp },
   imageleft: { label: __("Image to the left", "rdb"), icon: chevronLeft },
 };
+
+export const ORDERS = {
+  asc: __("Ascending", "rdb"),
+  desc: __("Descending", "rdb"),
+};

@@ -85,6 +85,10 @@ class Ruled_display_block_Helpers {
       $args['orderby'] = 'date';
     }
 
+    if(array_key_exists('order', $block_attributes)) {
+      $args['order'] = $block_attributes['order'];
+    }
+
     if (array_key_exists('taxonomy', $block_attributes)) {
       $args['tax_query'] = [
         'taxonomy' => $block_attributes['taxonomy']

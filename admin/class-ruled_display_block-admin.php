@@ -128,10 +128,9 @@ class Ruled_display_block_Admin {
 	}
 
 	public function register_block() {
-
 		foreach($this->config as $block_config) {
 			$block_type_id = $block_config['id'];
-			register_block_type("rdb/{$block_config['id']}", [
+			register_block_type("rdb/{$block_type_id}", [
 				'editor_script' => 'ruled-display-block-script',
 				'style' => 'ruled-display-block-style',
 				'render_callback' => function($block_attributes, $content) use ($block_config, $block_type_id) {

@@ -6,6 +6,7 @@ import {
   PanelBody,
   CheckboxControl,
   RadioControl,
+  SelectControl,
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 
@@ -13,6 +14,8 @@ import { useSelect } from "@wordpress/data";
 
 import GridItemPostPreview from "../../components/grid-item-post-preview/grid-item-post-preview";
 import RdbBlockControls from "../../components/rdb-block-controls/rdb-block-controls";
+
+import { ORDERS } from "../../consts";
 
 const TERMS_DEFAULT_SELECT_VALUE = "";
 
@@ -87,6 +90,7 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
         status: "publish",
         per_page: config.noOfPosts,
         exclude: currentPostId,
+        order: attributes.order,
       };
 
       if (attributes.taxonomy && attributes.terms) {
@@ -97,10 +101,14 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
 
       return perType;
     },
-    [attributes.postType, attributes.taxonomy, attributes.terms, currentPostId]
+    [
+      attributes.postType,
+      attributes.taxonomy,
+      attributes.terms,
+      attributes.order,
+      currentPostId,
+    ]
   );
-
-  console.log("posts", posts);
 
   // const onPostTypeCheckboxChange = (postTypeSlug) => {
   //   const newSelectedPostTypes = attributes.postTypes.includes(postTypeSlug)
@@ -135,6 +143,10 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
   const onTaxonomyRadioChange = (taxonomySlug) => {
     // Clear the terms of previous selection when taxonomy changes
     setAttributes({ terms: [], taxonomy: taxonomySlug });
+  };
+
+  const onOrderSelectChange = (order) => {
+    setAttributes({ order });
   };
 
   if (!config.allowedPostTypes)
@@ -192,6 +204,19 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
             })}
         </PanelBody>
       )}
+      <PanelBody>
+        <SelectControl
+          label={__("Order", "rdb")}
+          value={attributes.order}
+          onChange={(order) => onOrderSelectChange(order)}
+          options={Object.keys(ORDERS).map((key) => {
+            return {
+              value: key,
+              label: ORDERS[key],
+            };
+          })}
+        />
+      </PanelBody>
     </InspectorControls>
   );
 
