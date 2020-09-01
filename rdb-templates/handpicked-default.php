@@ -28,9 +28,17 @@
 							<?php the_title(); ?>
 						</h3>
 
-						<div class="rdb-gridItemPostPreview__excerpt">
-							<?php the_excerpt(); ?>
-						</div>
+						<?php if ($args['config']['showExcerpt']) : ?>
+							<div class="rdb-gridItemPostPreview__excerpt">
+								<?php the_excerpt(); ?>
+							</div>
+						<?php endif; ?>
+
+						<?php if ($args['config']['showDate']) : ?>
+							<div class="rdb-gridItemPostPreview__date">
+								<?php the_date(); ?>
+							</div>
+						<?php endif; ?>
 					</div>
 				</div>
 			<?php endforeach; ?>

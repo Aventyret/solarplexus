@@ -121,7 +121,7 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
   useEffect(() => {
     if (!attributes.postType) {
       setAttributes({
-        postType: config.allowedPostTypes[0]
+        postType: config.allowedPostTypes[0],
       });
     }
     if (!attributes.noOfPosts) {
@@ -131,8 +131,7 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
           : config.noOfPosts,
       });
     }
-
-  }, [config, attributes.noOfPosts, ]);
+  }, [config, attributes.noOfPosts, attributes.postType]);
 
   // const onPostTypeCheckboxChange = (postTypeSlug) => {
   //   const newSelectedPostTypes = attributes.postTypes.includes(postTypeSlug)
@@ -276,15 +275,17 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
         (attributes.layout === "horizontal" ||
           attributes.layout === "vertical") && (
           <div className={gridCls}>
-            {posts.map((post) => (
-              <GridItemPostPreview
-                key={post.id}
-                post={post}
-                config={config}
-                layout={attributes.itemLayout}
-                isCol={isCol}
-              />
-            ))}
+            {posts.map((post) => {
+              return (
+                <GridItemPostPreview
+                  key={post.id}
+                  post={post}
+                  config={config}
+                  layout={attributes.itemLayout}
+                  isCol={isCol}
+                />
+              );
+            })}
           </div>
         )}
       {attributes.layout === "carousel" && (

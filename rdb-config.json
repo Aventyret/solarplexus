@@ -9,7 +9,9 @@
     "noOfGridCols": 2,
     "customFields": [],
     "allowedLayouts": ["horizontal", "vertical", "carousel"],
-    "allowedItemLayouts": ["imagebg", "imagetop", "imageleft"]
+    "allowedItemLayouts": ["imagebg", "imagetop", "imageleft"],
+    "showDate": true,
+    "showExcerpt": true
   },
   {
     "id": "handpicked-default",
@@ -21,6 +23,7 @@
     "noOfGridCols": 2,
     "customFields": [],
     "allowedLayouts": ["horizontal", "vertical", "carousel"],
-    "allowedItemLayouts": ["imagebg", "imagetop", "imageleft"]
+    "allowedItemLayouts": ["imagebg", "imagetop", "imageleft"],
+    "showExcerpt": true
   }
 ]

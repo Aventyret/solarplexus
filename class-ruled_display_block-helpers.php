@@ -114,6 +114,7 @@ class Ruled_display_block_Helpers {
       'block_attributes' => $block_attributes,
       'classes_grid' => self::block_classes($classes_grid),
       'classes_item' => self::block_classes($classes_item),
+      'config' => $block_config
     ];
   }
 
