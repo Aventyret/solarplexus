@@ -85,7 +85,7 @@ class Ruled_display_block_Helpers {
       $args['orderby'] = 'date';
     }
 
-    if(array_key_exists('order', $block_attributes)) {
+    if (array_key_exists('order', $block_attributes)) {
       $args['order'] = $block_attributes['order'];
     }
 

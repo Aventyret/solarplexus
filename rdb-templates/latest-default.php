@@ -27,14 +27,14 @@
 						<h3 class="rdb-gridItemPostPreview__heading">
 							<?php the_title(); ?>
 						</h3>
-						
-						<?php if ($args['config']['showExcerpt']) : ?>
+
+						<?php if (array_key_exists('showExcerpt', $args['config'])) : ?>
 							<div class="rdb-gridItemPostPreview__excerpt">
 								<?php the_excerpt(); ?>
 							</div>
 						<?php endif; ?>
 
-						<?php if ($args['config']['showDate']) : ?>
+						<?php if (array_key_exists('showDate', $args['config'])) : ?>
 							<div class="rdb-gridItemPostPreview__date">
 								<?php the_date(); ?>
 							</div>
