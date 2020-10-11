@@ -13,7 +13,7 @@
  * @package           Ruled_display_block
  *
  * @wordpress-plugin
- * Plugin Name:       Ruled Display Block
+ * Plugin Name:       Solarplexus
  * Plugin URI:        https://aventyret.com
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
  * Version:           1.0.0
