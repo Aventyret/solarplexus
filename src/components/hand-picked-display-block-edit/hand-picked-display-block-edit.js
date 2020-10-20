@@ -16,7 +16,7 @@ import {
 import { InspectorControls } from "@wordpress/block-editor";
 
 import GridItemPostPreview from "../../components/grid-item-post-preview/grid-item-post-preview";
-import RdbBlockControls from "../../components/splx-block-controls/splx-block-controls";
+import SplxBlockControls from "../../components/splx-block-controls/splx-block-controls";
 
 const SearchResultPreview = ({ config, attributes, isCol, getUrl }) => {
   const [post, setPost] = useState(null);
@@ -36,7 +36,6 @@ const SearchResultPreview = ({ config, attributes, isCol, getUrl }) => {
     <GridItemPostPreview
       post={post}
       config={config}
-      layout={attributes.itemLayout}
       isCol={isCol}
     />
   );
@@ -213,19 +212,19 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
   );
 
 
-  let gridCls = `splx-grid splx-grid--layout-${attributes.layout}`;
-  const isCol = attributes.layout === "horizontal";
+  let gridCls = `splx-grid splx-grid--listType-${config.listType}`;
+  const isCol = config.listType === "horizontal";
   if (isCol) {
     gridCls += ` splx-grid--cols${config.noOfGridCols}`;
   }
 
   return (
     <div className="splx-wrap">
-      <RdbBlockControls
+      {/* <SplxBlockControls
         config={config}
         attributes={attributes}
         setAttributes={setAttributes}
-      />
+      /> */}
       {inspectorControls}
       {!isDirty && !attributes.searchResults.length && (
         <p>
@@ -234,8 +233,8 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
       )}
 
       {attributes.searchResults &&
-        (attributes.layout === "horizontal" ||
-          attributes.layout === "vertical") && (
+        (config.listType === "horizontal" ||
+          config.listType === "vertical") && (
           <div className={gridCls}>
             {attributes.searchResults.map((searchResult) => (
               <SearchResultPreview
@@ -249,7 +248,7 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
             ))}
           </div>
         )}
-      {attributes.layout === "carousel" && (
+      {config.listType === "carousel" && (
         <div className={gridCls}>
           {__("Carousel preview not available.", "splx")}
         </div>

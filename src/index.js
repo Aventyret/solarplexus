@@ -10,14 +10,6 @@ import HandPickedDisplayBlockEdit from "./components/hand-picked-display-block-e
 
 solarplexusConfig.forEach((config) => {
   const commonAttributes = {
-    layout: {
-      type: "string",
-      default: config.allowedLayouts[0],
-    },
-    itemLayout: {
-      type: "string",
-      default: config.allowedItemLayouts[0],
-    },
     noOfPosts: {
       type: "integer"
     },

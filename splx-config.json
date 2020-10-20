@@ -8,8 +8,8 @@
     "noOfPosts": [2,8],
     "noOfGridCols": 2,
     "customFields": [],
-    "allowedLayouts": ["horizontal", "vertical", "carousel"],
-    "allowedItemLayouts": ["imagebg", "imagetop", "imageleft"],
+    "listType": "horizontal",
+    "itemLayout": "imagebg",
     "showDate": true,
     "showExcerpt": true
   },
@@ -22,8 +22,8 @@
     "noOfPosts": 8,
     "noOfGridCols": 2,
     "customFields": [],
-    "allowedLayouts": ["horizontal", "vertical", "carousel"],
-    "allowedItemLayouts": ["imagebg", "imagetop", "imageleft"],
+    "listType": "horizontal",
+    "itemLayout": "imagebg",
     "showExcerpt": true
   }
 ]

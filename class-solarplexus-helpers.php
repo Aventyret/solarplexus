@@ -20,8 +20,6 @@ class Solarplexus_Helpers {
 
   public static function block_args($block_config, $block_type_id, $block_attributes) {
     // Set grid and item classes from attributes
-    $allowed_layouts = $block_config['allowedLayouts'];
-    $allowed_item_layouts = $block_config['allowedItemLayouts'];
 
     $classes_grid = [];
     $classes_item = [];
@@ -30,11 +28,6 @@ class Solarplexus_Helpers {
         'class_base' => 'splx-grid--cols',
         'value' => $block_config['noOfGridCols'],
         'divider' => ''
-      ],
-      'layout' => [
-        'class_base' => 'splx-grid--layout',
-        'value' => $block_config['allowedLayouts'][0],
-        'divider' => '-'
       ]
     ];
     $attrs_item = [
@@ -42,11 +35,6 @@ class Solarplexus_Helpers {
         'class_base' => 'splx-gridItemPostPreview--cols',
         'value' => $block_config['noOfGridCols'],
         'divider' => ''
-      ],
-      'itemLayout' => [
-        'class_base' => 'splx-gridItemPostPreview--layout',
-        'value' => $block_config['allowedItemLayouts'][0],
-        'divider' => '-'
       ]
     ];
 
@@ -59,6 +47,21 @@ class Solarplexus_Helpers {
         $attrs_item[$key]['value'] = $attribute;
       }
     }
+
+    // Add listType and itemLayout
+    // directly from config instead
+    // of from block attributes.
+    $attrs_grid['listType'] = [
+      'class_base' => 'splx-grid--listType',
+      'value' => $block_config['listType'],
+      'divider' => '-'
+    ];
+
+    $attrs_item['itemLayout'] = [
+      'class_base' => 'splx-gridItemPostPreview--layout',
+      'value' => $block_config['itemLayout'],
+      'divider' => '-'
+    ];
 
     foreach ($attrs_grid as $attribute) {
       $classes_grid[] = sprintf('%s%s%s', $attribute['class_base'], $attribute['divider'], $attribute['value']);

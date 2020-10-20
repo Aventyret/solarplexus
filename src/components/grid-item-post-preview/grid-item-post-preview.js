@@ -5,7 +5,8 @@ import { dateI18n, __experimentalGetSettings } from "@wordpress/date";
 import GridItemPostFeaturedMediaPreview from "../grid-item-post-featured-media-preview/grid-item-post-featured-media-preview";
 import GridItemPostCustomFieldsPreview from "../grid-item-post-custom-fields-preview/grid-item-post-custom-fields-preview";
 
-const GridItemPostPreview = ({ post, config, layout, isCol }) => {
+const GridItemPostPreview = ({ post, config, isCol }) => {
+  const layout = config.itemLayout;
   let cls =
     `splx-gridItemPostPreview splx-gridItemPostPreview--layout-${layout}` +
     (!!post.featured_media ? " splx-gridItemPostPreview--hasImg" : "");

@@ -3,6 +3,11 @@ import { BlockControls } from "@wordpress/block-editor";
 
 import { LAYOUTS, ITEM_LAYOUTS } from "../../consts";
 
+// Not used atm as layout (listtypes)
+// and itemLayouts are fixed values in
+// config per block and doesnt need
+// editor controls.
+
 const SplxBlockControls = ({ config, attributes, setAttributes }) => {
   const onLayoutButtonClick = (layout) => {
     setAttributes({ layout });

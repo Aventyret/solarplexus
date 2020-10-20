@@ -15,7 +15,7 @@ import { useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
 import GridItemPostPreview from "../../components/grid-item-post-preview/grid-item-post-preview";
-import RdbBlockControls from "../../components/splx-block-controls/splx-block-controls";
+import SplxBlockControls from "../../components/splx-block-controls/splx-block-controls";
 
 import { ORDERS } from "../../consts";
 
@@ -257,23 +257,23 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
     </InspectorControls>
   );
 
-  let gridCls = `splx-grid splx-grid--layout-${attributes.layout}`;
-  const isCol = attributes.layout === "horizontal";
+  let gridCls = `splx-grid splx-grid--listType-${config.listType}`;
+  const isCol = config.listType === "horizontal";
   if (isCol) {
     gridCls += ` splx-grid--cols${config.noOfGridCols}`;
   }
 
   return (
     <div className="splx-wrap">
-      <RdbBlockControls
+      {/* <SplxBlockControls
         config={config}
         attributes={attributes}
         setAttributes={setAttributes}
-      />
+      /> */}
       {inspectorControls}
       {posts &&
-        (attributes.layout === "horizontal" ||
-          attributes.layout === "vertical") && (
+        (config.listType === "horizontal" ||
+        config.listType === "vertical") && (
           <div className={gridCls}>
             {posts.map((post) => {
               return (
@@ -281,14 +281,13 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
                   key={post.id}
                   post={post}
                   config={config}
-                  layout={attributes.itemLayout}
                   isCol={isCol}
                 />
               );
             })}
           </div>
         )}
-      {attributes.layout === "carousel" && (
+      {attributes.listType === "carousel" && (
         <div className={gridCls}>
           {__("Carousel preview not available.", "splx")}
         </div>
