@@ -83,6 +83,8 @@ class Solarplexus_Helpers {
       $args['post_type'] = $block_attributes['postType'];
       $args['posts_per_page'] = $block_attributes['noOfPosts'];
       $args['orderby'] = 'date';
+    } else {
+      $args['post_type'] = 'any';
     }
 
     if (array_key_exists('order', $block_attributes)) {

@@ -10,7 +10,7 @@
  */
 ?>
 
-<?php print_r($args); if ($args['posts']) : ?>
+<?php if ($args['posts']) : ?>
 	<div class="splx-wrap">
 		<div class="splx-grid <?php echo esc_attr($args['classes_grid']); ?>">
 			<?php foreach ($args['posts'] as $post) : setup_postdata($post); ?>
