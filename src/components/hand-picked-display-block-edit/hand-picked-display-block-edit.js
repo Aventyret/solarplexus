@@ -16,7 +16,7 @@ import {
 import { InspectorControls } from "@wordpress/block-editor";
 
 import GridItemPostPreview from "../../components/grid-item-post-preview/grid-item-post-preview";
-import RdbBlockControls from "../../components/rdb-block-controls/rdb-block-controls";
+import RdbBlockControls from "../../components/splx-block-controls/splx-block-controls";
 
 const SearchResultPreview = ({ config, attributes, isCol, getUrl }) => {
   const [post, setPost] = useState(null);
@@ -128,7 +128,7 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
   const inspectorControls = (
     <InspectorControls>
       <PanelBody>
-        <h4>{__("Search", "rdb")}</h4>
+        <h4>{__("Search", "splx")}</h4>
         <TextControl onChange={(nextValue) => onSearchInputChange(nextValue)} />
         <ul>
           {searchResults.map((searchResult) => {
@@ -142,7 +142,7 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
             const maxReached =
               attributes.searchResults.length >= attributes.noOfPosts;
             return (
-              <li className="rdb-searchResult" key={searchResult.id}>
+              <li className="splx-searchResult" key={searchResult.id}>
                 <span>{searchResult.title}</span>
                 <Button
                   isSecondary
@@ -151,50 +151,50 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
                   onClick={() => selectSearchResult(searchResult)}
                 >
                   {alreadySelected
-                    ? __("Already selected", "rdb")
+                    ? __("Already selected", "splx")
                     : maxReached
                     ? sprintf(
-                        __("You can't select more than %d posts", "rdb"),
+                        __("You can't select more than %d posts", "splx"),
                         attributes.noOfPosts
                       )
-                    : __("Select", "rdb")}
+                    : __("Select", "splx")}
                 </Button>
               </li>
             );
           })}
         </ul>
         {attributes.searchResults.length ? (
-          <div className="rdb-selectedSearchResultsWrap">
-            <h4>{__("Selected posts", "rdb")}</h4>
-            <div className="rdb-selectedSearchResults">
+          <div className="splx-selectedSearchResultsWrap">
+            <h4>{__("Selected posts", "splx")}</h4>
+            <div className="splx-selectedSearchResults">
               {attributes.searchResults.map((searchResult) => {
                 return (
                   <Card key={searchResult.id}>
                     <CardBody>
-                      <h5 className="rdb-selectedSearchResultTitle">
+                      <h5 className="splx-selectedSearchResultTitle">
                         {searchResult.title}
                       </h5>
-                      <div className="rdb-selectedSearchResultButtons">
+                      <div className="splx-selectedSearchResultButtons">
                         <Button
                           isSecondary
                           isSmall
                           onClick={() => moveSearchResultUp(searchResult.id)}
                         >
-                          {__("Move up", "rdb")}
+                          {__("Move up", "splx")}
                         </Button>
                         <Button
                           isSecondary
                           isSmall
                           onClick={() => moveSearchResultDown(searchResult.id)}
                         >
-                          {__("Move down", "rdb")}
+                          {__("Move down", "splx")}
                         </Button>
                         <Button
                           isSecondary
                           isSmall
                           onClick={() => removeSearchResult(searchResult.id)}
                         >
-                          {__("Remove", "rdb")}
+                          {__("Remove", "splx")}
                         </Button>
                       </div>
                     </CardBody>
@@ -211,14 +211,14 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
   console.log("searchResults", searchResults);
   console.log("selected searchResults", attributes.searchResults);
 
-  let gridCls = `rdb-grid rdb-grid--layout-${attributes.layout}`;
+  let gridCls = `splx-grid splx-grid--layout-${attributes.layout}`;
   const isCol = attributes.layout === "horizontal";
   if (isCol) {
-    gridCls += ` rdb-grid--cols${config.noOfGridCols}`;
+    gridCls += ` splx-grid--cols${config.noOfGridCols}`;
   }
 
   return (
-    <div className="rdb-wrap">
+    <div className="splx-wrap">
       <RdbBlockControls
         config={config}
         attributes={attributes}
@@ -227,7 +227,7 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
       {inspectorControls}
       {!isDirty && !attributes.searchResults.length && (
         <p>
-          {__("Start by searching for posts in the panel to the right", "rdb")}
+          {__("Start by searching for posts in the panel to the right", "splx")}
         </p>
       )}
 
@@ -249,7 +249,7 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
         )}
       {attributes.layout === "carousel" && (
         <div className={gridCls}>
-          {__("Carousel preview not available.", "rdb")}
+          {__("Carousel preview not available.", "splx")}
         </div>
       )}
     </div>

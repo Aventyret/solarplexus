@@ -20,7 +20,7 @@ const GridItemPostFeaturedMediaPreview = ({ post }) => {
   console.log("GridItemPostFeaturedMediaPreview", featuredMedia);
 
   return featuredMedia ? (
-    <div className="rdb-gridItemPostFeaturedMediaPreview">
+    <div className="splx-gridItemPostFeaturedMediaPreview">
       <img src={featuredMedia.source_url} alt={featuredMedia.alt_text} />
     </div>
   ) : null;

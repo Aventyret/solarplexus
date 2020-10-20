@@ -9,8 +9,8 @@
  * @link       https://aventyret.com
  * @since      1.0.0
  *
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/includes
+ * @package    Solarplexus
+ * @subpackage Solarplexus/includes
  */
 
 /**
@@ -23,11 +23,11 @@
  * version of the plugin.
  *
  * @since      1.0.0
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/includes
+ * @package    Solarplexus
+ * @subpackage Solarplexus/includes
  * @author     Äventyret <andreas.bohman@aventyret.com>
  */
-class Ruled_display_block {
+class Solarplexus {
 
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
@@ -35,7 +35,7 @@ class Ruled_display_block {
 	 *
 	 * @since    1.0.0
 	 * @access   protected
-	 * @var      Ruled_display_block_Loader    $loader    Maintains and registers all hooks for the plugin.
+	 * @var      Solarplexus_Loader    $loader    Maintains and registers all hooks for the plugin.
 	 */
 	protected $loader;
 
@@ -72,7 +72,7 @@ class Ruled_display_block {
 		} else {
 			$this->version = '1.0.0';
 		}
-		$this->plugin_name = 'ruled_display_block';
+		$this->plugin_name = 'solarplexus';
 
 		$this->load_dependencies();
 		$this->set_locale();
@@ -86,10 +86,10 @@ class Ruled_display_block {
 	 *
 	 * Include the following files that make up the plugin:
 	 *
-	 * - Ruled_display_block_Loader. Orchestrates the hooks of the plugin.
-	 * - Ruled_display_block_i18n. Defines internationalization functionality.
-	 * - Ruled_display_block_Admin. Defines all hooks for the admin area.
-	 * - Ruled_display_block_Public. Defines all hooks for the public side of the site.
+	 * - Solarplexus_Loader. Orchestrates the hooks of the plugin.
+	 * - Solarplexus_i18n. Defines internationalization functionality.
+	 * - Solarplexus_Admin. Defines all hooks for the admin area.
+	 * - Solarplexus_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -99,39 +99,39 @@ class Ruled_display_block {
 	 */
 	private function load_dependencies() {
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-ruled_display_block-helpers.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-solarplexus-helpers.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ruled_display_block-loader.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-solarplexus-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-ruled_display_block-i18n.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-solarplexus-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-ruled_display_block-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-solarplexus-admin.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the public-facing
 		 * side of the site.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-ruled_display_block-public.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-solarplexus-public.php';
 
-		$this->loader = new Ruled_display_block_Loader();
+		$this->loader = new Solarplexus_Loader();
 
 	}
 
 	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
-	 * Uses the Ruled_display_block_i18n class in order to set the domain and to register the hook
+	 * Uses the Solarplexus_i18n class in order to set the domain and to register the hook
 	 * with WordPress.
 	 *
 	 * @since    1.0.0
@@ -139,7 +139,7 @@ class Ruled_display_block {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new Ruled_display_block_i18n();
+		$plugin_i18n = new Solarplexus_i18n();
 
 		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
 
@@ -154,7 +154,7 @@ class Ruled_display_block {
 	 */
 	private function define_admin_hooks() {
 
-		$plugin_admin = new Ruled_display_block_Admin( $this->get_plugin_name(), $this->get_version() );
+		$plugin_admin = new Solarplexus_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
@@ -171,7 +171,7 @@ class Ruled_display_block {
 	 */
 	private function define_public_hooks() {
 
-		$plugin_public = new Ruled_display_block_Public( $this->get_plugin_name(), $this->get_version() );
+		$plugin_public = new Solarplexus_Public( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
 		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
@@ -202,7 +202,7 @@ class Ruled_display_block {
 	 * The reference to the class that orchestrates the hooks with the plugin.
 	 *
 	 * @since     1.0.0
-	 * @return    Ruled_display_block_Loader    Orchestrates the hooks of the plugin.
+	 * @return    Solarplexus_Loader    Orchestrates the hooks of the plugin.
 	 */
 	public function get_loader() {
 		return $this->loader;

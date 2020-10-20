@@ -6,8 +6,8 @@
  * @link       https://aventyret.com
  * @since      1.0.0
  *
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/includes
+ * @package    Solarplexus
+ * @subpackage Solarplexus/includes
  */
 
 /**
@@ -17,11 +17,11 @@
  * the plugin, and register them with the WordPress API. Call the
  * run function to execute the list of actions and filters.
  *
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/includes
+ * @package    Solarplexus
+ * @subpackage Solarplexus/includes
  * @author     Äventyret <andreas.bohman@aventyret.com>
  */
-class Ruled_display_block_Loader {
+class Solarplexus_Loader {
 
 	/**
 	 * The array of actions registered with WordPress.

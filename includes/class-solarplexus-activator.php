@@ -6,8 +6,8 @@
  * @link       https://aventyret.com
  * @since      1.0.0
  *
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/includes
+ * @package    Solarplexus
+ * @subpackage Solarplexus/includes
  */
 
 /**
@@ -16,11 +16,11 @@
  * This class defines all code necessary to run during the plugin's activation.
  *
  * @since      1.0.0
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/includes
+ * @package    Solarplexus
+ * @subpackage Solarplexus/includes
  * @author     Äventyret <andreas.bohman@aventyret.com>
  */
-class Ruled_display_block_Activator {
+class Solarplexus_Activator {
 
 	/**
 	 * Short Description. (use period)

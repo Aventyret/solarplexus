@@ -8,8 +8,8 @@
  * @link       https://aventyret.com
  * @since      1.0.0
  *
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/public/partials
+ * @package    Solarplexus
+ * @subpackage Solarplexus/public/partials
  */
 ?>
 

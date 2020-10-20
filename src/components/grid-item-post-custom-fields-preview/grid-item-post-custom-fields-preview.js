@@ -8,10 +8,10 @@ const GridItemPostCustomFieldsPreview = ({ post, config }) => {
   if (isEmpty(customFields)) return null;
 
   return (
-    <div className="rdb-gridItemPostCustomFieldsPreview">
+    <div className="splx-gridItemPostCustomFieldsPreview">
       {customFields.map((customField, i) => {
         if (!post[customField.name]) return null;
-        const baseCls = "rdb-gridItemPostCustomFieldsPreview__field";
+        const baseCls = "splx-gridItemPostCustomFieldsPreview__field";
         const typeCls = `${baseCls}--${customField.type}`;
         // TODO more types
         if (customField.type === "string") {

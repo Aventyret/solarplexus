@@ -10,10 +10,10 @@
  *
  * @link              https://aventyret.com
  * @since             1.0.0
- * @package           Ruled_display_block
+ * @package           Solarplexus
  *
  * @wordpress-plugin
- * Plugin Name:       Ruled Display Block
+ * Plugin Name:       Solarplexus
  * Plugin URI:        https://aventyret.com
  * Description:       This is a short description of what the plugin does. It's displayed in the WordPress admin area.
  * Version:           1.0.0
@@ -21,7 +21,7 @@
  * Author URI:        https://aventyret.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain:       ruled_display_block
+ * Text Domain:       solarplexus
  * Domain Path:       /languages
  */
 
@@ -30,43 +30,43 @@ if ( ! defined( 'WPINC' ) ) {
 	die;
 }
 
-define( 'RDB_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-define( 'RDB_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
-define( 'RDB_TEMPLATE_FOLDER', 'rdb-templates' );
+define( 'SPLX_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
+define( 'SPLX_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
+define( 'SPLX_TEMPLATE_FOLDER', 'splx-templates' );
 
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org
  * Rename this for your plugin and update it as you release new versions.
  */
-define( 'RULED_DISPLAY_BLOCK_VERSION', '1.0.0' );
+define( 'SOLARPLEXUS_VERSION', '1.0.0' );
 
 /**
  * The code that runs during plugin activation.
- * This action is documented in includes/class-ruled_display_block-activator.php
+ * This action is documented in includes/class-solarplexus-activator.php
  */
-function activate_ruled_display_block() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ruled_display_block-activator.php';
-	Ruled_display_block_Activator::activate();
+function activate_solarplexus() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-solarplexus-activator.php';
+	Solarplexus_Activator::activate();
 }
 
 /**
  * The code that runs during plugin deactivation.
- * This action is documented in includes/class-ruled_display_block-deactivator.php
+ * This action is documented in includes/class-solarplexus-deactivator.php
  */
-function deactivate_ruled_display_block() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-ruled_display_block-deactivator.php';
-	Ruled_display_block_Deactivator::deactivate();
+function deactivate_solarplexus() {
+	require_once plugin_dir_path( __FILE__ ) . 'includes/class-solarplexus-deactivator.php';
+	Solarplexus_Deactivator::deactivate();
 }
 
-register_activation_hook( __FILE__, 'activate_ruled_display_block' );
-register_deactivation_hook( __FILE__, 'deactivate_ruled_display_block' );
+register_activation_hook( __FILE__, 'activate_solarplexus' );
+register_deactivation_hook( __FILE__, 'deactivate_solarplexus' );
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin-specific hooks, and public-facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-ruled_display_block.php';
+require plugin_dir_path( __FILE__ ) . 'includes/class-solarplexus.php';
 
 /**
  * Begins execution of the plugin.
@@ -77,10 +77,10 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-ruled_display_block.php';
  *
  * @since    1.0.0
  */
-function run_ruled_display_block() {
+function run_solarplexus() {
 
-	$plugin = new Ruled_display_block();
+	$plugin = new Solarplexus();
 	$plugin->run();
 
 }
-run_ruled_display_block();
+run_solarplexus();

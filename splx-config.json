@@ -1,7 +1,7 @@
 [
   {
     "id": "latest-default",
-    "title": "[RDB]: Latest posts and pages",
+    "title": "[Solarplexus]: Latest posts and pages",
     "type": "dynamic",
     "allowedPostTypes": ["post", "page"],
     "allowedTaxonomies": ["category"],
@@ -15,7 +15,7 @@
   },
   {
     "id": "handpicked-default",
-    "title": "[RDB]: Hand picked posts and pages",
+    "title": "[Solarplexus]: Hand picked posts and pages",
     "type": "handpicked",
     "allowedPostTypes": ["post", "page"],
     "allowedTaxonomies": ["category"],

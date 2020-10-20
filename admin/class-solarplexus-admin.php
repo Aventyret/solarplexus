@@ -6,8 +6,8 @@
  * @link       https://aventyret.com
  * @since      1.0.0
  *
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/admin
+ * @package    Solarplexus
+ * @subpackage Solarplexus/admin
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the admin-specific stylesheet and JavaScript.
  *
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/admin
+ * @package    Solarplexus
+ * @subpackage Solarplexus/admin
  * @author     Äventyret <andreas.bohman@aventyret.com>
  */
-class Ruled_display_block_Admin {
+class Solarplexus_Admin {
 
 	/**
 	 * The ID of this plugin.
@@ -53,7 +53,7 @@ class Ruled_display_block_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		$this->config = Ruled_display_block_Helpers::retrieve_block_configs();
+		$this->config = Solarplexus_Helpers::retrieve_block_configs();
 
 	}
 
@@ -68,15 +68,15 @@ class Ruled_display_block_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Ruled_display_block_Loader as all of the hooks are defined
+		 * defined in Solarplexus_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Ruled_display_block_Loader will then create the relationship
+		 * The Solarplexus_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ruled_display_block-admin.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/solarplexus-admin.css', array(), $this->version, 'all' );
 
 	}
 
@@ -91,37 +91,37 @@ class Ruled_display_block_Admin {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Ruled_display_block_Loader as all of the hooks are defined
+		 * defined in Solarplexus_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Ruled_display_block_Loader will then create the relationship
+		 * The Solarplexus_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ruled_display_block-admin.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/solarplexus-admin.js', array( 'jquery' ), $this->version, false );
 
 	}
 
 	public function register_scripts() {
 
 		wp_register_style(
-			'ruled-display-block-style',
-			RDB_PLUGIN_DIR_URL . 'build/index.css',
+			'solarplexus-style',
+			SPLX_PLUGIN_DIR_URL . 'build/index.css',
 			[ 'wp-edit-blocks' ],
-			filemtime( RDB_PLUGIN_PATH . 'build/index.css' )
+			filemtime( SPLX_PLUGIN_PATH . 'build/index.css' )
 		);
 
 		wp_register_script(
-			'ruled-display-block-script',
-			RDB_PLUGIN_DIR_URL . 'build/index.js',
+			'solarplexus-script',
+			SPLX_PLUGIN_DIR_URL . 'build/index.js',
 			[ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ],
-			filemtime( RDB_PLUGIN_PATH . 'build/index.js' )
+			filemtime( SPLX_PLUGIN_PATH . 'build/index.js' )
 		);
 
 		wp_add_inline_script(
-			'ruled-display-block-script',
-			'const ruledDisplayBlockConfig = ' . wp_json_encode( $this->config ),
+			'solarplexus-script',
+			'const solarplexusConfig = ' . wp_json_encode( $this->config ),
 			'before'
 		);
 
@@ -130,12 +130,12 @@ class Ruled_display_block_Admin {
 	public function register_block() {
 		foreach($this->config as $block_config) {
 			$block_type_id = $block_config['id'];
-			register_block_type("rdb/{$block_type_id}", [
-				'editor_script' => 'ruled-display-block-script',
-				'style' => 'ruled-display-block-style',
+			register_block_type("splx/{$block_type_id}", [
+				'editor_script' => 'solarplexus-script',
+				'style' => 'solarplexus-style',
 				'render_callback' => function($block_attributes, $content) use ($block_config, $block_type_id) {
-					$args = Ruled_display_block_Helpers::block_args($block_config, $block_type_id, $block_attributes);
-					$template = Ruled_display_block_Helpers::template_loader($block_type_id, $args);
+					$args = Solarplexus_Helpers::block_args($block_config, $block_type_id, $block_attributes);
+					$template = Solarplexus_Helpers::template_loader($block_type_id, $args);
 	
 					return $template;
 				}

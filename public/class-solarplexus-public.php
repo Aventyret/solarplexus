@@ -6,8 +6,8 @@
  * @link       https://aventyret.com
  * @since      1.0.0
  *
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/public
+ * @package    Solarplexus
+ * @subpackage Solarplexus/public
  */
 
 /**
@@ -16,11 +16,11 @@
  * Defines the plugin name, version, and two examples hooks for how to
  * enqueue the public-facing stylesheet and JavaScript.
  *
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/public
+ * @package    Solarplexus
+ * @subpackage Solarplexus/public
  * @author     Äventyret <andreas.bohman@aventyret.com>
  */
-class Ruled_display_block_Public {
+class Solarplexus_Public {
 
 	/**
 	 * The ID of this plugin.
@@ -65,15 +65,15 @@ class Ruled_display_block_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Ruled_display_block_Loader as all of the hooks are defined
+		 * defined in Solarplexus_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Ruled_display_block_Loader will then create the relationship
+		 * The Solarplexus_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/ruled_display_block-public.css', array(), $this->version, 'all' );
+		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/solarplexus-public.css', array(), $this->version, 'all' );
 
 	}
 
@@ -88,15 +88,15 @@ class Ruled_display_block_Public {
 		 * This function is provided for demonstration purposes only.
 		 *
 		 * An instance of this class should be passed to the run() function
-		 * defined in Ruled_display_block_Loader as all of the hooks are defined
+		 * defined in Solarplexus_Loader as all of the hooks are defined
 		 * in that particular class.
 		 *
-		 * The Ruled_display_block_Loader will then create the relationship
+		 * The Solarplexus_Loader will then create the relationship
 		 * between the defined hooks and the functions defined in this
 		 * class.
 		 */
 
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/ruled_display_block-public.js', array( 'jquery' ), $this->version, false );
+		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/solarplexus-public.js', array( 'jquery' ), $this->version, false );
 
 	}
 

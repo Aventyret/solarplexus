@@ -1,6 +1,6 @@
 $test: #ff0000;
 
-.rdb-wrap {
+.splx-wrap {
   min-height: 100px;
   pre {
     display: inline;
@@ -8,11 +8,11 @@ $test: #ff0000;
     margin: 0;
   }
 }
-.rdb-test {
+.splx-test {
   color: $test;
 }
 
-.rdb-grid {
+.splx-grid {
   
   flex-wrap: wrap;
   &--layout-horizontal {

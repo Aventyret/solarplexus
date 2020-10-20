@@ -9,8 +9,8 @@
  * @link       https://aventyret.com
  * @since      1.0.0
  *
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/includes
+ * @package    Solarplexus
+ * @subpackage Solarplexus/includes
  */
 
 /**
@@ -20,11 +20,11 @@
  * so that it is ready for translation.
  *
  * @since      1.0.0
- * @package    Ruled_display_block
- * @subpackage Ruled_display_block/includes
+ * @package    Solarplexus
+ * @subpackage Solarplexus/includes
  * @author     Äventyret <andreas.bohman@aventyret.com>
  */
-class Ruled_display_block_i18n {
+class Solarplexus_i18n {
 
 
 	/**
@@ -35,7 +35,7 @@ class Ruled_display_block_i18n {
 	public function load_plugin_textdomain() {
 
 		load_plugin_textdomain(
-			'ruled_display_block',
+			'solarplexus',
 			false,
 			dirname( dirname( plugin_basename( __FILE__ ) ) ) . '/languages/'
 		);

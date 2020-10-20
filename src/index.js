@@ -8,7 +8,7 @@ import { registerBlockType } from "@wordpress/blocks";
 import DynamicDisplayBlockEdit from "./components/dynamic-display-block-edit/dynamic-display-block-edit";
 import HandPickedDisplayBlockEdit from "./components/hand-picked-display-block-edit/hand-picked-display-block-edit";
 
-ruledDisplayBlockConfig.forEach((config) => {
+solarplexusConfig.forEach((config) => {
   const commonAttributes = {
     layout: {
       type: "string",
@@ -52,7 +52,7 @@ ruledDisplayBlockConfig.forEach((config) => {
           },
         }
       : {};
-  registerBlockType(`rdb/${config.id}`, {
+  registerBlockType(`splx/${config.id}`, {
     title: config.title,
     icon: "universal-access-alt",
     category: "layout",

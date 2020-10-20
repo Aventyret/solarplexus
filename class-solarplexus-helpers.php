@@ -1,11 +1,11 @@
 <?php
 
-class Ruled_display_block_Helpers {
+class Solarplexus_Helpers {
   public static function retrieve_block_configs() {
 
-    $config_path = RDB_PLUGIN_PATH . 'rdb-config.json';
+    $config_path = SPLX_PLUGIN_PATH . 'splx-config.json';
 
-    $theme_config_path = get_stylesheet_directory() . '/rdb-config.json';
+    $theme_config_path = get_stylesheet_directory() . '/splx-config.json';
 
     // Override with custom config from theme
     if(file_exists($theme_config_path)) {
@@ -27,24 +27,24 @@ class Ruled_display_block_Helpers {
     $classes_item = [];
     $attrs_grid = [
       'cols' => [
-        'class_base' => 'rdb-grid--cols',
+        'class_base' => 'splx-grid--cols',
         'value' => $block_config['noOfGridCols'],
         'divider' => ''
       ],
       'layout' => [
-        'class_base' => 'rdb-grid--layout',
+        'class_base' => 'splx-grid--layout',
         'value' => $block_config['allowedLayouts'][0],
         'divider' => '-'
       ]
     ];
     $attrs_item = [
       'cols' => [
-        'class_base' => 'rdb-gridItemPostPreview--cols',
+        'class_base' => 'splx-gridItemPostPreview--cols',
         'value' => $block_config['noOfGridCols'],
         'divider' => ''
       ],
       'itemLayout' => [
-        'class_base' => 'rdb-gridItemPostPreview--layout',
+        'class_base' => 'splx-gridItemPostPreview--layout',
         'value' => $block_config['allowedItemLayouts'][0],
         'divider' => '-'
       ]
@@ -137,10 +137,10 @@ class Ruled_display_block_Helpers {
         load_template($template, false, $block_attributes);
         $loaded_template = ob_get_clean();
       } else {
-        error_log("Ruled Display Block: Unable to validate template path: \"$template\". Error Code: $validated_file.");
+        error_log("Solarplexus: Unable to validate template path: \"$template\". Error Code: $validated_file.");
       }
     } else {
-      error_log("Ruled Display Block: Unable to load template for: \"$block\". File not found.");
+      error_log("Solarplexus: Unable to load template for: \"$block\". File not found.");
     }
 
     return $loaded_template;
@@ -150,7 +150,7 @@ class Ruled_display_block_Helpers {
     $template = locate_template(
       sprintf(
         '%s/%s.php',
-        RDB_TEMPLATE_FOLDER,
+        SPLX_TEMPLATE_FOLDER,
         $block
       )
     );
@@ -158,8 +158,8 @@ class Ruled_display_block_Helpers {
     if (!$template) {
       $template = sprintf(
         '%s%s/%s.php',
-        RDB_PLUGIN_PATH,
-        RDB_TEMPLATE_FOLDER,
+        SPLX_PLUGIN_PATH,
+        SPLX_TEMPLATE_FOLDER,
         $block
       );
     }

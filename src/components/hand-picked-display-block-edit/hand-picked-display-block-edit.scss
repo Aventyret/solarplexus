@@ -1,13 +1,13 @@
-h5.rdb-selectedSearchResultTitle {
+h5.splx-selectedSearchResultTitle {
   margin-top: 0;
 }
 
-.rdb-selectedSearchResultButtons {
+.splx-selectedSearchResultButtons {
   display: flex;
   justify-content: space-between;
 }
 
-.rdb-selectedSearchResults .components-card {
+.splx-selectedSearchResults .components-card {
   margin-bottom: 0.5em;
   
   .components-card__body {
@@ -15,11 +15,11 @@ h5.rdb-selectedSearchResultTitle {
   }
 }
 
-.rdb-selectedSearchResultsWrap {
+.splx-selectedSearchResultsWrap {
   margin-top: 3em;
 }
 
-.rdb-searchResult {
+.splx-searchResult {
   > span {
     display: inline-block;
     margin-right: 0.5em;

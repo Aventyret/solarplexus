@@ -15,7 +15,7 @@ import { useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
 import GridItemPostPreview from "../../components/grid-item-post-preview/grid-item-post-preview";
-import RdbBlockControls from "../../components/rdb-block-controls/rdb-block-controls";
+import RdbBlockControls from "../../components/splx-block-controls/splx-block-controls";
 
 import { ORDERS } from "../../consts";
 
@@ -182,9 +182,9 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
   const inspectorControls = (
     <InspectorControls>
       {availablePostTypes && availablePostTypes.length && (
-        <PanelBody title={__("Post types", "rdb")}>
+        <PanelBody title={__("Post types", "splx")}>
           <RadioControl
-            label={__("Show posts from:", "rdb")}
+            label={__("Show posts from:", "splx")}
             selected={attributes.postType}
             options={availablePostTypes.map((postType) => {
               return { label: postType.name, value: postType.slug };
@@ -204,12 +204,12 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
         </PanelBody>
       )}
       {availableTaxsAndTerms && availableTaxsAndTerms.length && (
-        <PanelBody title={__("Taxonomies", "rdb")}>
+        <PanelBody title={__("Taxonomies", "splx")}>
           <RadioControl
-            label={__("Show posts from:", "rdb")}
+            label={__("Show posts from:", "splx")}
             selected={attributes.taxonomy}
             options={[
-              { label: __("All", "rdb"), value: TERMS_DEFAULT_SELECT_VALUE },
+              { label: __("All", "splx"), value: TERMS_DEFAULT_SELECT_VALUE },
               ...availableTaxsAndTerms.map((taxWTerms) => {
                 return { label: taxWTerms.name, value: taxWTerms.slug };
               }),
@@ -233,7 +233,7 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
       )}
       <PanelBody>
         <SelectControl
-          label={__("Order", "rdb")}
+          label={__("Order", "splx")}
           value={attributes.order}
           onChange={(order) => onOrderSelectChange(order)}
           options={Object.keys(ORDERS).map((key) => {
@@ -257,14 +257,14 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
     </InspectorControls>
   );
 
-  let gridCls = `rdb-grid rdb-grid--layout-${attributes.layout}`;
+  let gridCls = `splx-grid splx-grid--layout-${attributes.layout}`;
   const isCol = attributes.layout === "horizontal";
   if (isCol) {
-    gridCls += ` rdb-grid--cols${config.noOfGridCols}`;
+    gridCls += ` splx-grid--cols${config.noOfGridCols}`;
   }
 
   return (
-    <div className="rdb-wrap">
+    <div className="splx-wrap">
       <RdbBlockControls
         config={config}
         attributes={attributes}
@@ -290,7 +290,7 @@ const DynamicDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
         )}
       {attributes.layout === "carousel" && (
         <div className={gridCls}>
-          {__("Carousel preview not available.", "rdb")}
+          {__("Carousel preview not available.", "splx")}
         </div>
       )}
     </div>

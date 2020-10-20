@@ -11,31 +11,31 @@
 ?>
 
 <?php if ($args['posts']) : ?>
-	<div class="rdb-wrap">
-		<div class="rdb-grid <?php echo esc_attr($args['classes_grid']); ?>">
+	<div class="splx-wrap">
+		<div class="splx-grid <?php echo esc_attr($args['classes_grid']); ?>">
 			<?php foreach ($args['posts'] as $post) : setup_postdata($post); ?>
-				<div class="gridItemPostPreview rdb-gridItemPostPreview <?php echo esc_attr($args['classes_item']); ?> <?php echo has_post_thumbnail() ? 'rdb-gridItemPostPreview--hasImg' : ''; ?>">
+				<div class="gridItemPostPreview splx-gridItemPostPreview <?php echo esc_attr($args['classes_item']); ?> <?php echo has_post_thumbnail() ? 'splx-gridItemPostPreview--hasImg' : ''; ?>">
 					<?php if (has_post_thumbnail()) : ?>
-						<div class="rdb-gridItemPostPreview__image">
-							<div class="rdb-gridItemPostFeaturedMediaPreview">
+						<div class="splx-gridItemPostPreview__image">
+							<div class="splx-gridItemPostFeaturedMediaPreview">
 								<?php the_post_thumbnail('large'); ?>
 							</div>
 						</div>
 					<?php endif; ?>
 
-					<div class="rdb-gridItemPostPreview__content">
-						<h3 class="rdb-gridItemPostPreview__heading">
+					<div class="splx-gridItemPostPreview__content">
+						<h3 class="splx-gridItemPostPreview__heading">
 							<?php the_title(); ?>
 						</h3>
-
+						
 						<?php if ($args['config']['showExcerpt']) : ?>
-							<div class="rdb-gridItemPostPreview__excerpt">
+							<div class="splx-gridItemPostPreview__excerpt">
 								<?php the_excerpt(); ?>
 							</div>
 						<?php endif; ?>
 
 						<?php if ($args['config']['showDate']) : ?>
-							<div class="rdb-gridItemPostPreview__date">
+							<div class="splx-gridItemPostPreview__date">
 								<?php the_date(); ?>
 							</div>
 						<?php endif; ?>

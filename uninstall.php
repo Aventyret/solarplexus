@@ -22,7 +22,7 @@
  * @link       https://aventyret.com
  * @since      1.0.0
  *
- * @package    Ruled_display_block
+ * @package    Solarplexus
  */
 
 // If uninstall not called from WordPress, then exit.
