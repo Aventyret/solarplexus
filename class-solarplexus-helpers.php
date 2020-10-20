@@ -18,6 +18,20 @@ class Solarplexus_Helpers {
     return $config_data;
   }
 
+  public static function retrieve_block_attribute_types($type) {
+
+    $common_path = SPLX_PLUGIN_PATH . 'src/common-attribute-types.json';
+    $type_path = SPLX_PLUGIN_PATH . "src/{$type}-attribute-types.json";
+
+    $common_json = file_get_contents( $common_path );
+    $common_data = json_decode( $common_json, true );
+
+    $type_json = file_get_contents( $type_path );
+    $type_data = json_decode( $type_json, true );
+    
+    return array_merge($common_data, $type_data);
+  }
+
   public static function block_args($block_config, $block_type_id, $block_attributes) {
     // Set grid and item classes from attributes
 
@@ -80,8 +94,8 @@ class Solarplexus_Helpers {
 
     if($current_post_id) {
 			$args['post__not_in'] = array($current_post_id);
-		}
-
+    }
+    
     if (array_key_exists('postType', $block_attributes)) {
       $args['post_type'] = $block_attributes['postType'];
       $args['posts_per_page'] = $block_attributes['noOfPosts'];
@@ -94,22 +108,19 @@ class Solarplexus_Helpers {
       $args['order'] = $block_attributes['order'];
     }
 
-    if (array_key_exists('taxonomy', $block_attributes)) {
-      $args['tax_query'] = [
-        'taxonomy' => $block_attributes['taxonomy']
+    if (array_key_exists('taxonomy', $block_attributes) && array_key_exists('terms', $block_attributes) && !empty($block_attributes['terms'])) {
+      $args['tax_query'] = [];
+      $args['tax_query'][] = [
+        'taxonomy' => $block_attributes['taxonomy'],
+        'field' => 'term_id',
+        'terms' => $block_attributes['terms']
       ];
-
-      if (array_key_exists('terms', $block_attributes)) {
-        $args['tax_query'] = [
-          'field' => 'id',
-          'terms' => $block_attributes['terms']
-        ];
-      }
     }
 
     if (array_key_exists('searchResults', $block_attributes)) {
       $args['post__in'] = wp_list_pluck($block_attributes['searchResults'], 'id');
     }
+
 
     $query = new WP_Query($args);
 
@@ -134,13 +145,16 @@ class Solarplexus_Helpers {
   public static function template_loader($block, $block_attributes) {
     $loaded_template = '';
     $template = self::get_template($block);
+    
 
     if ($template && file_exists($template)) {
+
       $validated_file = validate_file($template);
       if (0 === $validated_file) {
         ob_start();
         load_template($template, false, $block_attributes);
         $loaded_template = ob_get_clean();
+        
       } else {
         error_log("Solarplexus: Unable to validate template path: \"$template\". Error Code: $validated_file.");
       }

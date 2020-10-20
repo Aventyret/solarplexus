@@ -1,0 +1,6 @@
+{
+  "searchResults": {
+    "type": "array",
+    "default": []
+  }
+}

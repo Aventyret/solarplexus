@@ -1,0 +1,18 @@
+{
+  "postType": {
+    "type": "string",
+    "default": ""
+  },
+  "taxonomy": {
+    "type": "string",
+    "default": ""
+  },
+  "terms": {
+    "type": "array",
+    "default": []
+  },
+  "order": {
+    "type": "string",
+    "default": "desc"
+  }
+}

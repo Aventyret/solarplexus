@@ -55,6 +55,8 @@ class Solarplexus_Admin {
 		$this->version = $version;
 		$this->config = Solarplexus_Helpers::retrieve_block_configs();
 
+		$this->dynamic_attribute_types = Solarplexus_Helpers::retrieve_block_attribute_types("dynamic");
+		$this->handpicked_attribute_types = Solarplexus_Helpers::retrieve_block_attribute_types("handpicked");
 	}
 
 	/**
@@ -121,7 +123,17 @@ class Solarplexus_Admin {
 
 		wp_add_inline_script(
 			'solarplexus-script',
-			'const solarplexusConfig = ' . wp_json_encode( $this->config ),
+			'const solarplexusConfig = ' . wp_json_encode( $this->config ) . ';',
+			'before'
+		);
+		wp_add_inline_script(
+			'solarplexus-script',
+			'const solarplexusDynamicAttributeTypesConfig = ' . wp_json_encode( $this->dynamic_attribute_types ) . ';',
+			'before'
+		);
+		wp_add_inline_script(
+			'solarplexus-script',
+			'const solarplexusHandpickedAttributeTypesConfig = ' . wp_json_encode( $this->handpicked_attribute_types ) . ';',
 			'before'
 		);
 
@@ -130,13 +142,20 @@ class Solarplexus_Admin {
 	public function register_block() {
 		foreach($this->config as $block_config) {
 			$block_type_id = $block_config['id'];
+			$attributes = [];
+			if($block_config['type'] == "dynamic") {
+				$attributes = $this->dynamic_attribute_types;
+			} else if($block_config['type'] == "handpicked") {
+				$attributes = $this->handpicked_attribute_types;
+			};
+
 			register_block_type("splx/{$block_type_id}", [
+				'attributes' => $attributes,
 				'editor_script' => 'solarplexus-script',
 				'style' => 'solarplexus-style',
 				'render_callback' => function($block_attributes, $content) use ($block_config, $block_type_id) {
 					$args = Solarplexus_Helpers::block_args($block_config, $block_type_id, $block_attributes);
 					$template = Solarplexus_Helpers::template_loader($block_type_id, $args);
-	
 					return $template;
 				}
 			]);

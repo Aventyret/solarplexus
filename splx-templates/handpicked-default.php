@@ -11,7 +11,7 @@
 ?>
 
 <?php if ($args['posts']) : ?>
-	<div class="splx-wrap">
+	<div class="splx-wrap splx-wrap--ssr">
 		<div class="splx-grid <?php echo esc_attr($args['classes_grid']); ?>">
 			<?php foreach ($args['posts'] as $post) : setup_postdata($post); ?>
 				<div class="gridItemPostPreview splx-gridItemPostPreview <?php echo esc_attr($args['classes_item']); ?> <?php echo has_post_thumbnail() ? 'splx-gridItemPostPreview--hasImg' : ''; ?>">
