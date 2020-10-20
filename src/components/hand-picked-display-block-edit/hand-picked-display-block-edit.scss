@@ -20,6 +20,20 @@ h5.splx-selectedSearchResultTitle {
 }
 
 .splx-searchResult {
+  display: flex;
+  > div {
+    em {
+      font-style: normal;
+    }
+    span {
+      display: block;
+      font-size: 80%;
+    }
+  }
+  > button {
+    margin-left: auto;
+    align-self: center;
+  }
   > span {
     display: inline-block;
     margin-right: 0.5em;

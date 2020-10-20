@@ -3,7 +3,7 @@ import { BlockControls } from "@wordpress/block-editor";
 
 import { LAYOUTS, ITEM_LAYOUTS } from "../../consts";
 
-const RdbBlockControls = ({ config, attributes, setAttributes }) => {
+const SplxBlockControls = ({ config, attributes, setAttributes }) => {
   const onLayoutButtonClick = (layout) => {
     setAttributes({ layout });
   };
@@ -43,4 +43,4 @@ const RdbBlockControls = ({ config, attributes, setAttributes }) => {
   );
 };
 
-export default RdbBlockControls;
+export default SplxBlockControls;

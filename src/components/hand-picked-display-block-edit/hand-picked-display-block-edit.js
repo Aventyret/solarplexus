@@ -143,7 +143,11 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
               attributes.searchResults.length >= attributes.noOfPosts;
             return (
               <li className="splx-searchResult" key={searchResult.id}>
-                <span>{searchResult.title}</span>
+                <div>
+                  <em>{searchResult.title}</em>
+                  <span>{__(searchResult.subtype, "splx")}</span>
+                </div>
+                
                 <Button
                   isSecondary
                   isSmall
@@ -208,8 +212,6 @@ const HandPickedDisplayBlockEdit = ({ config, attributes, setAttributes }) => {
     </InspectorControls>
   );
 
-  console.log("searchResults", searchResults);
-  console.log("selected searchResults", attributes.searchResults);
 
   let gridCls = `splx-grid splx-grid--layout-${attributes.layout}`;
   const isCol = attributes.layout === "horizontal";

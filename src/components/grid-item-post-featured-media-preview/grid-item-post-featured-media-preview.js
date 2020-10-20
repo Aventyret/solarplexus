@@ -9,15 +9,12 @@ const GridItemPostFeaturedMediaPreview = ({ post }) => {
 
   useEffect(() => {
     const fetchMedia = async () => {
-      console.log("featuredMediaLink", featuredMediaLink);
       const res = await fetch(featuredMediaLink);
       const json = await res.json();
       setFeaturedMedia(json);
     };
     if (featuredMediaLink) fetchMedia();
   }, [featuredMediaLink, setFeaturedMedia]);
-
-  console.log("GridItemPostFeaturedMediaPreview", featuredMedia);
 
   return featuredMedia ? (
     <div className="splx-gridItemPostFeaturedMediaPreview">

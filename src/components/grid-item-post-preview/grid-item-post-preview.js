@@ -6,8 +6,6 @@ import GridItemPostFeaturedMediaPreview from "../grid-item-post-featured-media-p
 import GridItemPostCustomFieldsPreview from "../grid-item-post-custom-fields-preview/grid-item-post-custom-fields-preview";
 
 const GridItemPostPreview = ({ post, config, layout, isCol }) => {
-  console.log("GridItemPostPreview", post);
-
   let cls =
     `splx-gridItemPostPreview splx-gridItemPostPreview--layout-${layout}` +
     (!!post.featured_media ? " splx-gridItemPostPreview--hasImg" : "");
