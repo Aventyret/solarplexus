@@ -27,15 +27,15 @@
 						<h3 class="splx-gridItemPostPreview__heading">
 							<?php the_title(); ?>
 						</h3>
-						
-						<?php if ($args['config']['showExcerpt']) : ?>
-							<div class="splx-gridItemPostPreview__excerpt">
+
+						<?php if (array_key_exists('showExcerpt', $args['config'])) : ?>
+							<div class="rdb-gridItemPostPreview__excerpt">
 								<?php the_excerpt(); ?>
 							</div>
 						<?php endif; ?>
 
-						<?php if ($args['config']['showDate']) : ?>
-							<div class="splx-gridItemPostPreview__date">
+						<?php if (array_key_exists('showDate', $args['config'])) : ?>
+							<div class="rdb-gridItemPostPreview__date">
 								<?php the_date(); ?>
 							</div>
 						<?php endif; ?>

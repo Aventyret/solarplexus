@@ -28,14 +28,24 @@
 							<?php the_title(); ?>
 						</h3>
 
+<<<<<<< HEAD:splx-templates/handpicked-default.php
 						<?php if ($args['config']['showExcerpt']) : ?>
 							<div class="splx-gridItemPostPreview__excerpt">
+=======
+						<?php if (array_key_exists('showExcerpt', $args['config'])) : ?>
+							<div class="rdb-gridItemPostPreview__excerpt">
+>>>>>>> 05a12ee3d9a403314aa24736b5f656492afb90e2:rdb-templates/handpicked-default.php
 								<?php the_excerpt(); ?>
 							</div>
 						<?php endif; ?>
 
+<<<<<<< HEAD:splx-templates/handpicked-default.php
 						<?php if ($args['config']['showDate']) : ?>
 							<div class="splx-gridItemPostPreview__date">
+=======
+						<?php if (array_key_exists('showDate', $args['config'])) : ?>
+							<div class="rdb-gridItemPostPreview__date">
+>>>>>>> 05a12ee3d9a403314aa24736b5f656492afb90e2:rdb-templates/handpicked-default.php
 								<?php the_date(); ?>
 							</div>
 						<?php endif; ?>
