@@ -121,7 +121,7 @@ class Solarplexus_Helpers {
 
     $query = new WP_Query($args);
 
-    $posts = apply_filters('splx_posts', $query->posts);
+    $posts = apply_filters('splx_posts', $query->posts, $block_config);
 
     // Return
     return [
