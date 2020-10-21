@@ -31,11 +31,7 @@ const DynamicPreview = ({ config, attributes, setAttributes }) => {
         q[attributes.taxonomy] = attributes.terms;
       }
 
-      console.log("q", q);
-
       const perType = getEntityRecords("postType", attributes.postType, q);
-
-      console.log("perType", perType);
 
       return perType;
     },

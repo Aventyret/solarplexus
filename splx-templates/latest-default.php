@@ -14,7 +14,7 @@
 	<div class="splx-wrap splx-wrap--ssr">
 		<div class="splx-grid <?php echo esc_attr($args['classes_grid']); ?>">
 			<?php foreach ($args['posts'] as $post) : setup_postdata($post); ?>
-				<div class="gridItemPostPreview splx-gridItemPostPreview <?php echo esc_attr($args['classes_item']); ?> <?php echo has_post_thumbnail() ? 'splx-gridItemPostPreview--hasImg' : ''; ?>">
+				<div class="splx-gridItemPostPreview <?php echo esc_attr($args['classes_item']); ?> <?php echo has_post_thumbnail() ? 'splx-gridItemPostPreview--hasImg' : ''; ?>">
 					<?php if (has_post_thumbnail()) : ?>
 						<div class="splx-gridItemPostPreview__image">
 							<div class="splx-gridItemPostFeaturedMediaPreview">
@@ -29,13 +29,13 @@
 						</h3>
 
 						<?php if (array_key_exists('showExcerpt', $args['config'])) : ?>
-							<div class="rdb-gridItemPostPreview__excerpt">
+							<div class="splx-gridItemPostPreview__excerpt">
 								<?php the_excerpt(); ?>
 							</div>
 						<?php endif; ?>
 
 						<?php if (array_key_exists('showDate', $args['config'])) : ?>
-							<div class="rdb-gridItemPostPreview__date">
+							<div class="splx-gridItemPostPreview__date">
 								<?php the_date(); ?>
 							</div>
 						<?php endif; ?>
