@@ -121,10 +121,12 @@ class Solarplexus_Helpers {
 
     $query = new WP_Query($args);
 
+    $posts = apply_filters('splx_posts', $query->posts);
+
     // Return
     return [
       'query' => $query->query,
-      'posts' => $query->posts,
+      'posts' => $posts,
       'block_attributes' => $block_attributes,
       'classes_grid' => self::block_classes($classes_grid),
       'classes_item' => self::block_classes($classes_item),
