@@ -128,8 +128,8 @@ class Solarplexus_Helpers {
       'query' => $query->query,
       'posts' => $posts,
       'block_attributes' => $block_attributes,
-      'classes_grid' => self::block_classes($classes_grid),
-      'classes_item' => self::block_classes($classes_item),
+      'classes_grid' => apply_filters('splx_grid_classes', self::block_classes($classes_grid), $block_config),
+      'classes_item' => apply_filters('splx_item_classes', self::block_classes($classes_item), $block_config),
       'config' => $block_config
     ];
   }
