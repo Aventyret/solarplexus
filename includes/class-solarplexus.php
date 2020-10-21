@@ -101,6 +101,10 @@ class Solarplexus {
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-solarplexus-helpers.php';
 
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/objects/class-solarplexus-block-attrs-definition.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/objects/class-solarplexus-dynamic-block-attrs-definition.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/objects/class-solarplexus-handpicked-block-attrs-definition.php';
+
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.

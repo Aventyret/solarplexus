@@ -1,6 +1,0 @@
-{
-  "noOfPosts": {
-    "type": "integer",
-    "default": 0
-  }
-}

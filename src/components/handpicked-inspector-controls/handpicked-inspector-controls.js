@@ -1,7 +1,7 @@
 
 const { __, sprintf } = wp.i18n;
 
-import { debounce, find, findIndex, isArray } from "lodash";
+import { debounce, find, findIndex } from "lodash";
 
 import { useEffect, useState } from "@wordpress/element";
 
@@ -19,17 +19,6 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsD
 
   const [searchInput, setSearchInput] = useState("");
   const [searchResults, setSearchResults] = useState([]);
-
- // Effectively in the handpicked version,
-  // the number of posts is determined by the
-  // max value in the range
-  useEffect(() => {
-    setAttributes({
-      noOfPosts: isArray(config.noOfPosts)
-        ? config.noOfPosts[1]
-        : config.noOfPosts,
-    });
-  }, [config]);
 
   useEffect(() => {
     const search = async () => {

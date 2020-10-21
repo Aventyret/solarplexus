@@ -34,6 +34,7 @@ define( 'SPLX_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
 define( 'SPLX_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
 define( 'SPLX_TEMPLATE_FOLDER', 'splx-templates' );
 
+
 /**
  * Currently plugin version.
  * Start at version 1.0.0 and use SemVer - https://semver.org

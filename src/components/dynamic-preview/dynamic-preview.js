@@ -1,8 +1,5 @@
 const { __ } = wp.i18n;
 
-import { isArray } from "lodash";
-
-import { useEffect } from "@wordpress/element";
 import { useSelect } from "@wordpress/data";
 
 import GridItemPostPreview from "../../components/grid-item-post-preview/grid-item-post-preview";
@@ -44,26 +41,6 @@ const DynamicPreview = ({ config, attributes, setAttributes }) => {
       currentPostId,
     ]
   );
-
-  // Set defaults. Can't use
-  // standard attribute defaults
-  // here, becase those keys
-  // won't get included in saved
-  // attrs if user selects the default
-  useEffect(() => {
-    if (!attributes.postType) {
-      setAttributes({
-        postType: config.allowedPostTypes[0],
-      });
-    }
-    if (!attributes.noOfPosts) {
-      setAttributes({
-        noOfPosts: isArray(config.noOfPosts)
-          ? config.noOfPosts[0]
-          : config.noOfPosts,
-      });
-    }
-  }, [config, attributes.noOfPosts, attributes.postType]);
 
 
   if (!config.allowedPostTypes)

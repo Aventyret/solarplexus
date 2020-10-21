@@ -12,18 +12,18 @@ import DynamicInspectorControls from "./components/dynamic-inspector-controls/dy
 import HandpickedPreview from "./components/handpicked-preview/handpicked-preview";
 import HandpickedInspectorControls from "./components/handpicked-inspector-controls/handpicked-inspector-controls";
 
-// solarplexusConfig, solarplexusDynamicAttributeTypesConfig and
-// solarplexusHandpickedAttributeTypesConfig are global window variables
+// solarplexusConfig and solarplexusAttrDefs
+// are global window variables
 // outputted in class-solarplexus-admin.php
 
 solarplexusConfig.forEach((config) => {
-  const attributes =
-    config.type === "dynamic"
-      ? solarplexusDynamicAttributeTypesConfig
-      : config.type === "handpicked"
-      ? solarplexusHandpickedAttributeTypesConfig
-      : {};
   const blockId = `splx/${config.id}`;
+  const attributes = solarplexusAttrDefs[config.id];
+  if(!attributes) {
+    console.error(`Solarplexus: No attributes found for ${attributes}, skipping`);
+    return;
+  }
+  console.log(`Solarplexus: Attributes for ${config.id}`, attributes);
   registerBlockType(blockId, {
     title: config.title,
     icon: "universal-access-alt",

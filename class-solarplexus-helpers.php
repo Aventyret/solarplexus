@@ -18,21 +18,16 @@ class Solarplexus_Helpers {
     return $config_data;
   }
 
-  public static function retrieve_block_attribute_types($type) {
-
-    $common_path = SPLX_PLUGIN_PATH . 'src/common-attribute-types.json';
-    $type_path = SPLX_PLUGIN_PATH . "src/{$type}-attribute-types.json";
-
-    $common_json = file_get_contents( $common_path );
-    $common_data = json_decode( $common_json, true );
-
-    $type_json = file_get_contents( $type_path );
-    $type_data = json_decode( $type_json, true );
-    
-    return array_merge($common_data, $type_data);
+  public static function get_block_type_id($block_config) {
+    $id = null;
+    if(array_key_exists('id', $block_config)) {
+      $id = $block_config['id'];
+    }
+    return $id;
   }
 
-  public static function block_args($block_config, $block_type_id, $block_attributes) {
+  public static function block_args($block_config, $block_attributes) {
+    $block_type_id = self::get_block_type_id($block_config);
     // Set grid and item classes from attributes
 
     $classes_grid = [];
@@ -128,6 +123,7 @@ class Solarplexus_Helpers {
 
     // Return
     return [
+      'query' => $query->query,
       'posts' => $query->posts,
       'block_attributes' => $block_attributes,
       'classes_grid' => self::block_classes($classes_grid),
@@ -144,9 +140,10 @@ class Solarplexus_Helpers {
     return $classes;
   }
 
-  public static function template_loader($block, $block_attributes) {
+  public static function template_loader($block_config, $block_attributes) {
+    $block_type_id = self::get_block_type_id($block_config);
     $loaded_template = '';
-    $template = self::get_template($block);
+    $template = self::get_template($block_config);
     
 
     if ($template && file_exists($template)) {
@@ -161,28 +158,46 @@ class Solarplexus_Helpers {
         error_log("Solarplexus: Unable to validate template path: \"$template\". Error Code: $validated_file.");
       }
     } else {
-      error_log("Solarplexus: Unable to load template for: \"$block\". File not found.");
+      error_log("Solarplexus: Unable to load template for: \"$block_type_id\". File not found.");
     }
 
     return $loaded_template;
   }
 
-  public static function get_template($block) {
+  public static function get_template($block_config) {
+    $block_type_id = self::get_block_type_id($block_config);
+
+    // If block id matches a custom template
+    // in the current theme
     $template = locate_template(
       sprintf(
         '%s/%s.php',
         SPLX_TEMPLATE_FOLDER,
-        $block
+        $block_type_id
       )
     );
 
+    // If it doesn't, use default templates provided
+    // by the plugin. Hard-coded template names here
+    // since a use case is to have a custom config
+    // without creating your own templates.
     if (!$template) {
-      $template = sprintf(
-        '%s%s/%s.php',
-        SPLX_PLUGIN_PATH,
-        SPLX_TEMPLATE_FOLDER,
-        $block
-      );
+      if($block_config['type'] == "dynamic") {
+        $template = sprintf(
+          '%s%s/%s.php',
+          SPLX_PLUGIN_PATH,
+          SPLX_TEMPLATE_FOLDER,
+          'latest-default'
+        );
+      } else if($block_config['type'] == "handpicked") {
+        $template = sprintf(
+          '%s%s/%s.php',
+          SPLX_PLUGIN_PATH,
+          SPLX_TEMPLATE_FOLDER,
+          'handpicked-default'
+        );
+      }
+      
     }
 
     return $template;
