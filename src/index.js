@@ -16,17 +16,32 @@ import HandpickedInspectorControls from "./components/handpicked-inspector-contr
 // are global window variables
 // outputted in class-solarplexus-admin.php
 
+const getCustomSvgJsx = (icon) => {
+  return function() {
+    return <span dangerouslySetInnerHTML={{ __html: icon }} />
+  }
+}
+
 solarplexusConfig.forEach((config) => {
   const blockId = `splx/${config.id}`;
   const attributes = solarplexusAttrDefs[config.id];
-  if(!attributes) {
-    console.error(`Solarplexus: No attributes found for ${attributes}, skipping`);
+  if (!attributes) {
+    console.error(
+      `Solarplexus: No attributes found for ${attributes}, skipping`
+    );
     return;
   }
   console.log(`Solarplexus: Attributes for ${config.id}`, attributes);
+
+  const icon = config.icon
+    ? config.icon.indexOf("<svg") === 0
+      ? getCustomSvgJsx(config.icon)
+      : config.icon
+    : "universal-access-alt";
+
   registerBlockType(blockId, {
     title: config.title,
-    icon: "universal-access-alt",
+    icon: icon,
     category: "layout",
     example: {},
     attributes,
@@ -39,9 +54,13 @@ solarplexusConfig.forEach((config) => {
           {config.type === "dynamic" ? (
             <DynamicInspectorControls {...props} config={config} />
           ) : config.type === "handpicked" ? (
-            <HandpickedInspectorControls {...props} config={config} setIsDirty={setIsDirty} />
+            <HandpickedInspectorControls
+              {...props}
+              config={config}
+              setIsDirty={setIsDirty}
+            />
           ) : null}
-          
+
           {isSSR ? (
             <ServerSideRender attributes={props.attributes} block={blockId} />
           ) : config.type === "dynamic" ? (
