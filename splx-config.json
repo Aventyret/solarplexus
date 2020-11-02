@@ -1,7 +1,7 @@
 [
   {
     "id": "latest-default",
-    "title": "[Solarplexus]: Latest posts and pages",
+    "title": "[Solarplexus]: Latest posts or pages",
     "type": "dynamic",
     "icon": "universal-access-alt",
     "allowedPostTypes": ["post", "page"],

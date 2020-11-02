@@ -99,7 +99,7 @@ class Solarplexus {
 	 */
 	private function load_dependencies() {
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'class-solarplexus-helpers.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-solarplexus-helpers.php';
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/objects/class-solarplexus-block-attrs-definition.php';
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/objects/class-solarplexus-dynamic-block-attrs-definition.php';

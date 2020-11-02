@@ -76,7 +76,7 @@ class Solarplexus_Helpers {
       $classes_grid[] = sprintf('%s%s%s', $attribute['class_base'], $attribute['divider'], $attribute['value']);
     }
 
-    foreach ($attrs_item as $kery => $attribute) {
+    foreach ($attrs_item as $key => $attribute) {
       $classes_item[] = sprintf('%s%s%s', $attribute['class_base'], $attribute['divider'], $attribute['value']);
     }
 
@@ -137,26 +137,23 @@ class Solarplexus_Helpers {
     ];
   }
 
-  public static function block_classes($classes) {
-    $classes = array_unique($classes);
-    $classes = join(' ', $classes);
-    $classes = ltrim($classes);
 
-    return $classes;
-  }
-
-  public static function template_loader($block_config, $block_attributes) {
+  public static function template_loader($block_config, $args) {
     $block_type_id = self::get_block_type_id($block_config);
     $loaded_template = '';
+    $sage_template = self::get_sage_template($block_config);
+    if($sage_template) {
+      return self::template_loader_sage($sage_template, $block_config, $args); 
+    }
+
     $template = self::get_template($block_config);
-    
 
     if ($template && file_exists($template)) {
 
       $validated_file = validate_file($template);
       if (0 === $validated_file) {
         ob_start();
-        load_template($template, false, $block_attributes);
+        load_template($template, false, $args);
         $loaded_template = ob_get_clean();
         
       } else {
@@ -169,20 +166,74 @@ class Solarplexus_Helpers {
     return $loaded_template;
   }
 
-  public static function get_template($block_config) {
+  public static function is_sage(){
+    return class_exists('Roots\Sage\Container');
+  }
+
+  private static function block_classes($classes) {
+    $classes = array_unique($classes);
+    $classes = join(' ', $classes);
+    $classes = ltrim($classes);
+
+    return $classes;
+  }
+
+  private static function template_loader_sage($template, $block_config, $args) {
+    // Get the Sage instance with
+    // the blade binding
+    // TODO: maybe move this container stuff
+    // to separate function if needed elsewhere
+    $container = Roots\Sage\Container::getInstance();
+    $abstract = 'blade';
+    $sage = $container->bound($abstract)
+        ? $container->makeWith($abstract, [])
+        : $container->makeWith("sage.{$abstract}", []);
+
     $block_type_id = self::get_block_type_id($block_config);
 
-    // If block id matches a custom template
-    // in the current theme
-    $template = locate_template(
-      sprintf(
-        '%s/%s.php',
-        SPLX_TEMPLATE_FOLDER,
-        $block_type_id
-      )
-    );
+    // Get the rendered template as a string
+    $loaded_template = $sage->render($template, ['args' => $args]);
 
-    // If it doesn't, use default templates provided
+    return $loaded_template;
+  }
+
+  private static function get_sage_template($block_config) {
+    $block_type_id = self::get_block_type_id($block_config);
+    $template = '';
+    // If block id matches a custom blade
+    // template in the current theme
+    $path = sprintf(
+      '%s/views/%s/%s.blade.php',
+      get_stylesheet_directory(),
+      SPLX_TEMPLATE_FOLDER,
+      $block_type_id
+    );
+    if(self::is_sage() && file_exists($path)) {
+      // Return template reference in Blade-ish format
+      // instead of file path, i.e splx-templates.foo
+      $template = sprintf('%s.%s', SPLX_TEMPLATE_FOLDER, $block_type_id);
+    }
+
+    return $template;
+  }
+
+  private static function get_template($block_config) {
+    $block_type_id = self::get_block_type_id($block_config);
+    $template = '';    
+
+    // If block id matches a custom
+    // regular PHP template in the current theme
+    if(!$template) {
+      $template = locate_template(
+        sprintf(
+          '%s/%s.php',
+          SPLX_TEMPLATE_FOLDER,
+          $block_type_id
+        )
+      );
+    }
+
+    // If nothing yet, use default templates provided
     // by the plugin. Hard-coded template names here
     // since a use case is to have a custom config
     // without creating your own templates.
@@ -207,4 +258,6 @@ class Solarplexus_Helpers {
 
     return $template;
   }
+
+  
 }
