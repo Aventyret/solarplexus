@@ -124,15 +124,14 @@ class Solarplexus_Helpers {
 
     $query = new WP_Query($args);
 
-    $posts = apply_filters('splx_posts', $query->posts, $block_config);
+    $posts = apply_filters('splx_posts', $query->posts, $block_config, $block_attributes);
 
-    // Return
     return [
       'query' => $query->query,
       'posts' => $posts,
       'block_attributes' => $block_attributes,
-      'classes_grid' => apply_filters('splx_grid_classes', self::block_classes($classes_grid), $block_config),
-      'classes_item' => apply_filters('splx_item_classes', self::block_classes($classes_item), $block_config),
+      'classes_grid' => apply_filters('splx_grid_classes', self::block_classes($classes_grid), $block_config, $block_attributes),
+      'classes_item' => apply_filters('splx_item_classes', self::block_classes($classes_item), $block_config, $block_attributes),
       'config' => $block_config
     ];
   }
@@ -166,7 +165,7 @@ class Solarplexus_Helpers {
     return $loaded_template;
   }
 
-  public static function is_sage(){
+  private static function is_sage(){
     return class_exists('Roots\Sage\Container');
   }
 
@@ -192,7 +191,7 @@ class Solarplexus_Helpers {
     $block_type_id = self::get_block_type_id($block_config);
 
     // Get the rendered template as a string
-    $loaded_template = $sage->render($template, ['args' => $args]);
+    $loaded_template = $sage->render($template, $args);
 
     return $loaded_template;
   }
