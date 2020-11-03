@@ -54,11 +54,6 @@ const HandpickedPreview = ({ config, attributes, isDirty }) => {
             ))}
           </div>
         )}
-      {config.listType === "carousel" && (
-        <div className={gridCls}>
-          {__("Carousel preview not available.", "splx")}
-        </div>
-      )}
     </div>
   );
 };

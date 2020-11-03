@@ -71,11 +71,6 @@ const DynamicPreview = ({ config, attributes, setAttributes }) => {
             })}
           </div>
         )}
-      {attributes.listType === "carousel" && (
-        <div className={gridCls}>
-          {__("Carousel preview not available.", "splx")}
-        </div>
-      )}
     </div>
   );
 };

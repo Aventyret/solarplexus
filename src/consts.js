@@ -3,17 +3,14 @@ const { __ } = wp.i18n;
 import {
   flipHorizontal,
   flipVertical,
-  arrowRight,
   stretchWide,
   chevronUp,
   chevronLeft,
 } from "@wordpress/icons";
 
-// TODO better carousel icon
 export const LAYOUTS = {
   horizontal: { label: __("Horizontal", "splx"), icon: flipHorizontal },
   vertical: { label: __("Vertical", "splx"), icon: flipVertical },
-  carousel: { label: __("Carousel", "splx"), icon: arrowRight },
 };
 
 // TODO better icons
