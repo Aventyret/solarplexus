@@ -27,6 +27,7 @@
  * @subpackage Solarplexus/includes
  * @author     Äventyret <andreas.bohman@aventyret.com>
  */
+
 class Solarplexus {
 
 	/**

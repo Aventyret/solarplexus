@@ -14,6 +14,8 @@ import {
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 
+import CustomControls from "../custom-controls/custom-controls"
+
 
 const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsDirty }) => {
 
@@ -169,6 +171,11 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsD
           </div>
         ) : null}
       </PanelBody>
+      <CustomControls
+        attributes={attributes}
+        setAttributes={setAttributes}
+        config={config}
+      />
     </InspectorControls>
   );
 };

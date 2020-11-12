@@ -11,6 +11,8 @@ import {
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 
+import CustomControls from "../custom-controls/custom-controls";
+
 import { isArray } from "lodash";
 
 import { ORDERS } from "../../consts";
@@ -190,6 +192,11 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
           />
         </PanelBody>
       ) : null}
+      <CustomControls
+        attributes={attributes}
+        setAttributes={setAttributes}
+        config={config}
+      />
     </InspectorControls>
   );
 };

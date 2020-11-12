@@ -7,6 +7,8 @@ class Solarplexus_Block_Attrs_Definition {
    */
   public $no_of_posts;
 
+  public $custom_controls;
+
   /*
    *
    * Private vars
@@ -21,11 +23,15 @@ class Solarplexus_Block_Attrs_Definition {
     $this->config = $block_config;
 
     $this->set_no_of_posts();
+    $this->set_custom_controls();
   }
 
   public function to_array() {
     $r = [];
     $r['noOfPosts'] = $this->no_of_posts;
+    foreach($this->custom_controls as $control_id => $control) {
+      $r[$control_id] = $control;
+    }
     return $r;
   }
 
@@ -67,5 +73,21 @@ class Solarplexus_Block_Attrs_Definition {
       'integer',
       $this->get_first_of_config_arr_or_single('noOfPosts', -1)
     );
+  }
+
+  private function set_custom_controls() {
+    if(!array_key_exists('customControls', $this->config)) {
+      $this->custom_controls = [];
+      return;
+    }
+    $custom_controls = [];
+    foreach($this->config['customControls'] as $control) {
+      if(array_key_exists('choices', $control)){
+        $custom_controls[$control['id']] = self::build_attribute('string', $control['choices'][0]['value']);
+      } else {
+        $custom_controls[$control['id']] = self::build_attribute('string', '');
+      }
+    }
+    $this->custom_controls = $custom_controls;
   }
 }
