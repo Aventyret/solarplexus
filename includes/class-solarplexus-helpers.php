@@ -114,6 +114,9 @@ class Solarplexus_Helpers {
 
     if (array_key_exists('searchResults', $block_attributes)) {
       $args['post__in'] = wp_list_pluck($block_attributes['searchResults'], 'id');
+      if(empty($args['post__in'])) {
+        $args['post__in'][] = 0;
+      }
       if(!array_key_exists('orderby', $args)) {
         $args['orderby'] = 'post__in';
       }

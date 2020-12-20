@@ -30,8 +30,9 @@
     .splx-gridItemPostPreview__image {
       position: absolute;
       left: 0;
-      top: 50%;
-      transform: translateY(-50%);
+      top: 0;
+      right: 0;
+      bottom: 0;
     }
   }
   &--layout-imagetop {

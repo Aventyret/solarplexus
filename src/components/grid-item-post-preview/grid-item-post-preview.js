@@ -18,7 +18,7 @@ const GridItemPostPreview = ({ post, config, isCol }) => {
   return (
     <div className={cls}>
       <div className="splx-gridItemPostPreview__image">
-        <GridItemPostFeaturedMediaPreview post={post} />
+        <GridItemPostFeaturedMediaPreview post={post} config={config} />
       </div>
       <div className="splx-gridItemPostPreview__content">
         <h3 className="splx-gridItemPostPreview__heading">

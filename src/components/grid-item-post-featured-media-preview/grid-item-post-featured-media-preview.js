@@ -2,7 +2,7 @@ import "./grid-item-post-featured-media-preview.scss";
 
 import { useEffect, useState } from "@wordpress/element";
 
-const GridItemPostFeaturedMediaPreview = ({ post }) => {
+const GridItemPostFeaturedMediaPreview = ({ post, config }) => {
   const featuredMediaLink =
     post._links["wp:featuredmedia"] && post._links["wp:featuredmedia"][0].href;
   const [featuredMedia, setFeaturedMedia] = useState(null);
@@ -16,8 +16,10 @@ const GridItemPostFeaturedMediaPreview = ({ post }) => {
     if (featuredMediaLink) fetchMedia();
   }, [featuredMediaLink, setFeaturedMedia]);
 
+  const cls = `splx-gridItemPostFeaturedMediaPreview splx-gridItemPostFeaturedMediaPreview--layout-${config.itemLayout}`;
+
   return featuredMedia ? (
-    <div className="splx-gridItemPostFeaturedMediaPreview">
+    <div className={cls}>
       <img src={featuredMedia.source_url} alt={featuredMedia.alt_text} />
     </div>
   ) : null;

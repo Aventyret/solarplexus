@@ -22,3 +22,7 @@ $test: #ff0000;
     display: block;
   }
 }
+
+[data-type^="splx"] {
+  min-height: 100px;
+}
