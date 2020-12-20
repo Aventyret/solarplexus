@@ -1,4 +1,4 @@
-<img align="right" width="200" height="200" src="https://github.com/Aventyret/solarplexus/blob/master/solarplexus-logo.png?raw=true" style="float:right" />
+<img align="right" width="120" height="120" src="https://github.com/Aventyret/solarplexus/blob/master/solarplexus-logo.png?raw=true" style="float:right" />
 
 # Solarplexus
 
