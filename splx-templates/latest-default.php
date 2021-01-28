@@ -14,28 +14,28 @@
 	<div class="splx-wrap splx-wrap--ssr">
 		<div class="splx-grid <?php echo esc_attr($args['classes_grid']); ?>">
 			<?php foreach ($args['posts'] as $post) : setup_postdata($post); ?>
-				<div class="splx-gridItemPostPreview <?php echo esc_attr($args['classes_item']); ?> <?php echo has_post_thumbnail() ? 'splx-gridItemPostPreview--hasImg' : ''; ?>">
+				<div class="splx-gridItemPost <?php echo esc_attr($args['classes_item']); ?> <?php echo has_post_thumbnail() ? 'splx-gridItemPost--hasImg' : ''; ?>">
 					<?php if (has_post_thumbnail()) : ?>
-						<div class="splx-gridItemPostPreview__image">
-							<div class="splx-gridItemPostFeaturedMediaPreview">
+						<div class="splx-gridItemPost__image">
+							<div class="splx-gridItemPostFeaturedMedia">
 								<?php the_post_thumbnail('large'); ?>
 							</div>
 						</div>
 					<?php endif; ?>
 
-					<div class="splx-gridItemPostPreview__content">
-						<h3 class="splx-gridItemPostPreview__heading">
+					<div class="splx-gridItemPost__content">
+						<h3 class="splx-gridItemPost__heading">
 							<?php the_title(); ?>
 						</h3>
 
 						<?php if (array_key_exists('showExcerpt', $args['config'])) : ?>
-							<div class="splx-gridItemPostPreview__excerpt">
+							<div class="splx-gridItemPost__excerpt">
 								<?php the_excerpt(); ?>
 							</div>
 						<?php endif; ?>
 
 						<?php if (array_key_exists('showDate', $args['config'])) : ?>
-							<div class="splx-gridItemPostPreview__date">
+							<div class="splx-gridItemPost__date">
 								<?php the_date(); ?>
 							</div>
 						<?php endif; ?>

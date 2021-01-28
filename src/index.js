@@ -7,9 +7,7 @@ import ServerSideRender from "@wordpress/server-side-render";
 import { __ } from "@wordpress/i18n";
 import { registerBlockType } from "@wordpress/blocks";
 
-import DynamicPreview from "./components/dynamic-preview/dynamic-preview";
 import DynamicInspectorControls from "./components/dynamic-inspector-controls/dynamic-inspector-controls";
-import HandpickedPreview from "./components/handpicked-preview/handpicked-preview";
 import HandpickedInspectorControls from "./components/handpicked-inspector-controls/handpicked-inspector-controls";
 
 // solarplexusConfig and solarplexusAttrDefs
@@ -18,9 +16,9 @@ import HandpickedInspectorControls from "./components/handpicked-inspector-contr
 
 const getCustomSvgJsx = (icon) => {
   return function() {
-    return <span dangerouslySetInnerHTML={{ __html: icon }} />
-  }
-}
+    return <span dangerouslySetInnerHTML={{ __html: icon }} />;
+  };
+};
 
 solarplexusConfig.forEach((config) => {
   const blockId = `splx/${config.id}`;
@@ -47,7 +45,6 @@ solarplexusConfig.forEach((config) => {
     attributes,
     edit(props) {
       const [isDirty, setIsDirty] = useState(false);
-      const isSSR = config.serverSideRenderedPreview;
 
       return (
         <>
@@ -61,13 +58,7 @@ solarplexusConfig.forEach((config) => {
             />
           ) : null}
 
-          {isSSR ? (
-            <ServerSideRender attributes={props.attributes} block={blockId} />
-          ) : config.type === "dynamic" ? (
-            <DynamicPreview config={config} {...props} />
-          ) : config.type === "handpicked" ? (
-            <HandpickedPreview config={config} {...props} isDirty={isDirty} />
-          ) : null}
+          <ServerSideRender attributes={props.attributes} block={blockId} />
         </>
       );
     },

@@ -1,3 +1,4 @@
+import "./handpicked-inspector-controls.scss";
 
 const { __, sprintf } = wp.i18n;
 

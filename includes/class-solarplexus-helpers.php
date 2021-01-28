@@ -41,7 +41,7 @@ class Solarplexus_Helpers {
     ];
     $attrs_item = [
       'cols' => [
-        'class_base' => 'splx-gridItemPostPreview--cols',
+        'class_base' => 'splx-gridItemPost--cols',
         'value' => $block_config['noOfGridCols'],
         'divider' => ''
       ]
@@ -67,7 +67,7 @@ class Solarplexus_Helpers {
     ];
 
     $attrs_item['itemLayout'] = [
-      'class_base' => 'splx-gridItemPostPreview--layout',
+      'class_base' => 'splx-gridItemPost--layout',
       'value' => $block_config['itemLayout'],
       'divider' => '-'
     ];

@@ -26,3 +26,97 @@ $test: #ff0000;
 [data-type^="splx"] {
   min-height: 100px;
 }
+
+
+.splx-gridItemPost {
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 1em;
+
+  // TODO responsive?
+  &--cols2 {
+    flex: 1 0 50%;
+  }
+  &--cols3 {
+    flex: 1 0 33%;
+  }
+  &--cols4 {
+    flex: 1 0 25%;
+  }
+  &--cols5 {
+    flex: 1 0 20%;
+  }
+
+  &__content {
+    position: relative;
+    padding: 1em;
+  }
+
+  &.splx-gridItemPost--layout-imagebg.splx-gridItemPost--hasImg {
+    color: #fff;
+  }
+
+  &--layout-imagebg {
+    .splx-gridItemPost__image {
+      position: absolute;
+      left: 0;
+      top: 0;
+      right: 0;
+      bottom: 0;
+    }
+  }
+  &--layout-imagetop {
+    h3.splx-gridItemPost__heading {
+      margin-top: 0.5em;
+    }
+    .splx-gridItemPost__content {
+      padding-top: 0;
+    }
+  }
+  &--layout-imageleft {
+    display: flex;
+    h3.splx-gridItemPost__heading {
+      margin: 0;
+      font-size: 20px;
+    }
+    .splx-gridItemPost__image {
+      flex: 1 0 5em;
+      max-width: 5em;
+    }
+    .splx-gridItemPost__content {
+      padding-top: 0;
+      font-size: 16px;
+      p {
+        margin-top: 1em;
+      }
+    }
+    
+  }
+}
+
+.splx-gridItemPostFeaturedMedia {
+  position: relative;
+  
+  img {
+    max-width: 100%;
+    vertical-align: bottom;
+  }
+  .splx-gridItemPost--layout-imagebg & {
+    height: 100%;
+    img {
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  &:after {
+    content: " ";
+    position: absolute;
+    display: block;
+    background: none rgba(0, 0, 0, 0.5);
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
