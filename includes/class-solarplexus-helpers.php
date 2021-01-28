@@ -122,7 +122,7 @@ class Solarplexus_Helpers {
       }
     }
 
-    $posts = apply_filters('splx_queryargs', $args, $block_config, $block_attributes);
+    $args = apply_filters('splx_queryargs', $args, $block_config, $block_attributes);
 
     $query = new WP_Query($args);
 
