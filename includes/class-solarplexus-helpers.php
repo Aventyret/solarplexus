@@ -112,6 +112,13 @@ class Solarplexus_Helpers {
       ];
     }
 
+    /**
+    * @since    1.2.0
+    */
+    if(array_key_exists('authors', $block_attributes) && !empty($block_attributes['authors'])) {
+      $args['author__in'] = $block_attributes['authors'];
+    }
+
     if (array_key_exists('searchResults', $block_attributes)) {
       $args['post__in'] = wp_list_pluck($block_attributes['searchResults'], 'id');
       if(empty($args['post__in'])) {
@@ -122,6 +129,9 @@ class Solarplexus_Helpers {
       }
     }
 
+    /**
+    * @since    1.2.0
+    */
     $args = apply_filters('splx_queryargs', $args, $block_config, $block_attributes);
 
     $query = new WP_Query($args);

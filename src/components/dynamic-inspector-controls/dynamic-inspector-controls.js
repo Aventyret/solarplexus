@@ -68,6 +68,15 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
     [availableTaxonomies]
   );
 
+  // Get all available authors
+  const availableAuthors = useSelect((select) => {
+    const { getAuthors } = select("core");
+
+    const authors = getAuthors();
+
+    return authors;
+  }, []);
+
   const selectedTaxonomy = availableTaxsAndTerms
     ? availableTaxsAndTerms.find((taxWTerms) => {
         return taxWTerms.slug === attributes.taxonomy;
@@ -103,6 +112,24 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 
   const onNoOfPostsChange = (value) => {
     setAttributes({ noOfPosts: value });
+  };
+
+  const onAuthorsCheckboxChange = (value) => {
+    if (!value) {
+      setAttributes({ authors: [] });
+      return;
+    }
+
+    const intValue = parseInt(value, 10);
+    if (attributes.authors.includes(intValue)) {
+      setAttributes({
+        authors: attributes.authors.filter((authorId) => {
+          return authorId !== intValue;
+        }),
+      });
+    } else {
+      setAttributes({ authors: [...attributes.authors, intValue] });
+    }
   };
 
   // const onPostTypeCheckboxChange = (postTypeSlug) => {
@@ -167,6 +194,25 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
                 />
               );
             })}
+        </PanelBody>
+      )}
+      {availableAuthors && availableAuthors.length && (
+        <PanelBody title={__("Authors", "splx")}>
+          <CheckboxControl
+            checked={!attributes.authors.length}
+            label={__("All authors", "splx")}
+            onChange={() => onAuthorsCheckboxChange(null)}
+          />
+          {availableAuthors.map(({ id, name }) => {
+            return (
+              <CheckboxControl
+                key={id}
+                checked={attributes.authors.includes(id)}
+                label={name}
+                onChange={() => onAuthorsCheckboxChange(id)}
+              />
+            );
+          })}
         </PanelBody>
       )}
       <PanelBody>
