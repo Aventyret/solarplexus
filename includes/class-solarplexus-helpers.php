@@ -122,8 +122,7 @@ class Solarplexus_Helpers {
       }
     }
 
-    // TODO maybe add filter possibility on $args
-    // here as well?
+    $posts = apply_filters('splx_queryargs', $args, $block_config, $block_attributes);
 
     $query = new WP_Query($args);
 
