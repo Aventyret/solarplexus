@@ -12,8 +12,7 @@
     "listType": "horizontal",
     "itemLayout": "imagebg",
     "showDate": true,
-    "showExcerpt": true,
-    "serverSideRenderedPreview": false
+    "showExcerpt": true
   },
   {
     "id": "handpicked-default",
@@ -27,7 +26,7 @@
     "customFields": [],
     "listType": "horizontal",
     "itemLayout": "imagebg",
-    "showExcerpt": true,
-    "serverSideRenderedPreview": false
+    "showDate": true,
+    "showExcerpt": true
   }
 ]
