@@ -153,13 +153,19 @@ class Solarplexus_Admin {
 		// 	'before'
 		// );
 
+		wp_set_script_translations(
+			'solarplexus-script',
+			'splx',
+			SPLX_PLUGIN_PATH . 'languages'
+		);
+
 	}
 
 	public function register_block() {
 		foreach($this->config as $block_config) {
 			$block_type_id = Solarplexus_Helpers::get_block_type_id($block_config);
 			$attributes = [];
-			
+
 			if($block_config['type'] == "dynamic") {
 				$instance = new Solarplexus_Dynamic_Block_Attrs_Definition($block_config);
 				$attributes = $instance->to_array();
