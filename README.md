@@ -4,6 +4,8 @@
 
 Solarplexus is a Wordpress plugin and developer tool to easily create Gutenberg blocks for creating dynamic and static lists of posts, pages and more.
 
+## Installation & usage
+
 **To use the latest version in a Wordpress project, simply head over to the 📖 [documentation](https://github.com/Aventyret/solarplexus/wiki) 📖 and don't bother with the dev stuff below.**
 
 ## Plugin development instructions
