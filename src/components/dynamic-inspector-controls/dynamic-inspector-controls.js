@@ -46,7 +46,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
           return config.allowedTaxonomies.includes(taxonomy.slug);
         })
       : null;
-  });
+  }, []);
 
   // Get all the terms for specified taxonomies
   const availableTaxsAndTerms = useSelect(
@@ -168,7 +168,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
         })} */}
         </PanelBody>
       )}
-      {availableTaxsAndTerms && availableTaxsAndTerms.length && (
+      {availableTaxsAndTerms && availableTaxsAndTerms.length ? (
         <PanelBody title={__("Taxonomies", "splx")}>
           <RadioControl
             label={__("Show posts from:", "splx")}
@@ -195,7 +195,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
               );
             })}
         </PanelBody>
-      )}
+      ) : null}
       {availableAuthors && availableAuthors.length && (
         <PanelBody title={__("Authors", "splx")}>
           <CheckboxControl

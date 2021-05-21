@@ -25,7 +25,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsD
 
   useEffect(() => {
     const search = async () => {
-      const res = await fetch(`/wp-json/wp/v2/search?search=${searchInput}`);
+      const res = await fetch(`/wp-json/wp/v2/search/?search=${searchInput}`);
       const json = await res.json();
       setSearchResults(json);
     };
