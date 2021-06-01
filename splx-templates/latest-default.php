@@ -25,7 +25,9 @@
 
 					<div class="splx-gridItemPost__content">
 						<h3 class="splx-gridItemPost__heading">
-							<?php the_title(); ?>
+							<a href="<?php the_permalink(); ?>" class="splx-gridItemPost__heading__link" title="<?php the_title_attribute(); ?>">
+								<?php the_title(); ?>
+							</a>
 						</h3>
 
 						<?php if (array_key_exists('showExcerpt', $args['config'])) : ?>
