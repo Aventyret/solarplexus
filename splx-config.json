@@ -12,7 +12,8 @@
     "listType": "horizontal",
     "itemLayout": "imagebg",
     "showDate": true,
-    "showExcerpt": true
+    "showExcerpt": true,
+	"allowDuplicates": false
   },
   {
     "id": "handpicked-default",

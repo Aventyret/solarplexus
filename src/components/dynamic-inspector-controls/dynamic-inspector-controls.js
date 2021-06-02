@@ -8,6 +8,7 @@ import {
   RadioControl,
   SelectControl,
   RangeControl,
+  ToggleControl,
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 
@@ -238,6 +239,13 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
           />
         </PanelBody>
       ) : null}
+	  {/* TODO <PanelBody title={__("Include previously rendered posts")}>
+		  <ToggleControl
+			label="Should text be shown?"
+			checked={allowDuplicates}
+			onChange={(allow) => { setAttribute({ allowDuplicates: allow }) }}
+		  />
+	  </PanelBody> */}
       <CustomControls
         attributes={attributes}
         setAttributes={setAttributes}

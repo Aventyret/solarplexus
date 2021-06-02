@@ -1,6 +1,8 @@
 <?php
 
 class Solarplexus_Helpers {
+  private static $rendered_post_ids = [];
+
   public static function retrieve_block_configs() {
 
     $config_path = SPLX_PLUGIN_PATH . 'splx-config.json';
@@ -88,7 +90,7 @@ class Solarplexus_Helpers {
     $current_post_id = get_the_ID();
 
     if($current_post_id) {
-			$args['post__not_in'] = array($current_post_id);
+      $args['post__not_in'] = array($current_post_id);
     }
     
     if (array_key_exists('postType', $block_attributes)) {
@@ -129,21 +131,44 @@ class Solarplexus_Helpers {
       }
     }
 
-    /**
-    * @since    1.2.0
-    */
+	if ( ! $block_config['allowDuplicates'] && isset( $block_config['type'] ) && $block_config['type'] !== 'handpicked' ) {
+		// Exclude previously rendered posts from the query args
+        $args = self::exclude_rendered_posts_in_args( $args );
+    }
+
+	/**
+	 * Filter the query args returning to the block render.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @param array $args 				Query args.
+	 * @param array $block_config		Block config
+	 * @param array $block_attributes	Block attributes
+	 */
     $args = apply_filters('splx_queryargs', $args, $block_config, $block_attributes);
 
-    $query = new WP_Query($args);
+    $query = new WP_Query( $args );
 
-    $posts = apply_filters('splx_posts', $query->posts, $block_config, $block_attributes);
+	// Keep track of rendered posts to avoid rendering same post multiple times on a page
+	self::keep_track_of_rendered_posts( $query->posts );
+
+	/**
+	 * Filter the posts array before returning to the block render.
+	 *
+	 * @since 1.2.0
+	 *
+	 * @param array $posts 				Posts array.
+	 * @param array $block_config		Block config
+	 * @param array $block_attributes	Block attributes
+	 */
+    $posts = apply_filters( 'splx_posts', $query->posts, $block_config, $block_attributes );
 
     return [
       'query' => $query->query,
       'posts' => $posts,
       'block_attributes' => $block_attributes,
-      'classes_grid' => apply_filters('splx_grid_classes', self::block_classes($classes_grid), $block_config, $block_attributes),
-      'classes_item' => apply_filters('splx_item_classes', self::block_classes($classes_item), $block_config, $block_attributes),
+      'classes_grid' => apply_filters( 'splx_grid_classes', self::block_classes($classes_grid), $block_config, $block_attributes ),
+      'classes_item' => apply_filters( 'splx_item_classes', self::block_classes($classes_item), $block_config, $block_attributes ),
       'config' => $block_config
     ];
   }
@@ -270,5 +295,70 @@ class Solarplexus_Helpers {
     return $template;
   }
 
-  
+  public static function is_json_api() {
+    return strpos($_SERVER['REQUEST_URI'], '/wp-json') === 0;
+  }
+
+  // Rendered post ids are stored in memory (self::$rendered_post_ids), but when the request is through the rest
+  // api (e.g. in the Gutenberg editor) they are in stead stored in a session variable
+  public static function get_rendered_post_ids() {
+    if (self::is_json_api()) {
+      self::ensure_php_session();
+      return self::get_rendered_post_ids_from_session();
+    }
+    return self::$rendered_post_ids;
+  }
+
+  public static function set_rendered_post_id($id) {
+    if (self::is_json_api()) {
+      self::ensure_php_session();
+      self::set_rendered_post_ids_in_session($id);
+      return;
+    }
+    self::$rendered_post_ids[] = $id;
+  }
+
+  public static function ensure_php_session() {
+    if (session_status() == PHP_SESSION_NONE) {
+      session_start();
+    }
+  }
+
+  public static function get_session_timestamp() {
+    return time();
+  }
+
+  public static function get_rendered_post_ids_from_session() {
+    if (isset($_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY]) && $_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY]['timestamp'] === self::get_session_timestamp() ) {
+      return $_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY]['ids'];
+    }
+    return array();
+  }
+
+  public static function set_rendered_post_ids_in_session($id) {
+    if ( isset( $_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY] ) && $_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY]['timestamp'] === self::get_session_timestamp() ) {
+      $_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY]['ids'][] = $id;
+      return;
+    }
+    $_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY] = array(
+      'timestamp' => self::get_session_timestamp(),
+      'ids' => [ $id ]
+    );
+  }
+
+  public static function keep_track_of_rendered_posts($posts) {
+    foreach ( $posts as $post ) {
+      self::set_rendered_post_id( $post->ID );
+    }
+    return $posts;
+  }
+
+  public static function exclude_rendered_posts_in_args($args) {
+    if ( ! isset( $args['post__not_in'] ) ) {
+      $args['post__not_in'] = [];
+    }
+    $args['post__not_in'] = array_unique( array_merge( $args['post__not_in'], self::get_rendered_post_ids() ) );
+    
+	return $args;
+  }
 }
