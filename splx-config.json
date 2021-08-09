@@ -13,7 +13,7 @@
     "itemLayout": "imagebg",
     "showDate": true,
     "showExcerpt": true,
-	"allowDuplicates": false
+	  "allowDuplicates": false
   },
   {
     "id": "handpicked-default",

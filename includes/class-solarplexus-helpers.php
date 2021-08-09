@@ -131,36 +131,36 @@ class Solarplexus_Helpers {
       }
     }
 
-	if ( ! $block_config['allowDuplicates'] && isset( $block_config['type'] ) && $block_config['type'] !== 'handpicked' ) {
-		// Exclude previously rendered posts from the query args
-        $args = self::exclude_rendered_posts_in_args( $args );
+    if ( ! $block_config['allowDuplicates'] && isset( $block_config['type'] ) && $block_config['type'] !== 'handpicked' ) {
+      // Exclude previously rendered posts from the query args
+      $args = self::exclude_rendered_posts_in_args( $args );
     }
 
-	/**
-	 * Filter the query args returning to the block render.
-	 *
-	 * @since 1.2.0
-	 *
-	 * @param array $args 				Query args.
-	 * @param array $block_config		Block config
-	 * @param array $block_attributes	Block attributes
-	 */
+    /**
+     * Filter the query args returning to the block render.
+     *
+     * @since 1.2.0
+     *
+     * @param array $args 				Query args.
+     * @param array $block_config		Block config
+     * @param array $block_attributes	Block attributes
+     */
     $args = apply_filters('splx_queryargs', $args, $block_config, $block_attributes);
 
     $query = new WP_Query( $args );
 
-	// Keep track of rendered posts to avoid rendering same post multiple times on a page
-	self::keep_track_of_rendered_posts( $query->posts );
+    // Keep track of rendered posts to avoid rendering same post multiple times on a page
+    self::keep_track_of_rendered_posts( $query->posts );
 
-	/**
-	 * Filter the posts array before returning to the block render.
-	 *
-	 * @since 1.2.0
-	 *
-	 * @param array $posts 				Posts array.
-	 * @param array $block_config		Block config
-	 * @param array $block_attributes	Block attributes
-	 */
+    /**
+     * Filter the posts array before returning to the block render.
+     *
+     * @since 1.2.0
+     *
+     * @param array $posts 				Posts array.
+     * @param array $block_config		Block config
+     * @param array $block_attributes	Block attributes
+     */
     $posts = apply_filters( 'splx_posts', $query->posts, $block_config, $block_attributes );
 
     return [
@@ -300,18 +300,34 @@ class Solarplexus_Helpers {
   }
 
   // Rendered post ids are stored in memory (self::$rendered_post_ids), but when the request is through the rest
-  // api (e.g. in the Gutenberg editor) they are in stead stored in a session variable
+  // api (e.g. in the Gutenberg editor) they are instead stored in a session variable
   public static function get_rendered_post_ids() {
     if (self::is_json_api()) {
       self::ensure_php_session();
+
       return self::get_rendered_post_ids_from_session();
     }
+
     return self::$rendered_post_ids;
+  }
+
+  public static function find_splx_blocks_in_content( $blocks ) {
+    $matching_blocks = [];
+    foreach ( $blocks as $block ) {
+      if ( strpos( $block['blockName'], 'splx/' ) === 0 ) {
+        $matching_blocks[] = $block;
+      }
+
+      if ( ! empty( $block['innerBlocks'] ) ) {
+        $matching_blocks = array_merge( $matching_blocks, self::find_splx_blocks_in_content( $block['innerBlocks'] ) );
+      }
+    }
+
+    return $matching_blocks;
   }
 
   public static function set_rendered_post_id($id) {
     if (self::is_json_api()) {
-      self::ensure_php_session();
       self::set_rendered_post_ids_in_session($id);
       return;
     }
@@ -329,18 +345,29 @@ class Solarplexus_Helpers {
   }
 
   public static function get_rendered_post_ids_from_session() {
-    if (isset($_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY]) && $_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY]['timestamp'] === self::get_session_timestamp() ) {
-      return $_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY]['ids'];
+    self::ensure_php_session();
+
+    global $post;
+    $rendered_posts_key = 'splx_rendered_posts_' . $post->ID;
+
+    if (isset($_SESSION[ $rendered_posts_key ]) && $_SESSION[ $rendered_posts_key ]['timestamp'] === self::get_session_timestamp() ) {
+      return $_SESSION[ $rendered_posts_key ]['ids'];
     }
     return array();
   }
 
   public static function set_rendered_post_ids_in_session($id) {
-    if ( isset( $_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY] ) && $_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY]['timestamp'] === self::get_session_timestamp() ) {
-      $_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY]['ids'][] = $id;
+    self::ensure_php_session();
+
+    global $post;
+    $rendered_posts_key = 'splx_rendered_posts_' . $post->ID;
+
+    if ( ! empty( $_SESSION[ $rendered_posts_key ]['timestamp'] ) && $_SESSION[ $rendered_posts_key ]['timestamp'] === self::get_session_timestamp() ) {
+      $_SESSION[ $rendered_posts_key ]['ids'][] = $id;
       return;
     }
-    $_SESSION[SOLARPLEXUS_RENDERED_POST_IDS_KEY] = array(
+
+    $_SESSION[ $rendered_posts_key ] = array(
       'timestamp' => self::get_session_timestamp(),
       'ids' => [ $id ]
     );
@@ -357,8 +384,9 @@ class Solarplexus_Helpers {
     if ( ! isset( $args['post__not_in'] ) ) {
       $args['post__not_in'] = [];
     }
+
     $args['post__not_in'] = array_unique( array_merge( $args['post__not_in'], self::get_rendered_post_ids() ) );
     
-	return $args;
+	  return $args;
   }
 }

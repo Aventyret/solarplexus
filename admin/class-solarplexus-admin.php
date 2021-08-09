@@ -181,6 +181,8 @@ class Solarplexus_Admin {
 				'editor_script' => 'solarplexus-script',
 				'style' => 'solarplexus-style',
 				'render_callback' => function($block_attributes, $content) use ($block_config) {
+					// echo '<pre>' . print_r( $block_attributes, 1 ) . print_r( $block_config, 1 ) . '</pre>';
+					// die();
 					$args = Solarplexus_Helpers::block_args($block_config, $block_attributes);
 					$template = Solarplexus_Helpers::template_loader($block_config, $args);
 					return $template;
