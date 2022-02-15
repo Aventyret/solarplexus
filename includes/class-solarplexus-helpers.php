@@ -30,24 +30,10 @@ class Solarplexus_Helpers {
 
   public static function block_args($block_config, $block_attributes) {
     $block_type_id = self::get_block_type_id($block_config);
-    // Set grid and item classes from attributes
-
+    $attrs_grid = [];
+    $attrs_item = [];
     $classes_grid = [];
     $classes_item = [];
-    $attrs_grid = [
-      'cols' => [
-        'class_base' => 'splx-grid--cols',
-        'value' => $block_config['noOfGridCols'],
-        'divider' => ''
-      ]
-    ];
-    $attrs_item = [
-      'cols' => [
-        'class_base' => 'splx-gridItemPost--cols',
-        'value' => $block_config['noOfGridCols'],
-        'divider' => ''
-      ]
-    ];
 
     foreach ($block_attributes as $key => $attribute) {
       if (array_key_exists($key, $attrs_grid)) {
@@ -59,20 +45,38 @@ class Solarplexus_Helpers {
       }
     }
 
+    if ( isset( $block_config['noOfGridCols'] ) ) {
+      // Set grid and item classes from attributes
+      $attrs_grid['cols'] = [
+        'class_base' => 'splx-grid--cols',
+        'value' => $block_config['noOfGridCols'],
+        'divider' => ''
+      ];
+      $attrs_item['cols'] = [
+        'class_base' => 'splx-gridItemPost--cols',
+        'value' => $block_config['noOfGridCols'],
+        'divider' => ''
+      ];
+    }
+
     // Add listType and itemLayout
     // directly from config instead
     // of from block attributes.
-    $attrs_grid['listType'] = [
-      'class_base' => 'splx-grid--listType',
-      'value' => $block_config['listType'],
-      'divider' => '-'
-    ];
+    if ( isset( $attrs_grid['listType'] ) ) {
+      $attrs_grid['listType'] = [
+        'class_base' => 'splx-grid--listType',
+        'value' => $block_config['listType'],
+        'divider' => '-'
+      ];
+    }
 
-    $attrs_item['itemLayout'] = [
-      'class_base' => 'splx-gridItemPost--layout',
-      'value' => $block_config['itemLayout'],
-      'divider' => '-'
-    ];
+    if ( isset( $attrs_grid['itemLayout'] ) ) {
+      $attrs_item['itemLayout'] = [
+        'class_base' => 'splx-gridItemPost--layout',
+        'value' => $block_config['itemLayout'],
+        'divider' => '-'
+      ];
+    }
 
     foreach ($attrs_grid as $attribute) {
       $classes_grid[] = sprintf('%s%s%s', $attribute['class_base'], $attribute['divider'], $attribute['value']);
@@ -131,7 +135,9 @@ class Solarplexus_Helpers {
       }
     }
 
-    if ( ! $block_config['allowDuplicates'] && isset( $block_config['type'] ) && $block_config['type'] !== 'handpicked' ) {
+    $allow_duplicates = $block_config['allowDuplicates'] ?? false;
+    $handpicked = ( $block_config['type'] ?? '' ) === 'handpicked';
+    if ( ! $allow_duplicates && ! $handpicked ) {
       // Exclude previously rendered posts from the query args
       $args = self::exclude_rendered_posts_in_args( $args );
     }
