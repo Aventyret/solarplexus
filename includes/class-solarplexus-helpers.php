@@ -4,6 +4,8 @@ class Solarplexus_Helpers {
   private static $rendered_post_ids = [];
 
   public static function retrieve_block_configs() {
+    // Allow config via PHP
+    $config_data = apply_filters( 'splx_config', [] );
 
     $config_path = SPLX_PLUGIN_PATH . 'splx-config.json';
 
@@ -15,7 +17,7 @@ class Solarplexus_Helpers {
     }
 
     $json = file_get_contents( $config_path );
-    $config_data = json_decode( $json, true );
+    $config_data = array_merge( json_decode( $json, true ), $config_data );
 
     return $config_data;
   }
