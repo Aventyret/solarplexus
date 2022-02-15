@@ -58,7 +58,7 @@ solarplexusConfig.forEach((config) => {
             />
           ) : null}
 
-          <ServerSideRender attributes={props.attributes} block={blockId} />
+          <ServerSideRender attributes={props.attributes} block={blockId} httpMethod="POST" />
         </>
       );
     },

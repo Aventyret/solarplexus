@@ -13,7 +13,7 @@ $test: #ff0000;
 }
 
 .splx-grid {
-  
+
   flex-wrap: wrap;
   &--listType-horizontal {
     display: flex;
@@ -27,8 +27,9 @@ $test: #ff0000;
   min-height: 100px;
 }
 
-
 .splx-gridItemPost {
+  display: flex;
+  flex-direction: column;
   position: relative;
   overflow: hidden;
   margin-bottom: 1em;
@@ -48,8 +49,23 @@ $test: #ff0000;
   }
 
   &__content {
+    flex: 1;
     position: relative;
     padding: 1em;
+  }
+
+  &__heading__link {
+    color: currentColor;
+    position: static;
+
+    &::after {
+      bottom: 0;
+      content: "";
+      left: 0;
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
   }
 
   &.splx-gridItemPost--layout-imagebg.splx-gridItemPost--hasImg {
@@ -90,13 +106,13 @@ $test: #ff0000;
         margin-top: 1em;
       }
     }
-    
+
   }
 }
 
 .splx-gridItemPostFeaturedMedia {
   position: relative;
-  
+
   img {
     max-width: 100%;
     vertical-align: bottom;
