@@ -53,7 +53,13 @@ class Solarplexus_Admin {
 
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
-		$this->config = Solarplexus_Helpers::retrieve_block_configs();
+		$this->config = [];
+	}
+
+	private function get_config() {
+		$this->config = empty( $this->config ) ? Solarplexus_Helpers::retrieve_block_configs() : $this->config;
+
+		return $this->config;
 	}
 
 	/**
@@ -103,19 +109,12 @@ class Solarplexus_Admin {
 	}
 
 	public function register_scripts() {
-
-		if ( file_exists( SPLX_PLUGIN_PATH . 'build/index.css' ) ) {
-			wp_register_style(
-				'solarplexus-style',
-				SPLX_PLUGIN_DIR_URL . 'build/index.css',
-				[ 'wp-edit-blocks' ],
-				filemtime( SPLX_PLUGIN_PATH . 'build/index.css' )
-			);
-		}
-
-		if ( ! file_exists( SPLX_PLUGIN_PATH . 'build/index.js' ) ) {
-			return;
-		}
+		wp_register_style(
+			'solarplexus-style',
+			SPLX_PLUGIN_DIR_URL . 'build/index.css',
+			[ 'wp-edit-blocks' ],
+			filemtime( SPLX_PLUGIN_PATH . 'build/index.css' )
+		);
 
 		wp_register_script(
 			'solarplexus-script',
@@ -126,12 +125,12 @@ class Solarplexus_Admin {
 
 		wp_add_inline_script(
 			'solarplexus-script',
-			'const solarplexusConfig = ' . wp_json_encode( $this->config ) . ';',
+			'const solarplexusConfig = ' . wp_json_encode( $this->get_config() ) . ';',
 			'before'
 		);		
 
 		$attr_defs_per_config = [];
-		foreach($this->config as $block_config) {
+		foreach($this->get_config() as $block_config) {
 			$instance = null;
 			$block_type_id = Solarplexus_Helpers::get_block_type_id($block_config);
 			if($block_config['type'] == "dynamic") {
@@ -169,7 +168,7 @@ class Solarplexus_Admin {
 	}
 
 	public function register_block() {
-		foreach($this->config as $block_config) {
+		foreach($this->get_config() as $block_config) {
 			$block_type_id = Solarplexus_Helpers::get_block_type_id($block_config);
 			$attributes = [];
 
