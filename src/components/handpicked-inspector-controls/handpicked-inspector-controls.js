@@ -1,6 +1,7 @@
 import "./handpicked-inspector-controls.scss";
 
 const { __, sprintf } = wp.i18n;
+const apiFetch = wp.apiFetch;
 
 import { debounce, find, findIndex } from "lodash";
 
@@ -25,9 +26,11 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsD
 
   useEffect(() => {
     const search = async () => {
-      const res = await fetch(`/wp-json/wp/v2/search/?search=${searchInput}`);
-      const json = await res.json();
-      setSearchResults(json);
+      const res = await apiFetch( {
+        path: `/wp/v2/search/?search=${searchInput}`
+      });
+
+      setSearchResults(res);
     };
     if (searchInput.length > 2) search();
   }, [searchInput]);

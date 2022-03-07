@@ -119,7 +119,7 @@ class Solarplexus_Admin {
 		wp_register_script(
 			'solarplexus-script',
 			SPLX_PLUGIN_DIR_URL . 'build/index.js',
-			[ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n' ],
+			[ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n', 'wp-api-fetch' ],
 			filemtime( SPLX_PLUGIN_PATH . 'build/index.js' )
 		);
 
@@ -127,14 +127,14 @@ class Solarplexus_Admin {
 			'solarplexus-script',
 			'const solarplexusConfig = ' . wp_json_encode( $this->get_config() ) . ';',
 			'before'
-		);		
+		);
 
 		$attr_defs_per_config = [];
 		foreach($this->get_config() as $block_config) {
 			$instance = null;
 			$block_type_id = Solarplexus_Helpers::get_block_type_id($block_config);
 			if($block_config['type'] == "dynamic") {
-				$instance = new Solarplexus_Dynamic_Block_Attrs_Definition($block_config);		
+				$instance = new Solarplexus_Dynamic_Block_Attrs_Definition($block_config);
 			} else if($block_config['type'] == "handpicked") {
 				$instance = new Solarplexus_Handpicked_Block_Attrs_Definition($block_config);
 			} else {
