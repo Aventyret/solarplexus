@@ -25,7 +25,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
   const availablePostTypes = useSelect((select) => {
     const { getPostTypes } = select("core");
 
-    const postTypes = getPostTypes();
+    const postTypes = getPostTypes( { per_page: -1 } );
 
     // Only return the ones allowed in config
     return postTypes && config.allowedPostTypes
