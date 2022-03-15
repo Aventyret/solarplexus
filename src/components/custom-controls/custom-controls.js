@@ -1,5 +1,6 @@
 import CustomSelectControl from "./custom-select-control"
 import CustomTextControl from "./custom-text-control"
+import CustomTextareaControl from "./custom-textarea-control"
 
 const CustomControls = ({ attributes, setAttributes, config }) => {
   if (
@@ -9,7 +10,7 @@ const CustomControls = ({ attributes, setAttributes, config }) => {
     return null;
 
   return config.customControls.map((control) => {
-    if (control.choices) {
+    if (control.type === "select") {
       return (
         <CustomSelectControl
           key={control.id}
@@ -18,7 +19,8 @@ const CustomControls = ({ attributes, setAttributes, config }) => {
           control={control}
         />
       );
-    } else {
+    }
+    if (control.type === "text") {
       return (
         <CustomTextControl
           key={control.id}
@@ -28,6 +30,17 @@ const CustomControls = ({ attributes, setAttributes, config }) => {
         />
       );
     }
+    if (control.type === "textarea") {
+      return (
+        <CustomTextareaControl
+          key={control.id}
+          attributes={attributes}
+          setAttributes={setAttributes}
+          control={control}
+        />
+      );
+    }
+    return null;
   });
 };
 
