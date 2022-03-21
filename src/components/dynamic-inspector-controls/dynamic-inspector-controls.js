@@ -133,40 +133,30 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
     }
   };
 
-  // const onPostTypeCheckboxChange = (postTypeSlug) => {
-  //   const newSelectedPostTypes = attributes.postTypes.includes(postTypeSlug)
-  //     ? attributes.postTypes.filter((_postTypeSlug) => {
-  //         return _postTypeSlug !== postTypeSlug;
-  //       })
-  //     : [...attributes.postTypes, postTypeSlug];
+  const onPostTypeCheckboxChange = (postTypeSlug) => {
+    const selectedPostTypes = attributes.postType.split(',');
+    const postTypeWasSelected = selectedPostTypes.includes(postTypeSlug);
+    const newSelectedPostTypes = postTypeWasSelected ? selectedPostTypes.filter((_postTypeSlug) => _postTypeSlug !== postTypeSlug) : [...selectedPostTypes, postTypeSlug];
 
-  //   setAttributes({
-  //     postTypes: newSelectedPostTypes,
-  //   });
-  // };
+    setAttributes({
+      postType: newSelectedPostTypes.join(','),
+    });
+  };
 
   return (
     <InspectorControls>
       {availablePostTypes && availablePostTypes.length && (
         <PanelBody title={__("Post types", "splx")}>
-          <RadioControl
-            label={__("Show posts from:", "splx")}
-            selected={attributes.postType}
-            options={availablePostTypes.map((postType) => {
-              return { label: postType.name, value: postType.slug };
-            })}
-            onChange={(value) => onPostTypeRadioChange(value)}
-          />
-          {/* {availablePostTypes.map((postType) => {
-          return (
-            <CheckboxControl
-              key={postType.slug}
-              onChange={() => onPostTypeCheckboxChange(postType.slug)}
-              label={postType.name}
-              checked={attributes.postTypes.includes(postType.slug)}
-            />
-          );
-        })} */}
+          { availablePostTypes.map((postType) => {
+            return (
+              <CheckboxControl
+                key={postType.slug}
+                onChange={() => onPostTypeCheckboxChange(postType.slug)}
+                label={postType.name}
+                checked={attributes.postType.split(',').includes(postType.slug)}
+              />
+            );
+          })}
         </PanelBody>
       )}
       {availableTaxsAndTerms && availableTaxsAndTerms.length ? (
