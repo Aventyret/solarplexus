@@ -186,10 +186,10 @@ class Solarplexus_Admin {
 				'attributes' => $attributes,
 				'editor_script' => 'solarplexus-script',
 				'style' => 'solarplexus-style',
-				'render_callback' => function($block_attributes, $content) use ($block_config) {
+				'render_callback' => function($block_attributes, $content) use ($block_config, $block_type_id) {
 					$args = Solarplexus_Helpers::block_args($block_config, $block_attributes);
 					$template = trim( Solarplexus_Helpers::template_loader($block_config, $args) );
-					return $template ? '<div class="wp-block wp-block-splx">' . $template . '</div>' : '';
+					return $template ? '<div class="wp-block wp-block-splx wp-block-splx--' . $block_type_id . '">' . $template . '</div>' : '';
 				}
 			]);
 		};

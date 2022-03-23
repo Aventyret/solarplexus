@@ -7,7 +7,9 @@ class Solarplexus_Helpers {
     // Allow config via PHP
     $config_data = apply_filters( 'splx_config', [] );
 
-    $config_path = SPLX_PLUGIN_PATH . 'splx-config.json';
+    if ( empty( $config_data ) ) {
+      $config_path = SPLX_PLUGIN_PATH . 'splx-config.json';
+    }
 
     $theme_config_path = get_stylesheet_directory() . '/splx-config.json';
 
@@ -16,8 +18,10 @@ class Solarplexus_Helpers {
       $config_path = $theme_config_path;
     }
 
-    $json = file_get_contents( $config_path );
-    $config_data = array_merge( json_decode( $json, true ), $config_data );
+    if ( ! empty( $config_path ) ) {
+      $json = file_get_contents( $config_path );
+      $config_data = array_merge( json_decode( $json, true ), $config_data );
+    }
 
     return $config_data;
   }
