@@ -84,12 +84,6 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
       })
     : null;
 
-  const onPostTypeRadioChange = (postTypeSlug) => {
-    setAttributes({
-      postType: postTypeSlug,
-    });
-  };
-
   const onTaxonomyRadioChange = (taxonomySlug) => {
     // Clear the terms of previous selection when taxonomy changes
     setAttributes({ terms: [], taxonomy: taxonomySlug });
