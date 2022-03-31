@@ -8,16 +8,29 @@ body {
   overflow-x: hidden;
 }
 
+strong {
+  font-family: 'latobold';
+}
+
+em {
+  font-family: 'latoitalic';
+}
+
 .nav-bar.nav-bar {
   background: #F5F8F9;
 }
 
 .nav-bar-title {
   font-family: 'trocchiregular';
+  font-size: 1.1rem;
 }
 
 .nav-bar-title .logo {
   height: 1.25rem;
+}
+
+.nav-bar-title .item {
+  font-size: 1rem;
 }
 
 .home-hero.home-hero {
@@ -30,34 +43,67 @@ body {
 
 .home-content.home-content {
   max-width: 1080px;
+  padding-left:  1.25rem;
+  padding-right:  1.25rem;
 }
 
 .home-hero h1 {
   font-family: 'trocchiregular';
 }
 
+.home-hero .item.isExternal svg {
+  display: none;
+}
+
+.home-hero .item.isExternal {
+  position: relative;
+  padding-left: 2.5em;
+}
+
+.home-hero .item.isExternal:before {
+  content: '';
+  background-image: url(/solarplexus/wp-logo.svg);
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  left: 1em;
+  top:  50%;
+  margin-top:  -10px;
+}
+
 .home-content h2 {
   border: 0;
   font-family: 'latolight';
+  font-size: 2rem;
+}
+
+.home-content {
+  font-size: 1.1rem;
+}
+
+.home-content a {
+  text-decoration: underline;
 }
 
 .facts {
   background: #F5F8F9;
-  padding: 1.25rem;
+  padding: 1.25rem 2rem;
 }
 
 .facts h3 {
+  font-family: 'latobold';
   margin-top:  0;
 }
 
 .facts-item {
   display: flex;
   align-items: flex-start;
-  margin: 0.5em 0;
+  font-size: 1.1rem;
+  margin: 0.75em 0 1.25em 0;
 }
 
 .facts-item > span {
-  font-size: 1.5em;
+  font-size: 1.75em;
   line-height: 1;
   padding-right: 1rem;
 }
@@ -74,7 +120,13 @@ body {
   position: absolute;
   top: 0;
   bottom: 0;
-  width: 999em;
+  width: 1.25rem;
+}
+@media screen and (min-width: 1080px) {
+  .home-footer:before,
+  .home-footer:after {
+    width: 999em;
+  }
 }
 
 .home-footer:before {

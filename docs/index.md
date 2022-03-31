@@ -14,11 +14,11 @@ footer: MIT Licensed | Copyright © 2021-present Äventyret
 
 ## What is Solarplexus?
 
-Solarplexus is a plugin aimed for developers of complex custom Wordpress websites. Solarplexus is made for giving developers a powerful tool for adding dynamic display blocks (as in “various ways of displaying content [in a page/post] that is residing in other areas of your website”).
+**Solarplexus** is a plugin aimed for developers of complex custom Wordpress websites. Solarplexus gives developers a powerful tool for adding **dynamic display blocks** (as in “various ways of displaying content [in a page/post] that is residing in other areas of your website”).
 
-We created Solarplexus because when building websites that stays close to Core (i.e. accepts and celebrates the new Wordpress Block Editor (a.k.a. Gutenberg) there was a clear need for a standardized of bringing life to feed based websites also in the new era of Wordpress.
+We created Solarplexus because when building websites that stays **close to Core** (i.e. accepts and celebrates the new Wordpress Block Editor (a.k.a. Gutenberg) there was a clear need for a standardized way of bringing life to feed based websites also in the new era of Wordpress.
 
-Solarplexus is created by Äventyret – a leading Wordpress (and much more) agency in Sweden – as our way to give back to the Wordpress community that has given us so much. Solarplexus is open source software free to use for anyone*
+Solarplexus is created by [Äventyret](https://aventyret.com) – a leading Wordpress (and much more) agency in Sweden – as our way to give back to the Wordpress community that has given us so much. Solarplexus is open source software free to use for anyone.*
 
 ---
 
@@ -31,7 +31,7 @@ _* Bare in mind Solarplexus is not the most graspable plugin around (at least no
 
 We think the Block editor (a.k.a Gutenberg) is a great idea while not yet a great implementation. Building Wordpress websites in an agency environment since 2003, we – a group of developers – were missing a (for us) central piece of the puzzle: blocks displaying content from other parts of the same website.
 
-Solarplexus is our solution to the problem. With the Solarplexus plugin a developer can create a custom set of blocks through writing just a few lines of code.
+Solarplexus is **our solution to the problem**. With the Solarplexus plugin a developer can create a custom set of blocks through writing just a few lines of code.
 
 [Download it](https://github.com/Aventyret/solarplexus/releases) today, checkout our [getting started guide](/guide/). Try it out and [join us on Github](https://github.com/Aventyret/solarplexus) developing it further!
 
@@ -40,7 +40,7 @@ Solarplexus is our solution to the problem. With the Solarplexus plugin a develo
   <div class="facts-item">
     <span>👌</span>
     <div>
-      Create dynamic or handpicked lists of articles (or other post type) to be displayed on Block editor based pages/posts
+      Create dynamic or handpicked lists of articles (or other post types) to be displayed on Block editor based pages/posts
     </div>
   </div>
   <div class="facts-item">
@@ -52,13 +52,13 @@ Solarplexus is our solution to the problem. With the Solarplexus plugin a develo
   <div class="facts-item">
     <span>💣</span>
     <div>
-      Perk 3
+      Powerful customization
     </div>
   </div>
   <div class="facts-item">
     <span>⚡</span>
     <div>
-      Perk 4
+      Lightning fast setup
     </div>
   </div>
 </div>
