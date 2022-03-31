@@ -13,22 +13,25 @@
 	"repository": "",
 	"main": "build/index.js",
 	"devDependencies": {
-		"@wordpress/scripts": "^9.0.0"
+		"@wordpress/scripts": "^9.0.0",
+		"css-loader": "^4.2.1",
+		"mini-css-extract-plugin": "^0.9.0",
+		"sass-loader": "^9.0.3",
+		"sass": "^1.49.10"
 	},
 	"scripts": {
 		"build": "wp-scripts build",
 		"format:js": "wp-scripts format-js",
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
-		"start": "wp-scripts start"
+		"start": "wp-scripts start",
+		"docs:dev": "vitepress dev docs",
+		"docs:build": "vitepress build docs",
+		"docs:serve": "vitepress serve docs"
 	},
 	"dependencies": {
-		"@wordpress/date": "^3.10.0",
-		"@wordpress/icons": "^2.4.0",
-		"@wordpress/server-side-render": "^1.19.0",
-		"css-loader": "^4.2.1",
-		"mini-css-extract-plugin": "^0.9.0",
-		"node-sass": "^4.14.1",
-		"sass-loader": "^9.0.3"
+		"@wordpress/date": "^4.5.0",
+		"@wordpress/icons": "^8.1.0",
+		"@wordpress/server-side-render": "^3.3.0"
 	}
 }
