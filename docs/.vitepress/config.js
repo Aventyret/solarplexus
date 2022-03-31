@@ -13,6 +13,7 @@ export default defineConfig({
     logo: '/solarplexus-logo.svg',
 
     nav: [
+      { text: 'Home', link: '/' },
       { text: 'Guide', link: '/guide/' },
       { text: 'Contribute', link: '/contribute/' },
       {
