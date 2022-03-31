@@ -1,0 +1,55 @@
+:root {
+  --c-brand: #289AED;
+  --c-brand-light: #289AED;
+}
+
+@font-face {
+  font-family: 'trocchi_boldbold';
+  src: url('/solarplexus/fonts/trocchi-bold-webfont.woff2') format('woff2'),
+       url('/solarplexus/fonts/trocchi-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'trocchiregular';
+  src: url('/solarplexus/fonts/trocchi-webfont.woff2') format('woff2'),
+       url('/solarplexus/fonts/trocchi-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+}
+
+.nav-bar.nav-bar {
+  background: #F5F8F9;
+}
+
+.nav-bar-title {
+  font-family: 'trocchiregular';
+}
+
+.nav-bar-title .logo {
+  height: 1.5rem;
+}
+
+.home-hero.home-hero {
+  background: #F5F8F9;
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-top: 4rem;
+  padding-bottom: 4rem;
+}
+
+.home-content.home-content {
+  max-width: 1080px;
+}
+
+.home-content h1 {
+  font-family: 'trocchiregular';
+}
+
+.home-content h2 {
+  border: 0;
+}
