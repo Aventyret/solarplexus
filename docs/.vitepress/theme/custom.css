@@ -5,6 +5,7 @@
 
 body {
   font-family: 'latoregular';
+  overflow-x: hidden;
 }
 
 .nav-bar.nav-bar {
@@ -37,4 +38,71 @@ body {
 
 .home-content h2 {
   border: 0;
+  font-family: 'latolight';
+}
+
+.facts {
+  background: #F5F8F9;
+  padding: 1.25rem;
+}
+
+.facts h3 {
+  margin-top:  0;
+}
+
+.facts-item {
+  display: flex;
+  align-items: flex-start;
+  margin: 0.5em 0;
+}
+
+.facts-item > span {
+  font-size: 1.5em;
+  line-height: 1;
+  padding-right: 1rem;
+}
+
+.home-footer {
+  background: #D0E6F5;
+  position: relative;
+}
+
+.home-footer:before,
+.home-footer:after {
+  content: '';
+  background: #D0E6F5;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 999em;
+}
+
+.home-footer:before {
+  right:  100%;
+}
+
+.home-footer:after {
+  left:  100%;
+}
+
+.home-footer-inner {
+  max-width: 1080px;
+  margin: 2rem auto 0 auto;
+  padding: 2rem 1.25rem 4rem 1.25rem;
+}
+
+.home-footer-inner h2 {
+  font-family: 'trocchiregular';
+}
+
+.home-footer-fact {
+  display: flex;
+  align-items: flex-start;
+}
+
+.home-footer-fact > span {
+  color: white;
+  font-size: 4em;
+  line-height: 1;
+  padding-right: 1rem;
 }
