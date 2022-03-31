@@ -102,9 +102,9 @@ class Solarplexus_Helpers {
     if($current_post_id) {
       $args['post__not_in'] = array($current_post_id);
     }
-    
+
     if (array_key_exists('postType', $block_attributes)) {
-      $args['post_type'] = $block_attributes['postType'];
+      $args['post_type'] = explode(',', $block_attributes['postType']);
       $args['posts_per_page'] = $block_attributes['noOfPosts'];
       $args['orderby'] = 'date';
     } else {
@@ -191,7 +191,7 @@ class Solarplexus_Helpers {
     $loaded_template = '';
     $sage_template = self::get_sage_template($block_config);
     if($sage_template) {
-      return self::template_loader_sage($sage_template, $block_config, $args); 
+      return self::template_loader_sage($sage_template, $block_config, $args);
     }
 
     $template = self::get_template($block_config);
@@ -203,7 +203,7 @@ class Solarplexus_Helpers {
         ob_start();
         load_template($template, false, $args);
         $loaded_template = ob_get_clean();
-        
+
       } else {
         error_log("Solarplexus: Unable to validate template path: \"$template\". Error Code: $validated_file.");
       }
@@ -267,7 +267,7 @@ class Solarplexus_Helpers {
 
   private static function get_template($block_config) {
     $block_type_id = self::get_block_type_id($block_config);
-    $template = '';    
+    $template = '';
 
     // If block id matches a custom
     // regular PHP template in the current theme
@@ -301,7 +301,7 @@ class Solarplexus_Helpers {
           'handpicked-default'
         );
       }
-      
+
     }
 
     return $template;
@@ -398,7 +398,7 @@ class Solarplexus_Helpers {
     }
 
     $args['post__not_in'] = array_unique( array_merge( $args['post__not_in'], self::get_rendered_post_ids() ) );
-    
+
 	  return $args;
   }
 }
