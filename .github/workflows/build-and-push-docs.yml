@@ -1,0 +1,31 @@
+name: Build and push docs
+
+on:
+  release:
+    types: [created]
+
+jobs:
+  publish-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: webfactory/ssh-agent@v0.5.4
+        with:
+          ssh-private-key: ${{ secrets.SOLARPLEXUS_BOT_SSH }}
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 16
+      - name: 'Build docs'
+        run: |
+          yarn
+          yarn docs:build
+      - name: 'Push docs to gh-pages branch'
+        working-directory: ./docs/.vitepress/dist
+        run: |
+          pwd
+          git init -b main
+          git add -A
+          git config --global user.email "solarplexus-bot@aventyret.com"
+          git config --global user.name "solarplexus-bot"
+          git commit -m "Publish docs"
+          git push -f git@github.com:$GITHUB_REPOSITORY.git HEAD:gh-pages
