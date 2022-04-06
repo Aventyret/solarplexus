@@ -1,0 +1,55 @@
+@font-face {
+    font-family: 'latobold';
+    src: url('/solarplexus/fonts/lato-bold-webfont.woff2') format('woff2'),
+         url('/solarplexus/fonts/lato-bold-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'latoitalic';
+    src: url('/solarplexus/fonts/lato-italic-webfont.woff2') format('woff2'),
+         url('/solarplexus/fonts/lato-italic-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'latomedium';
+    src: url('/solarplexus/fonts/lato-medium-webfont.woff2') format('woff2'),
+         url('/solarplexus/fonts/lato-medium-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'latoregular';
+    src: url('/solarplexus/fonts/lato-regular-webfont.woff2') format('woff2'),
+         url('/solarplexus/fonts/lato-regular-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'latolight';
+    src: url('/solarplexus/fonts/lato-light-webfont.woff2') format('woff2'),
+         url('/solarplexus/fonts/lato-light-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+  font-family: 'trocchi_boldbold';
+  src: url('/solarplexus/fonts/trocchi-bold-webfont.woff2') format('woff2'),
+       url('/solarplexus/fonts/trocchi-bold-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'trocchiregular';
+  src: url('/solarplexus/fonts/trocchi-webfont.woff2') format('woff2'),
+       url('/solarplexus/fonts/trocchi-webfont.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+}
