@@ -23,7 +23,7 @@ jobs:
         working-directory: ./docs/.vitepress/dist
         run: |
           pwd
-          git init -b main
+          git init -b master
           git add -A
           git config --global user.email "solarplexus-bot@aventyret.com"
           git config --global user.name "solarplexus-bot"
