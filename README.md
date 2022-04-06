@@ -6,7 +6,7 @@ Solarplexus is a Wordpress plugin and developer tool to easily create Gutenberg 
 
 ## Installation & usage
 
-**To use the latest version in a Wordpress project, simply head over to the 📖 [documentation](https://github.com/Aventyret/solarplexus/wiki) 📖 and don't bother with the dev stuff below.**
+**To use the latest version in a Wordpress project, simply head over to the 📖 [online documentation](https://aventyret.github.io/solarplexus/) 📖 and don't bother with the dev stuff below.**
 
 ## Plugin development instructions
 
@@ -33,3 +33,4 @@ The plugin is not yet public, and is only versioned in dist versions here on Git
 3. `yarn build`
 4. `wp dist-archive .` A dist version without dev-only files will be created in the directory above.
 5. On [Releases](https://github.com/Aventyret/solarplexus/releases) page, click `Draft a new release`, fill in new version, changes etc, and upload the zip.
+6. The `./docs` of the release tag will be published automatically when a release is created.
