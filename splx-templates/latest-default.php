@@ -45,5 +45,8 @@
 				</div>
 			<?php endforeach; ?>
 		</div>
+		<?php if($args['block_attributes']['hasPagination']): ?>
+
+		<?php var_dump($args); endif; ?>
 	</div>
 <?php wp_reset_postdata(); endif; ?>
