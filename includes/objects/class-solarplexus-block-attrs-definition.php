@@ -5,6 +5,8 @@ class Solarplexus_Block_Attrs_Definition {
    *
    * Public vars
    */
+  public $block_uid;
+
   public $no_of_posts;
 
   public $custom_controls;
@@ -22,12 +24,14 @@ class Solarplexus_Block_Attrs_Definition {
   public function __construct($block_config) {
     $this->config = $block_config;
 
+    $this->set_block_uid();
     $this->set_no_of_posts();
     $this->set_custom_controls();
   }
 
   public function to_array() {
     $r = [];
+    $r['blockUid'] = $this->block_uid;
     $r['noOfPosts'] = $this->no_of_posts;
     foreach($this->custom_controls as $control_id => $control) {
       $r[$control_id] = $control;
@@ -68,6 +72,13 @@ class Solarplexus_Block_Attrs_Definition {
    *
    * Private methods 
    */
+  private function set_block_uid() {
+    $this->block_uid = self::build_attribute(
+      'string',
+      ''
+    );
+  }
+
   private function set_no_of_posts() {
     $this->no_of_posts = self::build_attribute(
       'integer',

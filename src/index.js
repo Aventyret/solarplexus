@@ -1,6 +1,6 @@
 import "./shared.scss";
 
-import { useState } from "@wordpress/element";
+import { useState, useEffect } from "@wordpress/element";
 
 import ServerSideRender from "@wordpress/server-side-render";
 
@@ -45,6 +45,12 @@ solarplexusConfig.forEach((config) => {
     attributes,
     edit(props) {
       const [isDirty, setIsDirty] = useState(false);
+
+      useEffect(() => {
+        if (!props.attributes.blockUid) {
+          props.setAttributes({ blockUid: props.clientId });
+        }
+      }, []);
 
       return (
         <>
