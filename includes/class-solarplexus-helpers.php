@@ -436,7 +436,8 @@ class Solarplexus_Helpers {
       );
     }
     if (!isset($args['block_attributes']) || !isset($args['block_attributes']['hasPagination']) || !$args['block_attributes']['hasPagination']) {
-      throw new Exception('Block does not support pagination');
+      // Block does not support pagination
+      return;
     }
     $arg_properties = array(
       'block_attributes',
