@@ -148,6 +148,13 @@ class Solarplexus_Helpers {
       $args = self::exclude_rendered_posts_in_args( $args );
     }
 
+    $has_pagination = isset($block_attributes['hasPagination']) && $block_attributes['hasPagination'];
+    if ($has_pagination && isset($args['posts_per_page'])) {
+      $args['offset'] = (self::block_page($block_attributes) - 1) * $args['posts_per_page'];
+    }
+
+    var_dump($args);
+
     /**
      * Filter the query args returning to the block render.
      *
@@ -175,10 +182,13 @@ class Solarplexus_Helpers {
      */
     $posts = apply_filters( 'splx_posts', $query->posts, $block_config, $block_attributes );
 
-    $pagination = isset($block_attributes['hasPagination']) && $block_attributes['hasPagination'] ? array(
-      'page' => isset($_GET[self::block_page_query_parameter($block_attributes)]) ? $_GET[self::block_page_query_parameter($block_attributes)] : 1,
-      'max_num_pages' => $query->max_num_pages,
-    ) : false;
+    $pagination = false;
+    if ($has_pagination) {
+      $pagination = array(
+        'page' => self::block_page($block_attributes),
+        'max_num_pages' => $query->max_num_pages,
+      );
+    }
 
     return [
       'query' => $query->query,
@@ -410,6 +420,10 @@ class Solarplexus_Helpers {
 
   private static function block_page_query_parameter($block_attributes) {
     return 'block_' . $block_attributes['blockUid'] . '_page';
+  }
+
+  private static function block_page($block_attributes) {
+    return isset($_GET[self::block_page_query_parameter($block_attributes)]) ? (int)$_GET[self::block_page_query_parameter($block_attributes)] : 1;
   }
 
   private static function block_pagination_base($block_attributes) {
