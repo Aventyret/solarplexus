@@ -45,8 +45,8 @@
 				</div>
 			<?php endforeach; ?>
 		</div>
-		<?php if($args['block_attributes']['hasPagination']): ?>
-
-		<?php var_dump($args); endif; ?>
+		<?php if($args['block_attributes']['hasPagination']):
+			Solarplexus_Helpers::the_block_pagination($args);
+		endif; ?>
 	</div>
 <?php wp_reset_postdata(); endif; ?>
