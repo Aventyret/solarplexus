@@ -9,7 +9,6 @@ import {
   SelectControl,
   RangeControl,
   ToggleControl,
-  TextControl,
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 
@@ -108,14 +107,6 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 
   const onHasPaginationCheckboxChange = () => {
     setAttributes({ hasPagination: !attributes.hasPagination });
-  };
-
-  const onPaginationUseShowMoreCheckboxChange = () => {
-    setAttributes({ paginationUseShowMore: !attributes.paginationUseShowMore });
-  };
-
-  const onPaginationShowMoreTextCheckboxChange = (val) => {
-    setAttributes({ paginationShowMoreText: val });
   };
 
   const onNoOfPostsChange = (value) => {
@@ -232,17 +223,6 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
           label={__("Has pagination", "splx")}
           onChange={onHasPaginationCheckboxChange}
         />
-        {attributes.hasPagination && <CheckboxControl
-          checked={attributes.paginationUseShowMore}
-          label={__("Pagination is a Show more button", "splx")}
-          onChange={onPaginationUseShowMoreCheckboxChange}
-        />}
-        {attributes.hasPagination && attributes.paginationUseShowMore && <TextControl
-          label={__("Show more button text", "splx")}
-          value={attributes.paginationShowMoreText}
-          placeholder={__("Show more", "splx")}
-          onChange={onPaginationShowMoreTextCheckboxChange}
-        />}
       </PanelBody>
       {isArray(config.noOfPosts) ? (
         <PanelBody title={__("Number of items")}>

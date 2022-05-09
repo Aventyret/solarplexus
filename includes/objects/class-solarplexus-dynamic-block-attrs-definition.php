@@ -14,10 +14,6 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
 
   public $has_pagination;
 
-  public $pagination_use_show_more;
-
-  public $pagination_show_more_text;
-
   public function __construct($block_config) {
     parent::__construct($block_config);
 
@@ -27,8 +23,6 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
     $this->set_order();
     $this->set_authors();
     $this->set_has_pagination();
-    $this->set_pagination_use_show_more();
-    $this->set_pagination_show_more_text();
   }
 
   public function to_array() {
@@ -40,8 +34,6 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
     $r['order'] = $this->order;
     $r['authors'] = $this->authors; 
     $r['hasPagination'] = $this->has_pagination;
-    $r['paginationUseShowMore'] = $this->pagination_use_show_more;
-    $r['paginationShowMoreText'] = $this->pagination_show_more_text ?? '';
     return array_merge($common, $r);
   }
 
@@ -79,18 +71,6 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
     $this->has_pagination = self::build_attribute(
       'boolean',
       false
-    );
-  }
-  private function set_pagination_use_show_more() {
-    $this->pagination_use_show_more = self::build_attribute(
-      'boolean',
-      false
-    );
-  }
-  private function set_pagination_show_more_text() {
-    $this->pagination_show_more_text = self::build_attribute(
-      'string',
-      ''
     );
   }
 
