@@ -436,15 +436,15 @@ class Solarplexus_Helpers {
     return $base_url . ($query ? '&' : '?') . self::block_page_query_parameter($block_attributes) . '=%#%';
   }
 
-  public static function the_block_pagination($block_attributes_or_args, $max_num_pages = NULL) {
+  public static function the_block_pagination($block_attributes_or_args, $pagination = NULL) {
     $args = array();
-    if ($max_num_pages === NULL) {
+    if ($pagination === NULL) {
       $args = $block_attributes_or_args;
     }
-    if ($max_num_pages !== NULL) {
+    if ($pagination !== NULL) {
       $args = array(
         'block_attributes' => $block_attributes_or_args,
-        'max_num_pages' => $max_num_pages,
+        'pagination' => $pagination,
       );
     }
     if (!isset($args['block_attributes']) || !isset($args['block_attributes']['hasPagination']) || !$args['block_attributes']['hasPagination']) {
