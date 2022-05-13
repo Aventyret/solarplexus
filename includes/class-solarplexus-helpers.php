@@ -153,8 +153,6 @@ class Solarplexus_Helpers {
       $args['offset'] = (self::block_page($block_attributes) - 1) * $args['posts_per_page'];
     }
 
-    var_dump($args);
-
     /**
      * Filter the query args returning to the block render.
      *
