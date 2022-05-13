@@ -52,6 +52,37 @@ _array_ - The Solarplexus config for the block type of the block instance
 ### query
 _string_ - The query string that was passed to the $wp_query object by WP class.
 
+## Pagination
+If the Has Pagination option (available in the admin interface of blocks with type `dymanic`) Solarplexus can add a Wordpress style pagination to your blocks (using [paginate_links](https://developer.wordpress.org/reference/functions/paginate_links/)).
+
+If you use the default templates the pagination will be rendered automatically, but if you create custom templates you will need to add the pagination to your block templates.
+
+Example when using Sage:
+
+```php
+<div class="my-block">
+  <div class="my-block-posts">
+  </div>
+  <div class="my-block-pagination">
+    @php Solarplexus_Helpers::the_block_pagination($block_attributes, $pagination) @endphp
+  </div>
+</div>
+```
+
+Example when not using Sage:
+
+```php
+<div class="my-block">
+  <div class="my-block-posts">
+  </div>
+  <div class="my-block-pagination">
+    <?php Solarplexus_Helpers::the_block_pagination($args) ?>
+  </div>
+</div>
+```
+
+In many cases you would display your pagination as a "show more" button for screen users. For now will need to implement that behaviour in your theme.
+
 ## Using your custom template in the editor
 As soon as you create your own template(s) in your theme matching your configured block IDs, those templates will be used for preview within the Gutenberg editor as well. Easy!
 
