@@ -105,6 +105,10 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
     setAttributes({ order });
   };
 
+  const onHasPaginationCheckboxChange = () => {
+    setAttributes({ hasPagination: !attributes.hasPagination });
+  };
+
   const onNoOfPostsChange = (value) => {
     setAttributes({ noOfPosts: value });
   };
@@ -211,6 +215,13 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
               label: ORDERS[key],
             };
           })}
+        />
+      </PanelBody>
+      <PanelBody>
+        <CheckboxControl
+          checked={attributes.hasPagination}
+          label={__("Has pagination", "splx")}
+          onChange={onHasPaginationCheckboxChange}
         />
       </PanelBody>
       {isArray(config.noOfPosts) ? (

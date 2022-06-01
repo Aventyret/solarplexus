@@ -148,6 +148,11 @@ class Solarplexus_Helpers {
       $args = self::exclude_rendered_posts_in_args( $args );
     }
 
+    $has_pagination = isset($block_attributes['hasPagination']) && $block_attributes['hasPagination'];
+    if ($has_pagination && isset($block_attributes['noOfPosts']) && $block_attributes['noOfPosts'] > -1) {
+      $args['offset'] = (self::block_page($block_attributes) - 1) * $block_attributes['noOfPosts'];
+    }
+
     /**
      * Filter the query args returning to the block render.
      *
@@ -175,9 +180,18 @@ class Solarplexus_Helpers {
      */
     $posts = apply_filters( 'splx_posts', $query->posts, $block_config, $block_attributes );
 
+    $pagination = false;
+    if ($has_pagination) {
+      $pagination = array(
+        'page' => self::block_page($block_attributes),
+        'max_num_pages' => $query->max_num_pages,
+      );
+    }
+
     return [
       'query' => $query->query,
       'posts' => $posts,
+      'pagination' => $pagination,
       'block_attributes' => $block_attributes,
       'classes_grid' => apply_filters( 'splx_grid_classes', self::block_classes($classes_grid), $block_config, $block_attributes ),
       'classes_item' => apply_filters( 'splx_item_classes', self::block_classes($classes_item), $block_config, $block_attributes ),
@@ -400,5 +414,63 @@ class Solarplexus_Helpers {
     $args['post__not_in'] = array_unique( array_merge( $args['post__not_in'], self::get_rendered_post_ids() ) );
 
 	  return $args;
+  }
+
+  private static function block_page_query_parameter($block_attributes) {
+    return 'block_' . $block_attributes['blockUid'] . '_page';
+  }
+
+  private static function block_page($block_attributes) {
+    return isset($_GET[self::block_page_query_parameter($block_attributes)]) ? (int)$_GET[self::block_page_query_parameter($block_attributes)] : 1;
+  }
+
+  private static function block_pagination_base($block_attributes) {
+    $parsed_url = parse_url($_SERVER['REQUEST_URI']);
+    $query = '';
+    if (isset($parsed_url['query'])) {
+      parse_str($parsed_url['query'], $query_args);
+      unset($query_args[self::block_page_query_parameter($block_attributes)]);
+      $query = http_build_query($query_args);
+    }
+    $base_url = $parsed_url['path'] . ($query ? '?' . $query : '');
+    return $base_url . ($query ? '&' : '?') . self::block_page_query_parameter($block_attributes) . '=%#%';
+  }
+
+  public static function the_block_pagination($block_attributes_or_args, $pagination = NULL) {
+    $args = array();
+    if ($pagination === NULL) {
+      $args = $block_attributes_or_args;
+    }
+    if ($pagination !== NULL) {
+      $args = array(
+        'block_attributes' => $block_attributes_or_args,
+        'pagination' => $pagination,
+      );
+    }
+    if (!isset($args['block_attributes']) || !isset($args['block_attributes']['hasPagination']) || !$args['block_attributes']['hasPagination']) {
+      // Block does not support pagination
+      return;
+    }
+    $arg_properties = array(
+      'block_attributes',
+      'pagination',
+    );
+    foreach($arg_properties as $property) {
+      if (!isset($args[$property]) || !$args[$property]) {
+        throw new Exception('Bad arguments for Solarplexus::the_block_pagination($args)');
+      }
+    }
+    $pagination_base = self::block_pagination_base($args['block_attributes']);
+
+    echo '
+<div class="splx-pagination">
+  ' . paginate_links(array(
+    'base' => $pagination_base,
+    'current' => $args['pagination']['page'],
+    'total' => $args['pagination']['max_num_pages'],
+    'format' => '?' . self::block_page_query_parameter($args['block_attributes']) . '=%#%',
+    'type' => 'list',
+  )) . '
+</div>';
   }
 }
