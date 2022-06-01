@@ -149,8 +149,8 @@ class Solarplexus_Helpers {
     }
 
     $has_pagination = isset($block_attributes['hasPagination']) && $block_attributes['hasPagination'];
-    if ($has_pagination && isset($args['posts_per_page'])) {
-      $args['offset'] = (self::block_page($block_attributes) - 1) * $args['posts_per_page'];
+    if ($has_pagination && isset($block_attributes['noOfPosts']) && $block_attributes['noOfPosts'] > -1) {
+      $args['offset'] = (self::block_page($block_attributes) - 1) * $block_attributes['noOfPosts'];
     }
 
     /**
