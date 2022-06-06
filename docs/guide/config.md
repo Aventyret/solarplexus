@@ -4,7 +4,7 @@ To define your own blocks instead of the two default ones, the first thing you n
 
 In the root of your theme, create the file `splx-config.json`. If you are using **Roots Sage**, create the file in the `resources` folder. **When a custom config is created in your theme, the two default blocks will not be available anymore**.
 
-Here's an example config, which more or less defines the same as the default block types described on the previous page:
+Here's an example config, which defines two blocks similar to the blocks that the plugin ships with by default (that are described on the previous page):
 ```
 [
   {
@@ -64,7 +64,7 @@ If you omit `allowedPostTypes` dynamic blocks will show `posts` and handpicked b
 _[string]_ - `dynamic` type only. The key(s) of the taxonomies the editor will be able to filter on when using the block. For custom taxonomies, you must have `show_in_rest` set to `true` when calling `register_taxonomy` in your theme/plugin.
 
 ### noOfPosts
-_int|[int]_ - The maximum posts to be shown in the resulting lists. For `dynamic`, an array can be used instead, with 2 positions declaring the min and max number, e.g [3, 6], letting the editor choose between these.
+_int|[int]_ - The maximum posts to be shown in the resulting lists. For `dynamic`, an array can be used instead, with 2 positions declaring the min and max number, e.g [3, 6], letting the editor choose from a range between these.
 
 ### listType
 _string_ - Can either be `horizontal` or `vertical`. This controls how the block type will render its items.
