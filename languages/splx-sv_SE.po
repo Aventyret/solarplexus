@@ -1,19 +1,18 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Solarplexus\n"
-"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/solarplexus-"
-"source\n"
-"POT-Creation-Date: 2022-05-13T14:40:57+00:00\n"
-"PO-Revision-Date: 2022-05-13 16:41+0200\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/solarplexus\n"
+"POT-Creation-Date: 2022-06-07T13:34:04+00:00\n"
+"PO-Revision-Date: 2022-06-07 15:37+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.0\n"
-"X-Poedit-Basepath: ..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Poedit 3.0.1\n"
+"X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: solarplexus.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -43,113 +42,95 @@ msgstr ""
 msgid "Äventyret"
 msgstr ""
 
-#: build/index.js:9048
 #: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:147
 msgid "Post types"
 msgstr "Innehållstyper"
 
-#: build/index.js:9059
 #: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:161
 msgid "Taxonomies"
 msgstr "Taxonomier"
 
-#: build/index.js:9061
 #: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:163
 msgid "Show posts from:"
 msgstr "Visa inlägg från:"
 
-#: build/index.js:9064
 #: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:166
 msgid "All"
 msgstr "Alla"
 
-#: build/index.js:9086
 #: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:189
 msgid "Authors"
 msgstr "Författare"
 
-#: build/index.js:9089
 #: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:192
 msgid "All authors"
 msgstr "Alla författare"
 
-#: build/index.js:9105
 #: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:209
 msgid "Order"
 msgstr "Ordning"
 
-#: build/index.js:9118
 #: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:223
 msgid "Has pagination"
 msgstr "Har paginering"
 
-#: build/index.js:9291
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:97
+#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:132
 msgid "Search"
 msgstr "Sök"
 
-#: build/index.js:9310
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:124
+#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:159
 msgid "Already selected"
 msgstr "Redan vald"
 
-#: build/index.js:9310
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:127
+#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:162
 msgid "You can't select more than %d posts"
 msgstr "Du kan inte välja mer än %d inlägg"
 
-#: build/index.js:9310
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:130
+#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:165
 msgid "Select"
 msgstr "Välj"
 
-#: build/index.js:9313
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:138
+#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:173
 msgid "Selected posts"
 msgstr "Valda inlägg"
 
-#: build/index.js:9328
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:153
+#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:188
 msgid "Move up"
 msgstr "Flytta upp"
 
-#: build/index.js:9334
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:160
+#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:195
 msgid "Move down"
 msgstr "Flytta ner"
 
-#: build/index.js:9340
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:167
+#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:202
 msgid "Remove"
 msgstr "Ta bort"
 
-#: build/index.js:9380 src/consts.js:12
-msgid "Horizontal"
-msgstr "Horisontell"
-
-#: build/index.js:9384 src/consts.js:13
-msgid "Vertical"
-msgstr "Vertikal"
-
-#: build/index.js:9391 src/consts.js:18
+#: src/consts.js:11
 msgid "Image as background"
 msgstr "Bild som bakgrund"
 
-#: build/index.js:9395 src/consts.js:19
+#: src/consts.js:12
 msgid "Image on top"
 msgstr "Bild överst"
 
-#: build/index.js:9399 src/consts.js:20
+#: src/consts.js:13
 msgid "Image to the left"
 msgstr "Bild till vänster"
 
-#: build/index.js:9404 src/consts.js:24
+#: src/consts.js:17
 msgid "Ascending"
 msgstr "Stigande"
 
-#: build/index.js:9405 src/consts.js:25
+#: src/consts.js:18
 msgid "Descending"
 msgstr "Fallande"
+
+#~ msgid "Horizontal"
+#~ msgstr "Horisontell"
+
+#~ msgid "Vertical"
+#~ msgstr "Vertikal"
 
 #~ msgid "Number of items"
 #~ msgstr "Antal objekt"
