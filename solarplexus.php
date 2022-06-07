@@ -37,35 +37,13 @@ define( 'SPLX_TEMPLATE_FOLDER', 'splx-templates' );
 
 /**
  * Currently plugin version.
- * Start at version 1.0.0 and use SemVer - https://semver.org
- * Rename this for your plugin and update it as you release new versions.
+ * We use SemVer - https://semver.org
  */
-define( 'SOLARPLEXUS_VERSION', '1.2.6' );
-
-/**
- * The code that runs during plugin activation.
- * This action is documented in includes/class-solarplexus-activator.php
- */
-function activate_solarplexus() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-solarplexus-activator.php';
-	Solarplexus_Activator::activate();
-}
-
-/**
- * The code that runs during plugin deactivation.
- * This action is documented in includes/class-solarplexus-deactivator.php
- */
-function deactivate_solarplexus() {
-	require_once plugin_dir_path( __FILE__ ) . 'includes/class-solarplexus-deactivator.php';
-	Solarplexus_Deactivator::deactivate();
-}
-
-register_activation_hook( __FILE__, 'activate_solarplexus' );
-register_deactivation_hook( __FILE__, 'deactivate_solarplexus' );
+define( 'SOLARPLEXUS_VERSION', '1.3.0' );
 
 /**
  * The core plugin class that is used to define internationalization,
- * admin-specific hooks, and public-facing site hooks.
+ * admin specific hooks, and public facing site hooks.
  */
 require plugin_dir_path( __FILE__ ) . 'includes/class-solarplexus.php';
 

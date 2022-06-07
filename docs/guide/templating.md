@@ -65,7 +65,7 @@ Example when using Sage:
   </div>
   @if($block_attributes['hasPagination'])
   <div class="my-block-pagination">
-    @php Solarplexus_Helpers::the_block_pagination($block_attributes, $pagination) @endphp
+    @php Solarplexus::the_block_pagination($block_attributes, $pagination) @endphp
   </div>
   @endif
 </div>
@@ -79,7 +79,7 @@ Example when not using Sage:
   </div>
   <?php if($args['block_attributes']['hasPagination']): ?>
   <div class="my-block-pagination">
-    <?php Solarplexus_Helpers::the_block_pagination($args) ?>
+    <?php Solarplexus::the_block_pagination($args) ?>
   </div>
   <?php endif; ?>
 </div>

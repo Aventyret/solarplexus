@@ -9,7 +9,6 @@
     "noOfPosts": [2,8],
     "noOfGridCols": 2,
     "customFields": [],
-    "listType": "horizontal",
     "itemLayout": "imagebg",
     "showDate": true,
     "showExcerpt": true,
@@ -23,7 +22,6 @@
     "noOfPosts": 8,
     "noOfGridCols": 2,
     "customFields": [],
-    "listType": "horizontal",
     "itemLayout": "imagebg",
     "showDate": true,
     "showExcerpt": true

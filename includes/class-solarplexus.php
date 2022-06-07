@@ -1,23 +1,9 @@
 <?php
-
-/**
- * The file that defines the core plugin class
- *
- * A class definition that includes attributes and functions used across both the
- * public-facing side of the site and the admin area.
- *
- * @link       https://aventyret.com
- * @since      1.0.0
- *
- * @package    Solarplexus
- * @subpackage Solarplexus/includes
- */
-
 /**
  * The core plugin class.
  *
- * This is used to define internationalization, admin-specific hooks, and
- * public-facing site hooks.
+ * This is used to define internationalization, admin specific hooks,
+ * public facing site hooks and public facing functions.
  *
  * Also maintains the unique identifier of this plugin as well as the current
  * version of the plugin.
@@ -25,9 +11,7 @@
  * @since      1.0.0
  * @package    Solarplexus
  * @subpackage Solarplexus/includes
- * @author     Äventyret <andreas.bohman@aventyret.com>
  */
-
 class Solarplexus {
 
 	/**
@@ -63,7 +47,7 @@ class Solarplexus {
 	 *
 	 * Set the plugin name and the plugin version that can be used throughout the plugin.
 	 * Load the dependencies, define the locale, and set the hooks for the admin area and
-	 * the public-facing side of the site.
+	 * the public facing side of the site.
 	 *
 	 * @since    1.0.0
 	 */
@@ -78,8 +62,6 @@ class Solarplexus {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
-		$this->define_public_hooks();
-
 	}
 
 	/**
@@ -90,7 +72,6 @@ class Solarplexus {
 	 * - Solarplexus_Loader. Orchestrates the hooks of the plugin.
 	 * - Solarplexus_i18n. Defines internationalization functionality.
 	 * - Solarplexus_Admin. Defines all hooks for the admin area.
-	 * - Solarplexus_Public. Defines all hooks for the public side of the site.
 	 *
 	 * Create an instance of the loader which will be used to register the hooks
 	 * with WordPress.
@@ -122,12 +103,6 @@ class Solarplexus {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-solarplexus-admin.php';
-
-		/**
-		 * The class responsible for defining all actions that occur in the public-facing
-		 * side of the site.
-		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-solarplexus-public.php';
 
 		$this->loader = new Solarplexus_Loader();
 
@@ -162,25 +137,8 @@ class Solarplexus {
 		$plugin_admin = new Solarplexus_Admin( $this->get_plugin_name(), $this->get_version() );
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_scripts', 11 );
 		$this->loader->add_action( 'init', $plugin_admin, 'register_block', 11 );
-	}
-
-	/**
-	 * Register all of the hooks related to the public-facing functionality
-	 * of the plugin.
-	 *
-	 * @since    1.0.0
-	 * @access   private
-	 */
-	private function define_public_hooks() {
-
-		$plugin_public = new Solarplexus_Public( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_styles' );
-		$this->loader->add_action( 'wp_enqueue_scripts', $plugin_public, 'enqueue_scripts' );
-
 	}
 
 	/**
@@ -223,4 +181,50 @@ class Solarplexus {
 		return $this->version;
 	}
 
+	/**
+	 * Render a blocks pagination.
+	 *
+	 * @since     1.3.0
+	 * @param     array      $block_attributes_or_args Associative array with args if not called from a Sage template. Or the block attributes if called from a sage template
+	 * @param     array      $pagination OPTIONAL Associative array with args if not called from a Sage template. Or the block attributes if called from a sage template
+	 * @throws    Exception  If the arguments are bad
+	 * @return    void    	 Outputs html with pagination for a block, or nothing if the block does not support pagination.
+	 */
+	public static function the_block_pagination($block_attributes_or_args, $pagination = NULL) {
+		$args = array();
+		if ($pagination === NULL) {
+			$args = $block_attributes_or_args;
+		}
+		if ($pagination !== NULL) {
+			$args = array(
+				'block_attributes' => $block_attributes_or_args,
+				'pagination' => $pagination,
+			);
+		}
+		if (!isset($args['block_attributes']) || !isset($args['block_attributes']['hasPagination']) || !$args['block_attributes']['hasPagination']) {
+			// Block does not support pagination
+			return;
+		}
+		$arg_properties = array(
+			'block_attributes',
+			'pagination',
+		);
+		foreach($arg_properties as $property) {
+			if (!isset($args[$property]) || !$args[$property]) {
+				throw new Exception('Bad arguments for Solarplexus::the_block_pagination($args)');
+			}
+		}
+		$pagination_base = Solarplexus_Helpers::block_pagination_base($args['block_attributes']);
+
+		echo '
+<div class="splx-pagination">
+	' . paginate_links(array(
+		'base' => $pagination_base,
+		'current' => $args['pagination']['page'],
+		'total' => $args['pagination']['max_num_pages'],
+		'format' => '?' . Solarplexus_Helpers::block_page_query_parameter($args['block_attributes']) . '=%#%',
+		'type' => 'list',
+	)) . '
+</div>';
+	}
 }
