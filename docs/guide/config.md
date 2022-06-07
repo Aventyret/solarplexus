@@ -11,7 +11,6 @@ Here's an example config, which defines two blocks similar to the blocks that th
     "id": "my-example-dynamic",
     "title": "My dynamic posts or pages example",
     "type": "dynamic",
-    "icon": "universal-access-alt",
     "allowedPostTypes": ["post", "page"],
     "allowedTaxonomies": ["category"],
     "noOfPosts": [2,8],
@@ -25,7 +24,6 @@ Here's an example config, which defines two blocks similar to the blocks that th
     "id": "my-example-handpicked",
     "title": "My hand picked posts or pages example",
     "type": "handpicked",
-    "icon": "universal-access-alt",
     "allowedPostTypes": ["post", "page"],
     "noOfPosts": 8,
     "noOfGridCols": 2,
@@ -50,9 +48,6 @@ _string_ - The title of the block type.
 ### type
 _string_ - There are two types of block types - `dynamic` and `handpicked`. Dynamic loads the latest posts based on the configuration combined with the editors choices, while Hand picked always shows the same posts that the editor specifically has picked.
 
-### icon
-_string_ - The icon for the block type. Can be any [Dashicon](https://developer.wordpress.org/resource/dashicons/), or an inline SVG html string. Double quotes can be escaped.
-
 ### allowedPostTypes
 _[string]_ - The post type(s) the editor will be able to choose from when using the block. For custom post types, you must have `show_in_rest` set to `true` when calling `register_post_type` in your theme/plugin.
 
@@ -66,6 +61,9 @@ _int|[int]_ - The maximum posts to be shown in the resulting lists. For `dynamic
 
 ### allowedTaxonomies
 _[string]_ - `dynamic` type only. The key(s) of the taxonomies the editor will be able to filter on when using the block. For custom taxonomies, you must have `show_in_rest` set to `true` when calling `register_taxonomy` in your theme/plugin.
+
+### icon - optional
+_string_ - The icon for the block type, defaults to the Solarplexus logo. Can be an inline SVG html string. Double quotes can be escaped.
 
 ### customControls - optional
 _array_ - Here you may define additional controls for the editor, that will be included as attributes on the block. Currently, selectboxes and text inputs are supported. Say for instance that you'd like to add a selection of colors to add styles to in the templates:
