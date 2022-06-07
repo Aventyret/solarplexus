@@ -1,15 +1,4 @@
 <?php
-
-/**
- * Register all actions and filters for the plugin
- *
- * @link       https://aventyret.com
- * @since      1.0.0
- *
- * @package    Solarplexus
- * @subpackage Solarplexus/includes
- */
-
 /**
  * Register all actions and filters for the plugin.
  *
@@ -19,7 +8,6 @@
  *
  * @package    Solarplexus
  * @subpackage Solarplexus/includes
- * @author     Äventyret <andreas.bohman@aventyret.com>
  */
 class Solarplexus_Loader {
 

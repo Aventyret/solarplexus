@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Block attribute definitions used for all block types.
+ *
+ * @link       https://aventyret.com
+ * @since      1.0.0
+ *
+ * @package    Solarplexus
+ * @subpackage Solarplexus/includes/objects
+ */
 class Solarplexus_Block_Attrs_Definition {
   /*
    *

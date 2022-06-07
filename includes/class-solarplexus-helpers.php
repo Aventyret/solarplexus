@@ -1,6 +1,15 @@
 <?php
-
+/**
+ * Helper functions for the plugin, all called statically.
+ *
+ * @link       https://aventyret.com
+ * @since      1.0.0
+ *
+ * @package    Solarplexus
+ * @subpackage Solarplexus/includes
+ */
 class Solarplexus_Helpers {
+  // Used to keep track of rendered posts to avoid duplicates
   private static $rendered_post_ids = [];
 
   public static function retrieve_block_configs() {
@@ -65,17 +74,9 @@ class Solarplexus_Helpers {
       ];
     }
 
-    // Add listType and itemLayout
+    // Add itemLayout
     // directly from config instead
     // of from block attributes.
-    if ( isset( $attrs_grid['listType'] ) ) {
-      $attrs_grid['listType'] = [
-        'class_base' => 'splx-grid--listType',
-        'value' => $block_config['listType'],
-        'divider' => '-'
-      ];
-    }
-
     if ( isset( $attrs_grid['itemLayout'] ) ) {
       $attrs_item['itemLayout'] = [
         'class_base' => 'splx-gridItemPost--layout',
@@ -198,7 +199,6 @@ class Solarplexus_Helpers {
       'config' => $block_config
     ];
   }
-
 
   public static function template_loader($block_config, $args) {
     $block_type_id = self::get_block_type_id($block_config);
@@ -416,15 +416,15 @@ class Solarplexus_Helpers {
 	  return $args;
   }
 
-  private static function block_page_query_parameter($block_attributes) {
+  public static function block_page_query_parameter($block_attributes) {
     return 'block_' . $block_attributes['blockUid'] . '_page';
   }
 
-  private static function block_page($block_attributes) {
+  public static function block_page($block_attributes) {
     return isset($_GET[self::block_page_query_parameter($block_attributes)]) ? (int)$_GET[self::block_page_query_parameter($block_attributes)] : 1;
   }
 
-  private static function block_pagination_base($block_attributes) {
+  public static function block_pagination_base($block_attributes) {
     $parsed_url = parse_url($_SERVER['REQUEST_URI']);
     $query = '';
     if (isset($parsed_url['query'])) {
@@ -434,43 +434,5 @@ class Solarplexus_Helpers {
     }
     $base_url = $parsed_url['path'] . ($query ? '?' . $query : '');
     return $base_url . ($query ? '&' : '?') . self::block_page_query_parameter($block_attributes) . '=%#%';
-  }
-
-  public static function the_block_pagination($block_attributes_or_args, $pagination = NULL) {
-    $args = array();
-    if ($pagination === NULL) {
-      $args = $block_attributes_or_args;
-    }
-    if ($pagination !== NULL) {
-      $args = array(
-        'block_attributes' => $block_attributes_or_args,
-        'pagination' => $pagination,
-      );
-    }
-    if (!isset($args['block_attributes']) || !isset($args['block_attributes']['hasPagination']) || !$args['block_attributes']['hasPagination']) {
-      // Block does not support pagination
-      return;
-    }
-    $arg_properties = array(
-      'block_attributes',
-      'pagination',
-    );
-    foreach($arg_properties as $property) {
-      if (!isset($args[$property]) || !$args[$property]) {
-        throw new Exception('Bad arguments for Solarplexus::the_block_pagination($args)');
-      }
-    }
-    $pagination_base = self::block_pagination_base($args['block_attributes']);
-
-    echo '
-<div class="splx-pagination">
-  ' . paginate_links(array(
-    'base' => $pagination_base,
-    'current' => $args['pagination']['page'],
-    'total' => $args['pagination']['max_num_pages'],
-    'format' => '?' . self::block_page_query_parameter($args['block_attributes']) . '=%#%',
-    'type' => 'list',
-  )) . '
-</div>';
   }
 }

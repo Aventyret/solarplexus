@@ -24,7 +24,7 @@ More info in the [WP docs](https://developer.wordpress.org/block-editor/how-to-g
 
 ## Distribution instructions
 
-The plugin is not yet public, and is only versioned in dist versions here on GitHub.
+The plugin is versioned in dist versions here on GitHub.
 
 1. Make sure you have [wp-cli](https://make.wordpress.org/cli/handbook/guides/installing/) and the [dist-archive](https://developer.wordpress.org/cli/commands/dist-archive/) package installed.
 2. Update the version according to semver in `package.json`, `README.txt`, and the main plugin entry file `solarplexus.php`
