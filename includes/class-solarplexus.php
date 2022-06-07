@@ -190,41 +190,41 @@ class Solarplexus {
 	 * @throws    Exception  If the arguments are bad
 	 * @return    void    	 Outputs html with pagination for a block, or nothing if the block does not support pagination.
 	 */
-  public static function the_block_pagination($block_attributes_or_args, $pagination = NULL) {
-    $args = array();
-    if ($pagination === NULL) {
-      $args = $block_attributes_or_args;
-    }
-    if ($pagination !== NULL) {
-      $args = array(
-        'block_attributes' => $block_attributes_or_args,
-        'pagination' => $pagination,
-      );
-    }
-    if (!isset($args['block_attributes']) || !isset($args['block_attributes']['hasPagination']) || !$args['block_attributes']['hasPagination']) {
-      // Block does not support pagination
-      return;
-    }
-    $arg_properties = array(
-      'block_attributes',
-      'pagination',
-    );
-    foreach($arg_properties as $property) {
-      if (!isset($args[$property]) || !$args[$property]) {
-        throw new Exception('Bad arguments for Solarplexus::the_block_pagination($args)');
-      }
-    }
-    $pagination_base = Solarplexus_Helpers::block_pagination_base($args['block_attributes']);
+	public static function the_block_pagination($block_attributes_or_args, $pagination = NULL) {
+		$args = array();
+		if ($pagination === NULL) {
+			$args = $block_attributes_or_args;
+		}
+		if ($pagination !== NULL) {
+			$args = array(
+				'block_attributes' => $block_attributes_or_args,
+				'pagination' => $pagination,
+			);
+		}
+		if (!isset($args['block_attributes']) || !isset($args['block_attributes']['hasPagination']) || !$args['block_attributes']['hasPagination']) {
+			// Block does not support pagination
+			return;
+		}
+		$arg_properties = array(
+			'block_attributes',
+			'pagination',
+		);
+		foreach($arg_properties as $property) {
+			if (!isset($args[$property]) || !$args[$property]) {
+				throw new Exception('Bad arguments for Solarplexus::the_block_pagination($args)');
+			}
+		}
+		$pagination_base = Solarplexus_Helpers::block_pagination_base($args['block_attributes']);
 
-    echo '
+		echo '
 <div class="splx-pagination">
-  ' . paginate_links(array(
-    'base' => $pagination_base,
-    'current' => $args['pagination']['page'],
-    'total' => $args['pagination']['max_num_pages'],
-    'format' => '?' . Solarplexus_Helpers::block_page_query_parameter($args['block_attributes']) . '=%#%',
-    'type' => 'list',
-  )) . '
+	' . paginate_links(array(
+		'base' => $pagination_base,
+		'current' => $args['pagination']['page'],
+		'total' => $args['pagination']['max_num_pages'],
+		'format' => '?' . Solarplexus_Helpers::block_page_query_parameter($args['block_attributes']) . '=%#%',
+		'type' => 'list',
+	)) . '
 </div>';
-  }
+	}
 }
