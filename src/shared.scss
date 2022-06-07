@@ -13,11 +13,8 @@ $test: #ff0000;
 }
 
 .splx-grid {
-
+  display: flex;
   flex-wrap: wrap;
-  &--listType-horizontal {
-    display: flex;
-  }
   &--cols1 {
     display: block;
   }

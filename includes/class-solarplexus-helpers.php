@@ -65,17 +65,9 @@ class Solarplexus_Helpers {
       ];
     }
 
-    // Add listType and itemLayout
+    // Add itemLayout
     // directly from config instead
     // of from block attributes.
-    if ( isset( $attrs_grid['listType'] ) ) {
-      $attrs_grid['listType'] = [
-        'class_base' => 'splx-grid--listType',
-        'value' => $block_config['listType'],
-        'divider' => '-'
-      ];
-    }
-
     if ( isset( $attrs_grid['itemLayout'] ) ) {
       $attrs_item['itemLayout'] = [
         'class_base' => 'splx-gridItemPost--layout',
