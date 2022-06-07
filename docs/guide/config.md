@@ -15,7 +15,6 @@ Here's an example config, which defines two blocks similar to the blocks that th
     "allowedPostTypes": ["post", "page"],
     "allowedTaxonomies": ["category"],
     "noOfPosts": [2,8],
-    "listType": "horizontal",
     "noOfGridCols": 2,
     "itemLayout": "imagebg",
     "showDate": true,
@@ -29,7 +28,6 @@ Here's an example config, which defines two blocks similar to the blocks that th
     "icon": "universal-access-alt",
     "allowedPostTypes": ["post", "page"],
     "noOfPosts": 8,
-    "listType": "horizontal",
     "noOfGridCols": 2,
     "itemLayout": "imagebg",
     "showDate": true,
@@ -66,20 +64,8 @@ _[string]_ - `dynamic` type only. The key(s) of the taxonomies the editor will b
 ### noOfPosts
 _int|[int]_ - The maximum posts to be shown in the resulting lists. For `dynamic`, an array can be used instead, with 2 positions declaring the min and max number, e.g [3, 6], letting the editor choose from a range between these.
 
-### listType
-_string_ - Can either be `horizontal` or `vertical`. This controls how the block type will render its items.
-
-### noOfGridCols
-_int_ - `horizontal` listType only. The number of columns (when screen with allows) the post grid will consist of.
-
-### itemLayout
-_string_ - Can be either `imagebg`, `imagetop` or `imageleft`. Controls the layout within each post item in the list.
-
-### showDate
-_bool_ - Whether to show the post dates in the rendered lists.
-
-### showExcerpt
-_bool_ - Whether to show the post excerpts in the rendered lists.
+### allowedTaxonomies
+_[string]_ - `dynamic` type only. The key(s) of the taxonomies the editor will be able to filter on when using the block. For custom taxonomies, you must have `show_in_rest` set to `true` when calling `register_taxonomy` in your theme/plugin.
 
 ### customControls - optional
 _array_ - Here you may define additional controls for the editor, that will be included as attributes on the block. Currently, selectboxes and text inputs are supported. Say for instance that you'd like to add a selection of colors to add styles to in the templates:
@@ -123,3 +109,18 @@ For longer texts, you can use the textarea type:
     ]
 ```
 The id (as long as it doesn't collide with an already-exisiting attribute), name and choices can be anything you'd like. See more on the next page on how to work with templates.
+
+## Configuration attributes for default templates
+The following attributes are only meaningful when you use Solarplexus' default templates.
+
+### noOfGridCols
+_int_ - The number of columns (when screen with allows) the post grid will consist of.
+
+### itemLayout
+_string_ - Can be either `imagebg`, `imagetop` or `imageleft`. Controls the layout within each post item in the list.
+
+### showDate
+_bool_ - Whether to show the post dates in the rendered lists.
+
+### showExcerpt
+_bool_ - Whether to show the post excerpts in the rendered lists.
