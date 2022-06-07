@@ -1,5 +1,13 @@
 <?php
-
+/**
+ * Block attribute definitions that are only for dynamic blocks.
+ *
+ * @link       https://aventyret.com
+ * @since      1.0.0
+ *
+ * @package    Solarplexus
+ * @subpackage Solarplexus/includes/objects
+ */
 class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs_Definition {
 
   public $post_type;

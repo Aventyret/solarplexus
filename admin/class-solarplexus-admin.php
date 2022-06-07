@@ -1,24 +1,15 @@
 <?php
-
 /**
- * The admin-specific functionality of the plugin.
+ * The admin specific functionality of the plugin.
+ *
+ * Defines the plugin name, version, and two examples hooks for how to
+ * enqueue the admin specific stylesheet.
  *
  * @link       https://aventyret.com
  * @since      1.0.0
  *
  * @package    Solarplexus
  * @subpackage Solarplexus/admin
- */
-
-/**
- * The admin-specific functionality of the plugin.
- *
- * Defines the plugin name, version, and two examples hooks for how to
- * enqueue the admin-specific stylesheet and JavaScript.
- *
- * @package    Solarplexus
- * @subpackage Solarplexus/admin
- * @author     Äventyret <andreas.bohman@aventyret.com>
  */
 class Solarplexus_Admin {
 
@@ -85,29 +76,6 @@ class Solarplexus_Admin {
 
 	}
 
-	/**
-	 * Register the JavaScript for the admin area.
-	 *
-	 * @since    1.0.0
-	 */
-	public function enqueue_scripts() {
-
-		/**
-		 * This function is provided for demonstration purposes only.
-		 *
-		 * An instance of this class should be passed to the run() function
-		 * defined in Solarplexus_Loader as all of the hooks are defined
-		 * in that particular class.
-		 *
-		 * The Solarplexus_Loader will then create the relationship
-		 * between the defined hooks and the functions defined in this
-		 * class.
-		 */
-
-		wp_enqueue_script( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'js/solarplexus-admin.js', array( 'jquery' ), $this->version, false );
-
-	}
-
 	public function register_scripts() {
 		wp_register_style(
 			'solarplexus-style',
@@ -148,16 +116,6 @@ class Solarplexus_Admin {
 			'const solarplexusAttrDefs = ' . wp_json_encode( $attr_defs_per_config ) . ';',
 			'before'
 		);
-		// wp_add_inline_script(
-		// 	'solarplexus-script',
-		// 	'const solarplexusDynamicAttributeTypesConfig = ' . wp_json_encode( $this->dynamic_attribute_types ) . ';',
-		// 	'before'
-		// );
-		// wp_add_inline_script(
-		// 	'solarplexus-script',
-		// 	'const solarplexusHandpickedAttributeTypesConfig = ' . wp_json_encode( $this->handpicked_attribute_types ) . ';',
-		// 	'before'
-		// );
 
 		wp_set_script_translations(
 			'solarplexus-script',
