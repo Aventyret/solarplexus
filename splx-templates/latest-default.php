@@ -45,7 +45,7 @@
 				</div>
 			<?php endforeach; ?>
 		</div>
-		<?php if($args['block_attributes']['hasPagination']):
+		<?php if($args['pagination']):
 			Solarplexus::the_block_pagination($args);
 		endif; ?>
 	</div>

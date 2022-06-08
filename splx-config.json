@@ -10,8 +10,7 @@
     "customFields": [],
     "itemLayout": "imagebg",
     "showDate": true,
-    "showExcerpt": true,
-	  "allowDuplicates": false
+    "showExcerpt": true
   },
   {
     "id": "handpicked-default",
