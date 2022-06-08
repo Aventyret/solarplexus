@@ -62,6 +62,12 @@ _int|[int]_ - The maximum posts to be shown in the resulting lists. For `dynamic
 ### allowedTaxonomies
 _[string]_ - `dynamic` type only. The key(s) of the taxonomies the editor will be able to filter on when using the block. For custom taxonomies, you must have `show_in_rest` set to `true` when calling `register_taxonomy` in your theme/plugin.
 
+### allowDuplicates - optional
+_boolean_ - `dynamic` type only. Sets if Solarplexus check for not showing duplicate posts on the same page should be disabled. Defaults to `false`.
+
+### allowPagination - optional
+_boolean_ - `dynamic` type only. Sets if editors should be allowed to enable pagination for blocks of this type. Defaults to `false`.
+
 ### icon - optional
 _string_ - The icon for the block type, defaults to the Solarplexus logo. Can be an inline SVG html string. Double quotes can be escaped.
 
@@ -109,7 +115,7 @@ For longer texts, you can use the textarea type:
 The id (as long as it doesn't collide with an already-exisiting attribute), name and choices can be anything you'd like. See more on the next page on how to work with templates.
 
 ## Configuration attributes for default templates
-The following attributes are only meaningful when you use Solarplexus' default templates.
+The following attributes are only required (and meaningful) when you use Solarplexus' default templates.
 
 ### noOfGridCols
 _int_ - The number of columns (when screen with allows) the post grid will consist of.

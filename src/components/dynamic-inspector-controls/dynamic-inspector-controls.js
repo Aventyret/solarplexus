@@ -217,13 +217,15 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
           })}
         />
       </PanelBody>
-      <PanelBody>
-        <CheckboxControl
-          checked={attributes.hasPagination}
-          label={__("Has pagination", "splx")}
-          onChange={onHasPaginationCheckboxChange}
-        />
-      </PanelBody>
+      {config.allowPagination ? (
+        <PanelBody>
+          <CheckboxControl
+            checked={attributes.hasPagination}
+            label={__("Has pagination", "splx")}
+            onChange={onHasPaginationCheckboxChange}
+          />
+        </PanelBody>
+      ) : null}
       {isArray(config.noOfPosts) ? (
         <PanelBody title={__("Number of items")}>
           <RangeControl
@@ -234,13 +236,6 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
           />
         </PanelBody>
       ) : null}
-	  {/* TODO <PanelBody title={__("Include previously rendered posts")}>
-		  <ToggleControl
-			label="Should text be shown?"
-			checked={allowDuplicates}
-			onChange={(allow) => { setAttribute({ allowDuplicates: allow }) }}
-		  />
-	  </PanelBody> */}
       <CustomControls
         attributes={attributes}
         setAttributes={setAttributes}
