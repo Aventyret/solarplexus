@@ -2,7 +2,7 @@
  * All of the CSS for your admin specific functionality should be
  * included in this file.
  */
-.wp-block-splx {
+.wp-block[data-type*="splx"] {
 	pointer-events: none;
 }
 .splx-icon {

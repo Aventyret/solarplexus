@@ -146,8 +146,7 @@ class Solarplexus_Admin {
 				'style' => 'solarplexus-style',
 				'render_callback' => function($block_attributes, $content) use ($block_config, $block_type_id) {
 					$args = Solarplexus_Helpers::block_args($block_config, $block_attributes);
-					$template = trim( Solarplexus_Helpers::template_loader($block_config, $args) );
-					return $template ? '<div class="wp-block wp-block-splx wp-block-splx--' . $block_type_id . '">' . $template . '</div>' : '';
+					return trim( Solarplexus_Helpers::template_loader($block_config, $args) );
 				}
 			]);
 		};
