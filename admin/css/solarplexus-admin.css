@@ -8,3 +8,10 @@
 .splx-icon {
   height: 24px;
 }
+.splx-panel {
+  max-height: 300px;
+  overflow: auto;
+}
+.block-editor-block-inspector .splx-panel .components-base-control {
+  margin-bottom: 0;
+}

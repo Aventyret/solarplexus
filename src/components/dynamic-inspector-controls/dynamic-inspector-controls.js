@@ -144,7 +144,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
   return (
     <InspectorControls>
       {availablePostTypes && availablePostTypes.length && (
-        <PanelBody title={__("Post types", "splx")}>
+        <PanelBody className="splx-panel" title={__("Post types", "splx")}>
           { availablePostTypes.map((postType) => {
             return (
               <CheckboxControl
@@ -158,7 +158,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
         </PanelBody>
       )}
       {availableTaxsAndTerms && availableTaxsAndTerms.length ? (
-        <PanelBody title={__("Taxonomies", "splx")}>
+        <PanelBody className="splx-panel" title={__("Taxonomies", "splx")}>
           <RadioControl
             label={__("Show posts from:", "splx")}
             selected={attributes.taxonomy}
@@ -186,7 +186,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
         </PanelBody>
       ) : null}
       {availableAuthors && availableAuthors.length && (
-        <PanelBody title={__("Authors", "splx")}>
+        <PanelBody className="splx-panel" title={__("Authors", "splx")}>
           <CheckboxControl
             checked={!attributes.authors.length}
             label={__("All authors", "splx")}
