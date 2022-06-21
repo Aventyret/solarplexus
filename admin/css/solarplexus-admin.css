@@ -15,3 +15,6 @@
 .block-editor-block-inspector .splx-panel .components-base-control {
   margin-bottom: 0;
 }
+.components-radio-control .components-base-control__field {
+  margin-bottom: 24px;
+}
