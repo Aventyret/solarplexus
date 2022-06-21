@@ -3,6 +3,7 @@
 .git
 .gitignore
 .gitlab-ci.yml
+.github
 .nvmrc
 .travis.yml
 .DS_Store
@@ -29,6 +30,7 @@ node_modules
 src
 tests
 vendor
+docs
 *.sql
 *.tar.gz
 *.zip
