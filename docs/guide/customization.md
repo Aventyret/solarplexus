@@ -19,7 +19,7 @@ add_filter('splx_item_classes', function($classes, $block_config, $block_attribu
 ## Adding custom fields or other data
 Often times, you're going to want to display some custom data in your items. Instead of querying for that data directly in the template, use the provided custom hook, which is applied on the posts after a successful query:
 ```
-add_filter('splx_posts', function($posts, $block_config, $block_attributes){
+add_filter('splx_posts', function($posts, $block_config, $block_attributes, $pagination){
   $upd_posts = [];
   foreach($posts as $p) {
     $upd_post = clone $p;
@@ -27,7 +27,7 @@ add_filter('splx_posts', function($posts, $block_config, $block_attributes){
     $upd_posts[] = $upd_post;
   }
   return $upd_posts;
-}, 10, 3);
+}, 10, 4);
 ```
 The `posts` array available in your template will now include the above additions.
 
