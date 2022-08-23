@@ -171,6 +171,15 @@ class Solarplexus_Helpers {
     // Keep track of rendered posts to avoid rendering same post multiple times on a page
     self::keep_track_of_rendered_posts( $query->posts );
 
+    // Is this block paginated?
+    $pagination = false;
+    if ($has_pagination) {
+      $pagination = array(
+        'page' => self::block_page($block_attributes),
+        'max_num_pages' => $query->max_num_pages,
+      );
+    }
+
     /**
      * Filter the posts array before returning to the block render.
      *
@@ -180,15 +189,7 @@ class Solarplexus_Helpers {
      * @param array $block_config		Block config
      * @param array $block_attributes	Block attributes
      */
-    $posts = apply_filters( 'splx_posts', $query->posts, $block_config, $block_attributes );
-
-    $pagination = false;
-    if ($has_pagination) {
-      $pagination = array(
-        'page' => self::block_page($block_attributes),
-        'max_num_pages' => $query->max_num_pages,
-      );
-    }
+    $posts = apply_filters( 'splx_posts', $query->posts, $block_config, $block_attributes, $pagination );
 
     return [
       'query' => $query->query,
