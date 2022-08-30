@@ -185,8 +185,8 @@ class Solarplexus_Helpers {
      *
      * @since 1.2.0
      *
-     * @param array $posts        Posts array.
-     * @param array $block_config   Block config
+     * @param array $posts            Posts array.
+     * @param array $block_config     Block config
      * @param array $block_attributes Block attributes
      */
     $posts = apply_filters( 'splx_posts', $query->posts, $block_config, $block_attributes, $pagination );
