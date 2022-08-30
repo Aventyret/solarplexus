@@ -231,7 +231,15 @@ class Solarplexus_Helpers {
   }
 
   private static function is_sage(){
+    return self::is_sage_sub_10() || self::is_sage_10();
+  }
+
+  private static function is_sage_sub_10(){
     return class_exists('Roots\Sage\Container');
+  }
+
+  private static function is_sage_10(){
+    return function_exists('Roots\view');
   }
 
   private static function block_classes($classes) {
@@ -243,6 +251,16 @@ class Solarplexus_Helpers {
   }
 
   private static function template_loader_sage($template, $block_config, $args) {
+    if (self::is_sage_sub_10()) {
+      return self::template_loader_sage_sub_10($template, $block_config, $args);
+    }
+    if (self::is_sage_10()) {
+      return self::template_loader_sage_10($template, $block_config, $args);
+    }
+    throw new ErrorException('No sage template loader');
+  }
+
+  private static function template_loader_sage_sub_10($template, $block_config, $args) {
     // Get the Sage instance with
     // the blade binding
     // TODO: maybe move this container stuff
@@ -261,6 +279,12 @@ class Solarplexus_Helpers {
     return $loaded_template;
   }
 
+  private static function template_loader_sage_10($template, $block_config, $args) {
+    // Get the rendered template as a string
+    $loaded_template = view($template, $args)->render();
+    return $loaded_template;
+  }
+
   private static function get_sage_template($block_config) {
     $block_type_id = self::get_block_type_id($block_config);
     $template = '';
@@ -268,7 +292,7 @@ class Solarplexus_Helpers {
     // template in the current theme
     $path = sprintf(
       '%s/views/%s/%s.blade.php',
-      get_stylesheet_directory(),
+      get_stylesheet_directory() . '/resources',
       SPLX_TEMPLATE_FOLDER,
       $block_type_id
     );
