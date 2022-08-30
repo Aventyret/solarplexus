@@ -292,7 +292,7 @@ class Solarplexus_Helpers {
     // template in the current theme
     $path = sprintf(
       '%s/views/%s/%s.blade.php',
-      get_stylesheet_directory() . '/resources',
+      get_stylesheet_directory(),
       SPLX_TEMPLATE_FOLDER,
       $block_type_id
     );
