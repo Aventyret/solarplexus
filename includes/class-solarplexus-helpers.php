@@ -289,7 +289,7 @@ class Solarplexus_Helpers {
     return sprintf(
       '%s%s/views/%s/%s.blade.php',
       get_stylesheet_directory(),
-      self::is_sage_10() ? '/resources' : '',
+      self::is_sage_10() ? '/resources' : '', // NOTE: get_stylesheet_directory() returns the /resources path in Sage 9, but not in Sage 10
       SPLX_TEMPLATE_FOLDER,
       $block_type_id
     );
