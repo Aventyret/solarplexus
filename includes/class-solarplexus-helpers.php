@@ -160,9 +160,9 @@ class Solarplexus_Helpers {
      *
      * @since 1.2.0
      *
-     * @param array $args 				Query args.
-     * @param array $block_config		Block config
-     * @param array $block_attributes	Block attributes
+     * @param array $args             Query args.
+     * @param array $block_config     Block config
+     * @param array $block_attributes Block attributes
      */
     $args = apply_filters('splx_queryargs', $args, $block_config, $block_attributes);
 
@@ -185,9 +185,9 @@ class Solarplexus_Helpers {
      *
      * @since 1.2.0
      *
-     * @param array $posts 				Posts array.
-     * @param array $block_config		Block config
-     * @param array $block_attributes	Block attributes
+     * @param array $posts            Posts array.
+     * @param array $block_config     Block config
+     * @param array $block_attributes Block attributes
      */
     $posts = apply_filters( 'splx_posts', $query->posts, $block_config, $block_attributes, $pagination );
 
@@ -231,7 +231,15 @@ class Solarplexus_Helpers {
   }
 
   private static function is_sage(){
+    return self::is_sage_sub_10() || self::is_sage_10();
+  }
+
+  private static function is_sage_sub_10(){
     return class_exists('Roots\Sage\Container');
+  }
+
+  private static function is_sage_10(){
+    return function_exists('Roots\view');
   }
 
   private static function block_classes($classes) {
@@ -243,6 +251,16 @@ class Solarplexus_Helpers {
   }
 
   private static function template_loader_sage($template, $block_config, $args) {
+    if (self::is_sage_sub_10()) {
+      return self::template_loader_sage_sub_10($template, $block_config, $args);
+    }
+    if (self::is_sage_10()) {
+      return self::template_loader_sage_10($template, $block_config, $args);
+    }
+    error_log("Solarplexus: No sage template loader.");
+  }
+
+  private static function template_loader_sage_sub_10($template, $block_config, $args) {
     // Get the Sage instance with
     // the blade binding
     // TODO: maybe move this container stuff
@@ -261,24 +279,35 @@ class Solarplexus_Helpers {
     return $loaded_template;
   }
 
-  private static function get_sage_template($block_config) {
-    $block_type_id = self::get_block_type_id($block_config);
-    $template = '';
-    // If block id matches a custom blade
-    // template in the current theme
-    $path = sprintf(
-      '%s/views/%s/%s.blade.php',
+  private static function template_loader_sage_10($template, $block_config, $args) {
+    // Get the rendered template as a string
+    $loaded_template = view($template, $args)->render();
+    return $loaded_template;
+  }
+
+  private static function sage_template_path($block_type_id) {
+    return sprintf(
+      '%s%s/views/%s/%s.blade.php',
       get_stylesheet_directory(),
+      self::is_sage_10() ? '/resources' : '', // NOTE: get_stylesheet_directory() returns the /resources path in Sage 9, but not in Sage 10
       SPLX_TEMPLATE_FOLDER,
       $block_type_id
     );
-    if(self::is_sage() && file_exists($path)) {
-      // Return template reference in Blade-ish format
-      // instead of file path, i.e splx-templates.foo
-      $template = sprintf('%s.%s', SPLX_TEMPLATE_FOLDER, $block_type_id);
-    }
+  }
 
-    return $template;
+  private static function get_sage_template($block_config) {
+    if (!self::is_sage()) {
+      return NULL;
+    }
+    $block_type_id = self::get_block_type_id($block_config);
+    // Check if there is a template file for this block in the theme
+    $path = self::sage_template_path($block_type_id);
+    if(!file_exists($path)) {
+      return NULL;
+    }
+    // Return template reference in Blade-ish format
+    // instead of file path, i.e splx-templates.foo
+    return sprintf('%s.%s', SPLX_TEMPLATE_FOLDER, $block_type_id);
   }
 
   private static function get_template($block_config) {
@@ -415,7 +444,7 @@ class Solarplexus_Helpers {
 
     $args['post__not_in'] = array_unique( array_merge( $args['post__not_in'], self::get_rendered_post_ids() ) );
 
-	  return $args;
+    return $args;
   }
 
   public static function block_page_query_parameter($block_attributes) {
