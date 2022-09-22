@@ -53,7 +53,7 @@ solarplexusConfig.forEach((config) => {
       return (
         <>
           {config.type === "dynamic" ? (
-            <DynamicInspectorControls {...props} config={config} />
+            <DynamicInspectorControls {...props} config={config} setIsDirty={setIsDirty} />
           ) : config.type === "handpicked" ? (
             <HandpickedInspectorControls
               {...props}

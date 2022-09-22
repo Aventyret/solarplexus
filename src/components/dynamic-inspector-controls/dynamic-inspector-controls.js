@@ -8,9 +8,11 @@ import {
   RadioControl,
   SelectControl,
   RangeControl,
-  ToggleControl,
+  // ToggleControl,
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
+
+import SearchPostControl from "../common-controls/search-post-control";
 
 import CustomControls from "../custom-controls/custom-controls";
 
@@ -20,7 +22,7 @@ import { ORDERS } from "../../consts";
 
 const TERMS_DEFAULT_SELECT_VALUE = "";
 
-const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
+const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirty }) => {
   // Get all the registered post types
   const availablePostTypes = useSelect((select) => {
     const { getPostTypes } = select("core");
@@ -234,6 +236,11 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
             max={config.noOfPosts[1]}
             onChange={(value) => onNoOfPostsChange(value)}
           />
+        </PanelBody>
+      ) : null}
+      {config.allowHandpicked ? (
+        <PanelBody className="splx-panel" title={__("Handpicked posts", "splx")}>
+          <SearchPostControl attributes={attributes} config={config} setIsDirty={setIsDirty} selectSearchResult={() => {}} existingPosts={[]}/>
         </PanelBody>
       ) : null}
       <CustomControls
