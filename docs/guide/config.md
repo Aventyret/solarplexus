@@ -68,6 +68,9 @@ _boolean_ - `dynamic` type only. Sets if Solarplexus check for not showing dupli
 ### allowPagination - optional
 _boolean_ - `dynamic` type only. Sets if editors should be allowed to enable pagination for blocks of this type. Defaults to `false`.
 
+### allowHandpicked - optional
+_boolean_ - `dynamic` type only. Sets if editors should be allowed to add handpicked posts to dynamic blocks. Defaults to `false`.
+
 ### icon - optional
 _string_ - The icon for the block type, defaults to the Solarplexus logo. Can be an inline SVG html string. Double quotes can be escaped.
 
