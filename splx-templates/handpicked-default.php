@@ -9,7 +9,6 @@
  *
  */
 ?>
-
 <?php if ($args['posts']) : ?>
 	<div class="splx-wrap splx-wrap--ssr">
 		<div class="splx-grid <?php echo esc_attr($args['classes_grid']); ?>">
