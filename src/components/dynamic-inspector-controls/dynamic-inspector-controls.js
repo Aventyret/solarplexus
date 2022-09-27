@@ -280,37 +280,38 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
       {config.allowHandpicked ? (
         <PanelBody className="splx-panel" title={__("Handpicked posts", "splx")}>
           <SearchPostControl attributes={attributes} config={config} setIsDirty={setIsDirty} selectSearchResult={selectSearchResult} existingPosts={existingPosts}/>
-          <div className="splx-handpickedPostsWrap">
-            <h4>{__("Selected posts", "splx")}</h4>
-            <div className="splx-handpickedPosts">
-              {attributes.handpickedPosts.map((handpicked) => {
-                return (
-                  <Card key={handpicked.post.id}>
-                    <CardBody>
-                      <h5 className="splx-handpickedPostTitle">
-                        {handpicked.post.title}
-                      </h5>
-                      <div className="splx-handpickedPostButtons">
-                        <Button
-                          isSecondary
-                          isSmall
-                          onClick={() => removeHandpickedPost(handpicked.post.id)}
-                        >
-                          {__("Remove", "splx")}
-                        </Button>
-                        <SelectControl
-                          value={handpicked.position}
-                          options={positionOptions}
-                          onChange={(position) => setPosition(handpicked.post.id, position)} />
-                      </div>
+          {attributes.handpickedPosts.length ? (
+            <div className="splx-handpickedPostsWrap">
+              <h4>{__("Selected posts", "splx")}</h4>
+              <div className="splx-handpickedPosts">
+                {attributes.handpickedPosts.map((handpicked) => {
+                  return (
+                    <Card key={handpicked.post.id}>
+                      <CardBody>
+                        <h5 className="splx-handpickedPostTitle">
+                          {handpicked.post.title}
+                        </h5>
+                        <div className="splx-handpickedPostButtons">
+                          <Button
+                            isSecondary
+                            isSmall
+                            onClick={() => removeHandpickedPost(handpicked.post.id)}
+                          >
+                            {__("Remove", "splx")}
+                          </Button>
+                          <SelectControl
+                            value={handpicked.position}
+                            options={positionOptions}
+                            onChange={(position) => setPosition(handpicked.post.id, position)} />
+                        </div>
 
-                    </CardBody>
-                  </Card>
-                );
-              })}
+                      </CardBody>
+                    </Card>
+                  );
+                })}
+              </div>
             </div>
-          </div>
-
+          ) : null }
         </PanelBody>
       ) : null}
       <CustomControls
