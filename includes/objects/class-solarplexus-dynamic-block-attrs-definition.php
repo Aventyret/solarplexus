@@ -33,7 +33,7 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
     $this->set_order();
     $this->set_authors();
     $this->set_has_pagination();
-	$this->set_handpicked_posts();
+    $this->set_handpicked_posts();
   }
 
   public function to_array() {
@@ -45,7 +45,7 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
     $r['order'] = $this->order;
     $r['authors'] = $this->authors;
     $r['hasPagination'] = $this->has_pagination;
-	$r['handpickedPosts'] = $this->handpicked_posts;
+    $r['handpickedPosts'] = $this->handpicked_posts;
     return array_merge($common, $r);
   }
 
