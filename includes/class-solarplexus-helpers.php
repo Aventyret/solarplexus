@@ -171,12 +171,28 @@ class Solarplexus_Helpers {
 	$posts = $query->posts;
 
 	if (array_key_exists('handpickedPosts', $block_attributes)) {
+    $addedPosts = 0;
 		foreach ($block_attributes['handpickedPosts'] as $handpicked) {
-			var_dump((int)$handpicked['position'] - 1);
-			array_splice($posts, (int)$handpicked['position'] - 1, 0, get_post($handpicked['post']['id']));
+      $postToAdd = get_post($handpicked['post']['id']);
+      if ($postToAdd) {
+        $postToAddExistsAtIndex = false;
+        foreach($posts as $index => $post) {
+          if ($post->ID === $postToAdd->ID) {
+            $postToAddExistsAtIndex = $index;
+          }
+        }
+        if ($postToAddExistsAtIndex !== false) {
+          // If the post existed already we remove it from it's existing position
+          array_splice($posts, $postToAddExistsAtIndex, 1);
+        } else {
+          // If the post did not exist we count up $addedPosts, which means one more post will be removed with array_slice
+          $addedPosts++;
+        }
+        // Add the post at it's handpicked position
+        array_splice($posts, (int)$handpicked['position'] - 1, 0, [get_post($handpicked['post']['id'])]);
+      }
 		}
-		var_dump($posts);
-		$posts = array_slice($posts, 0, count($posts) - count($block_attributes['handpickedPosts']));
+		$posts = array_slice($posts, 0, count($posts) - $addedPosts);
 
 	}
 
