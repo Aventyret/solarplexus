@@ -1,3 +1,5 @@
+import "./dynamic-inspector-controls.scss";
+
 const { __ } = wp.i18n;
 
 import { useSelect } from "@wordpress/data";
@@ -8,7 +10,9 @@ import {
   RadioControl,
   SelectControl,
   RangeControl,
-  // ToggleControl,
+  Card,
+  CardBody,
+  Button,
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 
@@ -143,6 +147,41 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
     });
   };
 
+  const selectSearchResult = (searchResult) => {
+    setAttributes({
+      handpickedPosts: [...attributes.handpickedPosts, {position: 1, post: searchResult}],
+    });
+  };
+
+  const existingPosts = attributes.handpickedPosts.map(existing => existing.post)
+
+  const removeHandpickedPost = (existingPostId) => {
+    setAttributes({
+      handpickedPosts: attributes.handpickedPosts.filter((existing) => {
+        return existing.post.id !== existingPostId;
+      }),
+    });
+  };
+
+  const positionOptions = [];
+  for(let i = 0; i < attributes.noOfPosts; i++) {
+    positionOptions.push({label: i + 1, value: i + 1});
+  }
+
+  const setPosition = (existingPostId, position) => {
+    const existingIndex = attributes.handpickedPosts.findIndex((existing) => existing.post.id === existingPostId);
+    setAttributes({
+      handpickedPosts: [
+        ...attributes.handpickedPosts.slice(0, existingIndex),
+        {
+          ...attributes.handpickedPosts[existingIndex],
+          position
+        },
+        ...attributes.handpickedPosts.slice(existingIndex + 1)
+      ]
+    });
+  }
+
   return (
     <InspectorControls>
       {availablePostTypes && availablePostTypes.length && (
@@ -240,7 +279,38 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
       ) : null}
       {config.allowHandpicked ? (
         <PanelBody className="splx-panel" title={__("Handpicked posts", "splx")}>
-          <SearchPostControl attributes={attributes} config={config} setIsDirty={setIsDirty} selectSearchResult={() => {}} existingPosts={[]}/>
+          <SearchPostControl attributes={attributes} config={config} setIsDirty={setIsDirty} selectSearchResult={selectSearchResult} existingPosts={existingPosts}/>
+          <div className="splx-handpickedPostsWrap">
+            <h4>{__("Selected posts", "splx")}</h4>
+            <div className="splx-handpickedPosts">
+              {attributes.handpickedPosts.map((handpicked) => {
+                return (
+                  <Card key={handpicked.post.id}>
+                    <CardBody>
+                      <h5 className="splx-handpickedPostTitle">
+                        {handpicked.post.title}
+                      </h5>
+                      <div className="splx-handpickedPostButtons">
+                        <Button
+                          isSecondary
+                          isSmall
+                          onClick={() => removeHandpickedPost(handpicked.post.id)}
+                        >
+                          {__("Remove", "splx")}
+                        </Button>
+                        <SelectControl
+                          value={handpicked.position}
+                          options={positionOptions}
+                          onChange={(position) => setPosition(handpicked.post.id, position)} />
+                      </div>
+
+                    </CardBody>
+                  </Card>
+                );
+              })}
+            </div>
+          </div>
+
         </PanelBody>
       ) : null}
       <CustomControls
