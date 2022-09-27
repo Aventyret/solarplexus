@@ -168,7 +168,7 @@ class Solarplexus_Helpers {
 
     $query = new WP_Query( $args );
 
-  	$posts = $query->posts;
+    $posts = $query->posts;
 
     if (array_key_exists('handpickedPosts', $block_attributes)) {
       $addedPosts = 0;
@@ -196,7 +196,7 @@ class Solarplexus_Helpers {
       // Remove as many posts from end as we have added to $posts
       $posts = array_slice($posts, 0, count($posts) - $addedPosts);
 
-  	}
+    }
 
     // Keep track of rendered posts to avoid rendering same post multiple times on a page
     self::keep_track_of_rendered_posts( $posts );
