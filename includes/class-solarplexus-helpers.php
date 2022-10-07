@@ -352,14 +352,14 @@ class Solarplexus_Helpers {
     return $template;
   }
 
-  public static function is_json_api() {
-    return strpos($_SERVER['REQUEST_URI'], '/wp-json') === 0;
+  public static function is_gutenberg_request() {
+    return defined('REST_REQUEST') && is_user_logged_in();
   }
 
   // Rendered post ids are stored in memory (self::$rendered_post_ids), but when the request is through the rest
   // api (e.g. in the Gutenberg editor) they are instead stored in a session variable
   public static function get_rendered_post_ids() {
-    if (self::is_json_api()) {
+    if (self::is_gutenberg_request()) {
       self::ensure_php_session();
 
       return self::get_rendered_post_ids_from_session();
@@ -384,7 +384,7 @@ class Solarplexus_Helpers {
   }
 
   public static function set_rendered_post_id($id) {
-    if (self::is_json_api()) {
+    if (self::is_gutenberg_request()) {
       self::set_rendered_post_ids_in_session($id);
       return;
     }
