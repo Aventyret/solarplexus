@@ -16,6 +16,10 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
 
   public $terms;
 
+  public $orderby;
+
+  public $orderby_field;
+
   public $order;
 
   public $authors;
@@ -28,6 +32,8 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
     $this->set_post_type();
     $this->set_taxonomy();
     $this->set_terms();
+    $this->set_orderby();
+    $this->set_orderby_field();
     $this->set_order();
     $this->set_authors();
     $this->set_has_pagination();
@@ -39,6 +45,8 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
     $r['postType'] = $this->post_type;
     $r['taxonomy'] = $this->taxonomy;
     $r['terms'] = $this->terms;
+    $r['orderby'] = $this->orderby;
+    $r['orderby_field'] = $this->orderby_field;
     $r['order'] = $this->order;
     $r['authors'] = $this->authors; 
     $r['hasPagination'] = $this->has_pagination;
@@ -61,6 +69,18 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
     $this->terms = self::build_attribute(
       'array',
       []
+    );
+  }
+  private function set_orderby() {
+    $this->orderby = self::build_attribute(
+      'string',
+      'date'
+    );
+  }
+  private function set_orderby_field() {
+    $this->orderby_field = self::build_attribute(
+      'string',
+      ''
     );
   }
   private function set_order() {
