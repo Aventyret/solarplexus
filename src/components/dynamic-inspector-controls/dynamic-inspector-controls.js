@@ -9,6 +9,7 @@ import {
   SelectControl,
   RangeControl,
   ToggleControl,
+  TextControl
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 
@@ -16,7 +17,7 @@ import CustomControls from "../custom-controls/custom-controls";
 
 import { isArray } from "lodash";
 
-import { ORDERS } from "../../consts";
+import { ORDERBYS, ORDERS } from "../../consts";
 
 const TERMS_DEFAULT_SELECT_VALUE = "";
 
@@ -99,6 +100,14 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
     setAttributes({
       terms: newSelectedTerms,
     });
+  };
+
+  const onOrderbySelectChange = (orderby) => {
+    setAttributes({ orderby });
+  };
+
+  const onOrderbyFieldChange = (value) => {
+    setAttributes({ orderbyField: value });
   };
 
   const onOrderSelectChange = (order) => {
@@ -204,7 +213,25 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
           })}
         </PanelBody>
       )}
-      <PanelBody>
+      <PanelBody className="splx-panel" title={__("Sort order", "splx")}>
+        <SelectControl
+          label={__("Order by", "splx")}
+          value={attributes.orderby}
+          onChange={(orderby) => onOrderbySelectChange(orderby)}
+          options={Object.keys(ORDERBYS).map((key) => {
+            return {
+              value: key,
+              label: ORDERBYS[key],
+            };
+          })}
+        />
+        {['meta_value', 'meta_value_num'].includes(attributes.orderby) ? (
+          <TextControl
+            label={__("Meta field name", "splx")}
+            value={attributes.orderby_field}
+            onChange={onOrderbyFieldChange}
+          />
+        ) : null}
         <SelectControl
           label={__("Order", "splx")}
           value={attributes.order}
