@@ -106,8 +106,8 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
     setAttributes({ orderby });
   };
 
-  const onOrderbyFieldChange = (value) => {
-    setAttributes({ orderbyField: value });
+  const onOrderbyMetaKeyChange = (value) => {
+    setAttributes({ orderbyMetaKey: value });
   };
 
   const onOrderSelectChange = (order) => {
@@ -228,8 +228,8 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
         {['meta_value', 'meta_value_num'].includes(attributes.orderby) ? (
           <TextControl
             label={__("Meta field name", "splx")}
-            value={attributes.orderby_field}
-            onChange={onOrderbyFieldChange}
+            value={attributes.orderby_meta_key}
+            onChange={onOrderbyMetaKeyChange}
           />
         ) : null}
         <SelectControl
