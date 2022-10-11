@@ -112,6 +112,13 @@ class Solarplexus_Helpers {
       $args['post_type'] = 'any';
     }
 
+    if (array_key_exists('orderby', $block_attributes)) {
+      $args['orderby'] = $block_attributes['orderby'];
+      if (in_array($args['orderby'], ['meta_value', 'meta_value_num'])) {
+        $args['meta_key'] = $block_attributes['orderby_meta_key'];
+      }
+    }
+
     if (array_key_exists('order', $block_attributes)) {
       $args['order'] = $block_attributes['order'];
     }
