@@ -175,8 +175,38 @@ class Solarplexus_Helpers {
 
     $query = new WP_Query( $args );
 
+    $posts = $query->posts;
+
+    if (array_key_exists('handpickedPosts', $block_attributes)) {
+      $addedPosts = 0;
+      foreach ($block_attributes['handpickedPosts'] as $handpicked) {
+        $postToAdd = get_post($handpicked['post']['id']);
+        if ($postToAdd) {
+          // Find out if $postToAdd already exists in $posts
+          $postToAddExistsAtIndex = false;
+          foreach($posts as $index => $post) {
+            if ($post->ID === $postToAdd->ID) {
+              $postToAddExistsAtIndex = $index;
+            }
+          }
+          if ($postToAddExistsAtIndex !== false) {
+            // If the post existed already we remove it from it's existing position
+            array_splice($posts, $postToAddExistsAtIndex, 1);
+          } else {
+            // If the post did not exist we count up $addedPosts, which means one more post will be removed with array_slice
+            $addedPosts++;
+          }
+          // Add the post at it's handpicked position
+          array_splice($posts, (int)$handpicked['position'] - 1, 0, [$postToAdd]);
+        }
+      }
+      // Remove as many posts from end as we have added to $posts
+      $posts = array_slice($posts, 0, count($posts) - $addedPosts);
+
+    }
+
     // Keep track of rendered posts to avoid rendering same post multiple times on a page
-    self::keep_track_of_rendered_posts( $query->posts );
+    self::keep_track_of_rendered_posts( $posts );
 
     // Is this block paginated?
     $pagination = false;
@@ -196,7 +226,7 @@ class Solarplexus_Helpers {
      * @param array $block_config     Block config
      * @param array $block_attributes Block attributes
      */
-    $posts = apply_filters( 'splx_posts', $query->posts, $block_config, $block_attributes, $pagination );
+    $posts = apply_filters( 'splx_posts', $posts, $block_config, $block_attributes, $pagination );
 
     return [
       'query' => $query->query,

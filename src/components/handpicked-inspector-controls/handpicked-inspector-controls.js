@@ -1,80 +1,21 @@
 import "./handpicked-inspector-controls.scss";
 
 const { __, sprintf } = wp.i18n;
-const apiFetch = wp.apiFetch;
 
-import { debounce, find, findIndex } from "lodash";
-
-import { useEffect, useState } from "@wordpress/element";
+import { findIndex } from "lodash";
 
 import {
   PanelBody,
-  TextControl,
   Card,
   CardBody,
   Button,
 } from "@wordpress/components";
-import { InspectorControls } from "@wordpress/block-editor";
 
+import { InspectorControls } from "@wordpress/block-editor";
+import SearchPostControl from "../common-controls/search-post-control";
 import CustomControls from "../custom-controls/custom-controls"
 
-
 const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsDirty }) => {
-
-  const [searchInput, setSearchInput] = useState("");
-  const [searchResults, setSearchResults] = useState([]);
-
-  useEffect(() => {
-    const postTypes = config.allowedPostTypes ? config.allowedPostTypes : [];
-    const searchUris = [];
-    if (!postTypes.length) {
-      // Default to search endpoint if no post types are specified
-      searchUris.push(`/wp/v2/search/?search=${searchInput}`);
-    }
-    postTypes.forEach((postType) => {
-      // Otherwise do one search for each post type
-      const endpoint = `${postType}${['post', 'page'].includes(postType) ? 's' : ''}`
-      searchUris.push(`/wp/v2/${endpoint}/?search=${searchInput}`);
-    });
-    const search = async () => {
-      const res = await new Promise((resolve, reject) => {
-        Promise.all(searchUris.map((searchUri) => {
-          return apiFetch( { path: searchUri })
-        }))
-          .then((results) => {
-            const allResults = results.reduce((all, r, i) => {
-              return [
-                ...all,
-                ...r.map(p => {
-                  // If post type endpoints are used we need to map the results, but not for search endpoint
-                  if (!postTypes.length) {
-                    return p
-                  }
-                  return {
-                    id: p.id,
-                    title: p.title.rendered,
-                    url: p.link,
-                    type: postTypes[i],
-                    subtype: postTypes[i]
-                  }
-                })
-              ]
-            }, [])
-            resolve(allResults.slice(0, 10))
-          })
-          .catch((error) => reject(error))
-      })
-
-      setSearchResults(res);
-    };
-    if (searchInput.length > 2) search();
-  }, [searchInput]);
-
-  const onSearchInputChange = debounce((value) => {
-    setSearchInput(value);
-    setIsDirty(true);
-  }, 250);
-
   const selectSearchResult = (searchResult) => {
     setAttributes({
       searchResults: [...attributes.searchResults, searchResult],
@@ -89,25 +30,13 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsD
     const items = [...attributes.searchResults];
 
     if (!isUp && itemIndex === items.length - 1) return;
-    // clearTimeout(animateTimeout);
 
-    // const newArr = items.map(item => {
-    //   return { ...item, animate: false };
-    // });
     const newArr = items;
     const newIndex = isUp ? itemIndex - 1 : itemIndex + 1;
     const firstItem = items[itemIndex];
     newArr[itemIndex] = items[newIndex];
-    // newArr[newIndex] = { ...firstItem, animate: true };
     newArr[newIndex] = firstItem;
-    // animateTimeout = setTimeout(() => {
-    //   debugLog("running animate timeout");
-    //   setItems(
-    //     newArr.map((item) => {
-    //       return { ...item, animate: false };
-    //     })
-    //   );
-    // }, 1000);
+
     setAttributes({
       searchResults: newArr,
     });
@@ -129,45 +58,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsD
   return (
     <InspectorControls>
       <PanelBody>
-        <h4>{__("Search", "splx")}</h4>
-        <TextControl onChange={(nextValue) => onSearchInputChange(nextValue)} />
-        <ul>
-          {searchResults.map((searchResult) => {
-            const alreadySelected = !!find(
-              attributes.searchResults,
-              (_searchResult) => {
-                return searchResult.id === _searchResult.id;
-              }
-            );
-
-            const maxReached =
-              attributes.searchResults.length >= attributes.noOfPosts;
-            return (
-              <li className="splx-searchResult" key={searchResult.id}>
-                <div>
-                  <em>{searchResult.title}</em>
-                  <span>{__(searchResult.subtype, "splx")}</span>
-                </div>
-
-                <Button
-                  isSecondary
-                  isSmall
-                  disabled={alreadySelected || maxReached}
-                  onClick={() => selectSearchResult(searchResult)}
-                >
-                  {alreadySelected
-                    ? __("Already selected", "splx")
-                    : maxReached
-                    ? sprintf(
-                        __("You can't select more than %d posts", "splx"),
-                        attributes.noOfPosts
-                      )
-                    : __("Select", "splx")}
-                </Button>
-              </li>
-            );
-          })}
-        </ul>
+        <SearchPostControl attributes={attributes} config={config} setIsDirty={setIsDirty} selectSearchResult={selectSearchResult} existingPosts={attributes.searchResults}/>
         {attributes.searchResults.length ? (
           <div className="splx-selectedSearchResultsWrap">
             <h4>{__("Selected posts", "splx")}</h4>

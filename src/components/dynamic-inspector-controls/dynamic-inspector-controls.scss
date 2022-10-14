@@ -1,13 +1,13 @@
-h5.splx-selectedSearchResultTitle {
+h5.splx-handpickedPostTitle {
   margin-top: 0;
 }
 
-.splx-selectedSearchResultButtons {
+.splx-handpickedPostButtons {
   display: flex;
   justify-content: space-between;
 }
 
-.splx-selectedSearchResults .components-card {
+.splx-handpickedPosts .components-card {
   margin-bottom: 0.5em;
 
   .components-card__body {
@@ -15,6 +15,6 @@ h5.splx-selectedSearchResultTitle {
   }
 }
 
-.splx-selectedSearchResultsWrap {
+.splx-handpickedPostsWrap {
   margin-top: 3em;
 }
