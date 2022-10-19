@@ -65,7 +65,10 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
       const { getEntityRecords } = select("core");
 
       const taxTree = availableTaxonomies.map((tax) => {
-        const terms = getEntityRecords("taxonomy", tax.slug, { per_page: -1 });
+        const terms = getEntityRecords("taxonomy", tax.slug, { per_page: -1 })?.map(term => ({
+          ...term,
+          name: term.name.replace(/&amp;/g, '&')
+        })) || null;
 
         let selectedTermIds = attributes.taxonomyTerms.find(taxonomyTerm => taxonomyTerm.slug === tax.slug)?.terms || [];
 
