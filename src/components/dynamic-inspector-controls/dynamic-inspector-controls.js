@@ -254,6 +254,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
                 value={ taxonomyWithTerms.value }
                 suggestions={ taxonomyWithTerms.suggestions }
                 onChange={ ( taxonomyTermNames ) => onTermsChange(taxonomyWithTerms.slug, taxonomyTermNames) }
+                __experimentalShowHowTo={ false }
               />
             );
           })}
