@@ -13,7 +13,8 @@ import {
   Card,
   CardBody,
   Button,
-  TextControl
+  TextControl,
+  FormTokenField
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 
@@ -64,16 +65,31 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
       const { getEntityRecords } = select("core");
 
       const taxTree = availableTaxonomies.map((tax) => {
+        const terms = getEntityRecords("taxonomy", tax.slug, { per_page: -1 });
+
+        let selectedTermIds = attributes.taxonomyTerms.find(taxonomyTerm => taxonomyTerm.slug === tax.slug)?.terms || [];
+
+        // Handle legacy attributes from before multiple taxonomy support
+        if (attributes.taxonomy && terms) {
+          selectedTermIds = attributes.terms.filter(selectedTermId => terms.find(term => term.id === selectedTermId));
+        }
+        const value = terms?.length ? selectedTermIds.map(termId => {
+          const term = terms.find(t => t.id === termId);
+          return term.name;
+        }) : [];
+
         return {
           slug: tax.slug,
           name: tax.name,
-          terms: getEntityRecords("taxonomy", tax.slug, { per_page: -1 }),
+          terms,
+          suggestions: terms?.map(term => term.name) || [],
+          value
         };
       });
 
       return taxTree;
     },
-    [availableTaxonomies]
+    [availableTaxonomies, attributes]
   );
 
   // Get all available authors
@@ -105,6 +121,27 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
 
     setAttributes({
       terms: newSelectedTerms,
+    });
+  };
+
+  const onTermsChange = (taxonomySlug, termNames) => {
+    const taxonomyWithTerms = availableTaxsAndTerms.find(taxonomyWithTerm => taxonomyWithTerm.slug === taxonomySlug);
+    const termIds = taxonomyWithTerms.terms.filter(term => termNames.includes(term.name)).map(term => term.id);
+
+    let taxonomyTerms = attributes.taxonomyTerms.filter(taxonomyTerm => taxonomyTerm.slug !== taxonomyWithTerms.slug);
+    taxonomyTerms = [
+      ...taxonomyTerms,
+      {
+        slug: taxonomySlug,
+        terms: termIds
+      }
+    ];
+
+    // Set taxonomyTerms attribute and unset legacy taxonomy and terms attributes
+    setAttributes({
+      taxonomyTerms,
+      taxonomy: '',
+      terms: []
     });
   };
 
@@ -209,30 +246,17 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
       )}
       {availableTaxsAndTerms && availableTaxsAndTerms.length ? (
         <PanelBody className="splx-panel" title={__("Taxonomies", "splx")}>
-          <RadioControl
-            label={__("Show posts from:", "splx")}
-            selected={attributes.taxonomy}
-            options={[
-              { label: __("All", "splx"), value: TERMS_DEFAULT_SELECT_VALUE },
-              ...availableTaxsAndTerms.map((taxWTerms) => {
-                return { label: taxWTerms.name, value: taxWTerms.slug };
-              }),
-            ]}
-            onChange={(value) => onTaxonomyRadioChange(value)}
-          />
-          {selectedTaxonomy &&
-            selectedTaxonomy.terms &&
-            selectedTaxonomy.terms.map((term) => {
-              // TODO force user to select at least 1 term somehow?
-              return (
-                <CheckboxControl
-                  key={term.id}
-                  checked={attributes.terms.includes(term.id)}
-                  label={term.name}
-                  onChange={() => onTermCheckboxChange(term.id)}
-                />
-              );
-            })}
+          {availableTaxsAndTerms.map(taxonomyWithTerms => {
+            return (
+              <FormTokenField
+                key={taxonomyWithTerms.slug}
+                label={ taxonomyWithTerms.name }
+                value={ taxonomyWithTerms.value }
+                suggestions={ taxonomyWithTerms.suggestions }
+                onChange={ ( taxonomyTermNames ) => onTermsChange(taxonomyWithTerms.slug, taxonomyTermNames) }
+              />
+            );
+          })}
         </PanelBody>
       ) : null}
       {availableAuthors && availableAuthors.length && (

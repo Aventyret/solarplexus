@@ -12,9 +12,11 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
 
   public $post_type;
 
-  public $taxonomy;
+  public $taxonomy; // NOTE: Legacy from before allowing multiple taxonomies
 
-  public $terms;
+  public $terms; // NOTE: Legacy from before allowing multiple taxonomies
+
+  public $taxonomy_terms;
 
   public $orderby;
 
@@ -32,8 +34,9 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
     parent::__construct($block_config);
 
     $this->set_post_type();
-    $this->set_taxonomy();
-    $this->set_terms();
+    $this->set_taxonomy(); // NOTE: Legacy from before allowing multiple taxonomies
+    $this->set_terms(); // NOTE: Legacy from before allowing multiple taxonomies
+    $this->set_taxonomy_terms();
     $this->set_orderby();
     $this->set_orderby_meta_key();
     $this->set_order();
@@ -46,8 +49,9 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
     $common = parent::to_array();
     $r = [];
     $r['postType'] = $this->post_type;
-    $r['taxonomy'] = $this->taxonomy;
-    $r['terms'] = $this->terms;
+    $r['taxonomy'] = $this->taxonomy; // NOTE: Legacy from before allowing multiple taxonomies
+    $r['terms'] = $this->terms; // NOTE: Legacy from before allowing multiple taxonomies
+    $r['taxonomyTerms'] = $this->taxonomy_terms;
     $r['orderby'] = $this->orderby;
     $r['orderbyMetaKey'] = $this->orderby_meta_key;
     $r['order'] = $this->order;
@@ -63,13 +67,22 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends Solarplexus_Block_Attrs
       $this->get_first_of_config_arr_or_single('allowedPostTypes', 'post')
     );
   }
+  // NOTE: Legacy from before allowing multiple taxonomies
   private function set_taxonomy() {
     $this->taxonomy = self::build_attribute(
       'string',
       ''
     );
   }
+  // NOTE: Legacy from before allowing multiple taxonomies
   private function set_terms() {
+    $this->taxonomy_terms = self::build_attribute(
+      'array',
+      []
+    );
+  }
+  // Format: [[ 'slug' => 'taxonomy slug', 'terms' => [1, 2] ]]
+  private function set_taxonomy_terms() {
     $this->terms = self::build_attribute(
       'array',
       []
