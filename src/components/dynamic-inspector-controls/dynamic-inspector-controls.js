@@ -263,6 +263,11 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
           />
         </PanelBody>
       ) : null}
+      {config.allowOffset ? (
+        <PanelBody title={__("Offset")}>
+
+        </PanelBody>
+      ) : null}
       <CustomControls
         attributes={attributes}
         setAttributes={setAttributes}
