@@ -3,11 +3,9 @@ import CustomTextControl from "./custom-text-control"
 import CustomTextareaControl from "./custom-textarea-control"
 
 const CustomControls = ({ attributes, setAttributes, config }) => {
-  if (
-    !config.customControls ||
-    (config.customControls && !config.customControls.length)
-  )
+  if (!config.customControls || !config.customControls.length) {
     return null;
+  }
 
   return config.customControls.map((control) => {
     if (control.type === "select") {

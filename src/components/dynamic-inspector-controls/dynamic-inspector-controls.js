@@ -210,7 +210,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
 
   return (
     <InspectorControls>
-      {availablePostTypes && availablePostTypes.length && (
+      {availablePostTypes?.length ? (
         <PanelBody className="splx-panel" title={__("Post types", "splx")}>
           { availablePostTypes.map((postType) => {
             return (
@@ -223,8 +223,8 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
             );
           })}
         </PanelBody>
-      )}
-      {availableTaxonomiesWithTerms && availableTaxonomiesWithTerms.length ? (
+      ) : null}
+      {availableTaxonomiesWithTerms?.length ? (
         <PanelBody className="splx-panel" title={__("Taxonomies", "splx")}>
           {availableTaxonomiesWithTerms.map(taxonomyWithTerms => {
             return (
@@ -241,7 +241,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
           })}
         </PanelBody>
       ) : null}
-      {availableAuthors && availableAuthors.length && (
+      {availableAuthors?.length ? (
         <PanelBody className="splx-panel" title={__("Authors", "splx")}>
           <CheckboxControl
             checked={!attributes.authors.length}
@@ -259,7 +259,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
             );
           })}
         </PanelBody>
-      )}
+      ) : null}
       <PanelBody className="splx-panel" title={__("Sort order", "splx")}>
         <SelectControl
           label={__("Order by", "splx")}
