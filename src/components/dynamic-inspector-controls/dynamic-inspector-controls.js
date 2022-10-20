@@ -65,7 +65,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
       const { getEntityRecords } = select("core");
 
       const taxTree = availableTaxonomies.map((tax) => {
-        const terms = getEntityRecords("taxonomy", tax.slug, { per_page: -1 })?.map(term => ({
+        const terms = getEntityRecords("taxonomy", tax.slug, { per_page: -1, hide_empty: true })?.map(term => ({
           ...term,
           name: term.name.replace(/&amp;/g, '&')
         })) || null;
