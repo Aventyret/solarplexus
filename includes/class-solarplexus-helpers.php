@@ -134,7 +134,7 @@ class Solarplexus_Helpers {
     }
 
     /**
-    * @since    1.8.0
+    * @since    1.9.0
     */
     if (array_key_exists('taxonomyTerms', $block_attributes) && !empty($block_attributes['taxonomyTerms'])) {
       $args['tax_query'] = ['relation' => 'AND'];
