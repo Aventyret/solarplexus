@@ -123,6 +123,7 @@ class Solarplexus_Helpers {
       $args['order'] = $block_attributes['order'];
     }
 
+    // NOTE: Legacy tax_query from before multiple taxonomies
     if (array_key_exists('taxonomy', $block_attributes) && array_key_exists('terms', $block_attributes) && !empty($block_attributes['terms'])) {
       $args['tax_query'] = [];
       $args['tax_query'][] = [
@@ -130,6 +131,22 @@ class Solarplexus_Helpers {
         'field' => 'term_id',
         'terms' => $block_attributes['terms']
       ];
+    }
+
+    /**
+    * @since    1.9.0
+    */
+    if (array_key_exists('taxonomyTerms', $block_attributes) && !empty($block_attributes['taxonomyTerms'])) {
+      $args['tax_query'] = ['relation' => 'AND'];
+      foreach($block_attributes['taxonomyTerms'] as $taxonomy) {
+        if (!empty($taxonomy['terms'])) {
+          $args['tax_query'][] = [
+            'taxonomy' => $taxonomy['slug'],
+            'field' => 'term_id',
+            'terms' => $taxonomy['terms']
+          ];
+        }
+      }
     }
 
     /**

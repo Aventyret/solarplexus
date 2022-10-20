@@ -13,7 +13,8 @@ import {
   Card,
   CardBody,
   Button,
-  TextControl
+  TextControl,
+  FormTokenField
 } from "@wordpress/components";
 import { InspectorControls } from "@wordpress/block-editor";
 
@@ -57,23 +58,41 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
   }, []);
 
   // Get all the terms for specified taxonomies
-  const availableTaxsAndTerms = useSelect(
+  const availableTaxonomiesWithTerms = useSelect(
     (select) => {
       if (!availableTaxonomies) return null;
 
       const { getEntityRecords } = select("core");
 
       const taxTree = availableTaxonomies.map((tax) => {
+        const terms = getEntityRecords("taxonomy", tax.slug, { per_page: -1, hide_empty: true })?.map(term => ({
+          ...term,
+          name: term.name.replace(/&amp;/g, '&')
+        })) || null;
+
+        let selectedTermIds = attributes.taxonomyTerms.find(taxonomyTerm => taxonomyTerm.slug === tax.slug)?.terms || [];
+
+        // Handle legacy attributes from before multiple taxonomy support
+        if (attributes.taxonomy && terms) {
+          selectedTermIds = attributes.terms.filter(selectedTermId => terms.find(term => term.id === selectedTermId));
+        }
+        const value = terms?.length ? selectedTermIds.map(termId => {
+          const term = terms.find(t => t.id === termId);
+          return term.name;
+        }) : [];
+
         return {
           slug: tax.slug,
           name: tax.name,
-          terms: getEntityRecords("taxonomy", tax.slug, { per_page: -1 }),
+          terms,
+          suggestions: terms?.map(term => term.name) || [],
+          value
         };
       });
 
       return taxTree;
     },
-    [availableTaxonomies]
+    [availableTaxonomies, attributes]
   );
 
   // Get all available authors
@@ -85,26 +104,24 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
     return authors;
   }, []);
 
-  const selectedTaxonomy = availableTaxsAndTerms
-    ? availableTaxsAndTerms.find((taxWTerms) => {
-        return taxWTerms.slug === attributes.taxonomy;
-      })
-    : null;
+  const onTermsChange = (taxonomySlug, termNames) => {
+    const taxonomyWithTerms = availableTaxonomiesWithTerms.find(taxonomyWithTerm => taxonomyWithTerm.slug === taxonomySlug);
+    const termIds = taxonomyWithTerms.terms.filter(term => termNames.includes(term.name)).map(term => term.id);
 
-  const onTaxonomyRadioChange = (taxonomySlug) => {
-    // Clear the terms of previous selection when taxonomy changes
-    setAttributes({ terms: [], taxonomy: taxonomySlug });
-  };
+    let taxonomyTerms = attributes.taxonomyTerms.filter(taxonomyTerm => taxonomyTerm.slug !== taxonomyWithTerms.slug);
+    taxonomyTerms = [
+      ...taxonomyTerms,
+      {
+        slug: taxonomySlug,
+        terms: termIds
+      }
+    ];
 
-  const onTermCheckboxChange = (termId) => {
-    const newSelectedTerms = attributes.terms.includes(termId)
-      ? attributes.terms.filter((_termId) => {
-          return _termId !== termId;
-        })
-      : [...attributes.terms, termId];
-
+    // Set taxonomyTerms attribute and unset legacy taxonomy and terms attributes
     setAttributes({
-      terms: newSelectedTerms,
+      taxonomyTerms,
+      taxonomy: '',
+      terms: []
     });
   };
 
@@ -193,7 +210,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
 
   return (
     <InspectorControls>
-      {availablePostTypes && availablePostTypes.length && (
+      {availablePostTypes?.length ? (
         <PanelBody className="splx-panel" title={__("Post types", "splx")}>
           { availablePostTypes.map((postType) => {
             return (
@@ -206,36 +223,25 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
             );
           })}
         </PanelBody>
-      )}
-      {availableTaxsAndTerms && availableTaxsAndTerms.length ? (
+      ) : null}
+      {availableTaxonomiesWithTerms?.length ? (
         <PanelBody className="splx-panel" title={__("Taxonomies", "splx")}>
-          <RadioControl
-            label={__("Show posts from:", "splx")}
-            selected={attributes.taxonomy}
-            options={[
-              { label: __("All", "splx"), value: TERMS_DEFAULT_SELECT_VALUE },
-              ...availableTaxsAndTerms.map((taxWTerms) => {
-                return { label: taxWTerms.name, value: taxWTerms.slug };
-              }),
-            ]}
-            onChange={(value) => onTaxonomyRadioChange(value)}
-          />
-          {selectedTaxonomy &&
-            selectedTaxonomy.terms &&
-            selectedTaxonomy.terms.map((term) => {
-              // TODO force user to select at least 1 term somehow?
-              return (
-                <CheckboxControl
-                  key={term.id}
-                  checked={attributes.terms.includes(term.id)}
-                  label={term.name}
-                  onChange={() => onTermCheckboxChange(term.id)}
-                />
-              );
-            })}
+          {availableTaxonomiesWithTerms.map(taxonomyWithTerms => {
+            return (
+              <FormTokenField
+                key={taxonomyWithTerms.slug}
+                label={ taxonomyWithTerms.name }
+                value={ taxonomyWithTerms.value }
+                suggestions={ taxonomyWithTerms.suggestions }
+                onChange={ ( taxonomyTermNames ) => onTermsChange(taxonomyWithTerms.slug, taxonomyTermNames) }
+                __experimentalShowHowTo={ false }
+                __experimentalExpandOnFocus={ true }
+              />
+            );
+          })}
         </PanelBody>
       ) : null}
-      {availableAuthors && availableAuthors.length && (
+      {availableAuthors?.length ? (
         <PanelBody className="splx-panel" title={__("Authors", "splx")}>
           <CheckboxControl
             checked={!attributes.authors.length}
@@ -253,7 +259,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
             );
           })}
         </PanelBody>
-      )}
+      ) : null}
       <PanelBody className="splx-panel" title={__("Sort order", "splx")}>
         <SelectControl
           label={__("Order by", "splx")}
