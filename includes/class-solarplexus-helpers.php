@@ -115,7 +115,7 @@ class Solarplexus_Helpers {
     if (array_key_exists('orderby', $block_attributes)) {
       $args['orderby'] = $block_attributes['orderby'];
       if (in_array($args['orderby'], ['meta_value', 'meta_value_num'])) {
-        $args['meta_key'] = $block_attributes['orderby_meta_key'];
+        $args['meta_key'] = $block_attributes['orderbyMetaKey'];
       }
     }
 
