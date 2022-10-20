@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Solarplexus\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/solarplexus\n"
-"POT-Creation-Date: 2022-10-11T07:12:06+00:00\n"
-"PO-Revision-Date: 2022-10-11 09:16+0200\n"
+"POT-Creation-Date: 2022-06-07T13:34:04+00:00\n"
+"PO-Revision-Date: 2022-06-07 15:37+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -42,87 +42,35 @@ msgstr ""
 msgid "Äventyret"
 msgstr ""
 
-#: build/index.js:1 src/consts.js:11
-msgid "Image as background"
-msgstr "Bild som bakgrund"
-
-#: build/index.js:1 src/consts.js:12
-msgid "Image on top"
-msgstr "Bild överst"
-
-#: build/index.js:1 src/consts.js:13
-msgid "Image to the left"
-msgstr "Bild till vänster"
-
-#: build/index.js:1 src/consts.js:17
-msgid "Date"
-msgstr "Datum"
-
-#: build/index.js:1 src/consts.js:18
-msgid "Title"
-msgstr "Rubrik"
-
-#: build/index.js:1 src/consts.js:19
-msgid "Menu order"
-msgstr "Ordning"
-
-#: build/index.js:1 src/consts.js:20
-msgid "Post meta"
-msgstr "Meta-fält, sortera alfabetiskt"
-
-#: build/index.js:1 src/consts.js:21
-msgid "Post meta, numeric"
-msgstr "Meta-fält, sortera numeriskt"
-
-#: build/index.js:1 src/consts.js:25
-msgid "Ascending"
-msgstr "Stigande"
-
-#: build/index.js:1 src/consts.js:26
-msgid "Descending"
-msgstr "Fallande"
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:156
+#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:147
 msgid "Post types"
 msgstr "Innehållstyper"
 
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:170
+#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:161
 msgid "Taxonomies"
 msgstr "Taxonomier"
 
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:172
+#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:163
 msgid "Show posts from:"
 msgstr "Visa inlägg från:"
 
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:175
+#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:166
 msgid "All"
 msgstr "Alla"
 
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:198
+#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:189
 msgid "Authors"
 msgstr "Författare"
 
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:201
+#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:192
 msgid "All authors"
 msgstr "Alla författare"
 
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:216
-msgid "Sort order"
-msgstr "Sorteringsordning"
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:218
-msgid "Order by"
-msgstr "Sortera på"
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:230
-msgid "Meta field name"
-msgstr "Namn på meta-fält"
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:236
+#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:209
 msgid "Order"
 msgstr "Ordning"
 
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:251
+#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:223
 msgid "Has pagination"
 msgstr "Har paginering"
 
@@ -157,6 +105,26 @@ msgstr "Flytta ner"
 #: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:202
 msgid "Remove"
 msgstr "Ta bort"
+
+#: src/consts.js:11
+msgid "Image as background"
+msgstr "Bild som bakgrund"
+
+#: src/consts.js:12
+msgid "Image on top"
+msgstr "Bild överst"
+
+#: src/consts.js:13
+msgid "Image to the left"
+msgstr "Bild till vänster"
+
+#: src/consts.js:17
+msgid "Ascending"
+msgstr "Stigande"
+
+#: src/consts.js:18
+msgid "Descending"
+msgstr "Fallande"
 
 #~ msgid "Horizontal"
 #~ msgstr "Horisontell"
