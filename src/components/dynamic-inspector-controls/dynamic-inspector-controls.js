@@ -58,7 +58,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
   }, []);
 
   // Get all the terms for specified taxonomies
-  const availableTaxsAndTerms = useSelect(
+  const availableTaxonomiesWithTerms = useSelect(
     (select) => {
       if (!availableTaxonomies) return null;
 
@@ -104,31 +104,8 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
     return authors;
   }, []);
 
-  const selectedTaxonomy = availableTaxsAndTerms
-    ? availableTaxsAndTerms.find((taxWTerms) => {
-        return taxWTerms.slug === attributes.taxonomy;
-      })
-    : null;
-
-  const onTaxonomyRadioChange = (taxonomySlug) => {
-    // Clear the terms of previous selection when taxonomy changes
-    setAttributes({ terms: [], taxonomy: taxonomySlug });
-  };
-
-  const onTermCheckboxChange = (termId) => {
-    const newSelectedTerms = attributes.terms.includes(termId)
-      ? attributes.terms.filter((_termId) => {
-          return _termId !== termId;
-        })
-      : [...attributes.terms, termId];
-
-    setAttributes({
-      terms: newSelectedTerms,
-    });
-  };
-
   const onTermsChange = (taxonomySlug, termNames) => {
-    const taxonomyWithTerms = availableTaxsAndTerms.find(taxonomyWithTerm => taxonomyWithTerm.slug === taxonomySlug);
+    const taxonomyWithTerms = availableTaxonomiesWithTerms.find(taxonomyWithTerm => taxonomyWithTerm.slug === taxonomySlug);
     const termIds = taxonomyWithTerms.terms.filter(term => termNames.includes(term.name)).map(term => term.id);
 
     let taxonomyTerms = attributes.taxonomyTerms.filter(taxonomyTerm => taxonomyTerm.slug !== taxonomyWithTerms.slug);
@@ -247,9 +224,9 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
           })}
         </PanelBody>
       )}
-      {availableTaxsAndTerms && availableTaxsAndTerms.length ? (
+      {availableTaxonomiesWithTerms && availableTaxonomiesWithTerms.length ? (
         <PanelBody className="splx-panel" title={__("Taxonomies", "splx")}>
-          {availableTaxsAndTerms.map(taxonomyWithTerms => {
+          {availableTaxonomiesWithTerms.map(taxonomyWithTerms => {
             return (
               <FormTokenField
                 key={taxonomyWithTerms.slug}
