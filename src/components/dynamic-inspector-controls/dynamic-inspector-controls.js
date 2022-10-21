@@ -153,7 +153,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
     return '';
   }) || [] : [];
 
-  const onAuthorsCheckboxChange = (authorNames) => {
+  const onAuthorsChange = (authorNames) => {
     const authorIds = availableAuthors.filter(author => authorNames.includes(author.name)).map(author => author.id);
     setAttributes({ authors: authorIds });
   };
@@ -239,7 +239,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
               label={ __("Authors", "splx") }
               value={ authorsValue }
               suggestions={ authorsSuggestions }
-              onChange={ onAuthorChange }
+              onChange={ onAuthorsChange }
               __experimentalShowHowTo={ false }
               __experimentalExpandOnFocus={ true }
             />
