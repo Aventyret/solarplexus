@@ -8,7 +8,7 @@
 .splx-icon {
   height: 24px;
 }
-.splx-panel {
+.splx-panel:not(.splx-panel--no-scroll) {
   max-height: 300px;
   overflow: auto;
 }

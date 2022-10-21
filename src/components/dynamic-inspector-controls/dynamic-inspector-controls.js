@@ -220,7 +220,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
         </PanelBody>
       ) : null}
       {availableTaxonomiesWithTerms?.length || availableAuthors?.length ? (
-        <PanelBody className="splx-panel" title={__("Filter", "splx")}>
+        <PanelBody className="splx-panel splx-panel--no-scroll" title={__("Filter", "splx")}>
           {availableTaxonomiesWithTerms.map(taxonomyWithTerms => {
             return (
               <FormTokenField
