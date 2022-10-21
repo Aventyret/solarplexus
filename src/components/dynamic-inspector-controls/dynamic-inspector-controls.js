@@ -96,9 +96,9 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
 
   // Get all available authors
   const availableAuthors = useSelect((select) => {
-    const { getAuthors } = select("core");
+    const { getUsers } = select("core");
 
-    const authors = getAuthors();
+    const authors = getUsers({ who: "authors", per_page: -1 });
 
     return authors;
   }, []);
