@@ -148,7 +148,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
   const authorsValue = availableAuthors ? attributes.authors?.map(authorId => {
     const author = availableAuthors?.find(author => author.id === authorId);
     if (author) {
-      return authors.name;
+      return author.name;
     }
     return '';
   }) || [] : [];
