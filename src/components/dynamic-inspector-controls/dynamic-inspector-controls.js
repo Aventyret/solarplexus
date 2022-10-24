@@ -7,7 +7,6 @@ import { useSelect } from "@wordpress/data";
 import {
   PanelBody,
   CheckboxControl,
-  RadioControl,
   SelectControl,
   RangeControl,
   Card,
@@ -78,7 +77,10 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
         }
         const value = terms?.length ? selectedTermIds.map(termId => {
           const term = terms.find(t => t.id === termId);
-          return term.name;
+          if (term) {
+            return term.name;
+          }
+          return '';
         }) : [];
 
         return {
@@ -97,9 +99,9 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
 
   // Get all available authors
   const availableAuthors = useSelect((select) => {
-    const { getAuthors } = select("core");
+    const { getUsers } = select("core");
 
-    const authors = getAuthors();
+    const authors = getUsers({ who: "authors", per_page: -1 });
 
     return authors;
   }, []);
@@ -145,22 +147,18 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
     setAttributes({ noOfPosts: value });
   };
 
-  const onAuthorsCheckboxChange = (value) => {
-    if (!value) {
-      setAttributes({ authors: [] });
-      return;
+  const authorsSuggestions = availableAuthors?.map(author => author.name)
+  const authorsValue = availableAuthors ? attributes.authors?.map(authorId => {
+    const author = availableAuthors?.find(author => author.id === authorId);
+    if (author) {
+      return author.name;
     }
+    return '';
+  }) || [] : [];
 
-    const intValue = parseInt(value, 10);
-    if (attributes.authors.includes(intValue)) {
-      setAttributes({
-        authors: attributes.authors.filter((authorId) => {
-          return authorId !== intValue;
-        }),
-      });
-    } else {
-      setAttributes({ authors: [...attributes.authors, intValue] });
-    }
+  const onAuthorsChange = (authorNames) => {
+    const authorIds = availableAuthors.filter(author => authorNames.includes(author.name)).map(author => author.id);
+    setAttributes({ authors: authorIds });
   };
 
   const onPostTypeCheckboxChange = (postTypeSlug) => {
@@ -224,8 +222,8 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
           })}
         </PanelBody>
       ) : null}
-      {availableTaxonomiesWithTerms?.length ? (
-        <PanelBody className="splx-panel" title={__("Taxonomies", "splx")}>
+      {availableTaxonomiesWithTerms?.length || availableAuthors?.length ? (
+        <PanelBody className="splx-panel splx-panel--no-scroll" title={__("Filter", "splx")}>
           {availableTaxonomiesWithTerms.map(taxonomyWithTerms => {
             return (
               <FormTokenField
@@ -239,25 +237,16 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
               />
             );
           })}
-        </PanelBody>
-      ) : null}
-      {availableAuthors?.length ? (
-        <PanelBody className="splx-panel" title={__("Authors", "splx")}>
-          <CheckboxControl
-            checked={!attributes.authors.length}
-            label={__("All authors", "splx")}
-            onChange={() => onAuthorsCheckboxChange(null)}
-          />
-          {availableAuthors.map(({ id, name }) => {
-            return (
-              <CheckboxControl
-                key={id}
-                checked={attributes.authors.includes(id)}
-                label={name}
-                onChange={() => onAuthorsCheckboxChange(id)}
-              />
-            );
-          })}
+          {availableAuthors?.length ? (
+            <FormTokenField
+              label={ __("Authors", "splx") }
+              value={ authorsValue }
+              suggestions={ authorsSuggestions }
+              onChange={ onAuthorsChange }
+              __experimentalShowHowTo={ false }
+              __experimentalExpandOnFocus={ true }
+            />
+          ) : null }
         </PanelBody>
       ) : null}
       <PanelBody className="splx-panel" title={__("Sort order", "splx")}>
