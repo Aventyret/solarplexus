@@ -1,4 +1,6 @@
 node_modules
+vendor
 build
 dist
+.phplint-cache
 .DS_Store
