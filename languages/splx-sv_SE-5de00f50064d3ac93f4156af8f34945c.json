@@ -1,1 +1,22 @@
-{"translation-revision-date":"2022-05-13 16:41+0200","generator":"WP-CLI\/2.7.0-alpha-dc3beef","source":"src\/consts.js","domain":"messages","locale_data":{"messages":{"":{"domain":"messages","lang":"sv_SE","plural-forms":"nplurals=2; plural=(n != 1);"},"Horizontal":["Horisontell"],"Vertical":["Vertikal"],"Image as background":["Bild som bakgrund"],"Image on top":["Bild \u00f6verst"],"Image to the left":["Bild till v\u00e4nster"],"Ascending":["Stigande"],"Descending":["Fallande"]}}}
+{
+	"translation-revision-date": "2022-05-13 16:41+0200",
+	"generator": "WP-CLI/2.7.0-alpha-dc3beef",
+	"source": "src/consts.js",
+	"domain": "messages",
+	"locale_data": {
+		"messages": {
+			"": {
+				"domain": "messages",
+				"lang": "sv_SE",
+				"plural-forms": "nplurals=2; plural=(n != 1);"
+			},
+			"Horizontal": [ "Horisontell" ],
+			"Vertical": [ "Vertikal" ],
+			"Image as background": [ "Bild som bakgrund" ],
+			"Image on top": [ "Bild \u00f6verst" ],
+			"Image to the left": [ "Bild till v\u00e4nster" ],
+			"Ascending": [ "Stigande" ],
+			"Descending": [ "Fallande" ]
+		}
+	}
+}

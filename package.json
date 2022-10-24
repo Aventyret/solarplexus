@@ -18,10 +18,11 @@
 	},
 	"scripts": {
 		"build": "wp-scripts build",
-		"format:js": "wp-scripts format-js",
+		"format:js": "wp-scripts format",
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"start": "wp-scripts start",
+		"test": "yarn test",
 		"docs:dev": "vitepress dev docs",
 		"docs:build": "vitepress build docs",
 		"docs:serve": "vitepress serve docs"
