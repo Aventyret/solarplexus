@@ -20,8 +20,8 @@
   },
   "scripts": {
     "build": "wp-scripts build",
-    "format:check": "wp-scripts format --debug-check && prettier admin/*.php includes/**/*.php --debug-check",
-    "format": "wp-scripts format && prettier admin/*.php includes/**/*.php --write",
+    "format:check": "prettier ./  --check",
+    "format": "prettier ./ --write",
     "lint:js": "wp-scripts lint-js",
     "lint:php": "./vendor/bin/phplint",
     "lint": "yarn lint:js && yarn lint:php",
