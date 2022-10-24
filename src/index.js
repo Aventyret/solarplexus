@@ -1,10 +1,9 @@
 import './shared.scss';
 
-import { useState, useEffect } from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
 
 import ServerSideRender from '@wordpress/server-side-render';
 
-import { __ } from '@wordpress/i18n';
 import { registerBlockType } from '@wordpress/blocks';
 
 import DynamicInspectorControls from './components/dynamic-inspector-controls/dynamic-inspector-controls';
@@ -25,16 +24,12 @@ const getCustomSvgJsx = ( icon ) => {
 	};
 };
 
-solarplexusConfig.forEach( ( config ) => {
+window.solarplexusConfig.forEach( ( config ) => {
 	const blockId = `splx/${ config.id }`;
-	const attributes = solarplexusAttrDefs[ config.id ];
+	const attributes = window.solarplexusAttrDefs[ config.id ];
 	if ( ! attributes ) {
-		console.error(
-			`Solarplexus: No attributes found for ${ attributes }, skipping`
-		);
 		return;
 	}
-	console.log( `Solarplexus: Attributes for ${ config.id }`, attributes );
 
 	const icon =
 		config.icon && config.icon.indexOf( '<svg' ) === 0
@@ -45,13 +40,12 @@ solarplexusConfig.forEach( ( config ) => {
 
 	registerBlockType( blockId, {
 		title: config.title,
-		icon: icon,
+		icon,
 		category: 'layout',
 		example: {},
 		attributes,
 		edit( props ) {
-			const [ isDirty, setIsDirty ] = useState( false );
-
+			// eslint-disable-next-line react-hooks/rules-of-hooks
 			useEffect( () => {
 				if ( ! props.attributes.blockUid ) {
 					props.setAttributes( { blockUid: props.clientId } );
@@ -64,13 +58,12 @@ solarplexusConfig.forEach( ( config ) => {
 						<DynamicInspectorControls
 							{ ...props }
 							config={ config }
-							setIsDirty={ setIsDirty }
 						/>
-					) : config.type === 'handpicked' ? (
+					) : null }
+					{ config.type === 'handpicked' ? (
 						<HandpickedInspectorControls
 							{ ...props }
 							config={ config }
-							setIsDirty={ setIsDirty }
 						/>
 					) : null }
 

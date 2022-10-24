@@ -25,14 +25,7 @@ import { isArray } from 'lodash';
 
 import { ORDERBYS, ORDERS } from '../../consts';
 
-const TERMS_DEFAULT_SELECT_VALUE = '';
-
-const DynamicInspectorControls = ( {
-	attributes,
-	setAttributes,
-	config,
-	setIsDirty,
-} ) => {
+const DynamicInspectorControls = ( { attributes, setAttributes, config } ) => {
 	// Get all the registered post types
 	const availablePostTypes = useSelect( ( select ) => {
 		const { getPostTypes } = select( 'core' );
@@ -176,7 +169,7 @@ const DynamicInspectorControls = ( {
 	const authorsValue = availableAuthors
 		? attributes.authors?.map( ( authorId ) => {
 				const author = availableAuthors?.find(
-					( author ) => author.id === authorId
+					( a ) => a.id === authorId
 				);
 				if ( author ) {
 					return author.name;
@@ -376,7 +369,6 @@ const DynamicInspectorControls = ( {
 					<SearchPostControl
 						attributes={ attributes }
 						config={ config }
-						setIsDirty={ setIsDirty }
 						selectSearchResult={ selectSearchResult }
 						existingPosts={ existingPosts }
 					/>

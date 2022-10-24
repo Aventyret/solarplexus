@@ -22,7 +22,7 @@
 		"lint:js": "wp-scripts lint-js",
 		"packages-update": "wp-scripts packages-update",
 		"start": "wp-scripts start",
-		"test": "yarn test",
+		"test": "yarn lint:js",
 		"docs:dev": "vitepress dev docs",
 		"docs:build": "vitepress build docs",
 		"docs:serve": "vitepress serve docs"
@@ -30,6 +30,7 @@
 	"dependencies": {
 		"@wordpress/date": "^4.15.0",
 		"@wordpress/icons": "^9.6.0",
-		"@wordpress/server-side-render": "^3.13.0"
+		"@wordpress/server-side-render": "^3.13.0",
+		"lodash": "^4.17.21"
 	}
 }

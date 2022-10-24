@@ -1,6 +1,6 @@
 import './handpicked-inspector-controls.scss';
 
-const { __, sprintf } = wp.i18n;
+const { __ } = wp.i18n;
 
 import { findIndex } from 'lodash';
 
@@ -14,7 +14,6 @@ const HandpickedInspectorControls = ( {
 	attributes,
 	setAttributes,
 	config,
-	setIsDirty,
 } ) => {
 	const selectSearchResult = ( searchResult ) => {
 		setAttributes( {
@@ -66,7 +65,6 @@ const HandpickedInspectorControls = ( {
 				<SearchPostControl
 					attributes={ attributes }
 					config={ config }
-					setIsDirty={ setIsDirty }
 					selectSearchResult={ selectSearchResult }
 					existingPosts={ attributes.searchResults }
 				/>

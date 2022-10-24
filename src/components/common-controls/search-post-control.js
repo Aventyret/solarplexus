@@ -13,7 +13,6 @@ const SearchPostControl = ( {
 	attributes,
 	existingPosts,
 	config,
-	setIsDirty,
 	selectSearchResult,
 } ) => {
 	const [ searchInput, setSearchInput ] = useState( '' );
@@ -73,7 +72,6 @@ const SearchPostControl = ( {
 
 	const onSearchInputChange = debounce( ( value ) => {
 		setSearchInput( value );
-		setIsDirty( true );
 	}, 250 );
 
 	return (
@@ -93,6 +91,20 @@ const SearchPostControl = ( {
 
 					const maxReached =
 						existingPosts.length >= attributes.noOfPosts;
+					let buttonText = __( 'Select', 'splx' );
+					if ( alreadySelected ) {
+						buttonText = __( 'Already selected', 'splx' );
+					}
+					if ( ! alreadySelected && maxReached ) {
+						buttonText = sprintf(
+							/* translators: %d is the maximum number of posts */
+							__( "You can't select more than %d posts", 'splx' ),
+							attributes.noOfPosts
+						);
+					}
+
+					const subTypeText = __( searchResult.subtype, 'splx' ); // eslint-disable-line @wordpress/i18n-no-variables
+
 					return (
 						<li
 							className="splx-searchResult"
@@ -100,9 +112,7 @@ const SearchPostControl = ( {
 						>
 							<div>
 								<em>{ searchResult.title }</em>
-								<span>
-									{ __( searchResult.subtype, 'splx' ) }
-								</span>
+								<span>{ subTypeText }</span>
 							</div>
 
 							<Button
@@ -113,17 +123,7 @@ const SearchPostControl = ( {
 									selectSearchResult( searchResult )
 								}
 							>
-								{ alreadySelected
-									? __( 'Already selected', 'splx' )
-									: maxReached
-									? sprintf(
-											__(
-												"You can't select more than %d posts",
-												'splx'
-											),
-											attributes.noOfPosts
-									  )
-									: __( 'Select', 'splx' ) }
+								{ buttonText }
 							</Button>
 						</li>
 					);
