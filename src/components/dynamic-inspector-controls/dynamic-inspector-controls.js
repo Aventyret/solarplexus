@@ -77,7 +77,10 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
         }
         const value = terms?.length ? selectedTermIds.map(termId => {
           const term = terms.find(t => t.id === termId);
-          return term.name;
+          if (term) {
+            return term.name;
+          }
+          return '';
         }) : [];
 
         return {
