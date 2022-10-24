@@ -20,11 +20,14 @@
   },
   "scripts": {
     "build": "wp-scripts build",
-    "format": "wp-scripts format && prettier admin/** includes/** --write",
+    "format:check": "wp-scripts format --debug-check && prettier admin/*.php includes/**/*.php --debug-check",
+    "format": "wp-scripts format && prettier admin/*.php includes/**/*.php --write",
     "lint:js": "wp-scripts lint-js",
+    "lint:php": "./vendor/bin/phplint",
+    "lint": "yarn lint:js && yarn lint:php",
     "packages-update": "wp-scripts packages-update",
     "start": "wp-scripts start",
-    "test": "yarn lint:js",
+    "test": "yarn format:check && yarn lint",
     "docs:dev": "vitepress dev docs",
     "docs:build": "vitepress build docs",
     "docs:serve": "vitepress serve docs"
