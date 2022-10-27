@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: Solarplexus\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/solarplexus\n"
 "POT-Creation-Date: 2022-06-07T13:34:04+00:00\n"
-"PO-Revision-Date: 2022-06-07 15:37+0200\n"
+"PO-Revision-Date: 2022-10-27 10:45+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: sv_SE\n"
@@ -11,14 +11,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.2\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-Flags-xgettext: --add-comments=translators:\n"
 "X-Poedit-WPHeader: solarplexus.php\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.min.js\n"
 "X-Poedit-SearchPathExcluded-1: node_modules\n"
@@ -33,104 +31,122 @@ msgid "https://aventyret.com"
 msgstr ""
 
 #. Description of the plugin
-msgid ""
-"A plugin and developer tool to easily create Gutenberg blocks for creating "
-"dynamic and static lists of posts, pages and more."
+msgid "A plugin and developer tool to easily create Gutenberg blocks for creating dynamic and static lists of posts, pages and more."
 msgstr ""
 
 #. Author of the plugin
 msgid "Äventyret"
 msgstr ""
 
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:147
-msgid "Post types"
-msgstr "Innehållstyper"
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:161
-msgid "Taxonomies"
-msgstr "Taxonomier"
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:163
-msgid "Show posts from:"
-msgstr "Visa inlägg från:"
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:166
-msgid "All"
-msgstr "Alla"
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:189
-msgid "Authors"
-msgstr "Författare"
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:192
-msgid "All authors"
-msgstr "Alla författare"
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:209
-msgid "Order"
-msgstr "Ordning"
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:223
-msgid "Has pagination"
-msgstr "Har paginering"
-
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:132
+#: build/index.js:186
 msgid "Search"
 msgstr "Sök"
 
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:159
+#: build/index.js:201
 msgid "Already selected"
 msgstr "Redan vald"
 
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:162
+#. translators: %s: maximum number of items
+#: build/index.js:203
 msgid "You can't select more than %d posts"
 msgstr "Du kan inte välja mer än %d inlägg"
 
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:165
+#: build/index.js:203
 msgid "Select"
 msgstr "Välj"
 
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:173
+#: build/index.js:648
+msgid "Post types"
+msgstr "Innehållstyper"
+
+#: build/index.js:658
+msgid "Filter"
+msgstr "Filter"
+
+#: build/index.js:670
+msgid "Authors"
+msgstr "Författare"
+
+#: build/index.js:678
+msgid "Sort order"
+msgstr "Sorteringsordning"
+
+#: build/index.js:680
+msgid "Order by"
+msgstr "Sortera efter"
+
+#: build/index.js:690
+msgid "Meta field name"
+msgstr "Namn på metafält"
+
+#: build/index.js:694
+msgid "Order"
+msgstr "Ordning"
+
+#: build/index.js:705
+msgid "Has pagination"
+msgstr "Har paginering"
+
+#: build/index.js:708
+msgid "Number of items"
+msgstr "Antal objekt"
+
+#: build/index.js:716
+msgid "Handpicked posts"
+msgstr "Handplockade inlägg"
+
+#: build/index.js:725 build/index.js:842
 msgid "Selected posts"
 msgstr "Valda inlägg"
 
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:188
-msgid "Move up"
-msgstr "Flytta upp"
-
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:195
-msgid "Move down"
-msgstr "Flytta ner"
-
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:202
+#: build/index.js:738 build/index.js:863
 msgid "Remove"
 msgstr "Ta bort"
 
-#: src/consts.js:11
+#: build/index.js:855
+msgid "Move up"
+msgstr "Flytta upp"
+
+#: build/index.js:859
+msgid "Move down"
+msgstr "Flytta ner"
+
+#: build/index.js:897
 msgid "Image as background"
 msgstr "Bild som bakgrund"
 
-#: src/consts.js:12
+#: build/index.js:901
 msgid "Image on top"
 msgstr "Bild överst"
 
-#: src/consts.js:13
+#: build/index.js:905
 msgid "Image to the left"
 msgstr "Bild till vänster"
 
-#: src/consts.js:17
+#: build/index.js:910
+msgid "Date"
+msgstr "Datum"
+
+#: build/index.js:911
+msgid "Title"
+msgstr "Rubrik"
+
+#: build/index.js:912
+msgid "Menu order"
+msgstr "Menyordning"
+
+#: build/index.js:913
+msgid "Post meta"
+msgstr "Metafält"
+
+#: build/index.js:914
+msgid "Post meta, numeric"
+msgstr "Metafält, numerisk"
+
+#: build/index.js:917
 msgid "Ascending"
 msgstr "Stigande"
 
-#: src/consts.js:18
+#: build/index.js:918
 msgid "Descending"
 msgstr "Fallande"
-
-#~ msgid "Horizontal"
-#~ msgstr "Horisontell"
-
-#~ msgid "Vertical"
-#~ msgstr "Vertikal"
-
-#~ msgid "Number of items"
-#~ msgstr "Antal objekt"
