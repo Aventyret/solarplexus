@@ -2,16 +2,16 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Solarplexus 1.4.0\n"
+"Project-Id-Version: Solarplexus 1.9.0\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/solarplexus\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-06-07T13:34:04+00:00\n"
+"POT-Creation-Date: 2022-10-27T08:43:55+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
-"X-Generator: WP-CLI 2.6.0\n"
+"X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: splx\n"
 
 #. Plugin Name of the plugin
@@ -31,86 +31,117 @@ msgstr ""
 msgid "Äventyret"
 msgstr ""
 
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:147
-msgid "Post types"
-msgstr ""
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:161
-msgid "Taxonomies"
-msgstr ""
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:163
-msgid "Show posts from:"
-msgstr ""
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:166
-msgid "All"
-msgstr ""
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:189
-msgid "Authors"
-msgstr ""
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:192
-msgid "All authors"
-msgstr ""
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:209
-msgid "Order"
-msgstr ""
-
-#: src/components/dynamic-inspector-controls/dynamic-inspector-controls.js:223
-msgid "Has pagination"
-msgstr ""
-
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:132
+#: build/index.js:186
 msgid "Search"
 msgstr ""
 
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:159
+#: build/index.js:201
 msgid "Already selected"
 msgstr ""
 
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:162
+#. translators: %s: maximum number of items
+#: build/index.js:203
 msgid "You can't select more than %d posts"
 msgstr ""
 
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:165
+#: build/index.js:203
 msgid "Select"
 msgstr ""
 
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:173
+#: build/index.js:648
+msgid "Post types"
+msgstr ""
+
+#: build/index.js:658
+msgid "Filter"
+msgstr ""
+
+#: build/index.js:670
+msgid "Authors"
+msgstr ""
+
+#: build/index.js:678
+msgid "Sort order"
+msgstr ""
+
+#: build/index.js:680
+msgid "Order by"
+msgstr ""
+
+#: build/index.js:690
+msgid "Meta field name"
+msgstr ""
+
+#: build/index.js:694
+msgid "Order"
+msgstr ""
+
+#: build/index.js:705
+msgid "Has pagination"
+msgstr ""
+
+#: build/index.js:708
+msgid "Number of items"
+msgstr ""
+
+#: build/index.js:716
+msgid "Handpicked posts"
+msgstr ""
+
+#: build/index.js:725
+#: build/index.js:842
 msgid "Selected posts"
 msgstr ""
 
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:188
-msgid "Move up"
-msgstr ""
-
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:195
-msgid "Move down"
-msgstr ""
-
-#: src/components/handpicked-inspector-controls/handpicked-inspector-controls.js:202
+#: build/index.js:738
+#: build/index.js:863
 msgid "Remove"
 msgstr ""
 
-#: src/consts.js:11
+#: build/index.js:855
+msgid "Move up"
+msgstr ""
+
+#: build/index.js:859
+msgid "Move down"
+msgstr ""
+
+#: build/index.js:897
 msgid "Image as background"
 msgstr ""
 
-#: src/consts.js:12
+#: build/index.js:901
 msgid "Image on top"
 msgstr ""
 
-#: src/consts.js:13
+#: build/index.js:905
 msgid "Image to the left"
 msgstr ""
 
-#: src/consts.js:17
+#: build/index.js:910
+msgid "Date"
+msgstr ""
+
+#: build/index.js:911
+msgid "Title"
+msgstr ""
+
+#: build/index.js:912
+msgid "Menu order"
+msgstr ""
+
+#: build/index.js:913
+msgid "Post meta"
+msgstr ""
+
+#: build/index.js:914
+msgid "Post meta, numeric"
+msgstr ""
+
+#: build/index.js:917
 msgid "Ascending"
 msgstr ""
 
-#: src/consts.js:18
+#: build/index.js:918
 msgid "Descending"
 msgstr ""

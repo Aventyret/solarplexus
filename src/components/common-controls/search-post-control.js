@@ -100,6 +100,7 @@ const SearchPostControl = ({ attributes, existingPosts, config, setIsDirty, sele
                   ? __("Already selected", "splx")
                   : maxReached
                   ? sprintf(
+                      /* translators: %s: maximum number of items */
                       __("You can't select more than %d posts", "splx"),
                       attributes.noOfPosts
                     )

@@ -290,7 +290,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
         </PanelBody>
       ) : null}
       {isArray(config.noOfPosts) ? (
-        <PanelBody title={__("Number of items")}>
+        <PanelBody title={__("Number of items", "splx")}>
           <RangeControl
             value={attributes.noOfPosts}
             min={config.noOfPosts[0]}
