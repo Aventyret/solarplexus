@@ -11,10 +11,11 @@ Solarplexus is a Wordpress plugin and developer tool to easily create Gutenberg 
 ## Plugin development instructions
 
 1. Clone the repo in the `plugins` folder of a local WP installation
-2. `nvm use`
-3. `yarn install`
-4. `yarn start`
-5. Create a custom theme in your WP installation and follow the regular instructions on the Wiki on how to use the plugin.
+2. `composer install`
+3. `nvm use`
+4. `yarn install`
+5. `yarn start`
+6. Create a custom theme in your WP installation and follow the regular instructions on the Wiki on how to use the plugin.
 
 ### Translations
 1. Run `yarn start` to create a non-minified build/index.js.
