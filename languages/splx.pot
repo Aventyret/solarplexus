@@ -2,7 +2,7 @@
 # This file is distributed under the GPL-2.0+.
 msgid ""
 msgstr ""
-"Project-Id-Version: Solarplexus 1.9.0\n"
+"Project-Id-Version: Solarplexus 1.9.1\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/solarplexus\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
