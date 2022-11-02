@@ -163,12 +163,12 @@ class Solarplexus_Helpers {
       * Optionaly hide duplicates in hand picked blocks
       */
       if (array_key_exists('hideDuplicates', $block_attributes) && $block_attributes['hideDuplicates']) {
-        $args['post__in'] = array_filter(function($post_id) {
-          if(in_array(self::$rendered_post_ids, $post_id)) {
+        $args['post__in'] = array_filter($args['post__in'], function($post_id) {
+          if(in_array($post_id, self::$rendered_post_ids)) {
             return false;
           }
           return true;
-        }, $args['post__in']);
+        });
       }
       if(empty($args['post__in'])) {
         $args['post__in'][] = 0;

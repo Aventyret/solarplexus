@@ -36,7 +36,7 @@ class Solarplexus_Handpicked_Block_Attrs_Definition extends Solarplexus_Block_At
   }
 
   private function set_hide_duplicates() {
-    $this->post_type = self::build_attribute(
+    $this->hide_duplicates = self::build_attribute(
       'boolean',
       false
     );
