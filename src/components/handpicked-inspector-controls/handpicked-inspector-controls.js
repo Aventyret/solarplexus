@@ -54,10 +54,13 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsD
       }),
     });
   };
+  const onHideDuplicatesCheckboxChange = () => {
+    setAttributes({ hideDuplicates: !attributes.hideDuplicates });
+  };
 
   return (
     <InspectorControls>
-      <PanelBody>
+      <PanelBody title={__("Posts", "splx")}>
         <SearchPostControl attributes={attributes} config={config} setIsDirty={setIsDirty} selectSearchResult={selectSearchResult} existingPosts={attributes.searchResults}/>
         {attributes.searchResults.length ? (
           <div className="splx-selectedSearchResultsWrap">
@@ -100,6 +103,13 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsD
             </div>
           </div>
         ) : null}
+      </PanelBody>
+      <PanelBody title={__("Block settings", "splx")}>
+        <CheckboxControl
+          checked={attributes.hideDuplicates}
+          label={__("Hide duplicates", "splx")}
+          onChange={onHideDuplicatesCheckboxChange}
+        />
       </PanelBody>
       <CustomControls
         attributes={attributes}

@@ -281,7 +281,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config, setIsDirt
         />
       </PanelBody>
       {config.allowPagination ? (
-        <PanelBody>
+        <PanelBody title={__("Pagination", "splx")}>
           <CheckboxControl
             checked={attributes.hasPagination}
             label={__("Has pagination", "splx")}
