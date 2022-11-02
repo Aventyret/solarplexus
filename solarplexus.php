@@ -26,26 +26,25 @@
  */
 
 // If this file is called directly, abort.
-if ( ! defined( 'WPINC' ) ) {
-	die;
+if (!defined('WPINC')) {
+	die();
 }
 
-define( 'SPLX_PLUGIN_PATH', plugin_dir_path( __FILE__ ) );
-define( 'SPLX_PLUGIN_DIR_URL', plugin_dir_url( __FILE__ ) );
-define( 'SPLX_TEMPLATE_FOLDER', 'splx-templates' );
-
+define('SPLX_PLUGIN_PATH', plugin_dir_path(__FILE__));
+define('SPLX_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
+define('SPLX_TEMPLATE_FOLDER', 'splx-templates');
 
 /**
  * Current plugin version.
  * We use SemVer - https://semver.org
  */
-define( 'SOLARPLEXUS_VERSION', '1.9.0' );
+define('SOLARPLEXUS_VERSION', '1.9.0');
 
 /**
  * The core plugin class that is used to define internationalization,
  * admin specific hooks, and public facing site hooks.
  */
-require plugin_dir_path( __FILE__ ) . 'includes/class-solarplexus.php';
+require plugin_dir_path(__FILE__) . 'includes/class-solarplexus.php';
 
 /**
  * Begins execution of the plugin.
@@ -56,10 +55,9 @@ require plugin_dir_path( __FILE__ ) . 'includes/class-solarplexus.php';
  *
  * @since    1.0.0
  */
-function run_solarplexus() {
-
+function run_solarplexus()
+{
 	$plugin = new Solarplexus();
 	$plugin->run();
-
 }
 run_solarplexus();

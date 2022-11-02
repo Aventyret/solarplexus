@@ -15,11 +15,11 @@ jobs:
       - uses: actions/setup-node@v2
         with:
           node-version: 16
-      - name: "Build docs"
+      - name: 'Build docs'
         run: |
           yarn
           yarn docs:build
-      - name: "Push docs to gh-pages branch"
+      - name: 'Push docs to gh-pages branch'
         working-directory: ./docs/.vitepress/dist
         run: |
           pwd

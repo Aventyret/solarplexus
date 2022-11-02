@@ -1,5 +1,5 @@
 {
-  "require-dev": {
-    "overtrue/phplint": "^5.3"
-  }
+	"require-dev": {
+		"overtrue/phplint": "^5.3"
+	}
 }

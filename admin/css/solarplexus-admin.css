@@ -6,15 +6,15 @@
 	pointer-events: none;
 }
 .splx-icon {
-  height: 24px;
+	height: 24px;
 }
 .splx-panel:not(.splx-panel--no-scroll) {
-  max-height: 300px;
-  overflow: auto;
+	max-height: 300px;
+	overflow: auto;
 }
 .block-editor-block-inspector .splx-panel .components-base-control {
-  margin-bottom: 0;
+	margin-bottom: 0;
 }
 .components-radio-control .components-base-control__field {
-  margin-bottom: 24px;
+	margin-bottom: 24px;
 }

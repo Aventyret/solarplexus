@@ -1,26 +1,26 @@
 [
-  {
-    "id": "latest-default",
-    "title": "[Solarplexus]: Latest posts or pages",
-    "type": "dynamic",
-    "allowedPostTypes": ["post", "page"],
-    "allowedTaxonomies": ["category"],
-    "noOfPosts": [2,8],
-    "noOfGridCols": 2,
-    "customFields": [],
-    "itemLayout": "imagebg",
-    "showDate": true,
-    "showExcerpt": true
-  },
-  {
-    "id": "handpicked-default",
-    "title": "[Solarplexus]: Hand picked posts and pages",
-    "type": "handpicked",
-    "noOfPosts": 8,
-    "noOfGridCols": 2,
-    "customFields": [],
-    "itemLayout": "imagebg",
-    "showDate": true,
-    "showExcerpt": true
-  }
+	{
+		"id": "latest-default",
+		"title": "[Solarplexus]: Latest posts or pages",
+		"type": "dynamic",
+		"allowedPostTypes": ["post", "page"],
+		"allowedTaxonomies": ["category"],
+		"noOfPosts": [2, 8],
+		"noOfGridCols": 2,
+		"customFields": [],
+		"itemLayout": "imagebg",
+		"showDate": true,
+		"showExcerpt": true
+	},
+	{
+		"id": "handpicked-default",
+		"title": "[Solarplexus]: Hand picked posts and pages",
+		"type": "handpicked",
+		"noOfPosts": 8,
+		"noOfGridCols": 2,
+		"customFields": [],
+		"itemLayout": "imagebg",
+		"showDate": true,
+		"showExcerpt": true
+	}
 ]
