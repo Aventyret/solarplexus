@@ -11,17 +11,20 @@
 class Solarplexus_Handpicked_Block_Attrs_Definition extends Solarplexus_Block_Attrs_Definition {
 
   public $search_results;
+  public $hide_duplicates;
   
   public function __construct($block_config) {
     parent::__construct($block_config);
 
     $this->set_search_results();
+    $this->set_hide_duplicates();
   }
 
   public function to_array() {
     $common = parent::to_array();
     $r = [];
     $r['searchResults'] = $this->post_type;
+    $r['hideDuplicates'] = $this->hide_duplicates;
     return array_merge($common, $r);
   }
 
@@ -29,6 +32,13 @@ class Solarplexus_Handpicked_Block_Attrs_Definition extends Solarplexus_Block_At
     $this->post_type = self::build_attribute(
       'array',
       []
+    );
+  }
+
+  private function set_hide_duplicates() {
+    $this->post_type = self::build_attribute(
+      'boolean',
+      false
     );
   }
 
