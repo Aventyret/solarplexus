@@ -137,3 +137,24 @@ $test: #ff0000;
 .splx-pagination {
   padding: 1em;
 }
+
+h5.splx-handpickedPostTitle {
+  margin-top: 0;
+}
+
+.splx-handpickedPostButtons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.splx-handpickedPosts .components-card {
+  margin-bottom: 0.5em;
+
+  .components-card__body {
+    padding: 0.7em;
+  }
+}
+
+.splx-handpickedPostsWrap {
+  margin-top: 3em;
+}
