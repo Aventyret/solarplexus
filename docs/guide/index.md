@@ -12,10 +12,13 @@ It includes support for themes based on the Roots Sage boilerplate.
 2. Go to wp-admin and activate the plugin.
 
 You should now have two new Gutenberg blocks available:
+
 ### [Solarplexus]: Latest posts or pages
+
 The editor can use this in a page to show a 2-column grid of either the latest posts or pages, layed out with titles, excerpts and dates on top of the featured images. The editor may choose to show between 2 and 8 posts.
 
 ### [Solarplexus]: Hand picked posts and pages
+
 The editor can use this in a page to show a 2-column grid of a maximum of 8 chosen posts and pages, layed out with titles, excerpts and dates on top of the featured images.
 
 Read more about how to customize blocks on the next page.

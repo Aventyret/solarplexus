@@ -1,160 +1,159 @@
 $test: #ff0000;
 
 .splx-wrap {
-  min-height: 100px;
-  pre {
-    display: inline;
-    padding: 0;
-    margin: 0;
-  }
+	min-height: 100px;
+	pre {
+		display: inline;
+		padding: 0;
+		margin: 0;
+	}
 }
 .splx-test {
-  color: $test;
+	color: $test;
 }
 
 .splx-grid {
-  display: flex;
-  flex-wrap: wrap;
-  &--cols1 {
-    display: block;
-  }
+	display: flex;
+	flex-wrap: wrap;
+	&--cols1 {
+		display: block;
+	}
 }
 
-[data-type^="splx"] {
-  min-height: 100px;
+[data-type^='splx'] {
+	min-height: 100px;
 }
 
 .splx-gridItemPost {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  overflow: hidden;
-  margin-bottom: 1em;
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	overflow: hidden;
+	margin-bottom: 1em;
 
-  // TODO responsive?
-  &--cols2 {
-    flex: 1 0 50%;
-  }
-  &--cols3 {
-    flex: 1 0 33%;
-  }
-  &--cols4 {
-    flex: 1 0 25%;
-  }
-  &--cols5 {
-    flex: 1 0 20%;
-  }
+	// TODO responsive?
+	&--cols2 {
+		flex: 1 0 50%;
+	}
+	&--cols3 {
+		flex: 1 0 33%;
+	}
+	&--cols4 {
+		flex: 1 0 25%;
+	}
+	&--cols5 {
+		flex: 1 0 20%;
+	}
 
-  &__content {
-    flex: 1;
-    position: relative;
-    padding: 1em;
-  }
+	&__content {
+		flex: 1;
+		position: relative;
+		padding: 1em;
+	}
 
-  &__heading__link {
-    color: currentColor;
-    position: static;
+	&__heading__link {
+		color: currentColor;
+		position: static;
 
-    &::after {
-      bottom: 0;
-      content: "";
-      left: 0;
-      position: absolute;
-      right: 0;
-      top: 0;
-    }
-  }
+		&::after {
+			bottom: 0;
+			content: '';
+			left: 0;
+			position: absolute;
+			right: 0;
+			top: 0;
+		}
+	}
 
-  &.splx-gridItemPost--layout-imagebg.splx-gridItemPost--hasImg {
-    color: #fff;
-  }
+	&.splx-gridItemPost--layout-imagebg.splx-gridItemPost--hasImg {
+		color: #fff;
+	}
 
-  &--layout-imagebg {
-    .splx-gridItemPost__image {
-      position: absolute;
-      left: 0;
-      top: 0;
-      right: 0;
-      bottom: 0;
-    }
-  }
-  &--layout-imagetop {
-    h3.splx-gridItemPost__heading {
-      margin-top: 0.5em;
-    }
-    .splx-gridItemPost__content {
-      padding-top: 0;
-    }
-  }
-  &--layout-imageleft {
-    display: flex;
-    h3.splx-gridItemPost__heading {
-      margin: 0;
-      font-size: 20px;
-    }
-    .splx-gridItemPost__image {
-      flex: 1 0 5em;
-      max-width: 5em;
-    }
-    .splx-gridItemPost__content {
-      padding-top: 0;
-      font-size: 16px;
-      p {
-        margin-top: 1em;
-      }
-    }
-
-  }
+	&--layout-imagebg {
+		.splx-gridItemPost__image {
+			position: absolute;
+			left: 0;
+			top: 0;
+			right: 0;
+			bottom: 0;
+		}
+	}
+	&--layout-imagetop {
+		h3.splx-gridItemPost__heading {
+			margin-top: 0.5em;
+		}
+		.splx-gridItemPost__content {
+			padding-top: 0;
+		}
+	}
+	&--layout-imageleft {
+		display: flex;
+		h3.splx-gridItemPost__heading {
+			margin: 0;
+			font-size: 20px;
+		}
+		.splx-gridItemPost__image {
+			flex: 1 0 5em;
+			max-width: 5em;
+		}
+		.splx-gridItemPost__content {
+			padding-top: 0;
+			font-size: 16px;
+			p {
+				margin-top: 1em;
+			}
+		}
+	}
 }
 
 .splx-gridItemPostFeaturedMedia {
-  position: relative;
+	position: relative;
 
-  img {
-    max-width: 100%;
-    vertical-align: bottom;
-  }
-  .splx-gridItemPost--layout-imagebg & {
-    height: 100%;
-    img {
-      height: 100%;
-      object-fit: cover;
-    }
-  }
+	img {
+		max-width: 100%;
+		vertical-align: bottom;
+	}
+	.splx-gridItemPost--layout-imagebg & {
+		height: 100%;
+		img {
+			height: 100%;
+			object-fit: cover;
+		}
+	}
 
-  &:after {
-    content: " ";
-    position: absolute;
-    display: block;
-    background: none rgba(0, 0, 0, 0.5);
-    left: 0;
-    top: 0;
-    right: 0;
-    bottom: 0;
-  }
+	&:after {
+		content: ' ';
+		position: absolute;
+		display: block;
+		background: none rgba(0, 0, 0, 0.5);
+		left: 0;
+		top: 0;
+		right: 0;
+		bottom: 0;
+	}
 }
 
 .splx-pagination {
-  padding: 1em;
+	padding: 1em;
 }
 
 h5.splx-handpickedPostTitle {
-  margin-top: 0;
+	margin-top: 0;
 }
 
 .splx-handpickedPostButtons {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
 
 .splx-handpickedPosts .components-card {
-  margin-bottom: 0.5em;
+	margin-bottom: 0.5em;
 
-  .components-card__body {
-    padding: 0.7em;
-  }
+	.components-card__body {
+		padding: 0.7em;
+	}
 }
 
 .splx-handpickedPostsWrap {
-  margin-top: 3em;
+	margin-top: 3em;
 }

@@ -13,7 +13,6 @@
  * @subpackage Solarplexus/includes
  */
 class Solarplexus {
-
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
@@ -52,7 +51,7 @@ class Solarplexus {
 	 * @since    1.0.0
 	 */
 	public function __construct() {
-		if ( defined( 'RULED_DISPLAY_BLOCK_VERSION' ) ) {
+		if (defined('RULED_DISPLAY_BLOCK_VERSION')) {
 			$this->version = RULED_DISPLAY_BLOCK_VERSION;
 		} else {
 			$this->version = '1.0.0';
@@ -80,32 +79,37 @@ class Solarplexus {
 	 * @access   private
 	 */
 	private function load_dependencies() {
+		require_once plugin_dir_path(dirname(__FILE__)) .
+			'includes/class-solarplexus-helpers.php';
 
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-solarplexus-helpers.php';
-
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/objects/class-solarplexus-block-attrs-definition.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/objects/class-solarplexus-dynamic-block-attrs-definition.php';
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/objects/class-solarplexus-handpicked-block-attrs-definition.php';
+		require_once plugin_dir_path(dirname(__FILE__)) .
+			'includes/objects/class-solarplexus-block-attrs-definition.php';
+		require_once plugin_dir_path(dirname(__FILE__)) .
+			'includes/objects/class-solarplexus-dynamic-block-attrs-definition.php';
+		require_once plugin_dir_path(dirname(__FILE__)) .
+			'includes/objects/class-solarplexus-handpicked-block-attrs-definition.php';
 
 		/**
 		 * The class responsible for orchestrating the actions and filters of the
 		 * core plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-solarplexus-loader.php';
+		require_once plugin_dir_path(dirname(__FILE__)) .
+			'includes/class-solarplexus-loader.php';
 
 		/**
 		 * The class responsible for defining internationalization functionality
 		 * of the plugin.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-solarplexus-i18n.php';
+		require_once plugin_dir_path(dirname(__FILE__)) .
+			'includes/class-solarplexus-i18n.php';
 
 		/**
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
-		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-solarplexus-admin.php';
+		require_once plugin_dir_path(dirname(__FILE__)) .
+			'admin/class-solarplexus-admin.php';
 
 		$this->loader = new Solarplexus_Loader();
-
 	}
 
 	/**
@@ -118,11 +122,13 @@ class Solarplexus {
 	 * @access   private
 	 */
 	private function set_locale() {
-
 		$plugin_i18n = new Solarplexus_i18n();
 
-		$this->loader->add_action( 'plugins_loaded', $plugin_i18n, 'load_plugin_textdomain' );
-
+		$this->loader->add_action(
+			'plugins_loaded',
+			$plugin_i18n,
+			'load_plugin_textdomain'
+		);
 	}
 
 	/**
@@ -133,12 +139,23 @@ class Solarplexus {
 	 * @access   private
 	 */
 	private function define_admin_hooks() {
+		$plugin_admin = new Solarplexus_Admin(
+			$this->get_plugin_name(),
+			$this->get_version()
+		);
 
-		$plugin_admin = new Solarplexus_Admin( $this->get_plugin_name(), $this->get_version() );
-
-		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
-		$this->loader->add_action( 'init', $plugin_admin, 'register_scripts', 11 );
-		$this->loader->add_action( 'init', $plugin_admin, 'register_block', 11 );
+		$this->loader->add_action(
+			'admin_enqueue_scripts',
+			$plugin_admin,
+			'enqueue_styles'
+		);
+		$this->loader->add_action(
+			'init',
+			$plugin_admin,
+			'register_scripts',
+			11
+		);
+		$this->loader->add_action('init', $plugin_admin, 'register_block', 11);
 	}
 
 	/**
@@ -190,41 +207,56 @@ class Solarplexus {
 	 * @throws    Exception  If the arguments are bad
 	 * @return    void    	 Outputs html with pagination for a block, or nothing if the block does not support pagination.
 	 */
-	public static function the_block_pagination($block_attributes_or_args, $pagination = NULL) {
-		$args = array();
-		if ($pagination === NULL) {
+	public static function the_block_pagination(
+		$block_attributes_or_args,
+		$pagination = null
+	) {
+		$args = [];
+		if ($pagination === null) {
 			$args = $block_attributes_or_args;
 		}
-		if ($pagination !== NULL) {
-			$args = array(
+		if ($pagination !== null) {
+			$args = [
 				'block_attributes' => $block_attributes_or_args,
 				'pagination' => $pagination,
-			);
+			];
 		}
-		if (!isset($args['block_attributes']) || !isset($args['block_attributes']['hasPagination']) || !$args['block_attributes']['hasPagination']) {
+		if (
+			!isset($args['block_attributes']) ||
+			!isset($args['block_attributes']['hasPagination']) ||
+			!$args['block_attributes']['hasPagination']
+		) {
 			// Block does not support pagination
 			return;
 		}
-		$arg_properties = array(
-			'block_attributes',
-			'pagination',
-		);
-		foreach($arg_properties as $property) {
+		$arg_properties = ['block_attributes', 'pagination'];
+		foreach ($arg_properties as $property) {
 			if (!isset($args[$property]) || !$args[$property]) {
-				throw new Exception('Bad arguments for Solarplexus::the_block_pagination($args)');
+				throw new Exception(
+					'Bad arguments for Solarplexus::the_block_pagination($args)'
+				);
 			}
 		}
-		$pagination_base = Solarplexus_Helpers::block_pagination_base($args['block_attributes']);
+		$pagination_base = Solarplexus_Helpers::block_pagination_base(
+			$args['block_attributes']
+		);
 
 		echo '
 <div class="splx-pagination">
-	' . paginate_links(array(
-		'base' => $pagination_base,
-		'current' => $args['pagination']['page'],
-		'total' => $args['pagination']['max_num_pages'],
-		'format' => '?' . Solarplexus_Helpers::block_page_query_parameter($args['block_attributes']) . '=%#%',
-		'type' => 'list',
-	)) . '
+	' .
+			paginate_links([
+				'base' => $pagination_base,
+				'current' => $args['pagination']['page'],
+				'total' => $args['pagination']['max_num_pages'],
+				'format' =>
+					'?' .
+					Solarplexus_Helpers::block_page_query_parameter(
+						$args['block_attributes']
+					) .
+					'=%#%',
+				'type' => 'list',
+			]) .
+			'
 </div>';
 	}
 }

@@ -18,6 +18,7 @@ Solarplexus is a Wordpress plugin and developer tool to easily create Gutenberg 
 6. Create a custom theme in your WP installation and follow the regular instructions on the Wiki on how to use the plugin.
 
 ### Translations
+
 1. Run `yarn start` to create a non-minified build/index.js.
 2. Run `yarn translate` to update splx.pot and existing splx-{locale}.po files.
 3. Translate new strings in splx-{locale}.po. This can be done through [Poedit](https://poedit.net) or directly in the file.

@@ -18,11 +18,11 @@ footer: MIT Licensed | Copyright © 2021-present Äventyret
 
 We created Solarplexus because when building websites that stays **close to Core** (i.e. accepts and celebrates the new Wordpress Block Editor (a.k.a. Gutenberg) there was a clear need for a standardized way of bringing life to feed based websites also in the new era of Wordpress.
 
-Solarplexus is created by [Äventyret](https://aventyret.com) – a leading Wordpress (and much more) agency in Sweden – as our way to give back to the Wordpress community that has given us so much. Solarplexus is open source software free to use for anyone.*
+Solarplexus is created by [Äventyret](https://aventyret.com) – a leading Wordpress (and much more) agency in Sweden – as our way to give back to the Wordpress community that has given us so much. Solarplexus is open source software free to use for anyone.\*
 
 ---
 
-_* Bare in mind Solarplexus is not the most graspable plugin around (at least not yet, hence why we call it a “developer plugin”) so you probably need a few years of experience in Wordpress development if you want to use it sucessfully._
+_\* Bare in mind Solarplexus is not the most graspable plugin around (at least not yet, hence why we call it a “developer plugin”) so you probably need a few years of experience in Wordpress development if you want to use it sucessfully._
 
   </div>
   <div class="grid-col grid-col--6">

@@ -12,7 +12,6 @@
  * @subpackage Solarplexus/admin
  */
 class Solarplexus_Admin {
-
 	/**
 	 * The ID of this plugin.
 	 *
@@ -40,15 +39,16 @@ class Solarplexus_Admin {
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct( $plugin_name, $version ) {
-
+	public function __construct($plugin_name, $version) {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 		$this->config = [];
 	}
 
 	private function get_config() {
-		$this->config = empty( $this->config ) ? Solarplexus_Helpers::retrieve_block_configs() : $this->config;
+		$this->config = empty($this->config)
+			? Solarplexus_Helpers::retrieve_block_configs()
+			: $this->config;
 
 		return $this->config;
 	}
@@ -59,7 +59,6 @@ class Solarplexus_Admin {
 	 * @since    1.0.0
 	 */
 	public function enqueue_styles() {
-
 		/**
 		 * This function is provided for demonstration purposes only.
 		 *
@@ -72,39 +71,59 @@ class Solarplexus_Admin {
 		 * class.
 		 */
 
-		wp_enqueue_style( $this->plugin_name, plugin_dir_url( __FILE__ ) . 'css/solarplexus-admin.css', array(), $this->version, 'all' );
-
+		wp_enqueue_style(
+			$this->plugin_name,
+			plugin_dir_url(__FILE__) . 'css/solarplexus-admin.css',
+			[],
+			$this->version,
+			'all'
+		);
 	}
 
 	public function register_scripts() {
 		wp_register_style(
 			'solarplexus-style',
 			SPLX_PLUGIN_DIR_URL . 'build/index.css',
-			[ 'wp-edit-blocks' ],
-			filemtime( SPLX_PLUGIN_PATH . 'build/index.css' )
+			['wp-edit-blocks'],
+			filemtime(SPLX_PLUGIN_PATH . 'build/index.css')
 		);
 
 		wp_register_script(
 			'solarplexus-script',
 			SPLX_PLUGIN_DIR_URL . 'build/index.js',
-			[ 'wp-blocks', 'wp-element', 'wp-editor', 'wp-components', 'wp-i18n', 'wp-api-fetch' ],
-			filemtime( SPLX_PLUGIN_PATH . 'build/index.js' )
+			[
+				'wp-blocks',
+				'wp-element',
+				'wp-editor',
+				'wp-components',
+				'wp-i18n',
+				'wp-api-fetch',
+			],
+			filemtime(SPLX_PLUGIN_PATH . 'build/index.js')
 		);
 
 		wp_add_inline_script(
 			'solarplexus-script',
-			'const solarplexusConfig = ' . wp_json_encode( $this->get_config() ) . ';',
+			'const solarplexusConfig = ' .
+				wp_json_encode($this->get_config()) .
+				';',
 			'before'
 		);
 
 		$attr_defs_per_config = [];
-		foreach($this->get_config() as $block_config) {
+		foreach ($this->get_config() as $block_config) {
 			$instance = null;
-			$block_type_id = Solarplexus_Helpers::get_block_type_id($block_config);
-			if($block_config['type'] == "dynamic") {
-				$instance = new Solarplexus_Dynamic_Block_Attrs_Definition($block_config);
-			} else if($block_config['type'] == "handpicked") {
-				$instance = new Solarplexus_Handpicked_Block_Attrs_Definition($block_config);
+			$block_type_id = Solarplexus_Helpers::get_block_type_id(
+				$block_config
+			);
+			if ($block_config['type'] == 'dynamic') {
+				$instance = new Solarplexus_Dynamic_Block_Attrs_Definition(
+					$block_config
+				);
+			} elseif ($block_config['type'] == 'handpicked') {
+				$instance = new Solarplexus_Handpicked_Block_Attrs_Definition(
+					$block_config
+				);
 			} else {
 				continue;
 			}
@@ -113,7 +132,9 @@ class Solarplexus_Admin {
 
 		wp_add_inline_script(
 			'solarplexus-script',
-			'const solarplexusAttrDefs = ' . wp_json_encode( $attr_defs_per_config ) . ';',
+			'const solarplexusAttrDefs = ' .
+				wp_json_encode($attr_defs_per_config) .
+				';',
 			'before'
 		);
 
@@ -122,37 +143,61 @@ class Solarplexus_Admin {
 			'splx',
 			SPLX_PLUGIN_PATH . 'languages'
 		);
-
 	}
 
 	public function register_block() {
-		foreach($this->get_config() as $block_config) {
-			$block_type_id = Solarplexus_Helpers::get_block_type_id($block_config);
+		foreach ($this->get_config() as $block_config) {
+			$block_type_id = Solarplexus_Helpers::get_block_type_id(
+				$block_config
+			);
 			$attributes = [];
 
-			if($block_config['type'] == "dynamic") {
-				$instance = new Solarplexus_Dynamic_Block_Attrs_Definition($block_config);
+			if ($block_config['type'] == 'dynamic') {
+				$instance = new Solarplexus_Dynamic_Block_Attrs_Definition(
+					$block_config
+				);
 				$attributes = $instance->to_array();
-			} else if($block_config['type'] == "handpicked") {
-				$instance = new Solarplexus_Handpicked_Block_Attrs_Definition($block_config);
+			} elseif ($block_config['type'] == 'handpicked') {
+				$instance = new Solarplexus_Handpicked_Block_Attrs_Definition(
+					$block_config
+				);
 				$attributes = $instance->to_array();
 			} else {
-				throw new Exception("Cannot create block '{$block_type_id}', type must be either 'dynamic' or 'handpicked'.");
+				throw new Exception(
+					"Cannot create block '{$block_type_id}', type must be either 'dynamic' or 'handpicked'."
+				);
 			}
 
 			register_block_type("splx/{$block_type_id}", [
 				'attributes' => $attributes,
 				'editor_script' => 'solarplexus-script',
 				'style' => 'solarplexus-style',
-				'render_callback' => function($block_attributes, $content) use ($block_config, $block_type_id) {
-					$args = Solarplexus_Helpers::block_args($block_config, $block_attributes);
-					$template = trim( Solarplexus_Helpers::template_loader($block_config, $args) );
+				'render_callback' => function (
+					$block_attributes,
+					$content
+				) use ($block_config, $block_type_id) {
+					$args = Solarplexus_Helpers::block_args(
+						$block_config,
+						$block_attributes
+					);
+					$template = trim(
+						Solarplexus_Helpers::template_loader(
+							$block_config,
+							$args
+						)
+					);
 					if (!Solarplexus_Helpers::is_gutenberg_request()) {
 						return $template;
 					}
-					return $template ? '<div class="wp-block wp-block-splx wp-block-splx--' . $block_type_id . '">' . $template . '</div>' : '';
-				}
+					return $template
+						? '<div class="wp-block wp-block-splx wp-block-splx--' .
+								$block_type_id .
+								'">' .
+								$template .
+								'</div>'
+						: '';
+				},
 			]);
-		};
+		}
 	}
 }
