@@ -23,7 +23,7 @@
 		"vitepress": "^0.22.3"
 	},
 	"scripts": {
-		"build": "yarn test && wp-scripts build",
+		"build": "yarn lint:js && wp-scripts build",
 		"format:check": "prettier ./  --check",
 		"format": "prettier ./ --write",
 		"lint:js": "eslint ./src --ext .js",
