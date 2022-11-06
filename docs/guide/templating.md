@@ -46,6 +46,9 @@ _string_ - The classnames that you should apply to **each** post/grid item.
 ### block_attributes
 _array_ - The raw attributes saved to the database for the block instance. If you have added `customControls` to your config, the values of those will be included here.
 
+### block_index
+_integer_ - The index of the current block. `0` for the first Solaplexus block on the page `1` for the second and so on.
+
 ### config
 _array_ - The Solarplexus config for the block type of the block instance
 

@@ -11,6 +11,8 @@
 class Solarplexus_Helpers {
   // Used to keep track of rendered posts to avoid duplicates
   private static $rendered_post_ids = [];
+  // Used to know which block we are in
+  private static $block_index = 0;
 
   public static function retrieve_block_configs() {
     // Allow config via PHP
@@ -158,6 +160,18 @@ class Solarplexus_Helpers {
 
     if (array_key_exists('searchResults', $block_attributes)) {
       $args['post__in'] = wp_list_pluck($block_attributes['searchResults'], 'id');
+      /**
+      * @since    1.10.0
+      * Optionaly hide duplicates in hand picked blocks
+      */
+      if (array_key_exists('hideDuplicates', $block_attributes) && $block_attributes['hideDuplicates']) {
+        $args['post__in'] = array_filter($args['post__in'], function($post_id) {
+          if(in_array($post_id, self::$rendered_post_ids)) {
+            return false;
+          }
+          return true;
+        });
+      }
       if(empty($args['post__in'])) {
         $args['post__in'][] = 0;
       }
@@ -245,11 +259,15 @@ class Solarplexus_Helpers {
      */
     $posts = apply_filters( 'splx_posts', $posts, $block_config, $block_attributes, $pagination );
 
+    $block_index = self::$block_index;
+    self::$block_index++;
+
     return [
       'query' => $query->query,
       'posts' => $posts,
       'pagination' => $pagination,
       'block_attributes' => $block_attributes,
+      'block_index' => $block_index,
       'classes_grid' => apply_filters( 'splx_grid_classes', self::block_classes($classes_grid), $block_config, $block_attributes ),
       'classes_item' => apply_filters( 'splx_item_classes', self::block_classes($classes_item), $block_config, $block_attributes ),
       'config' => $block_config
