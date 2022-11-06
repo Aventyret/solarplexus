@@ -9,6 +9,7 @@ import {
   Card,
   CardBody,
   Button,
+  CheckboxControl
 } from "@wordpress/components";
 
 import { InspectorControls } from "@wordpress/block-editor";
@@ -54,10 +55,13 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsD
       }),
     });
   };
+  const onHideDuplicatesCheckboxChange = () => {
+    setAttributes({ hideDuplicates: !attributes.hideDuplicates });
+  };
 
   return (
     <InspectorControls>
-      <PanelBody>
+      <PanelBody title={__("Posts", "splx")}>
         <SearchPostControl attributes={attributes} config={config} setIsDirty={setIsDirty} selectSearchResult={selectSearchResult} existingPosts={attributes.searchResults}/>
         {attributes.searchResults.length ? (
           <div className="splx-selectedSearchResultsWrap">
@@ -100,6 +104,14 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsD
             </div>
           </div>
         ) : null}
+      </PanelBody>
+      <PanelBody title={__("Block settings", "splx")}>
+        <CheckboxControl
+          checked={attributes.hideDuplicates}
+          label={__("Hide duplicates", "splx")}
+          help={__("This will hide posts that are shown in blocks earlier on the page (they will still be visible in the editor).", "splx")}
+          onChange={onHideDuplicatesCheckboxChange}
+        />
       </PanelBody>
       <CustomControls
         attributes={attributes}

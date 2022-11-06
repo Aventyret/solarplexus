@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-10-27T08:43:55+00:00\n"
+"POT-Creation-Date: 2022-11-02T14:02:13+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: splx\n"
@@ -76,72 +76,92 @@ msgstr ""
 msgid "Order"
 msgstr ""
 
-#: build/index.js:705
+#: build/index.js:704
+msgid "Pagination"
+msgstr ""
+
+#: build/index.js:707
 msgid "Has pagination"
 msgstr ""
 
-#: build/index.js:708
+#: build/index.js:710
 msgid "Number of items"
 msgstr ""
 
-#: build/index.js:716
+#: build/index.js:718
 msgid "Handpicked posts"
 msgstr ""
 
-#: build/index.js:725
-#: build/index.js:842
+#: build/index.js:727
+#: build/index.js:852
 msgid "Selected posts"
 msgstr ""
 
-#: build/index.js:738
-#: build/index.js:863
+#: build/index.js:740
+#: build/index.js:873
 msgid "Remove"
 msgstr ""
 
-#: build/index.js:855
+#: build/index.js:843
+msgid "Posts"
+msgstr ""
+
+#: build/index.js:865
 msgid "Move up"
 msgstr ""
 
-#: build/index.js:859
+#: build/index.js:869
 msgid "Move down"
 msgstr ""
 
-#: build/index.js:897
-msgid "Image as background"
+#: build/index.js:875
+msgid "Block settings"
 msgstr ""
 
-#: build/index.js:901
-msgid "Image on top"
+#: build/index.js:878
+msgid "Hide duplicates"
 msgstr ""
 
-#: build/index.js:905
-msgid "Image to the left"
-msgstr ""
-
-#: build/index.js:910
-msgid "Date"
-msgstr ""
-
-#: build/index.js:911
-msgid "Title"
-msgstr ""
-
-#: build/index.js:912
-msgid "Menu order"
-msgstr ""
-
-#: build/index.js:913
-msgid "Post meta"
+#: build/index.js:879
+msgid "This will hide posts that are shown in blocks earlier on the page (they will still be visible in the editor)."
 msgstr ""
 
 #: build/index.js:914
-msgid "Post meta, numeric"
-msgstr ""
-
-#: build/index.js:917
-msgid "Ascending"
+msgid "Image as background"
 msgstr ""
 
 #: build/index.js:918
+msgid "Image on top"
+msgstr ""
+
+#: build/index.js:922
+msgid "Image to the left"
+msgstr ""
+
+#: build/index.js:927
+msgid "Date"
+msgstr ""
+
+#: build/index.js:928
+msgid "Title"
+msgstr ""
+
+#: build/index.js:929
+msgid "Menu order"
+msgstr ""
+
+#: build/index.js:930
+msgid "Post meta"
+msgstr ""
+
+#: build/index.js:931
+msgid "Post meta, numeric"
+msgstr ""
+
+#: build/index.js:934
+msgid "Ascending"
+msgstr ""
+
+#: build/index.js:935
 msgid "Descending"
 msgstr ""
