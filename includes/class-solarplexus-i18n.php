@@ -11,13 +11,11 @@
  * @package    Solarplexus
  * @subpackage Solarplexus/includes
  */
-class Solarplexus_i18n
-{
+class Solarplexus_i18n {
 	/**
 	 * Load the plugin text domain for translation.
 	 */
-	public function load_plugin_textdomain()
-	{
+	public function load_plugin_textdomain() {
 		load_plugin_textdomain(
 			'splx',
 			false,

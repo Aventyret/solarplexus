@@ -8,8 +8,7 @@
  * @package    Solarplexus
  * @subpackage Solarplexus/includes/objects
  */
-class Solarplexus_Block_Attrs_Definition
-{
+class Solarplexus_Block_Attrs_Definition {
 	/*
 	 *
 	 * Public vars
@@ -30,8 +29,7 @@ class Solarplexus_Block_Attrs_Definition
 	 *
 	 * Public methods
 	 */
-	public function __construct($block_config)
-	{
+	public function __construct($block_config) {
 		$this->config = $block_config;
 
 		$this->set_block_uid();
@@ -39,8 +37,7 @@ class Solarplexus_Block_Attrs_Definition
 		$this->set_custom_controls();
 	}
 
-	public function to_array()
-	{
+	public function to_array() {
 		$r = [];
 		$r['blockUid'] = $this->block_uid;
 		$r['noOfPosts'] = $this->no_of_posts;
@@ -55,8 +52,7 @@ class Solarplexus_Block_Attrs_Definition
 	 * Protected methods
 	 */
 
-	protected static function build_attribute($type, $default)
-	{
+	protected static function build_attribute($type, $default) {
 		return [
 			'type' => $type,
 			'default' => $default,
@@ -87,21 +83,18 @@ class Solarplexus_Block_Attrs_Definition
 	 *
 	 * Private methods
 	 */
-	private function set_block_uid()
-	{
+	private function set_block_uid() {
 		$this->block_uid = self::build_attribute('string', '');
 	}
 
-	private function set_no_of_posts()
-	{
+	private function set_no_of_posts() {
 		$this->no_of_posts = self::build_attribute(
 			'integer',
 			$this->get_first_of_config_arr_or_single('noOfPosts', -1)
 		);
 	}
 
-	private function set_custom_controls()
-	{
+	private function set_custom_controls() {
 		if (!array_key_exists('customControls', $this->config)) {
 			$this->custom_controls = [];
 			return;

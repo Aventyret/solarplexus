@@ -12,8 +12,7 @@
  * @package    Solarplexus
  * @subpackage Solarplexus/includes
  */
-class Solarplexus
-{
+class Solarplexus {
 	/**
 	 * The loader that's responsible for maintaining and registering all hooks that power
 	 * the plugin.
@@ -51,8 +50,7 @@ class Solarplexus
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		if (defined('RULED_DISPLAY_BLOCK_VERSION')) {
 			$this->version = RULED_DISPLAY_BLOCK_VERSION;
 		} else {
@@ -80,8 +78,7 @@ class Solarplexus
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function load_dependencies()
-	{
+	private function load_dependencies() {
 		require_once plugin_dir_path(dirname(__FILE__)) .
 			'includes/class-solarplexus-helpers.php';
 
@@ -124,8 +121,7 @@ class Solarplexus
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function set_locale()
-	{
+	private function set_locale() {
 		$plugin_i18n = new Solarplexus_i18n();
 
 		$this->loader->add_action(
@@ -142,8 +138,7 @@ class Solarplexus
 	 * @since    1.0.0
 	 * @access   private
 	 */
-	private function define_admin_hooks()
-	{
+	private function define_admin_hooks() {
 		$plugin_admin = new Solarplexus_Admin(
 			$this->get_plugin_name(),
 			$this->get_version()
@@ -168,8 +163,7 @@ class Solarplexus
 	 *
 	 * @since    1.0.0
 	 */
-	public function run()
-	{
+	public function run() {
 		$this->loader->run();
 	}
 
@@ -180,8 +174,7 @@ class Solarplexus
 	 * @since     1.0.0
 	 * @return    string    The name of the plugin.
 	 */
-	public function get_plugin_name()
-	{
+	public function get_plugin_name() {
 		return $this->plugin_name;
 	}
 
@@ -191,8 +184,7 @@ class Solarplexus
 	 * @since     1.0.0
 	 * @return    Solarplexus_Loader    Orchestrates the hooks of the plugin.
 	 */
-	public function get_loader()
-	{
+	public function get_loader() {
 		return $this->loader;
 	}
 
@@ -202,8 +194,7 @@ class Solarplexus
 	 * @since     1.0.0
 	 * @return    string    The version number of the plugin.
 	 */
-	public function get_version()
-	{
+	public function get_version() {
 		return $this->version;
 	}
 

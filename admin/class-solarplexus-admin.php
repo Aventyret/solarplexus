@@ -11,8 +11,7 @@
  * @package    Solarplexus
  * @subpackage Solarplexus/admin
  */
-class Solarplexus_Admin
-{
+class Solarplexus_Admin {
 	/**
 	 * The ID of this plugin.
 	 *
@@ -40,15 +39,13 @@ class Solarplexus_Admin
 	 * @param      string    $plugin_name       The name of this plugin.
 	 * @param      string    $version    The version of this plugin.
 	 */
-	public function __construct($plugin_name, $version)
-	{
+	public function __construct($plugin_name, $version) {
 		$this->plugin_name = $plugin_name;
 		$this->version = $version;
 		$this->config = [];
 	}
 
-	private function get_config()
-	{
+	private function get_config() {
 		$this->config = empty($this->config)
 			? Solarplexus_Helpers::retrieve_block_configs()
 			: $this->config;
@@ -61,8 +58,7 @@ class Solarplexus_Admin
 	 *
 	 * @since    1.0.0
 	 */
-	public function enqueue_styles()
-	{
+	public function enqueue_styles() {
 		/**
 		 * This function is provided for demonstration purposes only.
 		 *
@@ -84,8 +80,7 @@ class Solarplexus_Admin
 		);
 	}
 
-	public function register_scripts()
-	{
+	public function register_scripts() {
 		wp_register_style(
 			'solarplexus-style',
 			SPLX_PLUGIN_DIR_URL . 'build/index.css',
@@ -150,8 +145,7 @@ class Solarplexus_Admin
 		);
 	}
 
-	public function register_block()
-	{
+	public function register_block() {
 		foreach ($this->get_config() as $block_config) {
 			$block_type_id = Solarplexus_Helpers::get_block_type_id(
 				$block_config

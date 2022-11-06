@@ -8,15 +8,13 @@
  * @package    Solarplexus
  * @subpackage Solarplexus/includes
  */
-class Solarplexus_Helpers
-{
+class Solarplexus_Helpers {
 	// Used to keep track of rendered posts to avoid duplicates
 	private static $rendered_post_ids = [];
 	// Used to know which block we are in
 	private static $block_index = 0;
 
-	public static function retrieve_block_configs()
-	{
+	public static function retrieve_block_configs() {
 		// Allow config via PHP
 		$config_data = apply_filters('splx_config', []);
 
@@ -39,8 +37,7 @@ class Solarplexus_Helpers
 		return $config_data;
 	}
 
-	public static function get_block_type_id($block_config)
-	{
+	public static function get_block_type_id($block_config) {
 		$id = null;
 		if (array_key_exists('id', $block_config)) {
 			$id = $block_config['id'];
@@ -48,8 +45,7 @@ class Solarplexus_Helpers
 		return $id;
 	}
 
-	public static function block_args($block_config, $block_attributes)
-	{
+	public static function block_args($block_config, $block_attributes) {
 		$block_type_id = self::get_block_type_id($block_config);
 		$attrs_grid = [];
 		$attrs_item = [];
@@ -337,8 +333,7 @@ class Solarplexus_Helpers
 		];
 	}
 
-	public static function template_loader($block_config, $args)
-	{
+	public static function template_loader($block_config, $args) {
 		$block_type_id = self::get_block_type_id($block_config);
 		$loaded_template = '';
 		$sage_template = self::get_sage_template($block_config);
@@ -372,23 +367,19 @@ class Solarplexus_Helpers
 		return $loaded_template;
 	}
 
-	private static function is_sage()
-	{
+	private static function is_sage() {
 		return self::is_sage_sub_10() || self::is_sage_10();
 	}
 
-	private static function is_sage_sub_10()
-	{
+	private static function is_sage_sub_10() {
 		return class_exists('Roots\Sage\Container');
 	}
 
-	private static function is_sage_10()
-	{
+	private static function is_sage_10() {
 		return function_exists('Roots\view');
 	}
 
-	private static function block_classes($classes)
-	{
+	private static function block_classes($classes) {
 		$classes = array_unique($classes);
 		$classes = join(' ', $classes);
 		$classes = ltrim($classes);
@@ -451,8 +442,7 @@ class Solarplexus_Helpers
 		return $loaded_template;
 	}
 
-	private static function sage_template_path($block_type_id)
-	{
+	private static function sage_template_path($block_type_id) {
 		return sprintf(
 			'%s%s/views/%s/%s.blade.php',
 			get_stylesheet_directory(),
@@ -462,8 +452,7 @@ class Solarplexus_Helpers
 		);
 	}
 
-	private static function get_sage_template($block_config)
-	{
+	private static function get_sage_template($block_config) {
 		if (!self::is_sage()) {
 			return null;
 		}
@@ -478,8 +467,7 @@ class Solarplexus_Helpers
 		return sprintf('%s.%s', SPLX_TEMPLATE_FOLDER, $block_type_id);
 	}
 
-	private static function get_template($block_config)
-	{
+	private static function get_template($block_config) {
 		$block_type_id = self::get_block_type_id($block_config);
 		$template = '';
 
@@ -516,15 +504,13 @@ class Solarplexus_Helpers
 		return $template;
 	}
 
-	public static function is_gutenberg_request()
-	{
+	public static function is_gutenberg_request() {
 		return defined('REST_REQUEST') && is_user_logged_in();
 	}
 
 	// Rendered post ids are stored in memory (self::$rendered_post_ids), but when the request is through the rest
 	// api (e.g. in the Gutenberg editor) they are instead stored in a session variable
-	public static function get_rendered_post_ids()
-	{
+	public static function get_rendered_post_ids() {
 		if (self::is_gutenberg_request()) {
 			self::ensure_php_session();
 
@@ -534,8 +520,7 @@ class Solarplexus_Helpers
 		return self::$rendered_post_ids;
 	}
 
-	public static function find_splx_blocks_in_content($blocks)
-	{
+	public static function find_splx_blocks_in_content($blocks) {
 		$matching_blocks = [];
 		foreach ($blocks as $block) {
 			if (strpos($block['blockName'], 'splx/') === 0) {
@@ -553,8 +538,7 @@ class Solarplexus_Helpers
 		return $matching_blocks;
 	}
 
-	public static function set_rendered_post_id($id)
-	{
+	public static function set_rendered_post_id($id) {
 		if (self::is_gutenberg_request()) {
 			self::set_rendered_post_ids_in_session($id);
 			return;
@@ -562,20 +546,17 @@ class Solarplexus_Helpers
 		self::$rendered_post_ids[] = $id;
 	}
 
-	public static function ensure_php_session()
-	{
+	public static function ensure_php_session() {
 		if (session_status() == PHP_SESSION_NONE) {
 			session_start();
 		}
 	}
 
-	public static function get_session_timestamp()
-	{
+	public static function get_session_timestamp() {
 		return time();
 	}
 
-	public static function get_rendered_post_ids_from_session()
-	{
+	public static function get_rendered_post_ids_from_session() {
 		self::ensure_php_session();
 
 		global $post;
@@ -591,8 +572,7 @@ class Solarplexus_Helpers
 		return [];
 	}
 
-	public static function set_rendered_post_ids_in_session($id)
-	{
+	public static function set_rendered_post_ids_in_session($id) {
 		self::ensure_php_session();
 
 		global $post;
@@ -613,16 +593,14 @@ class Solarplexus_Helpers
 		];
 	}
 
-	public static function keep_track_of_rendered_posts($posts)
-	{
+	public static function keep_track_of_rendered_posts($posts) {
 		foreach ($posts as $post) {
 			self::set_rendered_post_id($post->ID);
 		}
 		return $posts;
 	}
 
-	public static function exclude_rendered_posts_in_args($args)
-	{
+	public static function exclude_rendered_posts_in_args($args) {
 		if (!isset($args['post__not_in'])) {
 			$args['post__not_in'] = [];
 		}
@@ -634,20 +612,17 @@ class Solarplexus_Helpers
 		return $args;
 	}
 
-	public static function block_page_query_parameter($block_attributes)
-	{
+	public static function block_page_query_parameter($block_attributes) {
 		return 'block_' . $block_attributes['blockUid'] . '_page';
 	}
 
-	public static function block_page($block_attributes)
-	{
+	public static function block_page($block_attributes) {
 		return isset($_GET[self::block_page_query_parameter($block_attributes)])
 			? (int) $_GET[self::block_page_query_parameter($block_attributes)]
 			: 1;
 	}
 
-	public static function block_pagination_base($block_attributes)
-	{
+	public static function block_pagination_base($block_attributes) {
 		$parsed_url = parse_url($_SERVER['REQUEST_URI']);
 		$query = '';
 		if (isset($parsed_url['query'])) {

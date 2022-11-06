@@ -55,8 +55,7 @@ require plugin_dir_path(__FILE__) . 'includes/class-solarplexus.php';
  *
  * @since    1.0.0
  */
-function run_solarplexus()
-{
+function run_solarplexus() {
 	$plugin = new Solarplexus();
 	$plugin->run();
 }

@@ -9,8 +9,7 @@
  * @package    Solarplexus
  * @subpackage Solarplexus/includes
  */
-class Solarplexus_Loader
-{
+class Solarplexus_Loader {
 	/**
 	 * The array of actions registered with WordPress.
 	 *
@@ -34,8 +33,7 @@ class Solarplexus_Loader
 	 *
 	 * @since    1.0.0
 	 */
-	public function __construct()
-	{
+	public function __construct() {
 		$this->actions = [];
 		$this->filters = [];
 	}
@@ -132,8 +130,7 @@ class Solarplexus_Loader
 	 *
 	 * @since    1.0.0
 	 */
-	public function run()
-	{
+	public function run() {
 		foreach ($this->filters as $hook) {
 			add_filter(
 				$hook['hook'],
