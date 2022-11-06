@@ -1,5 +1,3 @@
-import "./dynamic-inspector-controls.scss";
-
 const { __ } = wp.i18n;
 
 import { useSelect } from "@wordpress/data";

@@ -1,5 +1,3 @@
-import "./handpicked-inspector-controls.scss";
-
 const { __, sprintf } = wp.i18n;
 
 import { findIndex } from "lodash";
@@ -64,17 +62,17 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config, setIsD
       <PanelBody title={__("Posts", "splx")}>
         <SearchPostControl attributes={attributes} config={config} setIsDirty={setIsDirty} selectSearchResult={selectSearchResult} existingPosts={attributes.searchResults}/>
         {attributes.searchResults.length ? (
-          <div className="splx-selectedSearchResultsWrap">
+          <div className="splx-handpickedPostsWrap">
             <h4>{__("Selected posts", "splx")}</h4>
-            <div className="splx-selectedSearchResults">
+            <div className="splx-handpickedPosts">
               {attributes.searchResults.map((searchResult) => {
                 return (
                   <Card key={searchResult.id}>
                     <CardBody>
-                      <h5 className="splx-selectedSearchResultTitle">
+                      <h5 className="splx-handpickedPostTitle">
                         {searchResult.title}
                       </h5>
-                      <div className="splx-selectedSearchResultButtons">
+                      <div className="splx-handpickedPostButtons">
                         <Button
                           isSecondary
                           isSmall
