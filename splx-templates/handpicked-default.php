@@ -9,12 +9,17 @@
  *
  */
 ?>
-<?php if ($args['posts']) : ?>
+<?php if ($args['posts']): ?>
 	<div class="splx-wrap splx-wrap--ssr">
 		<div class="splx-grid <?php echo esc_attr($args['classes_grid']); ?>">
-			<?php foreach ($args['posts'] as $post) : setup_postdata($post); ?>
-				<div class="splx-gridItemPost <?php echo esc_attr($args['classes_item']); ?> <?php echo has_post_thumbnail() ? 'splx-gridItemPost--hasImg' : ''; ?>">
-					<?php if (has_post_thumbnail()) : ?>
+			<?php foreach ($args['posts'] as $post):
+   	setup_postdata($post); ?>
+				<div class="splx-gridItemPost <?php echo esc_attr(
+    	$args['classes_item']
+    ); ?> <?php echo has_post_thumbnail()
+ 	? 'splx-gridItemPost--hasImg'
+ 	: ''; ?>">
+					<?php if (has_post_thumbnail()): ?>
 						<div class="splx-gridItemPost__image">
 							<div class="splx-gridItemPostFeaturedMedia">
 								<?php the_post_thumbnail('large'); ?>
@@ -29,20 +34,21 @@
 							</a>
 						</h3>
 
-						<?php if (array_key_exists('showExcerpt', $args['config'])) : ?>
+						<?php if (array_key_exists('showExcerpt', $args['config'])): ?>
 							<div class="splx-gridItemPost__excerpt">
 								<?php the_excerpt(); ?>
 							</div>
 						<?php endif; ?>
 
-						<?php if (array_key_exists('showDate', $args['config'])) : ?>
+						<?php if (array_key_exists('showDate', $args['config'])): ?>
 							<div class="splx-gridItemPost__date">
 								<?php the_date(); ?>
 							</div>
 						<?php endif; ?>
 					</div>
 				</div>
-			<?php endforeach; ?>
+			<?php
+   endforeach; ?>
 		</div>
 	</div>
-<?php wp_reset_postdata(); endif; ?>
+<?php wp_reset_postdata();endif; ?>

@@ -1,6 +1,6 @@
 {
-  "require-dev": {
-    "overtrue/phplint": "^5.3",
-    "wp-cli/wp-cli": "^2.7.1"
-  }
+	"require-dev": {
+		"wp-cli/wp-cli": "^2.7.1",
+		"phpstan/phpstan": "^1.9"
+	}
 }

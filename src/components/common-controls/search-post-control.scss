@@ -1,25 +1,25 @@
 .splx-searchResult {
-  display: flex;
-  > div {
-    em {
-      font-style: normal;
-    }
-    span {
-      display: block;
-      font-size: 80%;
-    }
-  }
-  > button {
-    margin-left: auto;
-    align-self: center;
-  }
-  > span {
-    display: inline-block;
-    margin-right: 0.5em;
-  }
-  & + & {
-    margin-top: 0.5em;
-    padding-top: 0.5em;
-    border-top: 1px solid rgb(226, 228, 231);
-  }
+	display: flex;
+	> div {
+		em {
+			font-style: normal;
+		}
+		span {
+			display: block;
+			font-size: 80%;
+		}
+	}
+	> button {
+		margin-left: auto;
+		align-self: center;
+	}
+	> span {
+		display: inline-block;
+		margin-right: 0.5em;
+	}
+	& + & {
+		margin-top: 0.5em;
+		padding-top: 0.5em;
+		border-top: 1px solid rgb(226, 228, 231);
+	}
 }

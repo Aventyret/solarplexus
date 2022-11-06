@@ -1,7 +1,9 @@
 # Advanced Customization
 
 ## Defining your own CSS classes
+
 You can redefine the classnames for the grid and grid items to whatever you want. Simply use the custom hooks:
+
 ```
 add_filter('splx_grid_classes', function($classes, $block_config, $block_attributes){
   // Use the default $classes, the $block_config and $block_attributes to
@@ -17,7 +19,9 @@ add_filter('splx_item_classes', function($classes, $block_config, $block_attribu
 ```
 
 ## Adding custom fields or other data
+
 Often times, you're going to want to display some custom data in your items. Instead of querying for that data directly in the template, use the provided custom hook, which is applied on the posts after a successful query:
+
 ```
 add_filter('splx_posts', function($posts, $block_config, $block_attributes, $pagination){
   $upd_posts = [];
@@ -29,10 +33,13 @@ add_filter('splx_posts', function($posts, $block_config, $block_attributes, $pag
   return $upd_posts;
 }, 10, 4);
 ```
+
 The `posts` array available in your template will now include the above additions.
 
 ## Modifying the query
+
 If you'd like greater control of what posts are actually queried from the database, you may change the arguments before they are passed to `WP_Query`. Example:
+
 ```
 add_filter('splx_queryargs', function($args, $block_config, $block_attributes){
   $super_important_post_id = 1337;
@@ -40,4 +47,3 @@ add_filter('splx_queryargs', function($args, $block_config, $block_attributes){
   return $args;
 }, 10, 3);
 ```
-
