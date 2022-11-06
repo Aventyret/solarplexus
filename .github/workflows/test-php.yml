@@ -13,6 +13,6 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Lint php
-      - uses: overtrue/phplint@8.1
+        uses: overtrue/phplint@8.1
         with:
           path: .
