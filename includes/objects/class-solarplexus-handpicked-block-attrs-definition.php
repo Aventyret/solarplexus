@@ -26,14 +26,14 @@ class Solarplexus_Handpicked_Block_Attrs_Definition extends
 	{
 		$common = parent::to_array();
 		$r = [];
-		$r['searchResults'] = $this->post_type;
+		$r['searchResults'] = $this->search_results;
 		$r['hideDuplicates'] = $this->hide_duplicates;
 		return array_merge($common, $r);
 	}
 
 	private function set_search_results()
 	{
-		$this->post_type = self::build_attribute('array', []);
+		$this->search_results = self::build_attribute('array', []);
 	}
 
 	private function set_hide_duplicates()

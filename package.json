@@ -27,7 +27,7 @@
 		"format:check": "prettier ./  --check",
 		"format": "prettier ./ --write",
 		"lint:js": "eslint ./src --ext .js",
-		"lint:php": "echo 'TODO: phpstan'",
+		"lint:php": "./vendor/bin/phplint",
 		"lint": "yarn lint:js && yarn lint:php",
 		"packages-update": "wp-scripts packages-update",
 		"start": "wp-scripts start",
