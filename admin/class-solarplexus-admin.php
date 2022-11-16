@@ -81,12 +81,21 @@ class Solarplexus_Admin {
 	}
 
 	public function register_scripts() {
-		wp_register_style(
-			'solarplexus-style',
-			SPLX_PLUGIN_DIR_URL . 'build/index.css',
-			['wp-edit-blocks'],
-			filemtime(SPLX_PLUGIN_PATH . 'build/index.css')
-		);
+		// wp_register_style(
+		// 	'solarplexus-style',
+		// 	SPLX_PLUGIN_DIR_URL . 'build/index.css',
+		// 	['wp-edit-blocks'],
+		// 	filemtime(SPLX_PLUGIN_PATH . 'build/index.css')
+		// );
+
+		if (Solarplexus_Helpers::is_theme_twentytwentythree()) {
+		  wp_register_style(
+		  	'solarplexus-style',
+		  	SPLX_PLUGIN_DIR_URL . 'public/themes/twentytwentythree.css',
+		  	['wp-edit-blocks'],
+		  	filemtime(SPLX_PLUGIN_PATH . 'public/themes/twentytwentythree.css')
+		  );
+		}
 
 		wp_register_script(
 			'solarplexus-script',
@@ -104,7 +113,7 @@ class Solarplexus_Admin {
 
 		wp_add_inline_script(
 			'solarplexus-script',
-			'const solarplexusConfig = ' .
+			'var solarplexusConfig = ' .
 				wp_json_encode($this->get_config()) .
 				';',
 			'before'
@@ -132,7 +141,7 @@ class Solarplexus_Admin {
 
 		wp_add_inline_script(
 			'solarplexus-script',
-			'const solarplexusAttrDefs = ' .
+			'var solarplexusAttrDefs = ' .
 				wp_json_encode($attr_defs_per_config) .
 				';',
 			'before'
