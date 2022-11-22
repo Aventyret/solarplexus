@@ -104,7 +104,7 @@ class Solarplexus_Admin {
 
 		wp_add_inline_script(
 			'solarplexus-script',
-			'const solarplexusConfig = ' .
+			'window.solarplexusConfig = ' .
 				wp_json_encode($this->get_config()) .
 				';',
 			'before'
@@ -132,7 +132,7 @@ class Solarplexus_Admin {
 
 		wp_add_inline_script(
 			'solarplexus-script',
-			'const solarplexusAttrDefs = ' .
+			'window.solarplexusAttrDefs = ' .
 				wp_json_encode($attr_defs_per_config) .
 				';',
 			'before'
