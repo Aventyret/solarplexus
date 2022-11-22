@@ -19,7 +19,10 @@ const SearchPostControl = ({
 	const [searchResults, setSearchResults] = useState([]);
 
 	useEffect(() => {
-		const postTypes = config.allowedPostTypes ? config.allowedPostTypes : [];
+		let postTypes = config.allowedPostTypes ? config.allowedPostTypes : [];
+		if (config.handpickedPostTypes) {
+			postTypes = config.handpickedPostTypes;
+		}
 		const searchUris = [];
 		if (!postTypes.length) {
 			// Default to search endpoint if no post types are specified
