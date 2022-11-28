@@ -1,6 +1,6 @@
 import './search-post-control.scss';
 
-const { __, sprintf } = window.wp.i18n;
+const { __ } = window.wp.i18n;
 const apiFetch = window.wp.apiFetch;
 
 import { debounce, find } from 'lodash';
@@ -9,12 +9,7 @@ import { useEffect, useState } from '@wordpress/element';
 
 import { TextControl, Button } from '@wordpress/components';
 
-const SearchPostControl = ({
-	attributes,
-	existingPosts,
-	config,
-	selectSearchResult,
-}) => {
+const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 	const [searchInput, setSearchInput] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
 
@@ -85,7 +80,6 @@ const SearchPostControl = ({
 						return searchResult.id === _searchResult.id;
 					});
 
-					const maxReached = existingPosts.length >= attributes.noOfPosts;
 					return (
 						<li className="splx-searchResult" key={searchResult.id}>
 							<div>
@@ -96,17 +90,11 @@ const SearchPostControl = ({
 							<Button
 								isSecondary
 								isSmall
-								disabled={alreadySelected || maxReached}
+								disabled={alreadySelected}
 								onClick={() => selectSearchResult(searchResult)}
 							>
 								{alreadySelected
 									? __('Already selected', 'splx')
-									: maxReached
-									? sprintf(
-											/* translators: %s: maximum number of items */
-											__("You can't select more than %d posts", 'splx'),
-											attributes.noOfPosts
-									  )
 									: __('Select', 'splx')}
 							</Button>
 						</li>
