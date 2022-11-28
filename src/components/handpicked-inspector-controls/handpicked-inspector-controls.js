@@ -19,8 +19,11 @@ import CustomControls from '../custom-controls/custom-controls';
 
 const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 	const selectSearchResult = (searchResult) => {
+		const searchResults = config.prependNewPosts
+			? [searchResult, ...attributes.searchResults]
+			: [...attributes.searchResults, searchResult];
 		setAttributes({
-			searchResults: [...attributes.searchResults, searchResult],
+			searchResults,
 		});
 	};
 	const move = (itemId, isUp) => {
@@ -118,6 +121,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 				{isArray(config.noOfPosts) ? (
 					<RangeControl
 						value={attributes.noOfPosts}
+						label={__('Number of items', 'splx')}
 						min={config.noOfPosts[0]}
 						max={config.noOfPosts[1]}
 						onChange={(value) => onNoOfPostsChange(value)}
