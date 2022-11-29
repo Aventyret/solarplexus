@@ -64,7 +64,7 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends
 	private function set_post_type() {
 		$this->post_type = self::build_attribute(
 			'string',
-			$this->get_first_of_config_arr_or_single('allowedPostTypes', 'post')
+			$this->get_last_of_config_arr_or_single('allowedPostTypes', 'post')
 		);
 	}
 	// NOTE: Legacy from before allowing multiple taxonomies
