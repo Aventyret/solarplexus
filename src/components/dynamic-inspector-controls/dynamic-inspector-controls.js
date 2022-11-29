@@ -267,9 +267,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 								onChange={(taxonomyTermNames) =>
 									onTermsChange(taxonomyWithTerms.slug, taxonomyTermNames)
 								}
-								__experimentalShowHowTo={false}
-								__experimentalExpandOnFocus={true}
-							/>
+								__experimentalShowHowTo={false}							/>
 						);
 					})}
 					{availableAuthors?.length ? (
@@ -279,7 +277,6 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 							suggestions={authorsSuggestions}
 							onChange={onAuthorsChange}
 							__experimentalShowHowTo={false}
-							__experimentalExpandOnFocus={true}
 						/>
 					) : null}
 				</PanelBody>
