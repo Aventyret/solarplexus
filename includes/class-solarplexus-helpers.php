@@ -116,9 +116,12 @@ class Solarplexus_Helpers {
 			$args['post__not_in'] = [$current_post_id];
 		}
 
+		if (array_key_exists('noOfPosts', $block_attributes)) {
+			$args['posts_per_page'] = $block_attributes['noOfPosts'];
+		}
+
 		if (array_key_exists('postType', $block_attributes)) {
 			$args['post_type'] = explode(',', $block_attributes['postType']);
-			$args['posts_per_page'] = $block_attributes['noOfPosts'];
 			$args['orderby'] = 'date';
 		} else {
 			$args['post_type'] = 'any';
