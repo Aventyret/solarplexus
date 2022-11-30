@@ -22,7 +22,7 @@ class Solarplexus_Helpers {
 			$config_path = SPLX_PLUGIN_PATH . 'splx-config.json';
 		}
 
-		$theme_config_path = get_stylesheet_directory() . '/splx-config.json';
+		$theme_config_path = get_stylesheet_directory() . (self::is_sage_10() ? '/resources' : '') . '/splx-config.json'; // NOTE: get_stylesheet_directory() returns the /resources path in Sage 10, but not in Sage 9
 
 		// Override with custom config from theme
 		if (file_exists($theme_config_path)) {
@@ -449,7 +449,7 @@ class Solarplexus_Helpers {
 		return sprintf(
 			'%s%s/views/%s/%s.blade.php',
 			get_stylesheet_directory(),
-			self::is_sage_10() ? '/resources' : '', // NOTE: get_stylesheet_directory() returns the /resources path in Sage 9, but not in Sage 10
+			self::is_sage_10() ? '/resources' : '', // NOTE: get_stylesheet_directory() returns the /resources path in Sage 10, but not in Sage 9
 			SPLX_TEMPLATE_FOLDER,
 			$block_type_id
 		);
