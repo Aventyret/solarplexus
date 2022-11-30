@@ -59,9 +59,10 @@ class Solarplexus_Block_Attrs_Definition {
 		];
 	}
 
-	protected function get_first_of_config_arr_or_single(
+	protected function get_single_of_config_arr_or_single(
 		$config_key,
-		$fallback = null
+		$fallback = null,
+		$get_last_if_array = false
 	) {
 		if (!array_key_exists($config_key, $this->config)) {
 			return $fallback;
@@ -73,7 +74,7 @@ class Solarplexus_Block_Attrs_Definition {
 		}
 
 		if (!empty($config_val)) {
-			return $config_val[0];
+			return $config_val[$get_last_if_array ? count($config_val) - 1 : 0];
 		}
 
 		return $fallback;
@@ -90,7 +91,7 @@ class Solarplexus_Block_Attrs_Definition {
 	private function set_no_of_posts() {
 		$this->no_of_posts = self::build_attribute(
 			'integer',
-			$this->get_first_of_config_arr_or_single('noOfPosts', -1)
+			$this->get_single_of_config_arr_or_single('noOfPosts', -1, true)
 		);
 	}
 
