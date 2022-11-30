@@ -267,7 +267,8 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 								onChange={(taxonomyTermNames) =>
 									onTermsChange(taxonomyWithTerms.slug, taxonomyTermNames)
 								}
-								__experimentalShowHowTo={false}							/>
+								__experimentalShowHowTo={false}
+							/>
 						);
 					})}
 					{availableAuthors?.length ? (
