@@ -84,6 +84,14 @@ _boolean_ - `dynamic` type only. Sets if editors should be allowed to enable pag
 
 _boolean_ - `dynamic` type only. Sets if editors should be allowed to add handpicked posts to dynamic blocks. Defaults to `false`.
 
+### allowHandpicked - optional
+
+_boolean_ - `dynamic` type only. Sets if editors should be allowed to add handpicked posts to dynamic blocks. Defaults to `false`.
+
+### handpickedPostTypes - optional
+
+_[string]_ - Specifies of what post types posts can be handpicked from. If omitted `allowedPostTypes` will be used.
+
 ### icon - optional
 
 _string_ - The icon for the block type, defaults to the Solarplexus logo. Can be an inline SVG html string. Double quotes can be escaped.
