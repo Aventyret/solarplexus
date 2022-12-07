@@ -19,22 +19,26 @@ const DynamicToolbar = ({ attributes, setAttributes, config }) => {
 		setAttributes({ noOfPosts: value });
 	};
 
+	const onOffsetChange = (value) => {
+		setAttributes({ offset: value });
+	};
+
 	return (
 		<>
 			<BlockControls>
-				{isArray(config.noOfPosts) ? (
-					<ToolbarGroup>
-						<Dropdown
-							contentClassName="block-library-query-toolbar__popover"
-							renderToggle={({ onToggle }) => (
-								<ToolbarButton
-									icon={settings}
-									label={__('Display settings', 'splx')}
-									onClick={onToggle}
-								/>
-							)}
-							renderContent={() => (
-								<>
+				<ToolbarGroup>
+					<Dropdown
+						contentClassName="block-library-query-toolbar__popover"
+						renderToggle={({ onToggle }) => (
+							<ToolbarButton
+								icon={settings}
+								label={__('Display settings', 'splx')}
+								onClick={onToggle}
+							/>
+						)}
+						renderContent={() => (
+							<>
+								{isArray(config.noOfPosts) ? (
 									<BaseControl>
 										<RangeControl
 											label={__('Number of posts', 'splx')}
@@ -44,11 +48,22 @@ const DynamicToolbar = ({ attributes, setAttributes, config }) => {
 											onChange={(value) => onNoOfPostsChange(value)}
 										/>
 									</BaseControl>
-								</>
-							)}
-						/>
-					</ToolbarGroup>
-				) : null}
+								) : null}
+								{config.allowOffset ? (
+									<BaseControl>
+										<RangeControl
+											label={__('Offset', 'splx')}
+											value={attributes.offset}
+											min={0}
+											max={100}
+											onChange={(value) => onOffsetChange(value)}
+										/>
+									</BaseControl>
+								) : null}
+							</>
+						)}
+					/>
+				</ToolbarGroup>
 			</BlockControls>
 		</>
 	);

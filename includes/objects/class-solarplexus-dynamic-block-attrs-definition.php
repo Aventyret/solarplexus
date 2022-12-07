@@ -30,6 +30,8 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends
 
 	public $handpicked_posts;
 
+	public $offset;
+
 	public function __construct($block_config) {
 		parent::__construct($block_config);
 
@@ -43,6 +45,7 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends
 		$this->set_authors();
 		$this->set_has_pagination();
 		$this->set_handpicked_posts();
+		$this->set_offset();
 	}
 
 	public function to_array() {
@@ -58,13 +61,17 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends
 		$r['authors'] = $this->authors;
 		$r['hasPagination'] = $this->has_pagination;
 		$r['handpickedPosts'] = $this->handpicked_posts;
+		$r['offset'] = $this->offset;
 		return array_merge($common, $r);
 	}
 
 	private function set_post_type() {
 		$this->post_type = self::build_attribute(
 			'string',
-			$this->get_single_of_config_arr_or_single('allowedPostTypes', 'post')
+			$this->get_single_of_config_arr_or_single(
+				'allowedPostTypes',
+				'post'
+			)
 		);
 	}
 	// NOTE: Legacy from before allowing multiple taxonomies
@@ -96,5 +103,8 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends
 	}
 	private function set_handpicked_posts() {
 		$this->handpicked_posts = self::build_attribute('array', []);
+	}
+	private function set_offset() {
+		$this->offset = self::build_attribute('integer', 0);
 	}
 }

@@ -231,6 +231,25 @@ class Solarplexus_Helpers {
 			$args['offset'] =
 				(self::block_page($block_attributes) - 1) *
 				$block_attributes['noOfPosts'];
+
+			$args['paged'] = self::block_page($block_attributes);
+		}
+
+		$allow_offset = $block_config['allowOffset'] ?? false;
+		if ($allow_offset) {
+			if (
+				$has_pagination &&
+				isset($block_attributes['noOfPosts']) &&
+				isset($args['paged']) &&
+				$args['paged'] > 1
+			) {
+				$offset =
+					$block_attributes['offset'] +
+					($args['paged'] - 1) * $block_attributes['noOfPosts'];
+				$args['offset'] = $offset;
+			} else {
+				$args['offset'] = $block_attributes['offset'];
+			}
 		}
 
 		/**
