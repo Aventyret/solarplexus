@@ -6,7 +6,6 @@ import {
 	PanelBody,
 	CheckboxControl,
 	SelectControl,
-	RangeControl,
 	Card,
 	CardBody,
 	Button,
@@ -18,8 +17,6 @@ import { InspectorControls } from '@wordpress/block-editor';
 import SearchPostControl from '../common-controls/search-post-control';
 
 import CustomControls from '../custom-controls/custom-controls';
-
-import { isArray } from 'lodash';
 
 import { ORDERBYS, ORDERS } from '../../consts';
 
@@ -154,10 +151,6 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 
 	const onHasPaginationCheckboxChange = () => {
 		setAttributes({ hasPagination: !attributes.hasPagination });
-	};
-
-	const onNoOfPostsChange = (value) => {
-		setAttributes({ noOfPosts: value });
 	};
 
 	const authorsSuggestions = availableAuthors?.map((author) => author.name);
@@ -319,16 +312,6 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 						checked={attributes.hasPagination}
 						label={__('Has pagination', 'splx')}
 						onChange={onHasPaginationCheckboxChange}
-					/>
-				</PanelBody>
-			) : null}
-			{isArray(config.noOfPosts) ? (
-				<PanelBody title={__('Number of items', 'splx')}>
-					<RangeControl
-						value={attributes.noOfPosts}
-						min={config.noOfPosts[0]}
-						max={config.noOfPosts[1]}
-						onChange={(value) => onNoOfPostsChange(value)}
 					/>
 				</PanelBody>
 			) : null}
