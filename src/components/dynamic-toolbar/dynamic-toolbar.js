@@ -23,6 +23,11 @@ const DynamicToolbar = ({ attributes, setAttributes, config }) => {
 		setAttributes({ offset: value });
 	};
 
+	let noOfPostsLabel = __('Number of posts', 'splx');
+	if (attributes.hasPagination) {
+		noOfPostsLabel = __('Posts per page', 'splx');
+	}
+
 	return (
 		<>
 			<BlockControls>
@@ -41,10 +46,11 @@ const DynamicToolbar = ({ attributes, setAttributes, config }) => {
 								{isArray(config.noOfPosts) ? (
 									<BaseControl>
 										<RangeControl
-											label={__('Number of posts', 'splx')}
+											label={noOfPostsLabel}
 											value={attributes.noOfPosts}
 											min={config.noOfPosts[0]}
 											max={config.noOfPosts[1]}
+											showTooltip={false}
 											onChange={(value) => onNoOfPostsChange(value)}
 										/>
 									</BaseControl>
@@ -56,6 +62,7 @@ const DynamicToolbar = ({ attributes, setAttributes, config }) => {
 											value={attributes.offset}
 											min={0}
 											max={100}
+											showTooltip={false}
 											onChange={(value) => onOffsetChange(value)}
 										/>
 									</BaseControl>
