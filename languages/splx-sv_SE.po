@@ -178,7 +178,7 @@ msgstr "Inlägg per sida"
 
 #: build/index.js:823
 msgid "Display settings"
-msgstr ""
+msgstr "Visningsinställningar"
 
 #: build/index.js:835
 msgid "Offset"
