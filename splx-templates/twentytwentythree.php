@@ -26,10 +26,17 @@ $columns = min(count($args['posts']), 3);
 		</li>
 		<?php endforeach; ?>
 	</ul>
-	<?php if ($args['pagination']): ?>
-	<nav class="is-content-justification-space-between is-layout-flex wp-container-6 alignwide wp-block-query-pagination" aria-label="Pagination">
-		<?php Solarplexus::the_block_pagination($args); ?>
-	</nav>
-	<?php endif; ?>
+	<?php
+	if ($args['pagination']):
+		Solarplexus::the_block_pagination(array_merge(
+			$args,
+			[
+				'class' => 'is-content-justification-space-between is-layout-flex wp-container-6 alignwide wp-block-query-pagination',
+				'next_text' => 'Next Posts',
+				'prev_text' => 'Previous Posts',
+			]
+		));
+	endif;
+  ?>
 </div>
 <?php wp_reset_postdata();endif; ?>

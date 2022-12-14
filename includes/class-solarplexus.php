@@ -209,7 +209,8 @@ class Solarplexus {
 	 */
 	public static function the_block_pagination(
 		$block_attributes_or_args,
-		$pagination = null
+		$pagination = null,
+		$pagination_options = [],
 	) {
 		$args = [];
 		if ($pagination === null) {
@@ -219,6 +220,7 @@ class Solarplexus {
 			$args = [
 				'block_attributes' => $block_attributes_or_args,
 				'pagination' => $pagination,
+				'pagination_options' => $pagination_options,
 			];
 		}
 		if (
@@ -241,22 +243,32 @@ class Solarplexus {
 			$args['block_attributes']
 		);
 
+		$pagination_args = [
+			'base' => $pagination_base,
+			'current' => $args['pagination']['page'],
+			'total' => $args['pagination']['max_num_pages'],
+			'format' =>
+				'?' .
+				Solarplexus_Helpers::block_page_query_parameter(
+					$args['block_attributes']
+				) .
+				'=%#%',
+			'type' => 'list',
+		];
+
+		if (isset($args['next_text'])) {
+			$pagination_args['next_text'] = $args['next_text'];
+		}
+
+		if (isset($args['prev_text'])) {
+			$pagination_args['prev_text'] = $args['prev_text'];
+		}
+
 		echo '
-<div class="splx-pagination">
+<nav class="splx-pagination' . (isset($args['class']) ? ' ' . $args['class'] : '') . '" aria-label="Pagination">
 	' .
-			paginate_links([
-				'base' => $pagination_base,
-				'current' => $args['pagination']['page'],
-				'total' => $args['pagination']['max_num_pages'],
-				'format' =>
-					'?' .
-					Solarplexus_Helpers::block_page_query_parameter(
-						$args['block_attributes']
-					) .
-					'=%#%',
-				'type' => 'list',
-			]) .
+			paginate_links($pagination_args) .
 			'
-</div>';
+</nav>';
 	}
 }

@@ -64,3 +64,34 @@
 .splx-wp-block-post-template .wp-block-post-excerpt {
   font-size: var(--wp--preset--font-size--medium);
 }
+
+.splx-pagination .page-numbers {
+  flex: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.splx-pagination .page-numbers .page-numbers {
+  display: none;
+  color: var(--wp--preset--color--contrast);
+  text-decoration: none;
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: 400;
+}
+
+.splx-pagination .page-numbers .page-numbers.next,
+.splx-pagination .page-numbers .page-numbers.prev {
+  display: block;
+}
+
+.splx-pagination .page-numbers .page-numbers.next:after {
+  content: '→';
+  display: inline-block;
+  margin-left: 1ch;
+}
+
+.splx-pagination .page-numbers .page-numbers.prev:before {
+  content: '←';
+  display: inline-block;
+  margin-right: 1ch;
+}
