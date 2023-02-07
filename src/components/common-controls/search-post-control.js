@@ -30,6 +30,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 			}`;
 			searchUris.push(`/wp/v2/${endpoint}/?search=${searchInput}`);
 		});
+
 		const search = async () => {
 			const res = await new Promise((resolve, reject) => {
 				Promise.all(
@@ -56,12 +57,29 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 								}),
 							];
 						}, []);
-						resolve(allResults.slice(0, 10));
+						resolve(allResults);
 					})
 					.catch((error) => reject(error));
 			});
 
-			setSearchResults(res);
+			const relevanceMatch = searchInput.toLowerCase();
+			res.sort((postA, postB) => {
+				if (postA.title?.toLowerCase() === relevanceMatch) {
+					return -1;
+				}
+				if (postB.title?.toLowerCase() === relevanceMatch) {
+					return 1;
+				}
+				if (postA.title?.toLowerCase()?.includes(relevanceMatch)) {
+					return -1;
+				}
+				if (postB.title?.toLowerCase()?.includes(relevanceMatch)) {
+					return 1;
+				}
+				return 0;
+			});
+
+			setSearchResults(res.slice(0, 10));
 		};
 		if (searchInput.length > 2) search();
 	}, [searchInput]);
