@@ -64,6 +64,12 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 
 			const relevanceMatch = searchInput.toLowerCase();
 			res.sort((postA, postB) => {
+				if (postA.title?.toLowerCase() === relevanceMatch) {
+					return -1;
+				}
+				if (postB.title?.toLowerCase() === relevanceMatch) {
+					return 1;
+				}
 				if (postA.title?.toLowerCase()?.includes(relevanceMatch)) {
 					return -1;
 				}
