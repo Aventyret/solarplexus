@@ -150,7 +150,7 @@ class Solarplexus {
 			'enqueue_styles'
 		);
 		$this->loader->add_action(
-			'init',
+			'admin_enqueue_scripts',
 			$plugin_admin,
 			'register_scripts',
 			11
