@@ -282,9 +282,6 @@ class Solarplexus_Helpers {
 			$posts = array_slice($posts, 0, count($posts) - $addedPosts);
 		}
 
-		// Keep track of rendered posts to avoid rendering same post multiple times on a page
-		self::keep_track_of_rendered_posts($posts);
-
 		// Is this block paginated?
 		$pagination = false;
 		if ($has_pagination) {
@@ -310,6 +307,9 @@ class Solarplexus_Helpers {
 			$block_attributes,
 			$pagination
 		);
+
+		// Keep track of rendered posts to avoid rendering same post multiple times on a page
+		self::keep_track_of_rendered_posts($posts);
 
 		$block_index = self::$block_index;
 		self::$block_index++;
