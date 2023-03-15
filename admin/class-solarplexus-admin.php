@@ -146,10 +146,14 @@ class Solarplexus_Admin {
 	}
 
 	public function register_block() {
+		$enable_default_style = apply_filters(
+			'splx_enable_default_style',
+			false
+		);
 		$block_style_handle = 'solarplexus-style';
 		$theme_config_path = Solarplexus_Helpers::get_theme_config_path();
 
-		if (file_exists($theme_config_path)) {
+		if (file_exists($theme_config_path) && !$enable_default_style) {
 			$block_style_handle = 'solarplexus-style-custom';
 		}
 
