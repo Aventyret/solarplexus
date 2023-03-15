@@ -146,6 +146,13 @@ class Solarplexus_Admin {
 	}
 
 	public function register_block() {
+		$block_style_handle = 'solarplexus-style';
+		$theme_config_path = Solarplexus_Helpers::get_theme_config_path();
+
+		if (file_exists($theme_config_path)) {
+			$block_style_handle = 'solarplexus-style-custom';
+		}
+
 		foreach ($this->get_config() as $block_config) {
 			$block_type_id = Solarplexus_Helpers::get_block_type_id(
 				$block_config
@@ -171,7 +178,7 @@ class Solarplexus_Admin {
 			register_block_type("splx/{$block_type_id}", [
 				'attributes' => $attributes,
 				'editor_script' => 'solarplexus-script',
-				'style' => 'solarplexus-style',
+				'style' => $block_style_handle,
 				'render_callback' => function (
 					$block_attributes,
 					$content
