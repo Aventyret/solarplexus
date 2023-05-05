@@ -9,9 +9,24 @@ import { useEffect, useState } from '@wordpress/element';
 
 import { TextControl, Button } from '@wordpress/components';
 
+import { useSelect } from '@wordpress/data';
+
 const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 	const [searchInput, setSearchInput] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
+
+	const availablePostTypes = useSelect((select) => {
+		const { getPostTypes } = select('core');
+		const postTypes = getPostTypes({ per_page: -1 });
+
+		return postTypes && config.allowedPostTypes
+			? postTypes
+					.filter((postType) => {
+						return config.allowedPostTypes.includes(postType.slug);
+					})
+					.map((postType) => postType.slug)
+			: null;
+	}, []);
 
 	useEffect(() => {
 		let postTypes = config.allowedPostTypes ? config.allowedPostTypes : [];
@@ -23,11 +38,20 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 			// Default to search endpoint if no post types are specified
 			searchUris.push(`/wp/v2/search/?search=${searchInput}`);
 		}
+
+		// Filter out post types that are not available
+		if (availablePostTypes) {
+			postTypes = postTypes.filter((postType) => {
+				return availablePostTypes.includes(postType);
+			});
+		}
+
 		postTypes.forEach((postType) => {
 			// Otherwise do one search for each post type
 			const endpoint = `${postType}${
 				['post', 'page'].includes(postType) ? 's' : ''
 			}`;
+
 			searchUris.push(`/wp/v2/${endpoint}/?search=${searchInput}`);
 		});
 
@@ -82,7 +106,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 			setSearchResults(res.slice(0, 10));
 		};
 		if (searchInput.length > 2) search();
-	}, [searchInput]);
+	}, [searchInput, availablePostTypes]);
 
 	const onSearchInputChange = debounce((value) => {
 		setSearchInput(value);
