@@ -16,7 +16,7 @@
 		"id": "handpicked-default",
 		"title": "[Solarplexus]: Hand picked posts and pages",
 		"type": "handpicked",
-		"noOfPosts": [2, 8],
+		"noOfPosts": [1, 8],
 		"prependNewPosts": true,
 		"noOfGridCols": 2,
 		"customFields": [],

@@ -14,7 +14,7 @@ import { isArray } from 'lodash';
 
 import { settings } from '@wordpress/icons';
 
-const DynamicToolbar = ({ attributes, setAttributes, config }) => {
+const Toolbar = ({ attributes, setAttributes, config }) => {
 	const onNoOfPostsChange = (value) => {
 		setAttributes({ noOfPosts: value });
 	};
@@ -76,4 +76,4 @@ const DynamicToolbar = ({ attributes, setAttributes, config }) => {
 	);
 };
 
-export default DynamicToolbar;
+export default Toolbar;
