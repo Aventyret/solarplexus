@@ -218,6 +218,7 @@ class Solarplexus_Helpers {
 			$args = self::exclude_rendered_posts_in_args($args);
 		}
 
+		$args['offset'] = 0;
 		$allow_offset = $block_config['allowOffset'] ?? false;
 		if ($allow_offset) {
 			$args['offset'] = $block_attributes['offset'];
