@@ -61,6 +61,7 @@ class Solarplexus {
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
+		$this->define_public_hooks();
 	}
 
 	/**
@@ -109,6 +110,12 @@ class Solarplexus {
 		require_once plugin_dir_path(dirname(__FILE__)) .
 			'admin/class-solarplexus-admin.php';
 
+		/**
+		 * The class responsible for defining all actions that occur in the public area.
+		 */
+		require_once plugin_dir_path(dirname(__FILE__)) .
+			'public/class-solarplexus-public.php';
+
 		$this->loader = new Solarplexus_Loader();
 	}
 
@@ -150,12 +157,32 @@ class Solarplexus {
 			'enqueue_styles'
 		);
 		$this->loader->add_action(
-			'init',
+			'admin_enqueue_scripts',
 			$plugin_admin,
 			'register_scripts',
 			11
 		);
 		$this->loader->add_action('init', $plugin_admin, 'register_block', 11);
+	}
+
+	/**
+	 * Register all of the hooks related to the admin area functionality
+	 * of the plugin.
+	 *
+	 * @since    1.0.0
+	 * @access   private
+	 */
+	private function define_public_hooks() {
+		$plugin_public = new Solarplexus_Public(
+			$this->get_plugin_name(),
+			$this->get_version()
+		);
+
+		$this->loader->add_action(
+			'wp_enqueue_scripts',
+			$plugin_public,
+			'register_style'
+		);
 	}
 
 	/**

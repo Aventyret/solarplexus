@@ -47,3 +47,13 @@ add_filter('splx_queryargs', function($args, $block_config, $block_attributes){
   return $args;
 }, 10, 3);
 ```
+
+## Enable default block styling
+
+By default the block styling by the plugin is disabled if you've added your own splx-config.json in your theme. If you'd like to enable it, you can do so by adding the following to your theme's `functions.php` file:
+
+```
+add_filter('splx_enable_default_style', function() {
+	return true;
+});
+```
