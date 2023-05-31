@@ -19,29 +19,32 @@ class Solarplexus_Helpers {
 	}
 
 	public static function retrieve_block_configs() {
-		// Allow config via PHP
-		$config_data = apply_filters('splx_config', []);
+		$splx_config = [];
 
-		if (empty($config_data)) {
-			$config_path = SPLX_PLUGIN_PATH . 'splx-config.json';
-		}
-
+		// Start by seeing if theme has a json config file
 		$theme_config_path =
 			get_stylesheet_directory() .
 			(self::is_sage_10() ? '/resources' : '') .
 			'/splx-config.json'; // NOTE: get_stylesheet_directory() returns the /resources path in Sage 10, but not in Sage 9
 
-		// Override with custom config from theme
 		if (file_exists($theme_config_path)) {
-			$config_path = $theme_config_path;
+			$splx_config = self::get_json_config($theme_config_path);
 		}
 
-		if (!empty($config_path)) {
+		// Allow adjustments (or creation) of config with filter
+		$splx_config = apply_filters('splx_config', $splx_config);
+
+		// If there is no config at this point, use the plugin default blocks
+		if (empty($splx_config)) {
+			$splx_config = self::get_json_config(SPLX_PLUGIN_PATH . 'splx-config.json');
+		}
+
+		return $splx_config;
+	}
+
+	private static function get_json_config($config_path) {
 			$json = file_get_contents($config_path);
-			$config_data = array_merge(json_decode($json, true), $config_data);
-		}
-
-		return $config_data;
+			return json_decode($json, true);
 	}
 
 	public static function get_block_type_id($block_config) {

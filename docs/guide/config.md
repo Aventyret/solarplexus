@@ -169,3 +169,24 @@ _bool_ - Whether to show the post dates in the rendered lists.
 ### showExcerpt
 
 _bool_ - Whether to show the post excerpts in the rendered lists.
+
+## Adjust configuration with php filter
+
+Configuration in a json file can be conveniant, but in some cases you need more flexibility.
+
+Perhaps to att translations to block names or custom controls, or to make the configration conditional – for instance if you want different blocks in differnt network sites with the same theme.
+
+In these cases you can use the filter `splx_config` to make dynamic adjustments to the configuration. This is an example of how you could add translations to your block titles:
+
+```
+add_filter('splx_config', function($splx_config) {
+  return array_map(function($block_config) {
+    return array_merge(
+      $block_config,
+      [
+        'title' => __($block_config['title'], 'your_text_domain'),
+      ],
+    );
+  }, $splx_config);
+});
+```
