@@ -502,24 +502,29 @@ class Solarplexus_Helpers {
 		// since a use case is to have a custom config
 		// without creating your own templates.
 		if (!$template) {
-			if ($block_config['type'] == 'dynamic') {
+
+			if(self::is_theme_twentytwentythree()) {
 				$template = sprintf(
 					'%s%s/%s.php',
 					SPLX_PLUGIN_PATH,
 					SPLX_TEMPLATE_FOLDER,
-					'latest-default'
+					'twentytwentythree'
 				);
-			} elseif ($block_config['type'] == 'handpicked') {
+			} else {
 				$template = sprintf(
 					'%s%s/%s.php',
 					SPLX_PLUGIN_PATH,
 					SPLX_TEMPLATE_FOLDER,
-					'handpicked-default'
+					'default'
 				);
 			}
 		}
 
 		return $template;
+	}
+
+	public static function is_theme_twentytwentythree() {
+		return get_stylesheet() == 'twentytwentythree';
 	}
 
 	public static function is_gutenberg_request() {

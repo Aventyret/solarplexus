@@ -88,6 +88,15 @@ class Solarplexus_Admin {
 			filemtime(SPLX_PLUGIN_PATH . 'build/index.css')
 		);
 
+		if (Solarplexus_Helpers::is_theme_twentytwentythree()) {
+		  wp_register_style(
+		  	'solarplexus-style-twentytwentythree',
+		  	SPLX_PLUGIN_DIR_URL . 'public/themes/twentytwentythree.css',
+		  	['wp-edit-blocks'],
+		  	filemtime(SPLX_PLUGIN_PATH . 'public/themes/twentytwentythree.css')
+		  );
+		}
+
 		wp_register_script(
 			'solarplexus-script',
 			SPLX_PLUGIN_DIR_URL . 'build/index.js',
@@ -155,6 +164,9 @@ class Solarplexus_Admin {
 
 		if (file_exists($theme_config_path) && !$enable_default_style) {
 			$block_style_handle = 'solarplexus-style-custom';
+		}
+		if (Solarplexus_Helpers::is_theme_twentytwentythree()) {
+			$block_style_handle = 'solarplexus-style-twentytwentythree';
 		}
 
 		foreach ($this->get_config() as $block_config) {

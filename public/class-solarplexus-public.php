@@ -53,5 +53,13 @@ class Solarplexus_Public {
 			[],
 			filemtime(SPLX_PLUGIN_PATH . 'build/index.css')
 		);
+		if (Solarplexus_Helpers::is_theme_twentytwentythree()) {
+		  wp_register_style(
+		  	'solarplexus-style-twentytwentythree',
+		  	SPLX_PLUGIN_DIR_URL . 'public/themes/twentytwentythree.css',
+		  	[],
+		  	filemtime(SPLX_PLUGIN_PATH . 'public/themes/twentytwentythree.css')
+		  );
+		}
 	}
 }

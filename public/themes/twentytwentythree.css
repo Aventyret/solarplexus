@@ -1,0 +1,97 @@
+.splx-wp-block-post-template {
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 100%;
+  list-style: none;
+  padding: 0;
+}
+.splx-wp-block-post-template.splx-wp-block-post-template {
+  background: none;
+}
+.splx-wp-block-post-template.is-flex-container {
+  flex-direction: row;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25em;
+}
+.splx-wp-block-post-template.is-flex-container li {
+  margin: 0;
+  width: 100%;
+}
+@media (min-width: 600px) {
+  .splx-wp-block-post-template.is-flex-container.is-flex-container.columns-2
+    > li {
+    width: calc((100% / 2) - 1.25em + (1.25em / 2));
+  }
+  .splx-wp-block-post-template.is-flex-container.is-flex-container.columns-3
+    > li {
+    width: calc((100% / 3) - 1.25em + (1.25em / 3));
+  }
+  .splx-wp-block-post-template.is-flex-container.is-flex-container.columns-4
+    > li {
+    width: calc((100% / 4) - 1.25em + (1.25em / 4));
+  }
+  .splx-wp-block-post-template.is-flex-container.is-flex-container.columns-5
+    > li {
+    width: calc((100% / 5) - 1.25em + (1.25em / 5));
+  }
+  .splx-wp-block-post-template.is-flex-container.is-flex-container.columns-6
+    > li {
+    width: calc((100% / 6) - 1.25em + (1.25em / 6));
+  }
+}
+
+.splx-wp-block-post-template
+  .wp-block-post-title
+  a:where(:not(.wp-element-button)),
+.splx-wp-block-post-template time a:where(:not(.wp-element-button)) {
+  color: var(--wp--preset--color--contrast);
+}
+
+.splx-wp-block-post-template
+  time
+  a:where(:not(.wp-element-button)):not(:hover):not(:focus):not(:active) {
+  text-decoration: none;
+}
+.splx-wp-block-post-template time a:where(:not(.wp-element-button)):hover {
+  text-decoration: underline;
+}
+
+.splx-wp-block-post-template h2 {
+  font-size: var(--wp--preset--font-size--x-large);
+}
+
+.splx-wp-block-post-template .wp-block-post-excerpt {
+  font-size: var(--wp--preset--font-size--medium);
+}
+
+.splx-pagination .page-numbers {
+  flex: auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.splx-pagination .page-numbers .page-numbers {
+  display: none;
+  color: var(--wp--preset--color--contrast);
+  text-decoration: none;
+  font-size: var(--wp--preset--font-size--small);
+  font-weight: 400;
+}
+
+.splx-pagination .page-numbers .page-numbers.next,
+.splx-pagination .page-numbers .page-numbers.prev {
+  display: block;
+}
+
+.splx-pagination .page-numbers .page-numbers.next:after {
+  content: '→';
+  display: inline-block;
+  margin-left: 1ch;
+}
+
+.splx-pagination .page-numbers .page-numbers.prev:before {
+  content: '←';
+  display: inline-block;
+  margin-right: 1ch;
+}
