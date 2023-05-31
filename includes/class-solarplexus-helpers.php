@@ -26,7 +26,10 @@ class Solarplexus_Helpers {
 			$config_path = SPLX_PLUGIN_PATH . 'splx-config.json';
 		}
 
-		$theme_config_path = self::get_theme_config_path();
+		$theme_config_path =
+			get_stylesheet_directory() .
+			(self::is_sage_10() ? '/resources' : '') .
+			'/splx-config.json'; // NOTE: get_stylesheet_directory() returns the /resources path in Sage 10, but not in Sage 9
 
 		// Override with custom config from theme
 		if (file_exists($theme_config_path)) {
@@ -222,6 +225,12 @@ class Solarplexus_Helpers {
 			$args = self::exclude_rendered_posts_in_args($args);
 		}
 
+		$args['offset'] = 0;
+		$allow_offset = $block_config['allowOffset'] ?? false;
+		if ($allow_offset) {
+			$args['offset'] = $block_attributes['offset'];
+		}
+
 		$allow_pagination = $block_config['allowPagination'] ?? false;
 		$has_pagination =
 			$allow_pagination &&
@@ -232,9 +241,11 @@ class Solarplexus_Helpers {
 			isset($block_attributes['noOfPosts']) &&
 			$block_attributes['noOfPosts'] > -1
 		) {
-			$args['offset'] =
+			$args['offset'] +=
 				(self::block_page($block_attributes) - 1) *
 				$block_attributes['noOfPosts'];
+
+			$args['paged'] = self::block_page($block_attributes);
 		}
 
 		/**

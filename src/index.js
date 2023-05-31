@@ -8,6 +8,7 @@ import { registerBlockType } from '@wordpress/blocks';
 
 import DynamicInspectorControls from './components/dynamic-inspector-controls/dynamic-inspector-controls';
 import HandpickedInspectorControls from './components/handpicked-inspector-controls/handpicked-inspector-controls';
+import Toolbar from './components/toolbar/toolbar';
 
 // solarplexusConfig and solarplexusAttrDefs
 // are global window variables
@@ -59,6 +60,7 @@ window.solarplexusConfig.forEach((config) => {
 					) : config.type === 'handpicked' ? (
 						<HandpickedInspectorControls {...props} config={config} />
 					) : null}
+					<Toolbar {...props} config={config} />
 
 					<ServerSideRender
 						attributes={props.attributes}

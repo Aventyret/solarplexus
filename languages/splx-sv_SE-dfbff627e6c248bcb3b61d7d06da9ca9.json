@@ -12,9 +12,6 @@
 			},
 			"Search": ["S\u00f6k"],
 			"Already selected": ["Redan vald"],
-			"You can't select more than %d posts": [
-				"Du kan inte v\u00e4lja mer \u00e4n %d inl\u00e4gg"
-			],
 			"Select": ["V\u00e4lj"],
 			"Post types": ["Inneh\u00e5llstyper"],
 			"Filter": ["Filter"],
@@ -46,7 +43,11 @@
 			"Post meta": ["Metaf\u00e4lt"],
 			"Post meta, numeric": ["Metaf\u00e4lt, numerisk"],
 			"Ascending": ["Stigande"],
-			"Descending": ["Fallande"]
+			"Descending": ["Fallande"],
+			"Number of posts": ["Antal objekt"],
+			"Posts per page": ["Inl\u00e4gg per sida"],
+			"Display settings": ["Visningsinst\u00e4llningar"],
+			"Offset": [""]
 		}
 	}
 }
