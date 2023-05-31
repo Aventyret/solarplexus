@@ -7,8 +7,11 @@ import {
 	Card,
 	CardBody,
 	Button,
+	RangeControl,
 	CheckboxControl,
 } from '@wordpress/components';
+
+import { isArray } from 'lodash';
 
 import { InspectorControls } from '@wordpress/block-editor';
 import SearchPostControl from '../common-controls/search-post-control';
@@ -16,8 +19,11 @@ import CustomControls from '../custom-controls/custom-controls';
 
 const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 	const selectSearchResult = (searchResult) => {
+		const searchResults = config.prependNewPosts
+			? [searchResult, ...attributes.searchResults]
+			: [...attributes.searchResults, searchResult];
 		setAttributes({
-			searchResults: [...attributes.searchResults, searchResult],
+			searchResults,
 		});
 	};
 	const move = (itemId, isUp) => {
@@ -52,6 +58,9 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 				return searchResult.id !== searchResultId;
 			}),
 		});
+	};
+	const onNoOfPostsChange = (value) => {
+		setAttributes({ noOfPosts: value });
 	};
 	const onHideDuplicatesCheckboxChange = () => {
 		setAttributes({ hideDuplicates: !attributes.hideDuplicates });
@@ -109,6 +118,15 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 				) : null}
 			</PanelBody>
 			<PanelBody title={__('Block settings', 'splx')}>
+				{isArray(config.noOfPosts) ? (
+					<RangeControl
+						value={attributes.noOfPosts}
+						label={__('Number of items', 'splx')}
+						min={config.noOfPosts[0]}
+						max={config.noOfPosts[1]}
+						onChange={(value) => onNoOfPostsChange(value)}
+					/>
+				) : null}
 				<CheckboxControl
 					checked={attributes.hideDuplicates}
 					label={__('Hide duplicates', 'splx')}

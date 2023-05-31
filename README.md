@@ -31,7 +31,7 @@ More info in the [WP docs](https://developer.wordpress.org/block-editor/how-to-g
 The plugin is versioned in dist versions here on GitHub.
 
 1. Make sure you have [wp-cli](https://make.wordpress.org/cli/handbook/guides/installing/) and the [dist-archive](https://developer.wordpress.org/cli/commands/dist-archive/) package installed.
-2. Update the version according to semver in `package.json`, `README.txt`, and the main plugin entry file `solarplexus.php`
+2. Update the version according to semver in `package.json`, `README.txt`, and the main plugin entry file `solarplexus.php`. Commit the changes and push to github.
 3. `yarn build`
 4. `wp dist-archive .` A dist version without dev-only files will be created in the directory above.
 5. On [Releases](https://github.com/Aventyret/solarplexus/releases) page, click `Draft a new release`, fill in new version, changes etc, and upload the zip.

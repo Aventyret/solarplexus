@@ -81,16 +81,16 @@ class Solarplexus_Admin {
 	}
 
 	public function register_scripts() {
-		// wp_register_style(
-		// 	'solarplexus-style',
-		// 	SPLX_PLUGIN_DIR_URL . 'build/index.css',
-		// 	['wp-edit-blocks'],
-		// 	filemtime(SPLX_PLUGIN_PATH . 'build/index.css')
-		// );
+		wp_register_style(
+			'solarplexus-style',
+			SPLX_PLUGIN_DIR_URL . 'build/index.css',
+			['wp-edit-blocks'],
+			filemtime(SPLX_PLUGIN_PATH . 'build/index.css')
+		);
 
 		if (Solarplexus_Helpers::is_theme_twentytwentythree()) {
 		  wp_register_style(
-		  	'solarplexus-style',
+		  	'solarplexus-style-twentytwentythree',
 		  	SPLX_PLUGIN_DIR_URL . 'public/themes/twentytwentythree.css',
 		  	['wp-edit-blocks'],
 		  	filemtime(SPLX_PLUGIN_PATH . 'public/themes/twentytwentythree.css')
@@ -113,7 +113,7 @@ class Solarplexus_Admin {
 
 		wp_add_inline_script(
 			'solarplexus-script',
-			'var solarplexusConfig = ' .
+			'window.solarplexusConfig = ' .
 				wp_json_encode($this->get_config()) .
 				';',
 			'before'
@@ -141,7 +141,7 @@ class Solarplexus_Admin {
 
 		wp_add_inline_script(
 			'solarplexus-script',
-			'var solarplexusAttrDefs = ' .
+			'window.solarplexusAttrDefs = ' .
 				wp_json_encode($attr_defs_per_config) .
 				';',
 			'before'
@@ -155,6 +155,20 @@ class Solarplexus_Admin {
 	}
 
 	public function register_block() {
+		$enable_default_style = apply_filters(
+			'splx_enable_default_style',
+			false
+		);
+		$block_style_handle = 'solarplexus-style';
+		$theme_config_path = Solarplexus_Helpers::get_theme_config_path();
+
+		if (file_exists($theme_config_path) && !$enable_default_style) {
+			$block_style_handle = 'solarplexus-style-custom';
+		}
+		if (Solarplexus_Helpers::is_theme_twentytwentythree()) {
+			$block_style_handle = 'solarplexus-style-twentytwentythree';
+		}
+
 		foreach ($this->get_config() as $block_config) {
 			$block_type_id = Solarplexus_Helpers::get_block_type_id(
 				$block_config
@@ -180,7 +194,7 @@ class Solarplexus_Admin {
 			register_block_type("splx/{$block_type_id}", [
 				'attributes' => $attributes,
 				'editor_script' => 'solarplexus-script',
-				'style' => 'solarplexus-style',
+				'style' => $block_style_handle,
 				'render_callback' => function (
 					$block_attributes,
 					$content

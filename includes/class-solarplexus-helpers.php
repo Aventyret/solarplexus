@@ -14,6 +14,10 @@ class Solarplexus_Helpers {
 	// Used to know which block we are in
 	private static $block_index = 0;
 
+	public static function get_theme_config_path() {
+		return get_stylesheet_directory() . (self::is_sage_10() ? '/resources' : '') . '/splx-config.json'; // NOTE: get_stylesheet_directory() returns the /resources path in Sage 10, but not in Sage 9
+	}
+
 	public static function retrieve_block_configs() {
 		// Allow config via PHP
 		$config_data = apply_filters('splx_config', []);
@@ -22,7 +26,7 @@ class Solarplexus_Helpers {
 			$config_path = SPLX_PLUGIN_PATH . 'splx-config.json';
 		}
 
-		$theme_config_path = get_stylesheet_directory() . '/splx-config.json';
+		$theme_config_path = self::get_theme_config_path();
 
 		// Override with custom config from theme
 		if (file_exists($theme_config_path)) {
@@ -116,9 +120,12 @@ class Solarplexus_Helpers {
 			$args['post__not_in'] = [$current_post_id];
 		}
 
+		if (array_key_exists('noOfPosts', $block_attributes)) {
+			$args['posts_per_page'] = $block_attributes['noOfPosts'];
+		}
+
 		if (array_key_exists('postType', $block_attributes)) {
 			$args['post_type'] = explode(',', $block_attributes['postType']);
-			$args['posts_per_page'] = $block_attributes['noOfPosts'];
 			$args['orderby'] = 'date';
 		} else {
 			$args['post_type'] = 'any';
@@ -279,9 +286,6 @@ class Solarplexus_Helpers {
 			$posts = array_slice($posts, 0, count($posts) - $addedPosts);
 		}
 
-		// Keep track of rendered posts to avoid rendering same post multiple times on a page
-		self::keep_track_of_rendered_posts($posts);
-
 		// Is this block paginated?
 		$pagination = false;
 		if ($has_pagination) {
@@ -307,6 +311,9 @@ class Solarplexus_Helpers {
 			$block_attributes,
 			$pagination
 		);
+
+		// Keep track of rendered posts to avoid rendering same post multiple times on a page
+		self::keep_track_of_rendered_posts($posts);
 
 		$block_index = self::$block_index;
 		self::$block_index++;
@@ -446,7 +453,7 @@ class Solarplexus_Helpers {
 		return sprintf(
 			'%s%s/views/%s/%s.blade.php',
 			get_stylesheet_directory(),
-			self::is_sage_10() ? '/resources' : '', // NOTE: get_stylesheet_directory() returns the /resources path in Sage 9, but not in Sage 10
+			self::is_sage_10() ? '/resources' : '', // NOTE: get_stylesheet_directory() returns the /resources path in Sage 10, but not in Sage 9
 			SPLX_TEMPLATE_FOLDER,
 			$block_type_id
 		);

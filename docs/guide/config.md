@@ -27,6 +27,7 @@ Here's an example config, which defines two blocks similar to the blocks that th
     "type": "handpicked",
     "allowedPostTypes": ["post", "page"],
     "noOfPosts": 8,
+    "prependNewPosts": true,
     "noOfGridCols": 2,
     "itemLayout": "imagebg",
     "showDate": true,
@@ -59,13 +60,13 @@ _[string]_ - The post type(s) the editor will be able to choose from when using 
 
 If you omit `allowedPostTypes` dynamic blocks will show `posts` and handpicked blocks will be able to show any post type.
 
-### allowedTaxonomies
-
-_[string]_ - `dynamic` type only. The key(s) of the taxonomies the editor will be able to filter on when using the block. For custom taxonomies, you must have `show_in_rest` set to `true` when calling `register_taxonomy` in your theme/plugin.
-
 ### noOfPosts
 
-_int|[int]_ - The maximum posts to be shown in the resulting lists. For `dynamic`, an array can be used instead, with 2 positions declaring the min and max number, e.g [3, 6], letting the editor choose from a range between these.
+_int|[int]_ - The maximum posts to be shown in the resulting lists. An array can be used, with 2 positions declaring the min and max number, e.g [3, 6], letting the editor choose from a range between these.
+
+### prependNewPosts
+
+_boolean_ - `handpicked` type only. If true posts are added to the start of the list, otherwise they are appended at the end. Defaults to `false`.
 
 ### allowedTaxonomies
 
@@ -82,6 +83,14 @@ _boolean_ - `dynamic` type only. Sets if editors should be allowed to enable pag
 ### allowHandpicked - optional
 
 _boolean_ - `dynamic` type only. Sets if editors should be allowed to add handpicked posts to dynamic blocks. Defaults to `false`.
+
+### allowHandpicked - optional
+
+_boolean_ - `dynamic` type only. Sets if editors should be allowed to add handpicked posts to dynamic blocks. Defaults to `false`.
+
+### handpickedPostTypes - optional
+
+_[string]_ - Specifies of what post types posts can be handpicked from. If omitted `allowedPostTypes` will be used.
 
 ### icon - optional
 
