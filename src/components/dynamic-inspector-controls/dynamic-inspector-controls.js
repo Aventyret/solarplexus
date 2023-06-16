@@ -250,7 +250,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					className="splx-panel splx-panel--no-scroll"
 					title={__('Filter', 'splx')}
 				>
-					{availableTaxonomiesWithTerms.map((taxonomyWithTerms) => {
+					{(availableTaxonomiesWithTerms || []).map((taxonomyWithTerms) => {
 						return (
 							<FormTokenField
 								key={taxonomyWithTerms.slug}

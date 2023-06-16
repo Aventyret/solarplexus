@@ -122,6 +122,7 @@ class Solarplexus_Helpers {
 		// Query posts
 		$args = [
 			'post_status' => 'publish',
+			'ignore_sticky_posts' => true,
 		];
 
 		$current_post_id = get_the_ID();
