@@ -237,7 +237,7 @@ class Solarplexus {
 	public static function the_block_pagination(
 		$block_attributes_or_args,
 		$pagination = null,
-		$pagination_options = [],
+		$pagination_options = []
 	) {
 		$args = [];
 		if ($pagination === null) {
@@ -292,7 +292,9 @@ class Solarplexus {
 		}
 
 		echo '
-<nav class="splx-pagination' . (isset($args['class']) ? ' ' . $args['class'] : '') . '" aria-label="Pagination">
+<nav class="splx-pagination' .
+			(isset($args['class']) ? ' ' . $args['class'] : '') .
+			'" aria-label="Pagination">
 	' .
 			paginate_links($pagination_args) .
 			'
