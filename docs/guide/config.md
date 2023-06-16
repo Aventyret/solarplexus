@@ -174,7 +174,7 @@ _bool_ - Whether to show the post excerpts in the rendered lists.
 
 Configuration in a json file can be conveniant, but in some cases you need more flexibility.
 
-Perhaps to att translations to block names or custom controls, or to make the configration conditional – for instance if you want different blocks in differnt network sites with the same theme.
+Perhaps to add translations to block names or custom controls, or to make the configuration conditional – for instance if you want different blocks in different network sites with the same theme.
 
 In these cases you can use the filter `splx_config` to make dynamic adjustments to the configuration. This is an example of how you could add translations to your block titles:
 
