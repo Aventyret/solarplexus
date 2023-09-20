@@ -36,7 +36,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 		const searchUris = [];
 		if (!postTypes.length) {
 			// Default to search endpoint if no post types are specified
-			searchUris.push(`/wp/v2/search/?search=${searchInput}`);
+			searchUris.push(`/wp/v2/search/?search=${searchInput}&per_page=30`);
 		}
 
 		// Filter out post types that are not available
@@ -52,7 +52,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 				['post', 'page'].includes(postType) ? 's' : ''
 			}`;
 
-			searchUris.push(`/wp/v2/${endpoint}/?search=${searchInput}`);
+			searchUris.push(`/wp/v2/${endpoint}/?search=${searchInput}&per_page=20`);
 		});
 
 		const search = async () => {
@@ -125,7 +125,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 					return (
 						<li className="splx-searchResult" key={searchResult.id}>
 							<div>
-								<em>{searchResult.title}</em>
+								<em>{searchResult.title}&nbsp;</em>
 								<span>{__(searchResult.subtype, 'splx')}</span>
 							</div>
 
