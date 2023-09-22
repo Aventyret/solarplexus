@@ -150,7 +150,7 @@ class Solarplexus_Helpers {
 		}
 
 		if (array_key_exists('order', $block_attributes)) {
-			$args['order'] = $block_attributes['order'];
+			$args['order'] = strtoupper($block_attributes['order']);
 		}
 
 		// NOTE: Legacy tax_query from before multiple taxonomies
