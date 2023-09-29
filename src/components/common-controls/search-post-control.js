@@ -5,7 +5,7 @@ const apiFetch = window.wp.apiFetch;
 
 import { debounce, find } from 'lodash';
 
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useRef } from '@wordpress/element';
 
 import { TextControl, Button } from '@wordpress/components';
 
@@ -14,6 +14,7 @@ import { useSelect } from '@wordpress/data';
 const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 	const [searchInput, setSearchInput] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
+	const inputRef = useRef(null);
 
 	const availablePostTypes = useSelect((select) => {
 		const { getPostTypes } = select('core');
@@ -117,12 +118,12 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 	}, 250);
 
 	const clearSearchResults = () => {
-		document.getElementById('splx-search-post-input').value = '';
 		setSearchResults([]);
 	};
 
 	const onSelectSearchResult = (searchResult) => {
 		setSearchInput('');
+		inputRef.current.value = '';
 		selectSearchResult(searchResult);
 	};
 
@@ -130,7 +131,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 		<div>
 			<h4>{__('Search posts', 'splx')}</h4>
 			<TextControl
-				id="splx-search-post-input"
+				ref={inputRef}
 				onChange={(nextValue) => onSearchInputChange(nextValue)}
 			/>
 			<ul>

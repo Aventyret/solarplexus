@@ -63,6 +63,12 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 	return (
 		<InspectorControls>
 			<PanelBody title={__('Block posts', 'splx')}>
+				<SearchPostControl
+					attributes={attributes}
+					config={config}
+					selectSearchResult={selectSearchResult}
+					existingPosts={attributes.searchResults}
+				/>
 				<div className="splx-handpickedPostsWrap">
 					<h4>{__('Selected posts', 'splx')}</h4>
 					<div className="splx-handpickedPosts">
@@ -105,12 +111,6 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 						})}
 					</div>
 				</div>
-				<SearchPostControl
-					attributes={attributes}
-					config={config}
-					selectSearchResult={selectSearchResult}
-					existingPosts={attributes.searchResults}
-				/>
 			</PanelBody>
 			<PanelBody title={__('Block settings', 'splx')}>
 				<CustomControls
