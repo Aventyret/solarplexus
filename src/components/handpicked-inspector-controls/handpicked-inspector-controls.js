@@ -62,56 +62,62 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 
 	return (
 		<InspectorControls>
-			<PanelBody title={__('Posts', 'splx')}>
+			<PanelBody title={__('Block posts', 'splx')}>
+				<div className="splx-handpickedPostsWrap">
+					<h4>{__('Selected posts', 'splx')}</h4>
+					<div className="splx-handpickedPosts">
+						{attributes.searchResults.length === 0 ? (
+							<em>{__('No posts selected')}</em>
+						) : null}
+						{attributes.searchResults.map((searchResult) => {
+							return (
+								<Card key={searchResult.id}>
+									<CardBody>
+										<h5 className="splx-handpickedPostTitle">
+											{searchResult.title}
+										</h5>
+										<div className="splx-handpickedPostButtons">
+											<Button
+												isSecondary
+												isSmall
+												onClick={() => moveSearchResultUp(searchResult.id)}
+											>
+												{__('Move up', 'splx')}
+											</Button>
+											<Button
+												isSecondary
+												isSmall
+												onClick={() => moveSearchResultDown(searchResult.id)}
+											>
+												{__('Move down', 'splx')}
+											</Button>
+											<Button
+												isSecondary
+												isSmall
+												onClick={() => removeSearchResult(searchResult.id)}
+											>
+												{__('Remove', 'splx')}
+											</Button>
+										</div>
+									</CardBody>
+								</Card>
+							);
+						})}
+					</div>
+				</div>
 				<SearchPostControl
 					attributes={attributes}
 					config={config}
 					selectSearchResult={selectSearchResult}
 					existingPosts={attributes.searchResults}
 				/>
-				{attributes.searchResults.length ? (
-					<div className="splx-handpickedPostsWrap">
-						<h4>{__('Selected posts', 'splx')}</h4>
-						<div className="splx-handpickedPosts">
-							{attributes.searchResults.map((searchResult) => {
-								return (
-									<Card key={searchResult.id}>
-										<CardBody>
-											<h5 className="splx-handpickedPostTitle">
-												{searchResult.title}
-											</h5>
-											<div className="splx-handpickedPostButtons">
-												<Button
-													isSecondary
-													isSmall
-													onClick={() => moveSearchResultUp(searchResult.id)}
-												>
-													{__('Move up', 'splx')}
-												</Button>
-												<Button
-													isSecondary
-													isSmall
-													onClick={() => moveSearchResultDown(searchResult.id)}
-												>
-													{__('Move down', 'splx')}
-												</Button>
-												<Button
-													isSecondary
-													isSmall
-													onClick={() => removeSearchResult(searchResult.id)}
-												>
-													{__('Remove', 'splx')}
-												</Button>
-											</div>
-										</CardBody>
-									</Card>
-								);
-							})}
-						</div>
-					</div>
-				) : null}
 			</PanelBody>
 			<PanelBody title={__('Block settings', 'splx')}>
+				<CustomControls
+					attributes={attributes}
+					setAttributes={setAttributes}
+					config={config}
+				/>
 				<CheckboxControl
 					checked={attributes.hideDuplicates}
 					label={__('Hide duplicates', 'splx')}
@@ -122,11 +128,6 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 					onChange={onHideDuplicatesCheckboxChange}
 				/>
 			</PanelBody>
-			<CustomControls
-				attributes={attributes}
-				setAttributes={setAttributes}
-				config={config}
-			/>
 		</InspectorControls>
 	);
 };

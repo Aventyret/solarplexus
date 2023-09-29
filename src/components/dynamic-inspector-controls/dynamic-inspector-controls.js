@@ -364,11 +364,13 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					) : null}
 				</PanelBody>
 			) : null}
-			<CustomControls
-				attributes={attributes}
-				setAttributes={setAttributes}
-				config={config}
-			/>
+			<PanelBody title={__('Block settings', 'splx')}>
+				<CustomControls
+					attributes={attributes}
+					setAttributes={setAttributes}
+					config={config}
+				/>
+			</PanelBody>
 		</InspectorControls>
 	);
 };

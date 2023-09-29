@@ -8,13 +8,11 @@ const CustomTextControl = ({ control, attributes, setAttributes }) => {
 	};
 
 	return (
-		<PanelBody>
-			<TextControl
-				label={control.name}
-				value={attributes[control.id]}
-				onChange={onChange}
-			/>
-		</PanelBody>
+		<TextControl
+			label={control.name}
+			value={attributes[control.id]}
+			onChange={onChange}
+		/>
 	);
 };
 

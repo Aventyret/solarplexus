@@ -105,17 +105,34 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 
 			setSearchResults(res.slice(0, 10));
 		};
-		if (searchInput.length > 2) search();
+		if (searchInput.length > 2) {
+			search();
+		} else {
+			clearSearchResults();
+		}
 	}, [searchInput, availablePostTypes]);
 
 	const onSearchInputChange = debounce((value) => {
 		setSearchInput(value);
 	}, 250);
 
+	const clearSearchResults = () => {
+		document.getElementById('splx-search-post-input').value = '';
+		setSearchResults([]);
+	};
+
+	const onSelectSearchResult = (searchResult) => {
+		setSearchInput('');
+		selectSearchResult(searchResult);
+	};
+
 	return (
 		<div>
-			<h4>{__('Search', 'splx')}</h4>
-			<TextControl onChange={(nextValue) => onSearchInputChange(nextValue)} />
+			<h4>{__('Search posts', 'splx')}</h4>
+			<TextControl
+				id="splx-search-post-input"
+				onChange={(nextValue) => onSearchInputChange(nextValue)}
+			/>
 			<ul>
 				{searchResults.map((searchResult) => {
 					const alreadySelected = !!find(existingPosts, (_searchResult) => {
@@ -133,7 +150,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 								isSecondary
 								isSmall
 								disabled={alreadySelected}
-								onClick={() => selectSearchResult(searchResult)}
+								onClick={() => onSelectSearchResult(searchResult)}
 							>
 								{alreadySelected
 									? __('Already selected', 'splx')
