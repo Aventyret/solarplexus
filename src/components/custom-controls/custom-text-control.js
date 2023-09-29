@@ -1,4 +1,4 @@
-import { PanelBody, TextControl } from '@wordpress/components';
+import { TextControl } from '@wordpress/components';
 
 const CustomTextControl = ({ control, attributes, setAttributes }) => {
 	const onChange = (val) => {

@@ -1,4 +1,4 @@
-import { PanelBody, SelectControl } from '@wordpress/components';
+import { SelectControl } from '@wordpress/components';
 
 const CustomSelectControl = ({ control, attributes, setAttributes }) => {
 	const onChange = (val) => {
@@ -8,19 +8,17 @@ const CustomSelectControl = ({ control, attributes, setAttributes }) => {
 	};
 
 	return (
-		<PanelBody>
-			<SelectControl
-				label={control.name}
-				value={attributes[control.id]}
-				onChange={onChange}
-				options={control.choices.map(({ value, label }) => {
-					return {
-						value,
-						label,
-					};
-				})}
-			/>
-		</PanelBody>
+		<SelectControl
+			label={control.name}
+			value={attributes[control.id]}
+			onChange={onChange}
+			options={control.choices.map(({ value, label }) => {
+				return {
+					value,
+					label,
+				};
+			})}
+		/>
 	);
 };
 
