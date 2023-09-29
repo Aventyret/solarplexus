@@ -103,6 +103,14 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 													{__('Remove', 'splx')}
 												</Button>
 											</div>
+											<div className="splx-handpickedPostCustomControls">
+												<CustomControls
+													attributes={attributes}
+													setAttributes={setAttributes}
+													config={config}
+													isPostCustomControls={true}
+												/>
+											</div>
 										</CardBody>
 									</Card>
 								);
@@ -122,11 +130,13 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 					onChange={onHideDuplicatesCheckboxChange}
 				/>
 			</PanelBody>
-			<CustomControls
-				attributes={attributes}
-				setAttributes={setAttributes}
-				config={config}
-			/>
+			<PanelBody title={__('Custom fields', 'splx')}>
+				<CustomControls
+					attributes={attributes}
+					setAttributes={setAttributes}
+					config={config}
+				/>
+			</PanelBody>
 		</InspectorControls>
 	);
 };

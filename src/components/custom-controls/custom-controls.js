@@ -2,8 +2,15 @@ import CustomSelectControl from './custom-select-control';
 import CustomTextControl from './custom-text-control';
 import CustomTextareaControl from './custom-textarea-control';
 
-const CustomControls = ({ attributes, setAttributes, config }) => {
-	if (!config.customControls || !config.customControls.length) {
+const CustomControls = ({
+	attributes,
+	setAttributes,
+	config,
+	isPostCustomControls = false,
+}) => {
+	config = isPostCustomControls ? '' : config.customControls;
+
+	if (!config || !config.length) {
 		return null;
 	}
 
