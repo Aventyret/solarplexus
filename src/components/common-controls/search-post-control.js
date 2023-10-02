@@ -16,17 +16,14 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 	const [searchResults, setSearchResults] = useState([]);
 	const inputRef = useRef(null);
 
-	const availablePostTypes = useSelect((select) => {
+	const allPostTypes = useSelect((select) => {
 		const { getPostTypes } = select('core');
 		const postTypes = getPostTypes({ per_page: -1 });
 
-		return postTypes && config.allowedPostTypes
-			? postTypes
-					.filter((postType) => {
-						return config.allowedPostTypes.includes(postType.slug);
-					})
-					.map((postType) => postType.slug)
-			: null;
+		return postTypes.reduce((allPostTypes, postType) => {
+			allPostTypes[postType.slug] = postType;
+			return allPostTypes;
+		}, {});
 	}, []);
 
 	useEffect(() => {
@@ -41,6 +38,12 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 		}
 
 		// Filter out post types that are not available
+		const availablePostTypes =
+			allPostTypes && config.allowedPostTypes
+				? Object.keys(allPostTypes).filter((postTypeSlug) => {
+						return config.allowedPostTypes.includes(postTypeSlug);
+				  })
+				: null;
 		if (availablePostTypes) {
 			postTypes = postTypes.filter((postType) => {
 				return availablePostTypes.includes(postType);
@@ -111,7 +114,14 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 		} else {
 			clearSearchResults();
 		}
-	}, [searchInput, availablePostTypes]);
+	}, [searchInput, allPostTypes]);
+
+	const objectSubTypeLabel = (subTypeSlug) => {
+		if (allPostTypes[subTypeSlug]?.labels?.singular_name) {
+			return allPostTypes[subTypeSlug].labels.singular_name;
+		}
+		return subTypeSlug;
+	};
 
 	const onSearchInputChange = debounce((value) => {
 		setSearchInput(value);
@@ -144,7 +154,9 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 						<li className="splx-searchResult" key={searchResult.id}>
 							<div>
 								<em>{searchResult.title}&nbsp;</em>
-								<span>{__(searchResult.subtype, 'splx')}</span>
+								{searchResult.subtype ? (
+									<span>— {objectSubTypeLabel(searchResult.subtype)}</span>
+								) : null}
 							</div>
 
 							<Button
