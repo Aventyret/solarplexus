@@ -5,7 +5,7 @@ const apiFetch = window.wp.apiFetch;
 
 import { debounce, find } from 'lodash';
 
-import { useEffect, useState } from '@wordpress/element';
+import { useEffect, useState, useRef } from '@wordpress/element';
 
 import { TextControl, Button } from '@wordpress/components';
 
@@ -14,18 +14,16 @@ import { useSelect } from '@wordpress/data';
 const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 	const [searchInput, setSearchInput] = useState('');
 	const [searchResults, setSearchResults] = useState([]);
+	const inputRef = useRef(null);
 
-	const availablePostTypes = useSelect((select) => {
+	const allPostTypes = useSelect((select) => {
 		const { getPostTypes } = select('core');
 		const postTypes = getPostTypes({ per_page: -1 });
 
-		return postTypes && config.allowedPostTypes
-			? postTypes
-					.filter((postType) => {
-						return config.allowedPostTypes.includes(postType.slug);
-					})
-					.map((postType) => postType.slug)
-			: null;
+		return postTypes.reduce((allPostTypes, postType) => {
+			allPostTypes[postType.slug] = postType;
+			return allPostTypes;
+		}, {});
 	}, []);
 
 	useEffect(() => {
@@ -40,6 +38,12 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 		}
 
 		// Filter out post types that are not available
+		const availablePostTypes =
+			allPostTypes && config.allowedPostTypes
+				? Object.keys(allPostTypes).filter((postTypeSlug) => {
+						return config.allowedPostTypes.includes(postTypeSlug);
+				  })
+				: null;
 		if (availablePostTypes) {
 			postTypes = postTypes.filter((postType) => {
 				return availablePostTypes.includes(postType);
@@ -105,17 +109,41 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 
 			setSearchResults(res.slice(0, 10));
 		};
-		if (searchInput.length > 2) search();
-	}, [searchInput, availablePostTypes]);
+		if (searchInput.length > 2) {
+			search();
+		} else {
+			clearSearchResults();
+		}
+	}, [searchInput, allPostTypes]);
+
+	const objectSubTypeLabel = (subTypeSlug) => {
+		if (allPostTypes[subTypeSlug]?.labels?.singular_name) {
+			return allPostTypes[subTypeSlug].labels.singular_name;
+		}
+		return subTypeSlug;
+	};
 
 	const onSearchInputChange = debounce((value) => {
 		setSearchInput(value);
 	}, 250);
 
+	const clearSearchResults = () => {
+		setSearchResults([]);
+	};
+
+	const onSelectSearchResult = (searchResult) => {
+		setSearchInput('');
+		inputRef.current.value = '';
+		selectSearchResult(searchResult);
+	};
+
 	return (
 		<div>
-			<h4>{__('Search', 'splx')}</h4>
-			<TextControl onChange={(nextValue) => onSearchInputChange(nextValue)} />
+			<h4>{__('Search posts', 'splx')}</h4>
+			<TextControl
+				ref={inputRef}
+				onChange={(nextValue) => onSearchInputChange(nextValue)}
+			/>
 			<ul>
 				{searchResults.map((searchResult) => {
 					const alreadySelected = !!find(existingPosts, (_searchResult) => {
@@ -126,14 +154,16 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 						<li className="splx-searchResult" key={searchResult.id}>
 							<div>
 								<em>{searchResult.title}&nbsp;</em>
-								<span>{__(searchResult.subtype, 'splx')}</span>
+								{searchResult.subtype ? (
+									<span>— {objectSubTypeLabel(searchResult.subtype)}</span>
+								) : null}
 							</div>
 
 							<Button
 								isSecondary
 								isSmall
 								disabled={alreadySelected}
-								onClick={() => selectSearchResult(searchResult)}
+								onClick={() => onSelectSearchResult(searchResult)}
 							>
 								{alreadySelected
 									? __('Already selected', 'splx')

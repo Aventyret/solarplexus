@@ -2,14 +2,14 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Solarplexus\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/solarplexus\n"
+"POT-Creation-Date: 2022-11-02T14:02:13+00:00\n"
+"PO-Revision-Date: 2023-10-01 20:56+0200\n"
 "Last-Translator: \n"
 "Language-Team: \n"
+"Language: sv_SE\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2022-11-02T14:02:13+00:00\n"
-"PO-Revision-Date: 2022-11-02 15:04+0100\n"
-"Language: sv_SE\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.0.1\n"
 "X-Poedit-Basepath: ..\n"
@@ -38,148 +38,142 @@ msgstr ""
 msgid "Äventyret"
 msgstr ""
 
-#: build/index.js:218
-msgid "Search"
-msgstr "Sök"
-
-#: build/index.js:232
+#: build/index.js:292
 msgid "Already selected"
 msgstr "Redan vald"
 
-#: build/index.js:232
+#: build/index.js:292
 msgid "Select"
 msgstr "Välj"
 
-#: build/index.js:664
+#: build/index.js:724
 msgid "Post types"
 msgstr "Innehållstyper"
 
-#: build/index.js:674
+#: build/index.js:734
 msgid "Filter"
 msgstr "Filter"
 
-#: build/index.js:685
+#: build/index.js:745
 msgid "Authors"
 msgstr "Författare"
 
-#: build/index.js:692
+#: build/index.js:752
 msgid "Sort order"
 msgstr "Sorteringsordning"
 
-#: build/index.js:694
+#: build/index.js:754
 msgid "Order by"
 msgstr "Sortera efter"
 
-#: build/index.js:704
+#: build/index.js:764
 msgid "Meta field name"
 msgstr "Namn på metafält"
 
-#: build/index.js:708
+#: build/index.js:768
 msgid "Order"
 msgstr "Ordning"
 
-#: build/index.js:718
+#: build/index.js:778
 msgid "Pagination"
 msgstr "Paginering"
 
-#: build/index.js:721
+#: build/index.js:781
 msgid "Has pagination"
 msgstr "Har paginering"
 
-#: build/index.js:974
-msgid "Number of items"
-msgstr "Antal objekt"
-
-#: build/index.js:725
+#: build/index.js:785
 msgid "Handpicked posts"
 msgstr "Handplockade inlägg"
 
-#: build/index.js:733
-#: build/index.js:948
+#: build/index.js:793 build/index.js:916
 msgid "Selected posts"
 msgstr "Valda inlägg"
 
-#: build/index.js:746
-#: build/index.js:969
+#: build/index.js:806 build/index.js:937
 msgid "Remove"
 msgstr "Ta bort"
 
-#: build/index.js:940
-msgid "Posts"
-msgstr "Inlägg"
-
-#: build/index.js:961
+#: build/index.js:929
 msgid "Move up"
 msgstr "Flytta upp"
 
-#: build/index.js:965
+#: build/index.js:933
 msgid "Move down"
 msgstr "Flytta ner"
 
-#: build/index.js:971
+#: build/index.js:812 build/index.js:939
 msgid "Block settings"
-msgstr "Blockinställningar"
+msgstr "Inställningar för blocket"
 
-#: build/index.js:980
+#: build/index.js:946
 msgid "Hide duplicates"
 msgstr "Dölj dubbletter"
 
-#: build/index.js:981
+#: build/index.js:947
 msgid "This will hide posts that are shown in blocks earlier on the page (they will still be visible in the editor)."
 msgstr "Den här inställningen döljer inlägg som har visats i block tidigare på sidan (de kommer fortfarande att visas i editorn)."
 
-#: build/index.js:1016
+#: build/index.js:1065
 msgid "Image as background"
 msgstr "Bild som bakgrund"
 
-#: build/index.js:1020
+#: build/index.js:1069
 msgid "Image on top"
 msgstr "Bild överst"
 
-#: build/index.js:1024
+#: build/index.js:1073
 msgid "Image to the left"
 msgstr "Bild till vänster"
 
-#: build/index.js:1029
+#: build/index.js:1078
 msgid "Date"
 msgstr "Datum"
 
-#: build/index.js:1030
+#: build/index.js:1079
 msgid "Title"
 msgstr "Rubrik"
 
-#: build/index.js:1031
+#: build/index.js:1080
 msgid "Menu order"
 msgstr "Menyordning"
 
-#: build/index.js:1032
+#: build/index.js:1081
 msgid "Post meta"
 msgstr "Metafält"
 
-#: build/index.js:1033
+#: build/index.js:1082
 msgid "Post meta, numeric"
 msgstr "Metafält, numerisk"
 
-#: build/index.js:1036
+#: build/index.js:1085
 msgid "Ascending"
 msgstr "Stigande"
 
-#: build/index.js:1037
+#: build/index.js:1086
 msgid "Descending"
 msgstr "Fallande"
 
-#: build/index.js:809
+#: build/index.js:1003
 msgid "Number of posts"
 msgstr "Antal objekt"
 
-#: build/index.js:812
+#: build/index.js:1006
 msgid "Posts per page"
 msgstr "Inlägg per sida"
 
-#: build/index.js:823
+#: build/index.js:1017
 msgid "Display settings"
 msgstr "Visningsinställningar"
 
-#: build/index.js:835
+#: build/index.js:1029
 msgid "Offset"
 msgstr ""
+
+#: build/index.js:277
+msgid "Search posts"
+msgstr "Sök bland inlägg"
+
+#: build/index.js:908
+msgid "Block posts"
+msgstr "Blockets inlägg"
