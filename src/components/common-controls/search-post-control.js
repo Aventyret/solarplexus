@@ -20,7 +20,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 		const { getPostTypes } = select('core');
 		const postTypes = getPostTypes({ per_page: -1 });
 
-		return postTypes.reduce((allPostTypes, postType) => {
+		return (postTypes || ['post']).reduce((allPostTypes, postType) => {
 			allPostTypes[postType.slug] = postType;
 			return allPostTypes;
 		}, {});
