@@ -19,6 +19,26 @@
 	margin-bottom: 24px;
 }
 
+.splx-searchResult {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 3px 0;
+}
+
+.splx-searchResult .title {
+	font-size: 14px;
+}
+
+.splx-searchResult .pill {
+	color: rgb(240, 240, 240);
+	padding: 3px 6px;
+	border-radius: 12px;
+	/* background-color: rgba(30,30,30,0.8); */
+	background-color: rgb(0, 109, 164);
+	font-size: 12px;
+}
+
 .splx-handpickedPostsWrap h4 {
 	margin-bottom: 0;
 }
@@ -53,4 +73,5 @@
 
 .splx-handpickedPosts .components-button.is-secondary {
 	box-shadow: none;
+	height: 20px;
 }

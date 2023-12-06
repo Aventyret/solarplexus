@@ -153,9 +153,9 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 					return (
 						<li className="splx-searchResult" key={searchResult.id}>
 							<div>
-								<em>{searchResult.title}&nbsp;</em>
+								<span className="title">{searchResult.title}&nbsp;</span>
 								{searchResult.subtype ? (
-									<span>— {objectSubTypeLabel(searchResult.subtype)}</span>
+									<span className="pill">{objectSubTypeLabel(searchResult.subtype)}</span>
 								) : null}
 							</div>
 
@@ -166,7 +166,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 								onClick={() => onSelectSearchResult(searchResult)}
 							>
 								{alreadySelected
-									? __('Already selected', 'splx')
+									? __('Selected', 'splx')
 									: __('Select', 'splx')}
 							</Button>
 						</li>
