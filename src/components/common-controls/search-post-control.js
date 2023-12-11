@@ -155,7 +155,9 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 							<div>
 								<span className="title">{searchResult.title}&nbsp;</span>
 								{searchResult.subtype ? (
-									<span className="pill">{objectSubTypeLabel(searchResult.subtype)}</span>
+									<span className="pill">
+										{objectSubTypeLabel(searchResult.subtype)}
+									</span>
 								) : null}
 							</div>
 
