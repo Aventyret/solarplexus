@@ -7,6 +7,7 @@ import {
 	Card,
 	CardBody,
 	Button,
+	Icon,
 	CheckboxControl,
 } from '@wordpress/components';
 
@@ -86,23 +87,26 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 											<Button
 												isSecondary
 												isSmall
+												label={__('Move up', 'splx')}
 												onClick={() => moveSearchResultUp(searchResult.id)}
 											>
-												{__('Move up', 'splx')}
+												<Icon icon="arrow-up-alt2" />
 											</Button>
 											<Button
 												isSecondary
 												isSmall
+												label={__('Move down', 'splx')}
 												onClick={() => moveSearchResultDown(searchResult.id)}
 											>
-												{__('Move down', 'splx')}
+												<Icon icon="arrow-down-alt2" />
 											</Button>
 											<Button
 												isSecondary
 												isSmall
+												label={__('Remove', 'splx')}
 												onClick={() => removeSearchResult(searchResult.id)}
 											>
-												{__('Remove', 'splx')}
+												<Icon icon="trash" />
 											</Button>
 										</div>
 									</CardBody>
