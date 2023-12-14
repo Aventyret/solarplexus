@@ -72,6 +72,10 @@ _boolean_ - `handpicked` type only. If true posts are added to the start of the 
 
 _[string]_ - `dynamic` type only. The key(s) of the taxonomies the editor will be able to filter on when using the block. For custom taxonomies, you must have `show_in_rest` set to `true` when calling `register_taxonomy` in your theme/plugin.
 
+### allowedPostStatuses - optional
+
+_[string]_ - `handpicked` type only. Defaults to ["publish"]. Posts with any other status than "publish" will only be visible in the editor.
+
 ### allowDuplicates - optional
 
 _boolean_ - `dynamic` type only. Sets if Solarplexus check for not showing duplicate posts on the same page should be disabled. Defaults to `false`.

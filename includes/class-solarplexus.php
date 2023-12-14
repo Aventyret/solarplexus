@@ -163,6 +163,7 @@ class Solarplexus {
 			11
 		);
 		$this->loader->add_action('init', $plugin_admin, 'register_block', 11);
+		$this->loader->add_action('rest_api_init', $plugin_admin, 'register_endpoints');
 	}
 
 	/**

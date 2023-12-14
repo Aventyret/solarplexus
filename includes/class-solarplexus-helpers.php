@@ -120,8 +120,12 @@ class Solarplexus_Helpers {
 		}
 
 		// Query posts
+		$post_status = 'publish';
+		if (self::is_gutenberg_request() && isset($block_config["allowedPostStatuses"]) && !empty($block_config["allowedPostStatuses"])) {
+			$post_status = $block_config["allowedPostStatuses"];
+		}
 		$args = [
-			'post_status' => 'publish',
+			'post_status' => $post_status,
 			'ignore_sticky_posts' => true,
 		];
 
