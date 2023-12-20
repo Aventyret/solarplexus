@@ -104,19 +104,19 @@ _[string]_ - Specifies of what post types posts can be handpicked from. If omitt
 
 _string_ - The icon for the block type, defaults to the Solarplexus logo. Use one of the following default logos or an inline SVG html string. Double quotes can be escaped.
 
-| Name          | Icon          |
-| ------------- | ------------- |
-| default       | ![Default](/solarplexus.svg) |
-| article       | ![Article](/article.svg) |
-| articles		  | ![Multiple articles](/articles.svg) |
-| masonry				| ![Masonry](/masonry.svg) |
-| 1-col					| ![1-col](/1-col.svg) |
-| 2-col					| ![2-col](/2-col.svg) |
-| 3-col					| ![3-col](/3-col.svg) |
-| 4-col					| ![4-col](/4-col.svg) |
-| 2-col-grid		| ![2-col grid](/2-grid.svg) |
-| 3-col-grid		| ![3-col grid](/3-grid.svg) |
-| 4-col-grid		| ![4-col grid](/4-grid.svg) |
+| Name       | Icon                                |
+| ---------- | ----------------------------------- |
+| default    | ![Default](/solarplexus.svg)        |
+| article    | ![Article](/article.svg)            |
+| articles   | ![Multiple articles](/articles.svg) |
+| masonry    | ![Masonry](/masonry.svg)            |
+| 1-col      | ![1-col](/1-col.svg)                |
+| 2-col      | ![2-col](/2-col.svg)                |
+| 3-col      | ![3-col](/3-col.svg)                |
+| 4-col      | ![4-col](/4-col.svg)                |
+| 2-col-grid | ![2-col grid](/2-grid.svg)          |
+| 3-col-grid | ![3-col grid](/3-grid.svg)          |
+| 4-col-grid | ![4-col grid](/4-grid.svg)          |
 
 ### customControls - optional
 
