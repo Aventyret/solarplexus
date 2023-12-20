@@ -227,35 +227,45 @@ class Solarplexus_Admin {
 	}
 
 	public function register_endpoints() {
-	  register_rest_route( SPLX_API_BASE, '/search', array(
-	    'methods' => 'GET',
-	    'callback' => function() {
-	    	$s = strtolower(isset($_GET["s"]) && strlen($_GET["s"] > 2) ? $_GET["s"] : "");
-	    	if (!$s) {
-	    		throw new Exception("Search for a minimum of 2 characters");
-	    		wp_die();
-	    	}
-	    	$post_status = isset($_GET["status"]) ? explode(',', $_GET["status"]) : ["publish"];
-	    	$post_type = isset($_GET["post_type"]) ? explode(',', $_GET["post_type"]) : ["post"];
-	    	$posts_per_page = isset($_GET["per_page"]) ? $_GET["per_page"] : 30;
-	    	$posts = get_posts(array(
-	    		"s" => $s,
-	    		"post_status" => $post_status,
-	    		"post_type" => $post_type,
-	    		"posts_per_page" => 100,
-	    	));
-	    	$posts = array_map(function($p) {
-	    		return array(
-	    			"id" => $p->ID,
-	    			"title" => $p->post_title,
-	    			"url" => get_permalink($p->ID),
-	    			"type" => $p->post_type,
-	    			"subtype" => $p->post_type,
-	    		);
-	    	}, $posts);
-	    	usort($posts, function($a, $b) use($s) {
-	    		$titleA = strtolower($a["title"]);
-	    		$titleB = strtolower($b["title"]);
+		register_rest_route(SPLX_API_BASE, '/search', [
+			'methods' => 'GET',
+			'callback' => function () {
+				$s = strtolower(
+					isset($_GET['s']) && strlen($_GET['s'] > 2)
+						? $_GET['s']
+						: ''
+				);
+				if (!$s) {
+					throw new Exception('Search for a minimum of 2 characters');
+					wp_die();
+				}
+				$post_status = isset($_GET['status'])
+					? explode(',', $_GET['status'])
+					: ['publish'];
+				$post_type = isset($_GET['post_type'])
+					? explode(',', $_GET['post_type'])
+					: ['post'];
+				$posts_per_page = isset($_GET['per_page'])
+					? $_GET['per_page']
+					: 30;
+				$posts = get_posts([
+					's' => $s,
+					'post_status' => $post_status,
+					'post_type' => $post_type,
+					'posts_per_page' => 100,
+				]);
+				$posts = array_map(function ($p) {
+					return [
+						'id' => $p->ID,
+						'title' => $p->post_title,
+						'url' => get_permalink($p->ID),
+						'type' => $p->post_type,
+						'subtype' => $p->post_type,
+					];
+				}, $posts);
+				usort($posts, function ($a, $b) use ($s) {
+					$titleA = strtolower($a['title']);
+					$titleB = strtolower($b['title']);
 					if ($titleA === $s) {
 						return -1;
 					}
@@ -268,19 +278,20 @@ class Solarplexus_Admin {
 					if ($titleB && strpos($titleB, $s) === 0) {
 						return 1;
 					}
-					if (strpos($titleA, $s) !== FALSE) {
+					if (strpos($titleA, $s) !== false) {
 						return -1;
 					}
-					if (strpos($titleB, $s) !== FALSE) {
+					if (strpos($titleB, $s) !== false) {
 						return 1;
 					}
 					return 0;
-	    	});
-	    	return array_slice($posts, 0, $posts_per_page);
-	    },
-	    'permission_callback' => function() {
-	    	return true;
-	    },
-	  ));
+				});
+				return array_slice($posts, 0, $posts_per_page);
+			},
+			'permission_callback' => function ($request) {
+				$can_search = current_user_can('edit_posts');
+				return apply_filters('splx_can_search_in_admin', $can_search);
+			},
+		]);
 	}
 }
