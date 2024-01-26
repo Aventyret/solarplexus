@@ -10,8 +10,6 @@ import {
 	RangeControl,
 } from '@wordpress/components';
 
-import { isArray } from 'lodash';
-
 import { settings } from '@wordpress/icons';
 
 const Toolbar = ({ attributes, setAttributes, config }) => {
@@ -43,7 +41,7 @@ const Toolbar = ({ attributes, setAttributes, config }) => {
 						)}
 						renderContent={() => (
 							<>
-								{isArray(config.noOfPosts) ? (
+								{Array?.isArray && Array.isArray(config.noOfPosts) ? (
 									<BaseControl>
 										<RangeControl
 											label={noOfPostsLabel}

@@ -1,7 +1,5 @@
 const { __ } = window.wp.i18n;
 
-import { findIndex } from 'lodash';
-
 import {
 	PanelBody,
 	Card,
@@ -25,7 +23,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 		});
 	};
 	const move = (itemId, isUp) => {
-		const itemIndex = findIndex(attributes.searchResults, (searchResult) => {
+		const itemIndex = attributes.searchResults.findIndex((searchResult) => {
 			return searchResult.id === itemId;
 		});
 		if (itemIndex === -1 || (isUp && itemIndex === 0)) return;
