@@ -242,9 +242,9 @@ class Solarplexus_Admin {
 				$post_status = isset($_GET['status'])
 					? explode(',', $_GET['status'])
 					: ['publish'];
-				$post_type = isset($_GET['post_type'])
+				$post_type = isset($_GET['post_type']) && $_GET['post_type']
 					? explode(',', $_GET['post_type'])
-					: ['post'];
+					: 'any';
 				$posts_per_page = isset($_GET['per_page'])
 					? $_GET['per_page']
 					: 30;
