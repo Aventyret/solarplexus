@@ -2,5 +2,6 @@ node_modules
 vendor
 build
 dist
+languages
 docs/.vitepress
 languages

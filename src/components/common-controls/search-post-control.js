@@ -3,13 +3,13 @@ import './search-post-control.scss';
 const { __ } = window.wp.i18n;
 const apiFetch = window.wp.apiFetch;
 
-import { debounce, find } from 'lodash';
-
 import { useEffect, useState, useRef } from '@wordpress/element';
 
 import { TextControl, Button } from '@wordpress/components';
 
 import { useSelect } from '@wordpress/data';
+
+import debounce from '../../utils/debounce';
 
 const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 	const [searchInput, setSearchInput] = useState('');
@@ -71,7 +71,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 
 	const onSearchInputChange = debounce((value) => {
 		setSearchInput(value);
-	}, 250);
+	});
 
 	const clearSearchResults = () => {
 		setSearchResults([]);
@@ -92,7 +92,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 			/>
 			<ul>
 				{searchResults.map((searchResult) => {
-					const alreadySelected = !!find(existingPosts, (_searchResult) => {
+					const alreadySelected = !!existingPosts.find((_searchResult) => {
 						return searchResult.id === _searchResult.id;
 					});
 
