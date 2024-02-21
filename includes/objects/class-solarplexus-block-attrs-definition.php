@@ -96,28 +96,12 @@ class Solarplexus_Block_Attrs_Definition {
 	}
 
 	private function set_custom_controls() {
-		$allowed_keys = ['customControls', 'postCustomControls'];
-		$custom_controls = [];
-
-		foreach ($allowed_keys as $key) {
-			$custom_controls[$key] = $this->get_custom_controls($key);
-		}
-
-		if (empty($custom_controls)) {
+		if (!array_key_exists('customControls', $this->config)) {
+			$this->custom_controls = [];
 			return;
 		}
-
-		$this->custom_controls = $custom_controls;
-
-		error_log('$this->custom_controls: ' . print_r($this->custom_controls, true));
-	}
-
-	private function get_custom_controls($key) {
-		if (!array_key_exists($key, $this->config)) {
-			return [];
-		}
 		$custom_controls = [];
-		foreach ($this->config[$key] as $control) {
+		foreach ($this->config['customControls'] as $control) {
 			if (array_key_exists('choices', $control)) {
 				$custom_controls[$control['id']] = self::build_attribute(
 					'string',
@@ -130,7 +114,6 @@ class Solarplexus_Block_Attrs_Definition {
 				);
 			}
 		}
-
-		return $custom_controls;
+		$this->custom_controls = $custom_controls;
 	}
 }
