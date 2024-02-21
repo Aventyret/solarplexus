@@ -72,6 +72,10 @@ _boolean_ - `handpicked` type only. If true posts are added to the start of the 
 
 _[string]_ - `dynamic` type only. The key(s) of the taxonomies the editor will be able to filter on when using the block. For custom taxonomies, you must have `show_in_rest` set to `true` when calling `register_taxonomy` in your theme/plugin.
 
+### allowedPostStatuses - optional
+
+_[string]_ - `handpicked` type only. Defaults to ["publish"]. Posts with any other status than "publish" will only be visible in the editor.
+
 ### allowDuplicates - optional
 
 _boolean_ - `dynamic` type only. Sets if Solarplexus check for not showing duplicate posts on the same page should be disabled. Defaults to `false`.
@@ -98,7 +102,21 @@ _[string]_ - Specifies of what post types posts can be handpicked from. If omitt
 
 ### icon - optional
 
-_string_ - The icon for the block type, defaults to the Solarplexus logo. Can be an inline SVG html string. Double quotes can be escaped.
+_string_ - The icon for the block type, defaults to the Solarplexus logo. Use one of the following default logos or an inline SVG html string. Double quotes can be escaped.
+
+| Name       | Icon                                |
+| ---------- | ----------------------------------- |
+| default    | ![Default](/solarplexus.svg)        |
+| article    | ![Article](/article.svg)            |
+| articles   | ![Multiple articles](/articles.svg) |
+| masonry    | ![Masonry](/masonry.svg)            |
+| 1-col      | ![1-col](/1-col.svg)                |
+| 2-col      | ![2-col](/2-col.svg)                |
+| 3-col      | ![3-col](/3-col.svg)                |
+| 4-col      | ![4-col](/4-col.svg)                |
+| 2-col-grid | ![2-col grid](/2-grid.svg)          |
+| 3-col-grid | ![3-col grid](/3-grid.svg)          |
+| 4-col-grid | ![4-col grid](/4-grid.svg)          |
 
 ### customControls - optional
 
@@ -156,7 +174,7 @@ The following attributes are only required (and meaningful) when you use Solarpl
 
 ### noOfGridCols
 
-_int_ - The number of columns (when screen with allows) the post grid will consist of.
+_int_ - The number of columns (when screen width allows) the post grid will consist of.
 
 ### itemLayout
 

@@ -16,7 +16,7 @@
  * Plugin Name:       Solarplexus
  * Plugin URI:        https://aventyret.com
  * Description:       A plugin and developer tool to easily create Gutenberg blocks for creating dynamic and static lists of posts, pages and more.
- * Version:           1.11.2
+ * Version:           1.14.1
  * Author:            Äventyret
  * Author URI:        https://aventyret.com
  * License:           GPL-2.0+
@@ -33,12 +33,13 @@ if (!defined('WPINC')) {
 define('SPLX_PLUGIN_PATH', plugin_dir_path(__FILE__));
 define('SPLX_PLUGIN_DIR_URL', plugin_dir_url(__FILE__));
 define('SPLX_TEMPLATE_FOLDER', 'splx-templates');
+define('SPLX_API_BASE', 'splx/v1');
 
 /**
  * Current plugin version.
  * We use SemVer - https://semver.org
  */
-define('SOLARPLEXUS_VERSION', '1.11.2');
+define('SOLARPLEXUS_VERSION', '1.14.1');
 
 /**
  * The core plugin class that is used to define internationalization,

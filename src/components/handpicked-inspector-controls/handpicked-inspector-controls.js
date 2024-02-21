@@ -1,12 +1,11 @@
 const { __ } = window.wp.i18n;
 
-import { findIndex } from 'lodash';
-
 import {
 	PanelBody,
 	Card,
 	CardBody,
 	Button,
+	Icon,
 	CheckboxControl,
 } from '@wordpress/components';
 
@@ -24,7 +23,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 		});
 	};
 	const move = (itemId, isUp) => {
-		const itemIndex = findIndex(attributes.searchResults, (searchResult) => {
+		const itemIndex = attributes.searchResults.findIndex((searchResult) => {
 			return searchResult.id === itemId;
 		});
 		if (itemIndex === -1 || (isUp && itemIndex === 0)) return;
@@ -62,64 +61,65 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 
 	return (
 		<InspectorControls>
-			<PanelBody title={__('Posts', 'splx')}>
+			<PanelBody title={__('Block posts', 'splx')}>
 				<SearchPostControl
 					attributes={attributes}
 					config={config}
 					selectSearchResult={selectSearchResult}
 					existingPosts={attributes.searchResults}
 				/>
-				{attributes.searchResults.length ? (
-					<div className="splx-handpickedPostsWrap">
-						<h4>{__('Selected posts', 'splx')}</h4>
-						<div className="splx-handpickedPosts">
-							{attributes.searchResults.map((searchResult) => {
-								return (
-									<Card key={searchResult.id}>
-										<CardBody>
-											<h5 className="splx-handpickedPostTitle">
-												{searchResult.title}
-											</h5>
-											<div className="splx-handpickedPostButtons">
-												<Button
-													isSecondary
-													isSmall
-													onClick={() => moveSearchResultUp(searchResult.id)}
-												>
-													{__('Move up', 'splx')}
-												</Button>
-												<Button
-													isSecondary
-													isSmall
-													onClick={() => moveSearchResultDown(searchResult.id)}
-												>
-													{__('Move down', 'splx')}
-												</Button>
-												<Button
-													isSecondary
-													isSmall
-													onClick={() => removeSearchResult(searchResult.id)}
-												>
-													{__('Remove', 'splx')}
-												</Button>
-											</div>
-											<div className="splx-handpickedPostCustomControls">
-												<CustomControls
-													attributes={attributes}
-													setAttributes={setAttributes}
-													config={config}
-													isPostCustomControls={true}
-												/>
-											</div>
-										</CardBody>
-									</Card>
-								);
-							})}
-						</div>
+				<div className="splx-handpickedPostsWrap">
+					<h4>{__('Selected posts', 'splx')}</h4>
+					<div className="splx-handpickedPosts">
+						{attributes.searchResults.length === 0 ? (
+							<em>{__('No posts selected')}</em>
+						) : null}
+						{attributes.searchResults.map((searchResult) => {
+							return (
+								<Card key={searchResult.id}>
+									<CardBody>
+										<h5 className="splx-handpickedPostTitle">
+											{searchResult.title}
+										</h5>
+										<div className="splx-handpickedPostButtons">
+											<Button
+												isSecondary
+												isSmall
+												label={__('Move up', 'splx')}
+												onClick={() => moveSearchResultUp(searchResult.id)}
+											>
+												<Icon icon="arrow-up-alt2" />
+											</Button>
+											<Button
+												isSecondary
+												isSmall
+												label={__('Move down', 'splx')}
+												onClick={() => moveSearchResultDown(searchResult.id)}
+											>
+												<Icon icon="arrow-down-alt2" />
+											</Button>
+											<Button
+												isSecondary
+												isSmall
+												label={__('Remove', 'splx')}
+												onClick={() => removeSearchResult(searchResult.id)}
+											>
+												<Icon icon="trash" />
+											</Button>
+										</div>
+									</CardBody>
+								</Card>
+							);
+						})}
 					</div>
-				) : null}
+				</div>
 			</PanelBody>
 			<PanelBody title={__('Block settings', 'splx')}>
+				<CustomControls
+					attributes={attributes}
+					setAttributes={setAttributes}
+					config={config}
+				/>
 				<CheckboxControl
 					checked={attributes.hideDuplicates}
 					label={__('Hide duplicates', 'splx')}
@@ -128,13 +128,6 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 						'splx'
 					)}
 					onChange={onHideDuplicatesCheckboxChange}
-				/>
-			</PanelBody>
-			<PanelBody title={__('Custom fields', 'splx')}>
-				<CustomControls
-					attributes={attributes}
-					setAttributes={setAttributes}
-					config={config}
 				/>
 			</PanelBody>
 		</InspectorControls>
