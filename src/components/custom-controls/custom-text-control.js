@@ -1,4 +1,5 @@
 import { TextControl } from '@wordpress/components';
+import customControlInputValue from './custom-control-input-value';
 
 const CustomTextControl = ({
 	control,
@@ -30,15 +31,12 @@ const CustomTextControl = ({
 		}
 	};
 
-	let inputValue = attributes[control.id];
-
-	if (isPostCustomControl) {
-		const itemIndex = attributes.searchResults.findIndex((item) => {
-			return item.id === searchResult.id;
-		});
-
-		inputValue = attributes.searchResults[itemIndex][control.id];
-	}
+	const inputValue = customControlInputValue(
+		attributes,
+		control,
+		searchResult,
+		isPostCustomControl
+	);
 
 	return (
 		<TextControl label={control.name} value={inputValue} onChange={onChange} />
