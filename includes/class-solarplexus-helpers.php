@@ -309,6 +309,7 @@ class Solarplexus_Helpers {
 					]);
 				}
 			}
+
 			// Remove as many posts from end as we have added to $posts
 			$posts = array_slice($posts, 0, count($posts) - $addedPosts);
 		}
@@ -344,6 +345,19 @@ class Solarplexus_Helpers {
 
 		$block_index = self::$block_index;
 		self::$block_index++;
+
+		// If key postCustomControls exists in searchResults, add it to the post object
+		if (isset($block_attributes['searchResults'])) {
+			foreach (
+				$block_attributes['searchResults']
+				as $key => $searchResult
+			) {
+				if (isset($searchResult['postCustomControls'])) {
+					$posts[$key]->post_custom_controls =
+						$searchResult['postCustomControls'];
+				}
+			}
+		}
 
 		return [
 			'query' => $query->query,
