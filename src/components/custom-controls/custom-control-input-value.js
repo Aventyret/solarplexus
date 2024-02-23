@@ -12,11 +12,18 @@ const customControlInputValue = (
 		let value = attributes[control.id];
 
 		if (isPostCustomControl) {
-			const itemIndex = attributes.searchResults.findIndex((item) => {
-				return item.id === searchResult.id;
-			});
+			const item = attributes.searchResults.find(
+				(item) => item.id === searchResult.id
+			);
 
-			value = attributes.searchResults[itemIndex][control.id];
+			if (item?.postCustomControls?.[control.id]) {
+				value = item.postCustomControls[control.id];
+				console.log('control.id', control.id);
+				console.log('value', value);
+			} else {
+				value = '';
+				console.log('control.id', control.id);
+			}
 		}
 
 		setInputValue(value);

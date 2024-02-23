@@ -15,7 +15,10 @@ const customControlOnChange = (
 					if (result.id === searchResult.id) {
 						return {
 							...result,
-							[control.id]: val,
+							postCustomControls: {
+								...result.postCustomControls,
+								[control.id]: val,
+							},
 						};
 					}
 					return result;

@@ -1,5 +1,6 @@
 import { SelectControl } from '@wordpress/components';
 import customControlInputValue from './custom-control-input-value';
+import customControlOnChange from './custom-control-on-change';
 
 const CustomSelectControl = ({
 	control,
@@ -8,28 +9,13 @@ const CustomSelectControl = ({
 	searchResult,
 	isPostCustomControl = false,
 }) => {
-	const onChange = (val) => {
-		if (isPostCustomControl) {
-			// Add the value to the search result for the current searchResult.id
-			const newSearchResults = attributes.searchResults.map((result) => {
-				if (result.id === searchResult.id) {
-					return {
-						...result,
-						[control.id]: val,
-					};
-				}
-				return result;
-			});
-
-			setAttributes({
-				searchResults: newSearchResults,
-			});
-		} else {
-			setAttributes({
-				[control.id]: val,
-			});
-		}
-	};
+	const onChange = customControlOnChange(
+		attributes,
+		setAttributes,
+		control,
+		searchResult,
+		isPostCustomControl
+	);
 
 	const inputValue = customControlInputValue(
 		attributes,
