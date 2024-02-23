@@ -18,11 +18,8 @@ const customControlInputValue = (
 
 			if (item?.postCustomControls?.[control.id]) {
 				value = item.postCustomControls[control.id];
-				console.log('control.id', control.id);
-				console.log('value', value);
 			} else {
 				value = '';
-				console.log('control.id', control.id);
 			}
 		}
 
