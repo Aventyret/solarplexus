@@ -38,10 +38,12 @@ const CustomSelectControl = ({
 		isPostCustomControl
 	);
 
+	const value = inputValue !== null ? inputValue : '';
+
 	return (
 		<SelectControl
 			label={control.name}
-			value={inputValue}
+			value={value}
 			onChange={onChange}
 			options={control.choices.map(({ value, label }) => {
 				return {

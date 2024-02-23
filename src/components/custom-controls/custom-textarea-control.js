@@ -38,12 +38,10 @@ const CustomTextareaControl = ({
 		isPostCustomControl
 	);
 
+	const value = inputValue !== null ? inputValue : '';
+
 	return (
-		<TextareaControl
-			label={control.name}
-			value={inputValue}
-			onChange={onChange}
-		/>
+		<TextareaControl label={control.name} value={value} onChange={onChange} />
 	);
 };
 
