@@ -319,6 +319,7 @@ class Solarplexus_Helpers {
 			$pagination = [
 				'page' => self::block_page($block_attributes),
 				'max_num_pages' => $query->max_num_pages,
+				'next_url' => self::block_page($block_attributes) < $query->max_num_pages ? rtrim(get_permalink(), '/') . '?' . self::block_page_query_parameter($block_attributes) . "=" . (self::block_page($block_attributes) + 1) : NULL,
 			];
 		}
 
