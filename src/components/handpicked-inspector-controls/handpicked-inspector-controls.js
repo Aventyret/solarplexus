@@ -108,6 +108,17 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 											</Button>
 										</div>
 									</CardBody>
+									<CardBody>
+										<div className="splx-handpickedPostCustomControls">
+											<CustomControls
+												attributes={attributes}
+												setAttributes={setAttributes}
+												config={config}
+												searchResult={searchResult}
+												isPostCustomControls={true}
+											/>
+										</div>
+									</CardBody>
 								</Card>
 							);
 						})}

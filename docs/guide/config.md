@@ -32,7 +32,8 @@ Here's an example config, which defines two blocks similar to the blocks that th
     "itemLayout": "imagebg",
     "showDate": true,
     "showExcerpt": true,
-    "customControls": []
+    "customControls": [],
+    "postCustomControls": []
   }
 ]
 
@@ -167,6 +168,34 @@ For longer texts, you can use the textarea type:
 ```
 
 The id (as long as it doesn't collide with an already-exisiting attribute), name and choices can be anything you'd like. See more on the next page on how to work with templates.
+
+### postCustomControls - optional
+
+_array_ - `handpicked` type only. Here you may define additional controls for each selected post in the editor, that will be included in the Post object. Currently, selectboxes and text inputs are supported. Say for instance that you'd like to add a custom title instead of using post_title:
+
+```
+"postCustomControls": [
+      {
+        "id": "custom_post_title",
+        "type": "text",
+        "name": "Set a custom post title"
+      }
+    ]
+```
+
+The postCustomControls are saved in the Post object, example:
+
+```
+WP_Post Object =>
+(
+  [ID] => 38
+  ...
+  [post_custom_controls] => Array
+  (
+      [custom_post_title] => Custom post title
+  )
+)
+```
 
 ## Configuration attributes for default templates
 
