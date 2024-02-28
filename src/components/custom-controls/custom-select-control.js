@@ -1,5 +1,4 @@
 import { SelectControl } from '@wordpress/components';
-import customControlInputValue from './custom-control-input-value';
 import customControlOnChange from './custom-control-on-change';
 
 const CustomSelectControl = ({
@@ -17,19 +16,20 @@ const CustomSelectControl = ({
 		isPostCustomControl
 	);
 
-	const inputValue = customControlInputValue(
-		attributes,
-		control,
-		searchResult,
-		isPostCustomControl
-	);
+	let inputValue = attributes[control.id];
 
-	const value = inputValue !== null ? inputValue : '';
+	if (isPostCustomControl) {
+		const item = attributes.searchResults.find(
+			(item) => item.id === searchResult.id
+		);
+
+		inputValue = item?.postCustomControls?.[control.id] ?? '';
+	}
 
 	return (
 		<SelectControl
 			label={control.name}
-			value={value}
+			value={inputValue}
 			onChange={onChange}
 			options={control.choices.map(({ value, label }) => {
 				return {

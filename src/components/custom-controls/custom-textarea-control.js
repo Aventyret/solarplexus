@@ -1,5 +1,4 @@
 import { TextareaControl } from '@wordpress/components';
-import customControlInputValue from './custom-control-input-value';
 import customControlOnChange from './custom-control-on-change';
 
 const CustomTextareaControl = ({
@@ -17,17 +16,22 @@ const CustomTextareaControl = ({
 		isPostCustomControl
 	);
 
-	const inputValue = customControlInputValue(
-		attributes,
-		control,
-		searchResult,
-		isPostCustomControl
-	);
+	let inputValue = attributes[control.id];
 
-	const value = inputValue !== null ? inputValue : '';
+	if (isPostCustomControl) {
+		const item = attributes.searchResults.find(
+			(item) => item.id === searchResult.id
+		);
+
+		inputValue = item?.postCustomControls?.[control.id] ?? '';
+	}
 
 	return (
-		<TextareaControl label={control.name} value={value} onChange={onChange} />
+		<TextareaControl
+			label={control.name}
+			value={inputValue}
+			onChange={onChange}
+		/>
 	);
 };
 
