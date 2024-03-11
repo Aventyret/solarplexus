@@ -16,7 +16,7 @@
  * Plugin Name:       Solarplexus
  * Plugin URI:        https://aventyret.com
  * Description:       A plugin and developer tool to easily create Gutenberg blocks for creating dynamic and static lists of posts, pages and more.
- * Version:           1.15.2
+ * Version:           1.15.3
  * Author:            Äventyret
  * Author URI:        https://aventyret.com
  * License:           GPL-2.0+
