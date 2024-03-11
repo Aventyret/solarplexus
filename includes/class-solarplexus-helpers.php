@@ -353,7 +353,7 @@ class Solarplexus_Helpers {
 				$block_attributes['searchResults']
 				as $key => $searchResult
 			) {
-				if (isset($searchResult['postCustomControls'])) {
+				if (isset($searchResult['postCustomControls']) && isset($posts[$key])) {
 					$posts[$key]->post_custom_controls =
 						$searchResult['postCustomControls'];
 				}
