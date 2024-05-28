@@ -110,6 +110,10 @@ msgstr "Inställningar för blocket"
 msgid "Hide duplicates"
 msgstr "Dölj dubbletter"
 
+#: build/index.js:946
+msgid "Randomize the posts"
+msgstr "Slumpa inläggen"
+
 #: build/index.js:947
 msgid "This will hide posts that are shown in blocks earlier on the page (they will still be visible in the editor)."
 msgstr "Den här inställningen döljer inlägg som har visats i block tidigare på sidan (de kommer fortfarande att visas i editorn)."
