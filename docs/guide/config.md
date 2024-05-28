@@ -81,6 +81,10 @@ _[string]_ - `handpicked` type only. Defaults to ["publish"]. Posts with any oth
 
 _boolean_ - `handpicked` type only. If true the order of the posts will be shuffled. If more posts are selected than the max `noOfPosts` the posts array will (as always) also be capped to `noOfPosts`. Defaults to `false`.
 
+### allowRandomize - optional
+
+_boolean_ - `handpicked` type only. If true the block will have a checkbox to control if posts are randomized (see `randomize`). Defaults to `false`.
+
 ### allowDuplicates - optional
 
 _boolean_ - `dynamic` type only. Sets if Solarplexus check for not showing duplicate posts on the same page should be disabled. Defaults to `false`.
