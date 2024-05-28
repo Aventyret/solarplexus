@@ -226,6 +226,22 @@ class Solarplexus_Helpers {
 					return true;
 				});
 			}
+			/**
+			 * End hide duplicates in hand picked blocks
+			 */
+			/**
+			 * @since    1.16.0
+			 * Optionaly randomize hand picked blocks
+			 */
+			if (
+				isset($block_config['randomize']) &&
+				$block_config['randomize']
+			) {
+				shuffle($args['post__in']);
+			}
+			/**
+			 * End randomize hand picked blocks
+			 */
 			if (empty($args['post__in'])) {
 				$args['post__in'][] = 0;
 			}
