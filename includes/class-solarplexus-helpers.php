@@ -232,11 +232,16 @@ class Solarplexus_Helpers {
 			/**
 			 * @since    1.16.0
 			 * Optionaly randomize hand picked blocks
+			 * Randomize can be controlled by config or by block attribute
 			 */
-			if (
-				isset($block_config['randomize']) &&
-				$block_config['randomize']
-			) {
+			$randomize =
+				(isset($block_config['randomize']) &&
+					$block_config['randomize']) ||
+				(isset($block_config['randomize']) &&
+					$block_config['randomize'] &&
+					array_key_exists('randomize', $block_attributes) &&
+					$block_attributes['randomize']);
+			if ($randomize) {
 				shuffle($args['post__in']);
 			}
 			/**
@@ -336,7 +341,16 @@ class Solarplexus_Helpers {
 			$pagination = [
 				'page' => self::block_page($block_attributes),
 				'max_num_pages' => $query->max_num_pages,
-				'next_url' => self::block_page($block_attributes) < $query->max_num_pages ? rtrim(get_permalink(), '/') . '?' . self::block_page_query_parameter($block_attributes) . "=" . (self::block_page($block_attributes) + 1) : NULL,
+				'next_url' =>
+					self::block_page($block_attributes) < $query->max_num_pages
+						? rtrim(get_permalink(), '/') .
+							'?' .
+							self::block_page_query_parameter(
+								$block_attributes
+							) .
+							'=' .
+							(self::block_page($block_attributes) + 1)
+						: null,
 			];
 		}
 
@@ -369,7 +383,10 @@ class Solarplexus_Helpers {
 				$block_attributes['searchResults']
 				as $key => $searchResult
 			) {
-				if (isset($searchResult['postCustomControls']) && isset($posts[$key])) {
+				if (
+					isset($searchResult['postCustomControls']) &&
+					isset($posts[$key])
+				) {
 					$posts[$key]->post_custom_controls =
 						$searchResult['postCustomControls'];
 				}
