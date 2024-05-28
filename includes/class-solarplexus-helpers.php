@@ -237,7 +237,7 @@ class Solarplexus_Helpers {
 				isset($block_config['randomize']) &&
 				$block_config['randomize']
 			) {
-				shufle($args['post__in']);
+				shuffle($args['post__in']);
 			}
 			/**
 			 * End randomize hand picked blocks
