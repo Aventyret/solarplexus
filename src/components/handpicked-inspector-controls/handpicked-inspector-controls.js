@@ -58,6 +58,9 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 	const onHideDuplicatesCheckboxChange = () => {
 		setAttributes({ hideDuplicates: !attributes.hideDuplicates });
 	};
+	const onRandomizeCheckboxChange = () => {
+		setAttributes({ randomize: !attributes.randomize });
+	};
 
 	return (
 		<InspectorControls>
@@ -140,6 +143,13 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 					)}
 					onChange={onHideDuplicatesCheckboxChange}
 				/>
+				{config.allowRandomize ? (
+					<CheckboxControl
+						checked={attributes.randomize}
+						label={__('Randomize the posts', 'splx')}
+						onChange={onRandomizeCheckboxChange}
+					/>
+				) : null}
 			</PanelBody>
 		</InspectorControls>
 	);

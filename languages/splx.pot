@@ -114,6 +114,10 @@ msgstr ""
 msgid "Hide duplicates"
 msgstr ""
 
+#: build/index.js:946
+msgid "Randomize the posts"
+msgstr ""
+
 #: build/index.js:947
 msgid "This will hide posts that are shown in blocks earlier on the page (they will still be visible in the editor)."
 msgstr ""
