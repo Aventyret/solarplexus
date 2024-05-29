@@ -237,8 +237,8 @@ class Solarplexus_Helpers {
 			$randomize =
 				(isset($block_config['randomize']) &&
 					$block_config['randomize']) ||
-				(isset($block_config['randomize']) &&
-					$block_config['randomize'] &&
+				(isset($block_config['allowRandomize']) &&
+					$block_config['allowRandomize'] &&
 					array_key_exists('randomize', $block_attributes) &&
 					$block_attributes['randomize']);
 			if ($randomize) {
