@@ -12,6 +12,7 @@ import {
 import { InspectorControls } from '@wordpress/block-editor';
 import SearchPostControl from '../common-controls/search-post-control';
 import CustomControls from '../custom-controls/custom-controls';
+import SchedulingControls from '../common-controls/scheduling-controls';
 
 const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 	const selectSearchResult = (searchResult) => {
@@ -150,6 +151,10 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 						onChange={onRandomizeCheckboxChange}
 					/>
 				) : null}
+				<SchedulingControls
+					attributes={attributes}
+					setAttributes={setAttributes}
+				/>
 			</PanelBody>
 		</InspectorControls>
 	);

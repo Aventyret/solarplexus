@@ -335,6 +335,17 @@ class Solarplexus_Helpers {
 			$posts = array_slice($posts, 0, count($posts) - $addedPosts);
 		}
 
+		// If this is a FE render, check block publishing settings
+		if (
+			!self::is_gutenberg_request() &&
+			((!empty($block_attributes['publishAt']) &&
+				time() < strtotime($block_attributes['publishAt'])) ||
+				(!empty($block_attributes['unpublishAt']) &&
+					time() >= strtotime($block_attributes['unpublishAt'])))
+		) {
+			$posts = [];
+		}
+
 		// Is this block paginated?
 		$pagination = false;
 		if ($has_pagination) {

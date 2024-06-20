@@ -17,6 +17,7 @@ import { InspectorControls } from '@wordpress/block-editor';
 import SearchPostControl from '../common-controls/search-post-control';
 
 import CustomControls from '../custom-controls/custom-controls';
+import SchedulingControls from '../common-controls/scheduling-controls';
 
 import { ORDERBYS, ORDERS } from '../../consts';
 
@@ -369,6 +370,10 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					attributes={attributes}
 					setAttributes={setAttributes}
 					config={config}
+				/>
+				<SchedulingControls
+					attributes={attributes}
+					setAttributes={setAttributes}
 				/>
 			</PanelBody>
 		</InspectorControls>

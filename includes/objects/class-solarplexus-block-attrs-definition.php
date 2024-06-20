@@ -19,6 +19,10 @@ class Solarplexus_Block_Attrs_Definition {
 
 	public $custom_controls;
 
+	public $publish_at;
+
+	public $unpublish_at;
+
 	/*
 	 *
 	 * Private vars
@@ -35,12 +39,16 @@ class Solarplexus_Block_Attrs_Definition {
 		$this->set_block_uid();
 		$this->set_no_of_posts();
 		$this->set_custom_controls();
+		$this->set_publish_at();
+		$this->set_unpublish_at();
 	}
 
 	public function to_array() {
 		$r = [];
 		$r['blockUid'] = $this->block_uid;
 		$r['noOfPosts'] = $this->no_of_posts;
+		$r['publishAt'] = $this->publish_at;
+		$r['unpublishAt'] = $this->unpublish_at;
 		foreach ($this->custom_controls as $control_id => $control) {
 			$r[$control_id] = $control;
 		}
@@ -115,5 +123,13 @@ class Solarplexus_Block_Attrs_Definition {
 			}
 		}
 		$this->custom_controls = $custom_controls;
+	}
+
+	private function set_publish_at() {
+		$this->publish_at = self::build_attribute('datetimeISO', '');
+	}
+
+	private function set_unpublish_at() {
+		$this->unpublish_at = self::build_attribute('datetimeISO', '');
 	}
 }
