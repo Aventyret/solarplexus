@@ -15,21 +15,13 @@ const getDateTimeLocalString = (dateString) => {
 
 const SchedulingControls = ({ attributes, setAttributes }) => {
 	const onPublishAtDateTimeChange = (publishAt) => {
-		console.log('got new publishAt:', publishAt);
-		console.log(
-			'saving publishAt as UTC:',
-			publishAt && new Date(publishAt).toISOString()
-		);
+		// Note: Storing as UTC string
 		setAttributes({
 			publishAt: publishAt && new Date(publishAt).toISOString(),
 		});
 	};
 	const onUnpublishAtDateTimeChange = (unpublishAt) => {
-		console.log('got new UNpublishAt:', unpublishAt);
-		console.log(
-			'saving UNpublishAt as UTC:',
-			unpublishAt && new Date(unpublishAt).toISOString()
-		);
+		// Note: Storing as UTC string
 		setAttributes({
 			unpublishAt: unpublishAt && new Date(unpublishAt).toISOString(),
 		});
