@@ -201,6 +201,18 @@ class Solarplexus_Admin {
 					$block_attributes,
 					$content
 				) use ($block_config, $block_type_id) {
+					$is_unpublished = Solarplexus_Helpers::block_is_unpublished(
+						$block_config,
+						$block_attributes
+					);
+					// If this is a FE render, check block publishing settings
+					if (
+						!Solarplexus_Helpers::is_gutenberg_request() &&
+						$is_unpublished
+					) {
+						return '';
+					}
+
 					$args = Solarplexus_Helpers::block_args(
 						$block_config,
 						$block_attributes
@@ -217,6 +229,9 @@ class Solarplexus_Admin {
 					return $template
 						? '<div class="wp-block wp-block-splx wp-block-splx--' .
 								$block_type_id .
+								($is_unpublished
+									? ' wp-block-splx--unpublished'
+									: '') .
 								'">' .
 								$template .
 								'</div>'

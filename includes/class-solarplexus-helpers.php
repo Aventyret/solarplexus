@@ -606,6 +606,22 @@ class Solarplexus_Helpers {
 		return self::$rendered_post_ids;
 	}
 
+	public static function block_is_unpublished(
+		$block_config,
+		$block_attributes
+	) {
+		if (
+			!isset($block_config['allowScheduling']) ||
+			!$block_config['allowScheduling']
+		) {
+			return false;
+		}
+		return (!empty($block_attributes['publishAt']) &&
+			time() < strtotime($block_attributes['publishAt'])) ||
+			(!empty($block_attributes['unpublishAt']) &&
+				time() >= strtotime($block_attributes['unpublishAt']));
+	}
+
 	public static function find_splx_blocks_in_content($blocks) {
 		$matching_blocks = [];
 		foreach ($blocks as $block) {

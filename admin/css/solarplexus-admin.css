@@ -5,6 +5,9 @@
 .wp-block-splx {
 	pointer-events: none;
 }
+.wp-block-splx--unpublished {
+	opacity: 0.4;
+}
 .splx-icon {
 	height: 24px;
 }
