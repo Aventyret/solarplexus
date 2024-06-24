@@ -151,10 +151,12 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 						onChange={onRandomizeCheckboxChange}
 					/>
 				) : null}
-				<SchedulingControls
-					attributes={attributes}
-					setAttributes={setAttributes}
-				/>
+				{config.allowScheduling ? (
+					<SchedulingControls
+						attributes={attributes}
+						setAttributes={setAttributes}
+					/>
+				) : null}
 			</PanelBody>
 		</InspectorControls>
 	);

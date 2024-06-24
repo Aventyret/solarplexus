@@ -201,6 +201,17 @@ class Solarplexus_Admin {
 					$block_attributes,
 					$content
 				) use ($block_config, $block_type_id) {
+					// If this is a FE render, check block publishing settings
+					if (
+						!Solarplexus_Helpers::is_gutenberg_request() &&
+						Solarplexus_Helpers::block_is_unpublished(
+							$block_config,
+							$block_attributes
+						)
+					) {
+						return '';
+					}
+
 					$args = Solarplexus_Helpers::block_args(
 						$block_config,
 						$block_attributes

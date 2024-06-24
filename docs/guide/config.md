@@ -65,6 +65,10 @@ If you omit `allowedPostTypes` dynamic blocks will show `posts` and handpicked b
 
 _int|[int]_ - The maximum posts to be shown in the resulting lists. An array can be used, with 2 positions declaring the min and max number, e.g [3, 6], letting the editor choose from a range between these.
 
+### allowScheduling - optional
+
+_boolean_ - If true the block will have date pickers for Publish at and Unpublish at. Defaults to `false`.
+
 ### prependNewPosts
 
 _boolean_ - `handpicked` type only. If true posts are added to the start of the list, otherwise they are appended at the end. Defaults to `false`.

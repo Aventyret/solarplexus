@@ -335,17 +335,6 @@ class Solarplexus_Helpers {
 			$posts = array_slice($posts, 0, count($posts) - $addedPosts);
 		}
 
-		// If this is a FE render, check block publishing settings
-		if (
-			!self::is_gutenberg_request() &&
-			((!empty($block_attributes['publishAt']) &&
-				time() < strtotime($block_attributes['publishAt'])) ||
-				(!empty($block_attributes['unpublishAt']) &&
-					time() >= strtotime($block_attributes['unpublishAt'])))
-		) {
-			$posts = [];
-		}
-
 		// Is this block paginated?
 		$pagination = false;
 		if ($has_pagination) {
@@ -615,6 +604,22 @@ class Solarplexus_Helpers {
 		}
 
 		return self::$rendered_post_ids;
+	}
+
+	public static function block_is_unpublished(
+		$block_config,
+		$block_attributes
+	) {
+		if (
+			!isset($block_config['allowScheduling']) ||
+			!$block_config['allowScheduling']
+		) {
+			return false;
+		}
+		return (!empty($block_attributes['publishAt']) &&
+			time() < strtotime($block_attributes['publishAt'])) ||
+			(!empty($block_attributes['unpublishAt']) &&
+				time() >= strtotime($block_attributes['unpublishAt']));
 	}
 
 	public static function find_splx_blocks_in_content($blocks) {

@@ -371,10 +371,12 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					setAttributes={setAttributes}
 					config={config}
 				/>
-				<SchedulingControls
-					attributes={attributes}
-					setAttributes={setAttributes}
-				/>
+				{config.allowScheduling ? (
+					<SchedulingControls
+						attributes={attributes}
+						setAttributes={setAttributes}
+					/>
+				) : null}
 			</PanelBody>
 		</InspectorControls>
 	);
