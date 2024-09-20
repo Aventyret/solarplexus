@@ -338,12 +338,18 @@ class Solarplexus_Helpers {
 		// Is this block paginated?
 		$pagination = false;
 		if ($has_pagination) {
+			$permalink = get_permalink();
+			$next_url_permalink = apply_filters(
+				'splx_pagination_next_url_permalink',
+				$permalink
+			);
+
 			$pagination = [
 				'page' => self::block_page($block_attributes),
 				'max_num_pages' => $query->max_num_pages,
 				'next_url' =>
 					self::block_page($block_attributes) < $query->max_num_pages
-						? rtrim(get_permalink(), '/') .
+						? rtrim($next_url_permalink, '/') .
 							'?' .
 							self::block_page_query_parameter(
 								$block_attributes
