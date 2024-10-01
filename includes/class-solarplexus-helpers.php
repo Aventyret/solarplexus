@@ -399,31 +399,41 @@ class Solarplexus_Helpers {
 			}
 		}
 
-		return [
-			'query' => $query->query,
-			'posts' => $posts,
-			'pagination' => $pagination,
-			'block_attributes' => $block_attributes,
-			'block_index' => $block_index,
-			'classes_grid' => apply_filters(
-				'splx_grid_classes',
-				self::block_classes($classes_grid),
-				$block_config,
-				$block_attributes
-			),
-			'classes_item' => apply_filters(
-				'splx_item_classes',
-				self::block_classes($classes_item),
-				$block_config,
-				$block_attributes
-			),
-			'config' => $block_config,
-		];
+		return apply_filters(
+			'splx_block_args',
+			[
+				'query' => $query->query,
+				'posts' => $posts,
+				'pagination' => $pagination,
+				'block_attributes' => $block_attributes,
+				'block_index' => $block_index,
+				'classes_grid' => apply_filters(
+					'splx_grid_classes',
+					self::block_classes($classes_grid),
+					$block_config,
+					$block_attributes
+				),
+				'classes_item' => apply_filters(
+					'splx_item_classes',
+					self::block_classes($classes_item),
+					$block_config,
+					$block_attributes
+				),
+				'config' => $block_config,
+			],
+			$block_type_id
+		);
 	}
 
 	public static function template_loader($block_config, $args) {
 		$block_type_id = self::get_block_type_id($block_config);
 		$loaded_template = '';
+
+		$loaded_template = self::render_with_callback($block_config, $args);
+		if ($loaded_template !== false) {
+			return $loaded_template;
+		}
+
 		$sage_template = self::get_sage_template($block_config);
 		if ($sage_template) {
 			return self::template_loader_sage(
@@ -473,6 +483,17 @@ class Solarplexus_Helpers {
 		$classes = ltrim($classes);
 
 		return $classes;
+	}
+
+	private static function render_with_callback($block_config, $args) {
+		$block_type_id = self::get_block_type_id($block_config);
+		// Run filter to see if a render callback is registered for block
+		return apply_filters(
+			'splx_block_render_callback',
+			false,
+			$args,
+			$block_type_id
+		);
 	}
 
 	private static function template_loader_sage(
