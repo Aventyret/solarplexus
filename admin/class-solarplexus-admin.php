@@ -121,7 +121,7 @@ class Solarplexus_Admin {
 			'before'
 		);
 
-		do_action("splx_editor_script_registered");
+		do_action('splx_editor_script_registered');
 
 		$attr_defs_per_config = [];
 		foreach ($this->get_config() as $block_config) {

@@ -46,6 +46,15 @@ class Solarplexus_Helpers {
 		return $splx_config;
 	}
 
+	public static function retrieve_block_config($block_type_id) {
+		foreach (self::retrieve_block_configs() as $block_config) {
+			if ($block_type_id == self::get_block_type_id($block_config)) {
+				return $block_config;
+			}
+		}
+		return null;
+	}
+
 	private static function get_json_config($config_path) {
 		$json = file_get_contents($config_path);
 		return json_decode($json, true);
