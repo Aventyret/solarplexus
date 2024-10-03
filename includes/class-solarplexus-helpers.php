@@ -776,4 +776,31 @@ class Solarplexus_Helpers {
 			self::block_page_query_parameter($block_attributes) .
 			'=%#%';
 	}
+
+	private static function add_editor_inline_script(
+		$data,
+		$before_or_after = 'after'
+	) {
+		add_action('splx_editor_script_registered', function () {
+			wp_add_inline_script('solarplexus-script', $data, $before_or_after);
+		});
+	}
+
+	public static function use_custom_editor_ssr_component(
+		$blockTypeId,
+		$ssrComponentName
+	) {
+		self::add_editor_inline_script(
+			'window.solarplexusOptions = window.solarplexusOptions || {}; window.solarplexusOptions.postponeBlockRegistration = true;',
+			'before'
+		);
+		self::add_editor_inline_script(
+			"window.solarplexusApi.registerSsrComponent('" .
+				esc_attr($blockTypeId) .
+				"', " .
+				esc_attr($ssrComponentName) .
+				');',
+			'after'
+		);
+	}
 }
