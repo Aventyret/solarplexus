@@ -48,6 +48,31 @@ add_filter('splx_queryargs', function($args, $block_config, $block_attributes){
 }, 10, 3);
 ```
 
+## Adjust block args
+
+For advanced customization, there is a possibility to adjust the variables that are passed to Solarplexus block templates with a filter
+
+```
+add_filter('splx_block_args', function($args, $block_type_id){
+  $args = array_merge($args, ["interesting_fact" => "You are awesome!"]); // This will pass the variable $args["interesting_fact"] (or just $interesing_fact if you use Sage) to all Solarplexus block templates.
+  return $args;
+}, 10, 2);
+```
+
+## Render blocks with a callback
+
+In some cases, such as with a Headless Wordpress setup, it can be usefull to render blocks with a callback rather than a template.
+
+```
+add_filter('splx_block_render_callback', function($template, $args, $block_type_id){
+  if ($block_type_id == "splx/special-block") {
+    return '<p>This was rendered with a callback.</p>';
+  }
+  $args = array_merge($args, ["interesting_fact" => "You are awesome!"]); // This will pass the variable $args["interesting_fact"] (or just $interesing_fact if you use Sage) to all Solarplexus block templates.
+  return $template;
+}, 10, 3);
+```
+
 ## Enable default block styling
 
 By default the block styling by the plugin is disabled if you've added your own splx-config.json in your theme. If you'd like to enable it, you can do so by adding the following to your theme's `functions.php` file:

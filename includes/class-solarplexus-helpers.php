@@ -46,6 +46,15 @@ class Solarplexus_Helpers {
 		return $splx_config;
 	}
 
+	public static function retrieve_block_config($block_type_id) {
+		foreach (self::retrieve_block_configs() as $block_config) {
+			if ($block_type_id == self::get_block_type_id($block_config)) {
+				return $block_config;
+			}
+		}
+		return null;
+	}
+
 	private static function get_json_config($config_path) {
 		$json = file_get_contents($config_path);
 		return json_decode($json, true);
@@ -399,31 +408,41 @@ class Solarplexus_Helpers {
 			}
 		}
 
-		return [
-			'query' => $query->query,
-			'posts' => $posts,
-			'pagination' => $pagination,
-			'block_attributes' => $block_attributes,
-			'block_index' => $block_index,
-			'classes_grid' => apply_filters(
-				'splx_grid_classes',
-				self::block_classes($classes_grid),
-				$block_config,
-				$block_attributes
-			),
-			'classes_item' => apply_filters(
-				'splx_item_classes',
-				self::block_classes($classes_item),
-				$block_config,
-				$block_attributes
-			),
-			'config' => $block_config,
-		];
+		return apply_filters(
+			'splx_block_args',
+			[
+				'query' => $query->query,
+				'posts' => $posts,
+				'pagination' => $pagination,
+				'block_attributes' => $block_attributes,
+				'block_index' => $block_index,
+				'classes_grid' => apply_filters(
+					'splx_grid_classes',
+					self::block_classes($classes_grid),
+					$block_config,
+					$block_attributes
+				),
+				'classes_item' => apply_filters(
+					'splx_item_classes',
+					self::block_classes($classes_item),
+					$block_config,
+					$block_attributes
+				),
+				'config' => $block_config,
+			],
+			$block_type_id
+		);
 	}
 
 	public static function template_loader($block_config, $args) {
 		$block_type_id = self::get_block_type_id($block_config);
 		$loaded_template = '';
+
+		$loaded_template = self::render_with_callback($block_config, $args);
+		if ($loaded_template !== false) {
+			return $loaded_template;
+		}
+
 		$sage_template = self::get_sage_template($block_config);
 		if ($sage_template) {
 			return self::template_loader_sage(
@@ -473,6 +492,17 @@ class Solarplexus_Helpers {
 		$classes = ltrim($classes);
 
 		return $classes;
+	}
+
+	private static function render_with_callback($block_config, $args) {
+		$block_type_id = self::get_block_type_id($block_config);
+		// Run filter to see if a render callback is registered for block
+		return apply_filters(
+			'splx_block_render_callback',
+			false,
+			$args,
+			$block_type_id
+		);
 	}
 
 	private static function template_loader_sage(
@@ -745,5 +775,28 @@ class Solarplexus_Helpers {
 			($query ? '&' : '?') .
 			self::block_page_query_parameter($block_attributes) .
 			'=%#%';
+	}
+
+	private static function add_editor_inline_script(
+		$data,
+		$before_or_after = 'after'
+	) {
+		add_action('splx_editor_script_registered', function () use (
+			$data,
+			$before_or_after
+		) {
+			wp_add_inline_script('solarplexus-script', $data, $before_or_after);
+		});
+	}
+
+	public static function use_custom_editor_ssr_component() {
+		self::add_editor_inline_script(
+			'window.solarplexusOptions = window.solarplexusOptions || {}; window.solarplexusOptions.postponeBlockRegistration = true;',
+			'before'
+		);
+		self::add_editor_inline_script(
+			'window.setTimeout(() => window.dispatchEvent(new Event("splx_register_blocks")), 500);',
+			'after'
+		);
 	}
 }
