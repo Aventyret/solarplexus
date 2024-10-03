@@ -795,7 +795,7 @@ class Solarplexus_Helpers {
 			'before'
 		);
 		self::add_editor_inline_script(
-			'window.setTimeout(() => window.dispatchEvent(new Event("splx_register_blocks")), 500);',
+			'window.setTimeout(() => window.dispatchEvent(new Event("splx_register_blocks")), 0);',
 			'after'
 		);
 	}
