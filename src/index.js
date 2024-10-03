@@ -12,6 +12,7 @@ import Toolbar from './components/toolbar/toolbar';
 
 let SsrComponents = {};
 
+window.solarplexusOptions || {};
 window.solarplexusApi = {
 	registerSsrComponent: (blockId, Component) => {
 		if (typeof Component !== 'function') {
