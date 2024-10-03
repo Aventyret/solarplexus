@@ -781,7 +781,10 @@ class Solarplexus_Helpers {
 		$data,
 		$before_or_after = 'after'
 	) {
-		add_action('splx_editor_script_registered', function () use ($data, $before_or_after) {
+		add_action('splx_editor_script_registered', function () use (
+			$data,
+			$before_or_after
+		) {
 			wp_add_inline_script('solarplexus-script', $data, $before_or_after);
 		});
 	}
@@ -791,6 +794,9 @@ class Solarplexus_Helpers {
 			'window.solarplexusOptions = window.solarplexusOptions || {}; window.solarplexusOptions.postponeBlockRegistration = true;',
 			'before'
 		);
-		self::add_editor_inline_script('window.setTimeout(() => window.dispatchEvent(new Event("splx_register_blocks")), 500);', "after");
+		self::add_editor_inline_script(
+			'window.setTimeout(() => window.dispatchEvent(new Event("splx_register_blocks")), 500);',
+			'after'
+		);
 	}
 }
