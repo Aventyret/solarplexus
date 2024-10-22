@@ -91,7 +91,7 @@ function registerBlockTypes() {
 	});
 }
 
-if (window.solarplexusOptions.postponeBlockRegistration) {
+if (window.solarplexusOptions?.postponeBlockRegistration) {
 	window.addEventListener('splx_register_blocks', registerBlockTypes);
 } else {
 	registerBlockTypes();
