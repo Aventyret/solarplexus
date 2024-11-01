@@ -1,6 +1,6 @@
 === Solarplexus ===
 Contributors: joelbergqvist, fiwas, claracollman, perarnborg, akkilstrom, kinapersson
-Tags: layout, Gutenberg, blocks, dynamic
+Tags: layout, Gutenberg, blocks, dynamic, query
 Requires at least: 6.1
 Tested up to: 6.6
 Requires PHP: 8.1

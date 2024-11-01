@@ -1,5 +1,6 @@
-import { TextControl } from '@wordpress/components';
 import customControlOnChange from './custom-control-on-change';
+
+const { TextControl } = window.wp.components;
 
 const CustomTextControl = ({
 	control,

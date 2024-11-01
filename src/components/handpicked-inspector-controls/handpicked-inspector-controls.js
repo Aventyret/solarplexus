@@ -1,18 +1,11 @@
-const { __ } = window.wp.i18n;
-
-import {
-	PanelBody,
-	Card,
-	CardBody,
-	Button,
-	Icon,
-	CheckboxControl,
-} from '@wordpress/components';
-
-import { InspectorControls } from '@wordpress/block-editor';
 import SearchPostControl from '../common-controls/search-post-control';
 import CustomControls from '../custom-controls/custom-controls';
 import SchedulingControls from '../common-controls/scheduling-controls';
+
+const { InspectorControls } = window.wp.blockEditor;
+const { __ } = window.wp.i18n;
+const { PanelBody, Card, CardBody, Button, Icon, CheckboxControl } =
+	window.wp.components;
 
 const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 	const selectSearchResult = (searchResult) => {

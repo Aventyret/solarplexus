@@ -1,15 +1,11 @@
 import './search-post-control.scss';
+import debounce from '../../utils/debounce';
 
 const { __ } = window.wp.i18n;
 const apiFetch = window.wp.apiFetch;
-
-import { useEffect, useState, useRef } from '@wordpress/element';
-
-import { TextControl, Button } from '@wordpress/components';
-
-import { useSelect } from '@wordpress/data';
-
-import debounce from '../../utils/debounce';
+const { useEffect, useState, useRef } = window.wp.element;
+const { TextControl, Button } = window.wp.components;
+const { useSelect } = window.wp.data;
 
 const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 	const [searchInput, setSearchInput] = useState('');

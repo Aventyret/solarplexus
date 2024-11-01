@@ -1,6 +1,5 @@
 const { __ } = window.wp.i18n;
-
-import { useSelect } from '@wordpress/data';
+const { useSelect } = window.wp.data;
 
 import {
 	PanelBody,

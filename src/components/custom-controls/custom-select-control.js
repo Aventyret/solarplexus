@@ -1,5 +1,6 @@
-import { SelectControl } from '@wordpress/components';
 import customControlOnChange from './custom-control-on-change';
+
+const { SelectControl } = window.wp.components;
 
 const CustomSelectControl = ({
 	control,

@@ -1,5 +1,6 @@
-import { TextareaControl } from '@wordpress/components';
 import customControlOnChange from './custom-control-on-change';
+
+const { TextareaControl } = window.wp.components;
 
 const CustomTextareaControl = ({
 	control,

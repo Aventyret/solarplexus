@@ -1,14 +1,12 @@
 import './shared.scss';
 
-import { useEffect } from '@wordpress/element';
-
-import ServerSideRender from '@wordpress/server-side-render';
-
-import { registerBlockType } from '@wordpress/blocks';
-
 import DynamicInspectorControls from './components/dynamic-inspector-controls/dynamic-inspector-controls';
 import HandpickedInspectorControls from './components/handpicked-inspector-controls/handpicked-inspector-controls';
 import Toolbar from './components/toolbar/toolbar';
+
+const ServerSideRender = window.wp.serverSideRender;
+const { registerBlockType } = window.wp.blocks;
+const { useEffect } = window.wp.element;
 
 let SsrComponents = {};
 
@@ -29,7 +27,6 @@ window.solarplexusApi = {
 // outputted in class-solarplexus-admin.php
 
 const getCustomSvgJsx = (icon) => {
-	// console.log(icon.startsWith('<svg'));
 	return function () {
 		const html = icon.startsWith('<svg') ? icon : svgIcons[icon];
 		return (
@@ -64,8 +61,6 @@ function registerBlockTypes() {
 				}, []);
 
 				const SsrComponent = SsrComponents[blockId] || ServerSideRender;
-
-				console.log(SsrComponents, blockId);
 
 				return (
 					<>

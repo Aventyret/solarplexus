@@ -1,16 +1,9 @@
-const { __ } = window.wp.i18n;
-
-import { BlockControls } from '@wordpress/block-editor';
-
-import {
-	ToolbarGroup,
-	Dropdown,
-	ToolbarButton,
-	BaseControl,
-	RangeControl,
-} from '@wordpress/components';
-
 import { settings } from '@wordpress/icons';
+
+const { __ } = window.wp.i18n;
+const { BlockControls } = window.wp.blockEditor;
+const { ToolbarGroup, Dropdown, ToolbarButton, BaseControl, RangeControl } =
+	window.wp.components;
 
 const Toolbar = ({ attributes, setAttributes, config }) => {
 	const onNoOfPostsChange = (value) => {

@@ -1,6 +1,5 @@
 const { __ } = window.wp.i18n;
-
-import { TextControl } from '@wordpress/components';
+const { TextControl } = window.wp.components;
 
 // Returns local time in format suitable for <input type=dateime-local />
 const getDateTimeLocalString = (dateString) => {

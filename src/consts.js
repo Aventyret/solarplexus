@@ -1,6 +1,6 @@
-const { __ } = window.wp.i18n;
-
 import { stretchWide, chevronUp, chevronLeft } from '@wordpress/icons';
+
+const { __ } = window.wp.i18n;
 
 // TODO better icons
 export const ITEM_LAYOUTS = {

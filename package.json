@@ -43,8 +43,6 @@
 		"translate:mo": "wp i18n make-mo ./languages ./languages"
 	},
 	"dependencies": {
-		"@wordpress/date": "^4.15.0",
-		"@wordpress/icons": "^9.6.0",
-		"@wordpress/server-side-render": "^3.13.0"
+		"@wordpress/icons": "^9.6.0"
 	}
 }
