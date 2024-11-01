@@ -3,7 +3,7 @@ home: true
 heroImage: /solarplexus-logo.svg
 heroAlt: Solarplexus logo
 heroText: Solarplexus
-tagline: Close to the heart of Gutenberg
+tagline: Dynamic display blocks
 actionText: Download for Wordpress >= 5.9
 actionLink: https://github.com/Aventyret/solarplexus/releases
 footer: MIT Licensed | Copyright © 2021-present Äventyret
@@ -14,24 +14,22 @@ footer: MIT Licensed | Copyright © 2021-present Äventyret
 
 ## What is Solarplexus?
 
-**Solarplexus** is a plugin aimed for developers of complex custom Wordpress websites. Solarplexus gives developers a powerful tool for adding **dynamic display blocks** (as in “various ways of displaying content [in a page/post] that is residing in other areas of your website”).
+Solarplexus gives developers a powerful tool for adding **dynamic display blocks** (as in “various ways of displaying content [in a page/post] that is residing in other areas of your website”).
 
-We created Solarplexus because when building websites that stays **close to Core** (i.e. accepts and celebrates the new Wordpress Block Editor (a.k.a. Gutenberg) there was a clear need for a standardized way of bringing life to feed based websites also in the new era of Wordpress.
+We created Solarplexus because when building websites that stays **close to Core** (i.e. accepts and celebrates the Block Editor) there was a clear need for a standardized way of bringing life to feed based websites.
 
-Solarplexus is created by [Äventyret](https://aventyret.com) – a leading Wordpress (and much more) agency in Sweden – as our way to give back to the Wordpress community that has given us so much. Solarplexus is open source software free to use for anyone.\*
+Solarplexus is created by [Äventyret](https://aventyret.com) – a leading Wordpress (and much more) agency in Sweden – as our way to give back to the Wordpress community that has given us so much. Solarplexus is open source software free to use for anyone.
 
----
+## Who is it for?
 
-_\* Bare in mind Solarplexus is not the most graspable plugin around (at least not yet, hence why we call it a “developer plugin”) so you probably need a few years of experience in Wordpress development if you want to use it sucessfully._
+Out of the box the plugin provides two dynamic display blocks. To make full use of the powers of Solarplexus' ability to create custom display blocks with just a few lines of code – please read the [configuration guide](/guide/config.html).
 
   </div>
   <div class="grid-col grid-col--6">
 
-## Gutenberg on Steroids 💪
+## The missing core component for dynamic display blocks 💪
 
-We think the Block editor (a.k.a Gutenberg) is a great idea while not yet a great implementation. Building Wordpress websites in an agency environment since 2003, we – a group of developers – were missing a (for us) central piece of the puzzle: blocks displaying content from other parts of the same website.
-
-Solarplexus is **our solution to the problem**. With the Solarplexus plugin a developer can create a custom set of blocks through writing just a few lines of code.
+Building Wordpress websites in an agency environment since 2003, we – a group of developers – were missing a (for us) central piece of the puzzle: blocks displaying content from other parts of the same website.
 
 [Download it](https://github.com/Aventyret/solarplexus/releases) today, checkout our [getting started guide](/guide/). Try it out and [join us on Github](https://github.com/Aventyret/solarplexus) developing it further!
 

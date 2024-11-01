@@ -1,6 +1,6 @@
 # Introduction
 
-Solarplexus is a plugin aimed at Wordpress developers, specifically designed to help out with a common concept that is often re-invented for every new website - referring to other content on that website. Well known concepts such as a list of the latest posts of a custom post type, or simply a hand picked list of highlighted posts, is not entirely trivial when just using what's offered in Wordpress core.
+Solarplexus is a plugin specifically designed to help out with a common concept that is often re-invented for every new website - referring to other content on that website. Well known concepts such as a list of the latest posts of a custom post type, or simply a hand picked list of highlighted posts, is not entirely trivial when just using what's offered in Wordpress core.
 
 Solarplexus makes this easy by reading a simple configuration from your theme, and generating Gutenberg blocks ready to be used by the editors without further programming. The plugin is designed to be highly developer-customizable, while still being perfectly usable with some default settings for simpler projects.
 

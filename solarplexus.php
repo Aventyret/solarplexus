@@ -14,11 +14,13 @@
  *
  * @wordpress-plugin
  * Plugin Name:       Solarplexus
- * Plugin URI:        https://aventyret.com
- * Description:       A plugin and developer tool to easily create Gutenberg blocks for creating dynamic and static lists of posts, pages and more.
+ * Plugin URI:        https://aventyret.github.io/solarplexus/
+ * Description:       A plugin and developer tool to easily create dynamic display blocks.
  * Version:           1.18.2
+ * Requires at least: 6.1
+ * Requires PHP:			8.1
  * Author:            Äventyret
- * Author URI:        https://aventyret.com
+ * Author URI:        https://www.aventyret.com
  * License:           GPL-2.0+
  * License URI:       http://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       splx

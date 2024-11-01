@@ -1,56 +1,39 @@
 === Solarplexus ===
-Contributors: (this should be a list of wordpress.org userid's)
-Donate link: https://aventyret.com
+Contributors: joelbergqvist, fiwas, claracollman, perarnborg, akkilstrom, kinapersson
 Tags: layout, Gutenberg, blocks, dynamic
-Requires at least: 5.7
-Tested up to: 6.1
+Requires at least: 6.1
+Tested up to: 6.6
+Requires PHP: 8.1
 Stable tag: 1.18.2
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-A plugin and developer tool to easily create Gutenberg blocks for creating dynamic and static lists of posts, pages and more.
+Solarplexus gives developers a powerful tool for adding dynamic display blocks.
 
 == Description ==
 
-Solarplexus is a plugin aimed at Wordpress developers, specifically designed to help out with a common concept that is often re-invented for every new website - referring to other content on that website. Well-known concepts such as a list of the latest posts of a custom post type, or simply a hand picked list of highlighted posts, is not entirely trivial when just using what's offered in Wordpress core.
+Solarplexus gives developers a powerful tool for adding dynamic display blocks (as in “various ways of displaying content [in a page/post] that is residing in other areas of your website”).
 
-Solarplexus makes this easy by reading a simple configuration from your theme, and generating Gutenberg blocks ready to be used by the editors without further programming. The plugin is designed to be highly developer-customizable, while still being perfectly usable with some default settings for simpler projects.
+We created Solarplexus because when building websites that stays close to Core (i.e. accepts and celebrates the Block Editor) there was a clear need for a standardized way of bringing life to feed based websites.
 
-It includes support for themes based on the Roots Sage boilerplate.
+= Who is it for? =
 
-== Installation ==
+Out of the box the plugin provides two dynamic display blocks. To make full use of the powers of Solarplexus' ability to create custom display blocks with just a few lines of code – please read the configuration guide.
 
-1. Unzip to `/wp-content/plugins/solarplexus` directory
-1. Activate the plugin through the 'Plugins' menu in WordPress
+= The missing core component for dynamic display blocks =
+
+Building Wordpress websites in an agency environment since 2003, we – a group of developers – were missing a (for us) central piece of the puzzle: blocks displaying content from other parts of the same website.
 
 == Frequently Asked Questions ==
 
-= TODO question 1 =
+= What perks does Solarplexus have? =
 
-Todo answer 1
+Here are four:
+- Create dynamic or handpicked lists of articles (or other post types) to be displayed on Block editor based pages/posts
+- Support for Sage or standard theme development
+- Powerful customization
+- Lightning fast setup
 
-= TODO question 2 =
+= Can I use Solarplexus without Sage? =
 
-Todo answer 2
-
-== Screenshots ==
-
-1. This screen shot description corresponds to screenshot-1.(png|jpg|jpeg|gif). Note that the screenshot is taken from
-the /assets directory or the directory that contains the stable readme.txt (tags or trunk). Screenshots in the /assets
-directory take precedence. For example, `/assets/screenshot-1.png` would win over `/tags/4.3/screenshot-1.png`
-(or jpg, jpeg, gif).
-2. This is the second screen shot
-
-== Changelog ==
-
-= 1.0 =
-* Initial version.
-
-== Upgrade Notice ==
-
-
-== Arbitrary section ==
-
-You may provide arbitrary sections, in the same format as the ones above.  This may be of use for extremely complicated
-plugins where more information needs to be conveyed that doesn't fit into the categories of "description" or
-"installation."  Arbitrary sections will be shown below the built-in sections outlined above.
+Yes!
