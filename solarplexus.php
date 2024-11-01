@@ -16,7 +16,7 @@
  * Plugin Name:       Solarplexus
  * Plugin URI:        https://aventyret.github.io/solarplexus/
  * Description:       A plugin and developer tool to easily create dynamic display blocks.
- * Version:           1.18.2
+ * Version:           1.18.3
  * Requires at least: 6.1
  * Requires PHP:			8.1
  * Author:            Äventyret
@@ -41,7 +41,7 @@ define('SPLX_API_BASE', 'splx/v1');
  * Current plugin version.
  * We use SemVer - https://semver.org
  */
-define('SOLARPLEXUS_VERSION', '1.18.2');
+define('SOLARPLEXUS_VERSION', '1.18.3');
 
 /**
  * The core plugin class that is used to define internationalization,
