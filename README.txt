@@ -1,5 +1,5 @@
 === Solarplexus ===
-Contributors: joelbergqvist, fiwas, claracollman, perarnborg, akkilstrom, kinapersson, andreasbohman
+Contributors: joelbergqvist, fiwas, claracollman, perarnborg, akkilstrom, kinapersson, andreasbohman, fank1, hexelius
 Tags: layout, Gutenberg, blocks, dynamic, query loop, news
 Requires at least: 6.1
 Tested up to: 6.6
