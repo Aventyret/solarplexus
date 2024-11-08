@@ -6,6 +6,10 @@
 .github
 .nvmrc
 .travis.yml
+.phplint.yml
+.prettierignore
+.prettierrc
+.eslintrc.js
 .DS_Store
 Thumbs.db
 behat.yml
