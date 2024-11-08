@@ -701,7 +701,11 @@ class Solarplexus_Helpers {
 			$_SESSION[$rendered_posts_key]['timestamp'] ===
 				self::get_session_timestamp()
 		) {
-			return $_SESSION[$rendered_posts_key]['ids'];
+			if (is_array($_SESSION[$rendered_posts_key]['ids'])) {
+				return array_map(function($id) {
+					return (int)esc_attr($id);
+				}, $_SESSION[$rendered_posts_key]['ids']);
+			}
 		}
 		return [];
 	}
@@ -759,7 +763,11 @@ class Solarplexus_Helpers {
 	}
 
 	public static function block_pagination_base($block_attributes) {
-		$parsed_url = wp_parse_url($_SERVER['REQUEST_URI']);
+		$parsed_url = wp_parse_url(
+			isset($_SERVER['REQUEST_URI'])
+				? sanitize_url(wp_unslash($_SERVER['REQUEST_URI']))
+				: ''
+		);
 		$query = '';
 		if (isset($parsed_url['query'])) {
 			parse_str($parsed_url['query'], $query_args);
