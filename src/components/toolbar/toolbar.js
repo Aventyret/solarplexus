@@ -14,9 +14,9 @@ const Toolbar = ({ attributes, setAttributes, config }) => {
 		setAttributes({ offset: value });
 	};
 
-	let noOfPostsLabel = __('Number of posts', 'splx');
+	let noOfPostsLabel = __('Number of posts', 'solarplexus');
 	if (attributes.hasPagination) {
-		noOfPostsLabel = __('Posts per page', 'splx');
+		noOfPostsLabel = __('Posts per page', 'solarplexus');
 	}
 
 	return (
@@ -28,7 +28,7 @@ const Toolbar = ({ attributes, setAttributes, config }) => {
 						renderToggle={({ onToggle }) => (
 							<ToolbarButton
 								icon={settings}
-								label={__('Display settings', 'splx')}
+								label={__('Display settings', 'solarplexus')}
 								onClick={onToggle}
 							/>
 						)}
@@ -49,7 +49,7 @@ const Toolbar = ({ attributes, setAttributes, config }) => {
 								{config.allowOffset ? (
 									<BaseControl>
 										<RangeControl
-											label={__('Offset', 'splx')}
+											label={__('Offset', 'solarplexus')}
 											value={attributes.offset}
 											min={0}
 											max={100}

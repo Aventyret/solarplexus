@@ -16,10 +16,10 @@ Solarplexus is depeloped and maintained by [Äventyret](https://aventyret.com). 
 
 ### Translations
 
-1. Add new translations by running `wp i18n make-pot ./ languages/splx.pot`
-2. Open languages/splx-sv_SE.po with Poedit and select "Update from POT file"
+1. Add new translations by running `wp i18n make-pot ./ languages/solarplexus.pot`
+2. Open languages/solarplexus-sv_SE.po with Poedit and select "Update from POT file"
 3. Translate and save
-4. Convert translations to JSON format by running `wp i18n make-json languages/splx-sv_SE.po --no-purge`
+4. Convert translations to JSON format by running `wp i18n make-json languages/solarplexus-sv_SE.po --no-purge`
 
 More info in the [WP docs](https://developer.wordpress.org/block-editor/how-to-guides/internationalization/)
 

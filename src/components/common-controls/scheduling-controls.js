@@ -29,14 +29,14 @@ const SchedulingControls = ({ attributes, setAttributes }) => {
 	return (
 		<>
 			<TextControl
-				label={__('Publish at', 'splx')}
+				label={__('Publish at', 'solarplexus')}
 				onChange={onPublishAtDateTimeChange}
 				type="datetime-local"
 				value={getDateTimeLocalString(attributes.publishAt)}
 				max={getDateTimeLocalString(attributes.unpublishAt)}
 			/>
 			<TextControl
-				label={__('Unpublish at', 'splx')}
+				label={__('Unpublish at', 'solarplexus')}
 				onChange={onUnpublishAtDateTimeChange}
 				type="datetime-local"
 				value={getDateTimeLocalString(attributes.unpublishAt)}

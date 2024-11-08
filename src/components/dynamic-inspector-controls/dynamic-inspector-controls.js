@@ -232,7 +232,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 	return (
 		<InspectorControls>
 			{availablePostTypes?.length ? (
-				<PanelBody className="splx-panel" title={__('Post types', 'splx')}>
+				<PanelBody className="splx-panel" title={__('Post types', 'solarplexus')}>
 					{availablePostTypes.map((postType) => {
 						return (
 							<CheckboxControl
@@ -248,7 +248,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 			{availableTaxonomiesWithTerms?.length || availableAuthors?.length ? (
 				<PanelBody
 					className="splx-panel splx-panel--no-scroll"
-					title={__('Filter', 'splx')}
+					title={__('Filter', 'solarplexus')}
 				>
 					{(availableTaxonomiesWithTerms || []).map((taxonomyWithTerms) => {
 						return (
@@ -266,7 +266,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					})}
 					{availableAuthors?.length ? (
 						<FormTokenField
-							label={__('Authors', 'splx')}
+							label={__('Authors', 'solarplexus')}
 							value={authorsValue}
 							suggestions={authorsSuggestions}
 							onChange={onAuthorsChange}
@@ -275,9 +275,9 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					) : null}
 				</PanelBody>
 			) : null}
-			<PanelBody className="splx-panel" title={__('Sort order', 'splx')}>
+			<PanelBody className="splx-panel" title={__('Sort order', 'solarplexus')}>
 				<SelectControl
-					label={__('Order by', 'splx')}
+					label={__('Order by', 'solarplexus')}
 					value={attributes.orderby}
 					onChange={(orderby) => onOrderbySelectChange(orderby)}
 					options={Object.keys(ORDERBYS).map((key) => {
@@ -289,13 +289,13 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 				/>
 				{['meta_value', 'meta_value_num'].includes(attributes.orderby) ? (
 					<TextControl
-						label={__('Meta field name', 'splx')}
+						label={__('Meta field name', 'solarplexus')}
 						value={attributes.orderby_meta_key}
 						onChange={onOrderbyMetaKeyChange}
 					/>
 				) : null}
 				<SelectControl
-					label={__('Order', 'splx')}
+					label={__('Order', 'solarplexus')}
 					value={attributes.order}
 					onChange={(order) => onOrderSelectChange(order)}
 					options={Object.keys(ORDERS).map((key) => {
@@ -307,10 +307,10 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 				/>
 			</PanelBody>
 			{config.allowPagination ? (
-				<PanelBody title={__('Pagination', 'splx')}>
+				<PanelBody title={__('Pagination', 'solarplexus')}>
 					<CheckboxControl
 						checked={attributes.hasPagination}
-						label={__('Has pagination', 'splx')}
+						label={__('Has pagination', 'solarplexus')}
 						onChange={onHasPaginationCheckboxChange}
 					/>
 				</PanelBody>
@@ -318,7 +318,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 			{config.allowHandpicked ? (
 				<PanelBody
 					className="splx-panel"
-					title={__('Handpicked posts', 'splx')}
+					title={__('Handpicked posts', 'solarplexus')}
 				>
 					<SearchPostControl
 						attributes={attributes}
@@ -328,7 +328,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					/>
 					{attributes.handpickedPosts.length ? (
 						<div className="splx-handpickedPostsWrap">
-							<h4>{__('Selected posts', 'splx')}</h4>
+							<h4>{__('Selected posts', 'solarplexus')}</h4>
 							<div className="splx-handpickedPosts">
 								{attributes.handpickedPosts.map((handpicked) => {
 									return (
@@ -345,7 +345,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 															removeHandpickedPost(handpicked.post.id)
 														}
 													>
-														{__('Remove', 'splx')}
+														{__('Remove', 'solarplexus')}
 													</Button>
 													<SelectControl
 														value={handpicked.position}
@@ -364,7 +364,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					) : null}
 				</PanelBody>
 			) : null}
-			<PanelBody title={__('Block settings', 'splx')}>
+			<PanelBody title={__('Block settings', 'solarplexus')}>
 				<CustomControls
 					attributes={attributes}
 					setAttributes={setAttributes}

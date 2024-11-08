@@ -153,7 +153,7 @@ class Solarplexus_Admin {
 
 		wp_set_script_translations(
 			'solarplexus-script',
-			'splx',
+			'solarplexus',
 			SPLX_PLUGIN_PATH . 'languages'
 		);
 	}

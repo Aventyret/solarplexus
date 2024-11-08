@@ -58,7 +58,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 
 	return (
 		<InspectorControls>
-			<PanelBody title={__('Block posts', 'splx')}>
+			<PanelBody title={__('Block posts', 'solarplexus')}>
 				<SearchPostControl
 					attributes={attributes}
 					config={config}
@@ -66,7 +66,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 					existingPosts={attributes.searchResults}
 				/>
 				<div className="splx-handpickedPostsWrap">
-					<h4>{__('Selected posts', 'splx')}</h4>
+					<h4>{__('Selected posts', 'solarplexus')}</h4>
 					<div className="splx-handpickedPosts">
 						{attributes.searchResults.length === 0 ? (
 							<em>{__('No posts selected')}</em>
@@ -82,7 +82,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 											<Button
 												isSecondary
 												isSmall
-												label={__('Move up', 'splx')}
+												label={__('Move up', 'solarplexus')}
 												onClick={() => moveSearchResultUp(searchResult.id)}
 											>
 												<Icon icon="arrow-up-alt2" />
@@ -90,7 +90,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 											<Button
 												isSecondary
 												isSmall
-												label={__('Move down', 'splx')}
+												label={__('Move down', 'solarplexus')}
 												onClick={() => moveSearchResultDown(searchResult.id)}
 											>
 												<Icon icon="arrow-down-alt2" />
@@ -98,7 +98,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 											<Button
 												isSecondary
 												isSmall
-												label={__('Remove', 'splx')}
+												label={__('Remove', 'solarplexus')}
 												onClick={() => removeSearchResult(searchResult.id)}
 											>
 												<Icon icon="trash" />
@@ -122,7 +122,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 					</div>
 				</div>
 			</PanelBody>
-			<PanelBody title={__('Block settings', 'splx')}>
+			<PanelBody title={__('Block settings', 'solarplexus')}>
 				<CustomControls
 					attributes={attributes}
 					setAttributes={setAttributes}
@@ -130,17 +130,17 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 				/>
 				<CheckboxControl
 					checked={attributes.hideDuplicates}
-					label={__('Hide duplicates', 'splx')}
+					label={__('Hide duplicates', 'solarplexus')}
 					help={__(
 						'This will hide posts that are shown in blocks earlier on the page (they will still be visible in the editor).',
-						'splx'
+						'solarplexus'
 					)}
 					onChange={onHideDuplicatesCheckboxChange}
 				/>
 				{config.allowRandomize ? (
 					<CheckboxControl
 						checked={attributes.randomize}
-						label={__('Randomize the posts', 'splx')}
+						label={__('Randomize the posts', 'solarplexus')}
 						onChange={onRandomizeCheckboxChange}
 					/>
 				) : null}

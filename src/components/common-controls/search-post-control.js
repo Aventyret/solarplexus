@@ -81,7 +81,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 
 	return (
 		<div>
-			<h4>{__('Search posts', 'splx')}</h4>
+			<h4>{__('Search posts', 'solarplexus')}</h4>
 			<TextControl
 				ref={inputRef}
 				onChange={(nextValue) => onSearchInputChange(nextValue)}
@@ -110,8 +110,8 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 								onClick={() => onSelectSearchResult(searchResult)}
 							>
 								{alreadySelected
-									? __('Selected', 'splx')
-									: __('Select', 'splx')}
+									? __('Selected', 'solarplexus')
+									: __('Select', 'solarplexus')}
 							</Button>
 						</li>
 					);
