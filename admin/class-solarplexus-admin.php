@@ -197,7 +197,7 @@ class Solarplexus_Admin {
 				$attributes = $instance->to_array();
 			} else {
 				throw new Exception(
-					"Cannot create block '{ esc_attr($block_type_id) }', type must be either 'dynamic' or 'handpicked'."
+					"Cannot create block ' " . esc_attr($block_type_id) . " ', type must be either 'dynamic' or 'handpicked'."
 				);
 			}
 
