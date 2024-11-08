@@ -56,8 +56,7 @@ class Solarplexus_Helpers {
 	}
 
 	private static function get_json_config($config_path) {
-		$json = file_get_contents($config_path);
-		return json_decode($json, true);
+		return wp_json_file_decode($config_path, ["associative" => true]);
 	}
 
 	public static function get_block_type_id($block_config) {
@@ -761,7 +760,7 @@ class Solarplexus_Helpers {
 	}
 
 	public static function block_pagination_base($block_attributes) {
-		$parsed_url = parse_url($_SERVER['REQUEST_URI']);
+		$parsed_url = wp_parse_url($_SERVER['REQUEST_URI']);
 		$query = '';
 		if (isset($parsed_url['query'])) {
 			parse_str($parsed_url['query'], $query_args);

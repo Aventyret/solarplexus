@@ -232,7 +232,10 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 	return (
 		<InspectorControls>
 			{availablePostTypes?.length ? (
-				<PanelBody className="splx-panel" title={__('Post types', 'solarplexus')}>
+				<PanelBody
+					className="splx-panel"
+					title={__('Post types', 'solarplexus')}
+				>
 					{availablePostTypes.map((postType) => {
 						return (
 							<CheckboxControl

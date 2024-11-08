@@ -4,9 +4,15 @@ const { __ } = window.wp.i18n;
 
 // TODO better icons
 export const ITEM_LAYOUTS = {
-	imagebg: { label: __('Image as background', 'solarplexus'), icon: stretchWide },
+	imagebg: {
+		label: __('Image as background', 'solarplexus'),
+		icon: stretchWide,
+	},
 	imagetop: { label: __('Image on top', 'solarplexus'), icon: chevronUp },
-	imageleft: { label: __('Image to the left', 'solarplexus'), icon: chevronLeft },
+	imageleft: {
+		label: __('Image to the left', 'solarplexus'),
+		icon: chevronLeft,
+	},
 };
 
 export const ORDERBYS = {
