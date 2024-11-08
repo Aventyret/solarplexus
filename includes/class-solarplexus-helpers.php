@@ -56,7 +56,7 @@ class Solarplexus_Helpers {
 	}
 
 	private static function get_json_config($config_path) {
-		return wp_json_file_decode($config_path, ["associative" => true]);
+		return wp_json_file_decode($config_path, ['associative' => true]);
 	}
 
 	public static function get_block_type_id($block_config) {
