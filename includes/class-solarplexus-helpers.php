@@ -460,14 +460,10 @@ class Solarplexus_Helpers {
 				load_template($template, false, $args);
 				$loaded_template = ob_get_clean();
 			} else {
-				error_log(
-					"Solarplexus: Unable to validate template path: \"$template\". Error Code: $validated_file."
-				);
+				// NOTE: Possibly display admin notice here?
 			}
 		} else {
-			error_log(
-				"Solarplexus: Unable to load template for: \"$block_type_id\". File not found."
-			);
+			// NOTE: Possibly display admin notice here?
 		}
 
 		return $loaded_template;
@@ -523,7 +519,7 @@ class Solarplexus_Helpers {
 				$args
 			);
 		}
-		error_log('Solarplexus: No sage template loader.');
+		// NOTE: Possibly display admin notice here?
 	}
 
 	private static function template_loader_sage_sub_10(
@@ -700,7 +696,8 @@ class Solarplexus_Helpers {
 		$rendered_posts_key = 'splx_rendered_posts_' . $post->ID;
 
 		if (
-			isset($_SESSION[$rendered_posts_key]) &&
+			isset($_SESSION[$rendered_posts_key]['timestamp']) &&
+			isset($_SESSION[$rendered_posts_key]['ids']) &&
 			$_SESSION[$rendered_posts_key]['timestamp'] ===
 				self::get_session_timestamp()
 		) {
@@ -716,11 +713,13 @@ class Solarplexus_Helpers {
 		$rendered_posts_key = 'splx_rendered_posts_' . $post->ID;
 
 		if (
+			isset($_SESSION[$rendered_posts_key]['timestamp']) &&
+			isset($_SESSION[$rendered_posts_key]['ids']) &&
 			!empty($_SESSION[$rendered_posts_key]['timestamp']) &&
 			$_SESSION[$rendered_posts_key]['timestamp'] ===
 				self::get_session_timestamp()
 		) {
-			$_SESSION[$rendered_posts_key]['ids'][] = $id;
+			$_SESSION[$rendered_posts_key]['ids'][] = esc_attr($id);
 			return;
 		}
 
