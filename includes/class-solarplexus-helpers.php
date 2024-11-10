@@ -56,8 +56,7 @@ class Solarplexus_Helpers {
 	}
 
 	private static function get_json_config($config_path) {
-		$json = file_get_contents($config_path);
-		return json_decode($json, true);
+		return wp_json_file_decode($config_path, ['associative' => true]);
 	}
 
 	public static function get_block_type_id($block_config) {
@@ -461,14 +460,10 @@ class Solarplexus_Helpers {
 				load_template($template, false, $args);
 				$loaded_template = ob_get_clean();
 			} else {
-				error_log(
-					"Solarplexus: Unable to validate template path: \"$template\". Error Code: $validated_file."
-				);
+				// NOTE: Possibly display admin notice here?
 			}
 		} else {
-			error_log(
-				"Solarplexus: Unable to load template for: \"$block_type_id\". File not found."
-			);
+			// NOTE: Possibly display admin notice here?
 		}
 
 		return $loaded_template;
@@ -524,7 +519,7 @@ class Solarplexus_Helpers {
 				$args
 			);
 		}
-		error_log('Solarplexus: No sage template loader.');
+		// NOTE: Possibly display admin notice here?
 	}
 
 	private static function template_loader_sage_sub_10(
@@ -701,11 +696,16 @@ class Solarplexus_Helpers {
 		$rendered_posts_key = 'splx_rendered_posts_' . $post->ID;
 
 		if (
-			isset($_SESSION[$rendered_posts_key]) &&
+			isset($_SESSION[$rendered_posts_key]['timestamp']) &&
+			isset($_SESSION[$rendered_posts_key]['ids']) &&
 			$_SESSION[$rendered_posts_key]['timestamp'] ===
 				self::get_session_timestamp()
 		) {
-			return $_SESSION[$rendered_posts_key]['ids'];
+			if (is_array($_SESSION[$rendered_posts_key]['ids'])) {
+				return array_map(function ($id) {
+					return (int) sanitize_key($id);
+				}, $_SESSION[$rendered_posts_key]['ids']);
+			}
 		}
 		return [];
 	}
@@ -717,11 +717,13 @@ class Solarplexus_Helpers {
 		$rendered_posts_key = 'splx_rendered_posts_' . $post->ID;
 
 		if (
+			isset($_SESSION[$rendered_posts_key]['timestamp']) &&
+			isset($_SESSION[$rendered_posts_key]['ids']) &&
 			!empty($_SESSION[$rendered_posts_key]['timestamp']) &&
 			$_SESSION[$rendered_posts_key]['timestamp'] ===
 				self::get_session_timestamp()
 		) {
-			$_SESSION[$rendered_posts_key]['ids'][] = $id;
+			$_SESSION[$rendered_posts_key]['ids'][] = esc_attr($id);
 			return;
 		}
 
@@ -755,13 +757,21 @@ class Solarplexus_Helpers {
 	}
 
 	public static function block_page($block_attributes) {
-		return isset($_GET[self::block_page_query_parameter($block_attributes)])
-			? (int) $_GET[self::block_page_query_parameter($block_attributes)]
-			: 1;
+		$page = get_query_var(
+			self::block_page_query_parameter($block_attributes)
+		);
+		if (!$page) {
+			return 1;
+		}
+		return (int) $page;
 	}
 
 	public static function block_pagination_base($block_attributes) {
-		$parsed_url = parse_url($_SERVER['REQUEST_URI']);
+		$parsed_url = wp_parse_url(
+			isset($_SERVER['REQUEST_URI'])
+				? sanitize_url(wp_unslash($_SERVER['REQUEST_URI']))
+				: ''
+		);
 		$query = '';
 		if (isset($parsed_url['query'])) {
 			parse_str($parsed_url['query'], $query_args);

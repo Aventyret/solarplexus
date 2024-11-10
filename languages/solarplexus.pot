@@ -12,7 +12,7 @@ msgstr ""
 "POT-Creation-Date: 2023-10-01T18:54:28+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
-"X-Domain: splx\n"
+"X-Domain: solarplexus\n"
 
 #. Plugin Name of the plugin
 msgid "Solarplexus"

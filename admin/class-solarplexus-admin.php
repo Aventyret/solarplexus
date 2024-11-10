@@ -151,9 +151,15 @@ class Solarplexus_Admin {
 			'before'
 		);
 
+		wp_add_inline_script(
+			'solarplexus-script',
+			'window.solarplexusNonce = "' . wp_create_nonce('splx') . '";',
+			'before'
+		);
+
 		wp_set_script_translations(
 			'solarplexus-script',
-			'splx',
+			'solarplexus',
 			SPLX_PLUGIN_PATH . 'languages'
 		);
 	}
@@ -191,7 +197,9 @@ class Solarplexus_Admin {
 				$attributes = $instance->to_array();
 			} else {
 				throw new Exception(
-					"Cannot create block '{$block_type_id}', type must be either 'dynamic' or 'handpicked'."
+					"Cannot create block ' " .
+						esc_attr($block_type_id) .
+						" ', type must be either 'dynamic' or 'handpicked'."
 				);
 			}
 
@@ -246,25 +254,31 @@ class Solarplexus_Admin {
 	public function register_endpoints() {
 		register_rest_route(SPLX_API_BASE, '/search', [
 			'methods' => 'GET',
-			'callback' => function () {
+			'callback' => function ($request) {
+				if (!wp_verify_nonce($request->get_param('nonce'), 'splx')) {
+					return new WP_REST_Response('Bad request', 400);
+				}
+
 				$s = strtolower(
-					isset($_GET['s']) && strlen($_GET['s'] > 2)
-						? $_GET['s']
+					$request->get_param('s') &&
+					strlen($request->get_param('s') > 2)
+						? $request->get_param('s')
 						: ''
 				);
 				if (!$s) {
 					throw new Exception('Search for a minimum of 2 characters');
 					wp_die();
 				}
-				$post_status = isset($_GET['status'])
-					? explode(',', $_GET['status'])
+				$post_status = $request->get_param('status')
+					? explode(',', $request->get_param('status'))
 					: ['publish'];
 				$post_type =
-					isset($_GET['post_type']) && $_GET['post_type']
-						? explode(',', $_GET['post_type'])
+					$request->get_param('post_type') &&
+					$request->get_param('post_type')
+						? explode(',', $request->get_param('post_type'))
 						: 'any';
-				$posts_per_page = isset($_GET['per_page'])
-					? $_GET['per_page']
+				$posts_per_page = $request->get_param('per_page')
+					? $request->get_param('per_page')
 					: 30;
 				$posts = get_posts([
 					's' => $s,

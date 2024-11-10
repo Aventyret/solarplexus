@@ -298,10 +298,10 @@ class Solarplexus {
 
 		echo '
 <nav class="splx-pagination' .
-			(isset($args['class']) ? ' ' . $args['class'] : '') .
+			(isset($args['class']) ? ' ' . esc_attr($args['class']) : '') .
 			'" aria-label="Pagination">
 	' .
-			paginate_links($pagination_args) .
+			wp_kses_post(paginate_links($pagination_args)) .
 			'
 </nav>';
 	}

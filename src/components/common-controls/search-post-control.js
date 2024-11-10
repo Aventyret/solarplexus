@@ -45,7 +45,9 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 		}
 		const searchUri = `/splx/v1/search/?s=${searchInput}&status=${postStatuses.join(
 			','
-		)}&post_type=${postTypes.join(',')}&per_page=30`;
+		)}&post_type=${postTypes.join(',')}&per_page=30&nonce=${
+			window.solarplexusNonce
+		}`;
 		const search = () =>
 			apiFetch({ path: searchUri }).then((res) => {
 				setSearchResults(res.slice(0, 10));
@@ -81,7 +83,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 
 	return (
 		<div>
-			<h4>{__('Search posts', 'splx')}</h4>
+			<h4>{__('Search posts', 'solarplexus')}</h4>
 			<TextControl
 				ref={inputRef}
 				onChange={(nextValue) => onSearchInputChange(nextValue)}
@@ -110,8 +112,8 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 								onClick={() => onSelectSearchResult(searchResult)}
 							>
 								{alreadySelected
-									? __('Selected', 'splx')
-									: __('Select', 'splx')}
+									? __('Selected', 'solarplexus')
+									: __('Select', 'solarplexus')}
 							</Button>
 						</li>
 					);

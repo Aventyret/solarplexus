@@ -36,8 +36,8 @@
 		"docs:serve": "vitepress serve docs",
 		"test": "yarn format:check && yarn lint",
 		"translate": "yarn translate:pot && yarn translate:update",
-		"translate:pot": "wp i18n make-pot . ./languages/splx.pot --exclude=node_modules,vendor,src/*.js,tests --include=build/*.js",
-		"translate:update": "wp i18n update-po ./languages/splx.pot ./languages",
+		"translate:pot": "wp i18n make-pot . ./languages/solarplexus.pot --exclude=node_modules,vendor,src/*.js,tests --include=build/*.js",
+		"translate:update": "wp i18n update-po ./languages/solarplexus.pot ./languages",
 		"translate:compile": "yarn translate:mo && yarn translate:js",
 		"translate:js": "wp i18n make-json languages --no-purge",
 		"translate:mo": "wp i18n make-mo ./languages ./languages"

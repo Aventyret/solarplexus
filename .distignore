@@ -1,12 +1,4 @@
-.distignore
-.editorconfig
-.git
-.gitignore
-.gitlab-ci.yml
-.github
-.nvmrc
-.travis.yml
-.DS_Store
+.*
 Thumbs.db
 behat.yml
 bin
