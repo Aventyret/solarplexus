@@ -702,8 +702,8 @@ class Solarplexus_Helpers {
 				self::get_session_timestamp()
 		) {
 			if (is_array($_SESSION[$rendered_posts_key]['ids'])) {
-				return array_map(function($id) {
-					return (int)esc_attr($id);
+				return array_map(function ($id) {
+					return (int) sanitize_key($id);
 				}, $_SESSION[$rendered_posts_key]['ids']);
 			}
 		}
@@ -757,9 +757,13 @@ class Solarplexus_Helpers {
 	}
 
 	public static function block_page($block_attributes) {
-		return isset($_GET[self::block_page_query_parameter($block_attributes)])
-			? (int) $_GET[self::block_page_query_parameter($block_attributes)]
-			: 1;
+		$page = get_query_var(
+			self::block_page_query_parameter($block_attributes)
+		);
+		if (!$page) {
+			return 1;
+		}
+		return (int) $page;
 	}
 
 	public static function block_pagination_base($block_attributes) {
