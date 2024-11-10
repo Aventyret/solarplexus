@@ -4,7 +4,7 @@ Tags: layout, Gutenberg, blocks, dynamic, query loop, news
 Requires at least: 6.1
 Tested up to: 6.6
 Requires PHP: 8.1
-Stable tag: 1.18.3
+Stable tag: 1.19.0
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
