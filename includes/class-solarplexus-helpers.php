@@ -478,7 +478,7 @@ class Solarplexus_Helpers {
 	}
 
 	private static function is_sage_10() {
-		return function_exists('Roots\view');
+		return function_exists('Roots\view') && current_theme_supports('sage');
 	}
 
 	private static function block_classes($classes) {
