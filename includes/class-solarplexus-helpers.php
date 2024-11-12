@@ -13,6 +13,8 @@ class Solarplexus_Helpers {
 	private static $rendered_post_ids = [];
 	// Used to know which block we are in
 	private static $block_index = 0;
+	// Used to keep track of if custom ssr component is used
+	private static $did_use_custom_editor_ssr_component = false;
 
 	public static function get_theme_config_path() {
 		return get_stylesheet_directory() .
@@ -800,6 +802,9 @@ class Solarplexus_Helpers {
 	}
 
 	public static function use_custom_editor_ssr_component() {
+		if (self::$did_use_custom_editor_ssr_component) {
+			return;
+		}
 		self::add_editor_inline_script(
 			'window.solarplexusOptions = window.solarplexusOptions || {}; window.solarplexusOptions.postponeBlockRegistration = true;',
 			'before'
@@ -808,5 +813,6 @@ class Solarplexus_Helpers {
 			'window.setTimeout(() => window.dispatchEvent(new Event("splx_register_blocks")), 0);',
 			'after'
 		);
+		self::$did_use_custom_editor_ssr_component = true;
 	}
 }
