@@ -321,9 +321,8 @@ class Solarplexus_Admin {
 				return array_slice($posts, 0, $posts_per_page);
 			},
 			'permission_callback' => function ($request) {
-				return true;
-				// $can_search = current_user_can('edit_posts');
-				// return apply_filters('splx_can_search_in_admin', $can_search);
+				$can_search = current_user_can('edit_posts');
+				return apply_filters('splx_can_search_in_admin', $can_search);
 			},
 		]);
 	}
