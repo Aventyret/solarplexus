@@ -9,7 +9,7 @@
 		"noOfGridCols": 2,
 		"customFields": [],
 		"itemLayout": "imagebg",
-		"showDate": true,
+		"showDate": false,
 		"showExcerpt": true
 	},
 	{
@@ -21,7 +21,7 @@
 		"noOfGridCols": 2,
 		"customFields": [],
 		"itemLayout": "imagebg",
-		"showDate": true,
+		"showDate": false,
 		"showExcerpt": true
 	}
 ]

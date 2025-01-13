@@ -2,11 +2,13 @@
 Contributors: joelbergqvist, fiwas, claracollman, perarnborg, akkilstrom, kinapersson, andreasbohman, fank1, hexelius
 Tags: layout, Gutenberg, blocks, dynamic, query loop, news
 Requires at least: 6.1
-Tested up to: 6.6
-Requires PHP: 8.1
+Tested up to: 6.7
+Requires PHP: 8.0
 Stable tag: 1.19.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Documentation: https://aventyret.github.io/solarplexus/
+Source code: https://github.com/Aventyret/solarplexus
 
 Solarplexus gives developers a powerful tool for adding dynamic display blocks.
 
