@@ -63,5 +63,25 @@ class Solarplexus_Public {
 				)
 			);
 		}
+		if (Solarplexus_Helpers::is_theme_twentytwentyfour()) {
+			wp_register_style(
+				'solarplexus-style-twentytwentyfour',
+				SPLX_PLUGIN_DIR_URL . 'public/themes/twentytwentyfour.css',
+				[],
+				filemtime(
+					SPLX_PLUGIN_PATH . 'public/themes/twentytwentyfour.css'
+				)
+			);
+		}
+		if (Solarplexus_Helpers::is_theme_twentytwentyfive()) {
+			wp_register_style(
+				'solarplexus-style-twentytwentyfive',
+				SPLX_PLUGIN_DIR_URL . 'public/themes/twentytwentyfive.css',
+				[],
+				filemtime(
+					SPLX_PLUGIN_PATH . 'public/themes/twentytwentyfive.css'
+				)
+			);
+		}
 	}
 }

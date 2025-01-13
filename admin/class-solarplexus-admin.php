@@ -99,6 +99,28 @@ class Solarplexus_Admin {
 			);
 		}
 
+		if (Solarplexus_Helpers::is_theme_twentytwentyfour()) {
+			wp_register_style(
+				'solarplexus-style-twentytwentyfour',
+				SPLX_PLUGIN_DIR_URL . 'public/themes/twentytwentyfour.css',
+				['wp-edit-blocks'],
+				filemtime(
+					SPLX_PLUGIN_PATH . 'public/themes/twentytwentyfour.css'
+				)
+			);
+		}
+
+		if (Solarplexus_Helpers::is_theme_twentytwentyfive()) {
+			wp_register_style(
+				'solarplexus-style-twentytwentyfive',
+				SPLX_PLUGIN_DIR_URL . 'public/themes/twentytwentyfive.css',
+				['wp-edit-blocks'],
+				filemtime(
+					SPLX_PLUGIN_PATH . 'public/themes/twentytwentyfive.css'
+				)
+			);
+		}
+
 		wp_register_script(
 			'solarplexus-script',
 			SPLX_PLUGIN_DIR_URL . 'build/index.js',
@@ -177,6 +199,12 @@ class Solarplexus_Admin {
 		}
 		if (Solarplexus_Helpers::is_theme_twentytwentythree()) {
 			$block_style_handle = 'solarplexus-style-twentytwentythree';
+		}
+		if (Solarplexus_Helpers::is_theme_twentytwentyfour()) {
+			$block_style_handle = 'solarplexus-style-twentytwentyfour';
+		}
+		if (Solarplexus_Helpers::is_theme_twentytwentyfive()) {
+			$block_style_handle = 'solarplexus-style-twentytwentyfive';
 		}
 
 		foreach ($this->get_config() as $block_config) {

@@ -606,6 +606,20 @@ class Solarplexus_Helpers {
 					SPLX_TEMPLATE_FOLDER,
 					'twentytwentythree'
 				);
+			} elseif (self::is_theme_twentytwentyfour()) {
+				$template = sprintf(
+					'%s%s/%s.php',
+					SPLX_PLUGIN_PATH,
+					SPLX_TEMPLATE_FOLDER,
+					'twentytwentyfour'
+				);
+			} elseif (self::is_theme_twentytwentyfive()) {
+				$template = sprintf(
+					'%s%s/%s.php',
+					SPLX_PLUGIN_PATH,
+					SPLX_TEMPLATE_FOLDER,
+					'twentytwentyfive'
+				);
 			} else {
 				$template = sprintf(
 					'%s%s/%s.php',
@@ -621,6 +635,14 @@ class Solarplexus_Helpers {
 
 	public static function is_theme_twentytwentythree() {
 		return get_stylesheet() == 'twentytwentythree';
+	}
+
+	public static function is_theme_twentytwentyfour() {
+		return get_stylesheet() == 'twentytwentyfour';
+	}
+
+	public static function is_theme_twentytwentyfive() {
+		return get_stylesheet() == 'twentytwentyfive';
 	}
 
 	public static function is_gutenberg_request() {
@@ -704,9 +726,9 @@ class Solarplexus_Helpers {
 				self::get_session_timestamp()
 		) {
 			if (is_array($_SESSION[$rendered_posts_key]['ids'])) {
-				return array_map(function ($id) {
-					return (int) sanitize_key($id);
-				}, $_SESSION[$rendered_posts_key]['ids']);
+				return array_unique(
+					array_map('absint', $_SESSION[$rendered_posts_key]['ids'])
+				);
 			}
 		}
 		return [];

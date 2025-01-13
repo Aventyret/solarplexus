@@ -8,6 +8,11 @@
  * $args['classes_item'] String
  *
  */
+
+if (!defined('ABSPATH')) {
+	exit();
+}
+// Exit if accessed directly
 ?>
 <?php if ($args['posts']):
 	$columns = min(count($args['posts']), 3); ?>
