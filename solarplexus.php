@@ -18,7 +18,7 @@
  * Description:       A plugin and developer tool to easily create dynamic display blocks.
  * Version:           1.19.1
  * Requires at least: 6.1
- * Requires PHP:			8.1
+ * Requires PHP:			8.0
  * Author:            Äventyret
  * Author URI:        https://www.aventyret.com
  * License:           GPL-2.0+
