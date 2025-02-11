@@ -102,13 +102,16 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 	);
 
 	// Get all available authors
-	const availableAuthors = useSelect((select) => {
+	let availableAuthors = useSelect((select) => {
 		const { getUsers } = select('core');
 
 		const authors = getUsers({ who: 'authors', per_page: -1 });
 
 		return authors;
 	}, []);
+	if (config.allowAuthors === false) {
+		availableAuthors = null;
+	}
 
 	const onTermsChange = (taxonomySlug, termNames) => {
 		const taxonomyWithTerms = availableTaxonomiesWithTerms.find(
@@ -278,37 +281,42 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					) : null}
 				</PanelBody>
 			) : null}
-			<PanelBody className="splx-panel" title={__('Sort order', 'solarplexus')}>
-				<SelectControl
-					label={__('Order by', 'solarplexus')}
-					value={attributes.orderby}
-					onChange={(orderby) => onOrderbySelectChange(orderby)}
-					options={Object.keys(ORDERBYS).map((key) => {
-						return {
-							value: key,
-							label: ORDERBYS[key],
-						};
-					})}
-				/>
-				{['meta_value', 'meta_value_num'].includes(attributes.orderby) ? (
-					<TextControl
-						label={__('Meta field name', 'solarplexus')}
-						value={attributes.orderby_meta_key}
-						onChange={onOrderbyMetaKeyChange}
+			{config.allowOrderby !== false ? (
+				<PanelBody
+					className="splx-panel"
+					title={__('Sort order', 'solarplexus')}
+				>
+					<SelectControl
+						label={__('Order by', 'solarplexus')}
+						value={attributes.orderby}
+						onChange={(orderby) => onOrderbySelectChange(orderby)}
+						options={Object.keys(ORDERBYS).map((key) => {
+							return {
+								value: key,
+								label: ORDERBYS[key],
+							};
+						})}
 					/>
-				) : null}
-				<SelectControl
-					label={__('Order', 'solarplexus')}
-					value={attributes.order}
-					onChange={(order) => onOrderSelectChange(order)}
-					options={Object.keys(ORDERS).map((key) => {
-						return {
-							value: key,
-							label: ORDERS[key],
-						};
-					})}
-				/>
-			</PanelBody>
+					{['meta_value', 'meta_value_num'].includes(attributes.orderby) ? (
+						<TextControl
+							label={__('Meta field name', 'solarplexus')}
+							value={attributes.orderby_meta_key}
+							onChange={onOrderbyMetaKeyChange}
+						/>
+					) : null}
+					<SelectControl
+						label={__('Order', 'solarplexus')}
+						value={attributes.order}
+						onChange={(order) => onOrderSelectChange(order)}
+						options={Object.keys(ORDERS).map((key) => {
+							return {
+								value: key,
+								label: ORDERS[key],
+							};
+						})}
+					/>
+				</PanelBody>
+			) : null}
 			{config.allowPagination ? (
 				<PanelBody title={__('Pagination', 'solarplexus')}>
 					<CheckboxControl

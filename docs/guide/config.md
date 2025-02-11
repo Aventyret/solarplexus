@@ -81,6 +81,14 @@ _[string]_ - `dynamic` type only. The key(s) of the taxonomies the editor will b
 
 _[string]_ - `handpicked` type only. Defaults to ["publish"]. Posts with any other status than "publish" will only be visible in the editor.
 
+### allowAuthors - optional
+
+_[string]_ - `dynamic` type only. Defaults to ["true"]. If false block can not be filtered by author.
+
+### allowOrderby - optional
+
+_[string]_ - `dynamic` type only. Defaults to ["true"]. If false the sort order of the block can not changed.
+
 ### randomize - optional
 
 _boolean_ - `handpicked` type only. If true the order of the posts will be shuffled. If more posts are selected than the max `noOfPosts` the posts array will (as always) also be capped to `noOfPosts`. Defaults to `false`.
