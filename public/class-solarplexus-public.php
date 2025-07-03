@@ -84,4 +84,14 @@ class Solarplexus_Public {
 			);
 		}
 	}
+
+	/**
+	 * Add query vars used in block pagination.
+	 */
+	public function add_query_vars($vars) {
+		$vars[] = 'splx_block_page';
+		$vars[] = 'splx_block_uid';
+
+		return $vars;
+	}
 }

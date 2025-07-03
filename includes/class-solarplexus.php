@@ -188,6 +188,12 @@ class Solarplexus {
 			$plugin_public,
 			'register_style'
 		);
+
+		$this->loader->add_action(
+			'query_vars',
+			$plugin_public,
+			'add_query_vars'
+		);
 	}
 
 	/**
