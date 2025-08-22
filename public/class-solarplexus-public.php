@@ -105,9 +105,9 @@ class Solarplexus_Public {
 		if (
 			$query->is_main_query() &&
 			$query->is_home() &&
-			(get_option('show_on_front') === 'page') &&
 			get_query_var('splx_block_uid') &&
-			get_query_var('splx_block_page')
+			get_query_var('splx_block_page') &&
+			(get_option('show_on_front') === 'page')
 		) {
 			$query->is_home = false;
 			$query->is_page = true;
