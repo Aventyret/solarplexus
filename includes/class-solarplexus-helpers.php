@@ -295,6 +295,18 @@ class Solarplexus_Helpers {
 			$args['paged'] = self::block_page($block_attributes);
 		}
 
+		if (array_key_exists('handpickedPosts', $block_attributes)) {
+			// Handpicked in dynamic: Exclude from query and add later
+			foreach ($block_attributes['handpickedPosts'] as $handpicked) {
+				$args['post__not_in'][] = $handpicked['post']['id'];
+			}
+
+			// Rewind offset on pages > 1
+			if ((!empty($args['paged']) && $args['paged'] > 1)) {
+				$args['offset'] = absint(($args['paged'] - 1) * $args['posts_per_page']) - count($block_attributes['handpickedPosts']);
+			}
+		}
+
 		/**
 		 * Filter the query args returning to the block render.
 		 *
@@ -315,25 +327,21 @@ class Solarplexus_Helpers {
 
 		$posts = $query->posts;
 
-		if (array_key_exists('handpickedPosts', $block_attributes)) {
+		if (array_key_exists('handpickedPosts', $block_attributes) &&
+			(empty($args['paged']) || $args['paged'] <= 1)) {
+			// Handpicked in dynamic: Correct order
+			usort($block_attributes['handpickedPosts'], function($a, $b) {
+			    return ($a['position'] < $b['position']) ? -1 : 1;
+			});
+
+			// Add to result
 			$addedPosts = 0;
 			foreach ($block_attributes['handpickedPosts'] as $handpicked) {
 				$postToAdd = get_post($handpicked['post']['id']);
 				if ($postToAdd) {
-					// Find out if $postToAdd already exists in $posts
-					$postToAddExistsAtIndex = false;
-					foreach ($posts as $index => $post) {
-						if ($post->ID === $postToAdd->ID) {
-							$postToAddExistsAtIndex = $index;
-						}
-					}
-					if ($postToAddExistsAtIndex !== false) {
-						// If the post existed already we remove it from it's existing position
-						array_splice($posts, $postToAddExistsAtIndex, 1);
-					} else {
-						// If the post did not exist we count up $addedPosts, which means one more post will be removed with array_slice
-						$addedPosts++;
-					}
+					// Count up $addedPosts, which means one more post will be removed with array_slice
+					$addedPosts++;
+
 					// Add the post at it's handpicked position
 					array_splice($posts, (int) $handpicked['position'] - 1, 0, [
 						$postToAdd,
