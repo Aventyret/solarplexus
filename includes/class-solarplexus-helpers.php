@@ -777,14 +777,18 @@ class Solarplexus_Helpers {
 	}
 
 	public static function block_page_query_parameter($block_attributes) {
-		return 'block_' . $block_attributes['blockUid'] . '_page';
+		return 'splx_block_uid=' . $block_attributes['blockUid'] . '&splx_block_page';
 	}
 
 	public static function block_page($block_attributes) {
-		$page = get_query_var(
-			self::block_page_query_parameter($block_attributes)
-		);
-		if (!$page) {
+		$block_id = get_query_var('splx_block_uid');
+		$page = get_query_var('splx_block_page');
+
+		if (
+			empty($page) ||
+			empty($block_attributes['blockUid']) ||
+			$block_id !== $block_attributes['blockUid']
+		) {
 			return 1;
 		}
 		return (int) $page;

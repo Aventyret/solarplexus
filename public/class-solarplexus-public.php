@@ -84,4 +84,35 @@ class Solarplexus_Public {
 			);
 		}
 	}
+
+	/**
+	 * Add query vars used in block pagination.
+	 */
+	public function add_query_vars($vars) {
+		$vars[] = 'splx_block_page';
+		$vars[] = 'splx_block_uid';
+
+		return $vars;
+	}
+
+	/**
+	 * Alter the main query for block pagination.
+	 *
+	 * This is needed to ensure the correct pages is displayed
+	 * when custom query vars are present on the front page.
+	 */
+	public function alter_pre_get_posts($query) {
+		if (
+			$query->is_main_query() &&
+			$query->is_home() &&
+			get_query_var('splx_block_uid') &&
+			get_query_var('splx_block_page') &&
+			(get_option('show_on_front') === 'page')
+		) {
+			$query->is_home = false;
+			$query->is_page = true;
+			$query->is_singular = true;
+			$query->set('page_id', get_option('page_on_front'));
+		}
+	}
 }
