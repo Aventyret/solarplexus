@@ -2,7 +2,7 @@
 Contributors: joelbergqvist, fiwas, claracollman, perarnborg, akkilstrom, kinapersson, andreasbohman, fank1, hexelius
 Tags: layout, Gutenberg, blocks, dynamic, query loop, news
 Requires at least: 6.1
-Tested up to: 6.7
+Tested up to: 6.8
 Requires PHP: 8.0
 Stable tag: 1.19.3
 License: GPLv2 or later
