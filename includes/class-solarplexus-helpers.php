@@ -327,23 +327,37 @@ class Solarplexus_Helpers {
 
 		$posts = $query->posts;
 
-		if (array_key_exists('handpickedPosts', $block_attributes) &&
-			(empty($args['paged']) || $args['paged'] <= 1)) {
-			// Handpicked in dynamic: Correct order
-			usort($block_attributes['handpickedPosts'], function($a, $b) {
-			    return ($a['position'] < $b['position']) ? -1 : 1;
-			});
-
-			// Add to result
+		if (array_key_exists('handpickedPosts', $block_attributes) && (empty($args['paged']) || $args['paged'] <= 1)) {
 			$addedPosts = 0;
-			foreach ($block_attributes['handpickedPosts'] as $handpicked) {
-				$postToAdd = get_post($handpicked['post']['id']);
-				if ($postToAdd) {
-					// Count up $addedPosts, which means one more post will be removed with array_slice
-					$addedPosts++;
 
+			// NOTE: Order handpicked in position and ensure only one post per position
+			$handpickedSorted = [];
+			foreach ($block_attributes['handpickedPosts'] as $handpicked) {
+				if (!isset($handpickedSorted[$handpicked['position']])) {
+					$handpickedSorted[(int)$handpicked['position']] = $handpicked['post'];
+				}
+			}
+			ksort($handpickedSorted, SORT_NUMERIC);
+
+			foreach ($handpickedSorted as $position => $handpicked) {
+				$postToAdd = get_post($handpicked['id']);
+				if ($postToAdd) {
+					// Find out if $postToAdd already exists in $posts
+					$postToAddExistsAtIndex = false;
+					foreach ($posts as $index => $post) {
+						if ($post->ID === $postToAdd->ID) {
+							$postToAddExistsAtIndex = $index;
+						}
+					}
+					if ($postToAddExistsAtIndex !== false) {
+						// If the post existed already we remove it from it's existing position
+						array_splice($posts, $postToAddExistsAtIndex, 1);
+					} else {
+						// If the post did not exist we count up $addedPosts, which means one more post will be removed with array_slice
+						$addedPosts++;
+					}
 					// Add the post at it's handpicked position
-					array_splice($posts, (int) $handpicked['position'] - 1, 0, [
+					array_splice($posts, $position - 1, 0, [
 						$postToAdd,
 					]);
 				}
