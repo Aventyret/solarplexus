@@ -152,12 +152,12 @@ class Solarplexus {
 		);
 
 		$this->loader->add_action(
-			'admin_enqueue_scripts',
+			'enqueue_block_assets',
 			$plugin_admin,
 			'enqueue_styles'
 		);
 		$this->loader->add_action(
-			'admin_enqueue_scripts',
+			'enqueue_block_editor_assets',
 			$plugin_admin,
 			'register_scripts',
 			11

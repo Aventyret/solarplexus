@@ -53,6 +53,7 @@ function registerBlockTypes() {
 			category: 'layout',
 			example: {},
 			attributes,
+			apiVersion: 3,
 			edit(props) {
 				useEffect(() => {
 					if (!props.attributes.blockUid) {
