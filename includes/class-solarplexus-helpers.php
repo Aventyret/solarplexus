@@ -725,7 +725,7 @@ class Solarplexus_Helpers {
 		self::ensure_php_session();
 
 		global $post;
-		$rendered_posts_key = 'splx_rendered_posts_' . $post->ID;
+		$rendered_posts_key = 'splx_rendered_posts_' . ($post->ID ?? 1);
 
 		if (
 			isset($_SESSION[$rendered_posts_key]['timestamp']) &&
@@ -746,7 +746,7 @@ class Solarplexus_Helpers {
 		self::ensure_php_session();
 
 		global $post;
-		$rendered_posts_key = 'splx_rendered_posts_' . $post->ID;
+		$rendered_posts_key = 'splx_rendered_posts_' . ($post->ID ?? 1);
 
 		if (
 			isset($_SESSION[$rendered_posts_key]['timestamp']) &&
