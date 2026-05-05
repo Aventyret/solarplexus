@@ -338,7 +338,7 @@ class Solarplexus_Helpers {
 			$addedPosts = 0;
 			foreach ($block_attributes['handpickedPosts'] as $handpicked) {
 				$postToAdd = get_post($handpicked['post']['id']);
-				if ($postToAdd) {
+				if ($postToAdd && $postToAdd->post_status == 'publish') {
 					// Count up $addedPosts, which means one more post will be removed with array_slice
 					$addedPosts++;
 
