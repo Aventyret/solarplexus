@@ -338,7 +338,7 @@ class Solarplexus_Helpers {
 			$addedPosts = 0;
 			foreach ($block_attributes['handpickedPosts'] as $handpicked) {
 				$postToAdd = get_post($handpicked['post']['id']);
-				if ($postToAdd) {
+				if ($postToAdd && ($postToAdd->post_status == 'publish' || self::is_gutenberg_request())) {
 					// Count up $addedPosts, which means one more post will be removed with array_slice
 					$addedPosts++;
 
@@ -376,6 +376,16 @@ class Solarplexus_Helpers {
 							(self::block_page($block_attributes) + 1)
 						: null,
 			];
+		}
+
+		// In editor: display post status in post_title if not published
+		if(self::is_gutenberg_request()) {
+			$posts = array_map(function($p) {
+				if ($p->post_status != 'publish') {
+					$p->post_title .= ' (' . $p->post_status . ')';
+				}
+				return $p;
+			}, $posts);
 		}
 
 		/**
