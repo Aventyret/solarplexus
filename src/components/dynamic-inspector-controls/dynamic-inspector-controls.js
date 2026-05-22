@@ -105,7 +105,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 	const availableAuthors = useSelect((select) => {
 		const { getUsers } = select('core');
 
-		if (config.allowAuthors) {
+		if (config.allowAuthors === false) {
 			return [];
 		}
 
