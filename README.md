@@ -36,3 +36,4 @@ The plugin is versioned in dist versions here on GitHub.
 4. `wp dist-archive .` A dist version without dev-only files will be created in the directory above.
 5. On [Releases](https://github.com/Aventyret/solarplexus/releases) page, click `Draft a new release`, fill in new version, changes etc, and upload the zip.
 6. The `./docs` of the release tag will be published automatically when a release is created.
+7. Releases are published to the WP Plugin directory with subversion, see https://developer.wordpress.org/plugins/wordpress-org/how-to-use-subversion/ for reference.
