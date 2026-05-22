@@ -93,6 +93,10 @@ _boolean_ - `handpicked` type only. If true the block will have a checkbox to co
 
 _boolean_ - `dynamic` type only. Sets if Solarplexus check for not showing duplicate posts on the same page should be disabled. Defaults to `false`.
 
+### allowAuthors - optional
+
+_boolean_ - `dynamic` type only. Sets if editors should be allowed to filter blocks on author. Defaults to `true`.
+
 ### allowPagination - optional
 
 _boolean_ - `dynamic` type only. Sets if editors should be allowed to enable pagination for blocks of this type. Defaults to `false`.

@@ -207,7 +207,9 @@ class Solarplexus_Helpers {
 		/**
 		 * @since    1.2.0
 		 */
+		$allow_authors = $block_config['allowAuthors'] ?? true;
 		if (
+			$allow_authors &&
 			array_key_exists('authors', $block_attributes) &&
 			!empty($block_attributes['authors'])
 		) {
@@ -302,8 +304,10 @@ class Solarplexus_Helpers {
 			}
 
 			// Rewind offset on pages > 1
-			if ((!empty($args['paged']) && $args['paged'] > 1)) {
-				$args['offset'] = absint(($args['paged'] - 1) * $args['posts_per_page']) - count($block_attributes['handpickedPosts']);
+			if (!empty($args['paged']) && $args['paged'] > 1) {
+				$args['offset'] =
+					absint(($args['paged'] - 1) * $args['posts_per_page']) -
+					count($block_attributes['handpickedPosts']);
 			}
 		}
 
@@ -327,18 +331,24 @@ class Solarplexus_Helpers {
 
 		$posts = $query->posts;
 
-		if (array_key_exists('handpickedPosts', $block_attributes) &&
-			(empty($args['paged']) || $args['paged'] <= 1)) {
+		if (
+			array_key_exists('handpickedPosts', $block_attributes) &&
+			(empty($args['paged']) || $args['paged'] <= 1)
+		) {
 			// Handpicked in dynamic: Correct order
-			usort($block_attributes['handpickedPosts'], function($a, $b) {
-			    return ($a['position'] < $b['position']) ? -1 : 1;
+			usort($block_attributes['handpickedPosts'], function ($a, $b) {
+				return $a['position'] < $b['position'] ? -1 : 1;
 			});
 
 			// Add to result
 			$addedPosts = 0;
 			foreach ($block_attributes['handpickedPosts'] as $handpicked) {
 				$postToAdd = get_post($handpicked['post']['id']);
-				if ($postToAdd && ($postToAdd->post_status == 'publish' || self::is_gutenberg_request())) {
+				if (
+					$postToAdd &&
+					($postToAdd->post_status == 'publish' ||
+						self::is_gutenberg_request())
+				) {
 					// Count up $addedPosts, which means one more post will be removed with array_slice
 					$addedPosts++;
 
@@ -379,8 +389,8 @@ class Solarplexus_Helpers {
 		}
 
 		// In editor: display post status in post_title if not published
-		if(self::is_gutenberg_request()) {
-			$posts = array_map(function($p) {
+		if (self::is_gutenberg_request()) {
+			$posts = array_map(function ($p) {
 				if ($p->post_status != 'publish') {
 					$p->post_title .= ' (' . $p->post_status . ')';
 				}
@@ -795,7 +805,9 @@ class Solarplexus_Helpers {
 	}
 
 	public static function block_page_query_parameter($block_attributes) {
-		return 'splx_block_uid=' . $block_attributes['blockUid'] . '&splx_block_page';
+		return 'splx_block_uid=' .
+			$block_attributes['blockUid'] .
+			'&splx_block_page';
 	}
 
 	public static function block_page($block_attributes) {
