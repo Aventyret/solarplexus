@@ -207,7 +207,9 @@ class Solarplexus_Helpers {
 		/**
 		 * @since    1.2.0
 		 */
+		$allow_authors = $block_config['allowAuthors'] ?? true;
 		if (
+			$allow_authors &&
 			array_key_exists('authors', $block_attributes) &&
 			!empty($block_attributes['authors'])
 		) {
