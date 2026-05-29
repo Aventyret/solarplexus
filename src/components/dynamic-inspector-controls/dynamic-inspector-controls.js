@@ -98,6 +98,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 
 			return taxTree;
 		},
+		// TODO: This is the useSelect that throws a performance warning in console
 		[availableTaxonomies, attributes]
 	);
 
