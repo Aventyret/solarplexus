@@ -7,6 +7,7 @@ import Toolbar from './components/toolbar/toolbar';
 const ServerSideRender = window.wp.serverSideRender;
 const { registerBlockType } = window.wp.blocks;
 const { useEffect } = window.wp.element;
+const { useBlockProps } = window.wp.blockEditor;
 
 let SsrComponents = {};
 
@@ -55,6 +56,7 @@ function registerBlockTypes() {
 			attributes,
 			apiVersion: 3,
 			edit(props) {
+				const blockProps = useBlockProps();
 				useEffect(() => {
 					if (!props.attributes.blockUid) {
 						props.setAttributes({ blockUid: props.clientId });
@@ -64,7 +66,7 @@ function registerBlockTypes() {
 				const SsrComponent = SsrComponents[blockId] || ServerSideRender;
 
 				return (
-					<>
+					<div {...blockProps}>
 						{config.type === 'dynamic' ? (
 							<DynamicInspectorControls {...props} config={config} />
 						) : config.type === 'handpicked' ? (
@@ -77,7 +79,7 @@ function registerBlockTypes() {
 							block={blockId}
 							httpMethod="POST"
 						/>
-					</>
+					</div>
 				);
 			},
 			save() {
