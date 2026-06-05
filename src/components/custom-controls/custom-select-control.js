@@ -29,6 +29,8 @@ const CustomSelectControl = ({
 
 	return (
 		<SelectControl
+			__next40pxDefaultSize
+			__nextHasNoMarginBottom
 			label={control.name}
 			value={inputValue}
 			onChange={onChange}

@@ -28,7 +28,13 @@ const CustomTextControl = ({
 	}
 
 	return (
-		<TextControl label={control.name} value={inputValue} onChange={onChange} />
+		<TextControl
+			__next40pxDefaultSize
+			__nextHasNoMarginBottom
+			label={control.name}
+			value={inputValue}
+			onChange={onChange}
+		/>
 	);
 };
 

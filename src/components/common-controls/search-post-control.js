@@ -85,6 +85,8 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 		<div>
 			<h4>{__('Search posts', 'solarplexus')}</h4>
 			<TextControl
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 				ref={inputRef}
 				onChange={(nextValue) => onSearchInputChange(nextValue)}
 			/>

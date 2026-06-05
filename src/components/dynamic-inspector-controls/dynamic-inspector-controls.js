@@ -240,6 +240,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					{availablePostTypes.map((postType) => {
 						return (
 							<CheckboxControl
+								__nextHasNoMarginBottom
 								key={postType.slug}
 								onChange={() => onPostTypeCheckboxChange(postType.slug)}
 								label={postType.name}
@@ -257,6 +258,8 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					{(availableTaxonomiesWithTerms || []).map((taxonomyWithTerms) => {
 						return (
 							<FormTokenField
+								__next40pxDefaultSize
+								__nextHasNoMarginBottom
 								key={taxonomyWithTerms.slug}
 								label={taxonomyWithTerms.name}
 								value={taxonomyWithTerms.value}
@@ -270,6 +273,8 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					})}
 					{availableAuthors?.length ? (
 						<FormTokenField
+							__next40pxDefaultSize
+							__nextHasNoMarginBottom
 							label={__('Authors', 'solarplexus')}
 							value={authorsValue}
 							suggestions={authorsSuggestions}
@@ -281,6 +286,8 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 			) : null}
 			<PanelBody className="splx-panel" title={__('Sort order', 'solarplexus')}>
 				<SelectControl
+					__next40pxDefaultSize
+					__nextHasNoMarginBottom
 					label={__('Order by', 'solarplexus')}
 					value={attributes.orderby}
 					onChange={(orderby) => onOrderbySelectChange(orderby)}
@@ -299,6 +306,8 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					/>
 				) : null}
 				<SelectControl
+					__next40pxDefaultSize
+					__nextHasNoMarginBottom
 					label={__('Order', 'solarplexus')}
 					value={attributes.order}
 					onChange={(order) => onOrderSelectChange(order)}
@@ -352,6 +361,8 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 														{__('Remove', 'solarplexus')}
 													</Button>
 													<SelectControl
+														__next40pxDefaultSize
+														__nextHasNoMarginBottom
 														value={handpicked.position}
 														options={positionOptions}
 														onChange={(position) =>

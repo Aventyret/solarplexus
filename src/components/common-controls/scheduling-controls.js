@@ -29,6 +29,8 @@ const SchedulingControls = ({ attributes, setAttributes }) => {
 	return (
 		<>
 			<TextControl
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 				label={__('Publish at', 'solarplexus')}
 				onChange={onPublishAtDateTimeChange}
 				type="datetime-local"
@@ -36,6 +38,8 @@ const SchedulingControls = ({ attributes, setAttributes }) => {
 				max={getDateTimeLocalString(attributes.unpublishAt)}
 			/>
 			<TextControl
+				__next40pxDefaultSize
+				__nextHasNoMarginBottom
 				label={__('Unpublish at', 'solarplexus')}
 				onChange={onUnpublishAtDateTimeChange}
 				type="datetime-local"
