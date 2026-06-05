@@ -379,19 +379,21 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					) : null}
 				</PanelBody>
 			) : null}
-			<PanelBody title={__('Block settings', 'solarplexus')}>
-				<CustomControls
-					attributes={attributes}
-					setAttributes={setAttributes}
-					config={config}
-				/>
-				{config.allowScheduling ? (
-					<SchedulingControls
+			{(config.customControls?.length > 0 || config.allowScheduling) && (
+				<PanelBody title={__('Block settings', 'solarplexus')}>
+					<CustomControls
 						attributes={attributes}
 						setAttributes={setAttributes}
+						config={config}
 					/>
-				) : null}
-			</PanelBody>
+					{config.allowScheduling ? (
+						<SchedulingControls
+							attributes={attributes}
+							setAttributes={setAttributes}
+						/>
+					) : null}
+				</PanelBody>
+			)}
 		</InspectorControls>
 	);
 };
