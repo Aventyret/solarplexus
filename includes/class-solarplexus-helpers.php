@@ -302,8 +302,10 @@ class Solarplexus_Helpers {
 			}
 
 			// Rewind offset on pages > 1
-			if ((!empty($args['paged']) && $args['paged'] > 1)) {
-				$args['offset'] = absint(($args['paged'] - 1) * $args['posts_per_page']) - count($block_attributes['handpickedPosts']);
+			if (!empty($args['paged']) && $args['paged'] > 1) {
+				$args['offset'] =
+					absint(($args['paged'] - 1) * $args['posts_per_page']) -
+					count($block_attributes['handpickedPosts']);
 			}
 		}
 
@@ -327,11 +329,13 @@ class Solarplexus_Helpers {
 
 		$posts = $query->posts;
 
-		if (array_key_exists('handpickedPosts', $block_attributes) &&
-			(empty($args['paged']) || $args['paged'] <= 1)) {
+		if (
+			array_key_exists('handpickedPosts', $block_attributes) &&
+			(empty($args['paged']) || $args['paged'] <= 1)
+		) {
 			// Handpicked in dynamic: Correct order
-			usort($block_attributes['handpickedPosts'], function($a, $b) {
-			    return ($a['position'] < $b['position']) ? -1 : 1;
+			usort($block_attributes['handpickedPosts'], function ($a, $b) {
+				return $a['position'] < $b['position'] ? -1 : 1;
 			});
 
 			// Add to result
@@ -785,7 +789,9 @@ class Solarplexus_Helpers {
 	}
 
 	public static function block_page_query_parameter($block_attributes) {
-		return 'splx_block_uid=' . $block_attributes['blockUid'] . '&splx_block_page';
+		return 'splx_block_uid=' .
+			$block_attributes['blockUid'] .
+			'&splx_block_page';
 	}
 
 	public static function block_page($block_attributes) {
