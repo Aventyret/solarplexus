@@ -129,6 +129,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 					config={config}
 				/>
 				<CheckboxControl
+					__nextHasNoMarginBottom
 					checked={attributes.hideDuplicates}
 					label={__('Hide duplicates', 'solarplexus')}
 					help={__(
@@ -139,6 +140,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 				/>
 				{config.allowRandomize ? (
 					<CheckboxControl
+						__nextHasNoMarginBottom
 						checked={attributes.randomize}
 						label={__('Randomize the posts', 'solarplexus')}
 						onChange={onRandomizeCheckboxChange}

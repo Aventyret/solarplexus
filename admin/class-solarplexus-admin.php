@@ -78,9 +78,7 @@ class Solarplexus_Admin {
 			$this->version,
 			'all'
 		);
-	}
 
-	public function register_scripts() {
 		wp_register_style(
 			'solarplexus-style',
 			SPLX_PLUGIN_DIR_URL . 'build/index.css',
@@ -120,7 +118,9 @@ class Solarplexus_Admin {
 				)
 			);
 		}
+	}
 
+	public function register_scripts() {
 		wp_register_script(
 			'solarplexus-script',
 			SPLX_PLUGIN_DIR_URL . 'build/index.js',
@@ -235,6 +235,7 @@ class Solarplexus_Admin {
 				'attributes' => $attributes,
 				'editor_script' => 'solarplexus-script',
 				'style' => $block_style_handle,
+				'api_version' => 3,
 				'render_callback' => function (
 					$block_attributes,
 					$content

@@ -7,7 +7,7 @@
 		"allowedTaxonomies": ["category"],
 		"noOfPosts": [2, 8],
 		"noOfGridCols": 2,
-		"customFields": [],
+		"customControls": [],
 		"itemLayout": "imagebg",
 		"showDate": false,
 		"showExcerpt": true
@@ -19,7 +19,7 @@
 		"noOfPosts": [1, 8],
 		"prependNewPosts": true,
 		"noOfGridCols": 2,
-		"customFields": [],
+		"customControls": [],
 		"itemLayout": "imagebg",
 		"showDate": false,
 		"showExcerpt": true

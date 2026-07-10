@@ -29,6 +29,8 @@ const CustomTextareaControl = ({
 
 	return (
 		<TextareaControl
+			__next40pxDefaultSize
+			__nextHasNoMarginBottom
 			label={control.name}
 			value={inputValue}
 			onChange={onChange}
