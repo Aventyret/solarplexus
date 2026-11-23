@@ -5,7 +5,7 @@ const customControlOnChange = (
 	setAttributes,
 	control,
 	searchResult,
-	isPostCustomControl
+	isPostCustomControl,
 ) => {
 	const onChange = useCallback(
 		(val) => {
@@ -33,7 +33,7 @@ const customControlOnChange = (
 				});
 			}
 		},
-		[attributes, setAttributes, control, searchResult, isPostCustomControl]
+		[attributes, setAttributes, control, searchResult, isPostCustomControl],
 	);
 
 	return onChange;

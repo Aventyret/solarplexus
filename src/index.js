@@ -16,7 +16,7 @@ window.solarplexusApi = {
 	registerSsrComponent: (blockId, Component) => {
 		if (typeof Component !== 'function') {
 			throw new Error(
-				'solarplexusApi.registerSsrComponent: Bad component registered'
+				'solarplexusApi.registerSsrComponent: Bad component registered',
 			);
 		}
 		SsrComponents[blockId] = Component;

@@ -5,3 +5,4 @@ dist
 languages
 docs/.vitepress
 languages
+pnpm-lock.yaml

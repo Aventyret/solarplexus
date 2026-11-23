@@ -134,7 +134,7 @@ const HandpickedInspectorControls = ({ attributes, setAttributes, config }) => {
 					label={__('Hide duplicates', 'solarplexus')}
 					help={__(
 						'This will hide posts that are shown in blocks earlier on the page (they will still be visible in the editor).',
-						'solarplexus'
+						'solarplexus',
 					)}
 					onChange={onHideDuplicatesCheckboxChange}
 				/>

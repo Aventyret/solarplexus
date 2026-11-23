@@ -31,7 +31,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 		return postTypes && config.allowedPostTypes
 			? postTypes.filter((postType) => {
 					return config.allowedPostTypes.includes(postType.slug);
-			  })
+				})
 			: null;
 	}, []);
 
@@ -45,7 +45,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 					// Weirdly, taxonomy.slug here refers to the initial key you
 					// give register_taxonomy, not the rewrite slug.
 					return config.allowedTaxonomies.includes(taxonomy.slug);
-			  })
+				})
 			: null;
 	}, []);
 
@@ -68,13 +68,13 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 
 				let selectedTermIds =
 					attributes.taxonomyTerms.find(
-						(taxonomyTerm) => taxonomyTerm.slug === tax.slug
+						(taxonomyTerm) => taxonomyTerm.slug === tax.slug,
 					)?.terms || [];
 
 				// Handle legacy attributes from before multiple taxonomy support
 				if (attributes.taxonomy && terms) {
 					selectedTermIds = attributes.terms.filter((selectedTermId) =>
-						terms.find((term) => term.id === selectedTermId)
+						terms.find((term) => term.id === selectedTermId),
 					);
 				}
 				const value = terms?.length
@@ -84,7 +84,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 								return term.name;
 							}
 							return '';
-					  })
+						})
 					: [];
 
 				return {
@@ -99,7 +99,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 			return taxTree;
 		},
 		// TODO: This is the useSelect that throws a performance warning in console
-		[availableTaxonomies, attributes]
+		[availableTaxonomies, attributes],
 	);
 
 	// Get all available authors
@@ -117,14 +117,14 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 
 	const onTermsChange = (taxonomySlug, termNames) => {
 		const taxonomyWithTerms = availableTaxonomiesWithTerms.find(
-			(taxonomyWithTerm) => taxonomyWithTerm.slug === taxonomySlug
+			(taxonomyWithTerm) => taxonomyWithTerm.slug === taxonomySlug,
 		);
 		const termIds = taxonomyWithTerms.terms
 			.filter((term) => termNames.includes(term.name))
 			.map((term) => term.id);
 
 		let taxonomyTerms = attributes.taxonomyTerms.filter(
-			(taxonomyTerm) => taxonomyTerm.slug !== taxonomyWithTerms.slug
+			(taxonomyTerm) => taxonomyTerm.slug !== taxonomyWithTerms.slug,
 		);
 		taxonomyTerms = [
 			...taxonomyTerms,
@@ -162,13 +162,13 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 	const authorsValue = availableAuthors
 		? attributes.authors?.map((authorId) => {
 				const author = availableAuthors?.find(
-					(author) => author.id === authorId
+					(author) => author.id === authorId,
 				);
 				if (author) {
 					return author.name;
 				}
 				return '';
-		  }) || []
+			}) || []
 		: [];
 
 	const onAuthorsChange = (authorNames) => {
@@ -183,8 +183,8 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 		const postTypeWasSelected = selectedPostTypes.includes(postTypeSlug);
 		const newSelectedPostTypes = postTypeWasSelected
 			? selectedPostTypes.filter(
-					(_postTypeSlug) => _postTypeSlug !== postTypeSlug
-			  )
+					(_postTypeSlug) => _postTypeSlug !== postTypeSlug,
+				)
 			: [...selectedPostTypes, postTypeSlug];
 
 		setAttributes({
@@ -202,7 +202,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 	};
 
 	const existingPosts = attributes.handpickedPosts.map(
-		(existing) => existing.post
+		(existing) => existing.post,
 	);
 
 	const removeHandpickedPost = (existingPostId) => {
@@ -220,7 +220,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 
 	const setPosition = (existingPostId, position) => {
 		const existingIndex = attributes.handpickedPosts.findIndex(
-			(existing) => existing.post.id === existingPostId
+			(existing) => existing.post.id === existingPostId,
 		);
 		setAttributes({
 			handpickedPosts: [

@@ -14,14 +14,14 @@ const CustomTextareaControl = ({
 		setAttributes,
 		control,
 		searchResult,
-		isPostCustomControl
+		isPostCustomControl,
 	);
 
 	let inputValue = attributes[control.id];
 
 	if (isPostCustomControl) {
 		const item = attributes.searchResults.find(
-			(item) => item.id === searchResult.id
+			(item) => item.id === searchResult.id,
 		);
 
 		inputValue = item?.postCustomControls?.[control.id] ?? '';

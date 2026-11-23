@@ -36,7 +36,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 			allPostTypes && config.allowedPostTypes
 				? Object.keys(allPostTypes).filter((postTypeSlug) => {
 						return config.allowedPostTypes.includes(postTypeSlug);
-				  })
+					})
 				: null;
 		if (availablePostTypes) {
 			postTypes = postTypes.filter((postType) => {
@@ -44,7 +44,7 @@ const SearchPostControl = ({ existingPosts, config, selectSearchResult }) => {
 			});
 		}
 		const searchUri = `/splx/v1/search/?s=${searchInput}&status=${postStatuses.join(
-			','
+			',',
 		)}&post_type=${postTypes.join(',')}&per_page=30&nonce=${
 			window.solarplexusNonce
 		}`;

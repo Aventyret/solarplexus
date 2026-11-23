@@ -16,7 +16,8 @@ phpcs.xml
 phpcs.xml.dist
 README.md
 wp-cli.local.yml
-yarn.lock
+pnpm-lock.yaml
+pnpm-workspace.yaml
 webpack.config.js
 node_modules
 src

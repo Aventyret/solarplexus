@@ -8,17 +8,18 @@ jobs:
   publish-docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
       - uses: webfactory/ssh-agent@v0.5.4
         with:
           ssh-private-key: ${{ secrets.SOLARPLEXUS_BOT_SSH }}
-      - uses: actions/setup-node@v2
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
         with:
-          node-version: 16
+          node-version-file: '.nvmrc'
       - name: 'Build docs'
         run: |
-          yarn
-          yarn docs:build
+          pnpm install --frozen-lockfile
+          pnpm docs:build
       - name: 'Push docs to gh-pages branch'
         working-directory: ./docs/.vitepress/dist
         run: |
