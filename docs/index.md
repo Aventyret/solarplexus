@@ -1,12 +1,15 @@
 ---
-home: true
-heroImage: /solarplexus-logo.svg
-heroAlt: Solarplexus logo
-heroText: Solarplexus
-tagline: Dynamic display blocks
-actionText: Download for Wordpress >= 5.9
-actionLink: https://github.com/Aventyret/solarplexus/releases
-footer: MIT Licensed | Copyright © 2021-present Äventyret
+layout: home
+hero:
+  name: Solarplexus
+  tagline: Dynamic display blocks
+  image:
+    src: /solarplexus-logo.svg
+    alt: Solarplexus logo
+  actions:
+    - theme: brand
+      text: Download for Wordpress >= 5.9
+      link: https://github.com/Aventyret/solarplexus/releases
 ---
 
 <div class="grid">

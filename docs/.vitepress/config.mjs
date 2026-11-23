@@ -5,12 +5,21 @@ export default defineConfig({
   title: 'Solarplexus',
   description:
     'A list block builder for the Wordpress Gutenberg editor.',
+  appearance: false,
   head: [
-    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/solarplexus-logo.svg' }]
+    ['link', { rel: 'icon', type: 'image/svg+xml', href: '/solarplexus/solarplexus-logo.svg' }]
   ],
   themeConfig: {
-    repo: 'Aventyret/solarplexus',
     logo: '/solarplexus-logo.svg',
+
+    socialLinks: [
+      { icon: 'github', link: 'https://github.com/Aventyret/solarplexus' }
+    ],
+
+    footer: {
+      message: 'MIT Licensed',
+      copyright: 'Copyright © 2021-present Äventyret'
+    },
 
     nav: [
       { text: 'Home', link: '/' },
@@ -23,11 +32,10 @@ export default defineConfig({
     ],
 
     sidebar: {
-      '/contribute/': 'auto',
-      '/': [
+      '/guide/': [
         {
           text: 'Guide',
-          children: [
+          items: [
             {
               text: 'Getting Started',
               link: '/guide/'

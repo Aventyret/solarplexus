@@ -1,10 +1,18 @@
 :root {
-  --c-brand: #289AED;
-  --c-brand-light: #289AED;
+  --vp-c-brand-1: #289AED;
+  --vp-c-brand-2: #289AED;
+  --vp-c-brand-3: #289AED;
+  --vp-c-brand-soft: rgba(40, 154, 237, 0.14);
+  --vp-c-bg-alt: #F5F8F9;
+  --vp-nav-bg-color: #F5F8F9;
+  --vp-font-family-base: 'latoregular', sans-serif;
+  --vp-home-hero-name-color: inherit;
+  --vp-button-brand-bg: #289AED;
+  --vp-button-brand-hover-bg: #289AED;
+  --vp-button-brand-active-bg: #289AED;
 }
 
 body {
-  font-family: 'latoregular';
   overflow-x: hidden;
 }
 
@@ -16,72 +24,58 @@ em {
   font-family: 'latoitalic';
 }
 
-.nav-bar.nav-bar {
-  background: #F5F8F9;
-}
-
-.nav-bar-title {
+.VPNavBarTitle .title {
   font-family: 'trocchiregular';
   font-size: 1.1rem;
 }
 
-.nav-bar-title .logo {
+.VPNavBarTitle .logo {
   height: 1.25rem;
 }
 
-.nav-bar-title .item {
-  font-size: 1rem;
+.VPHome {
+  margin-bottom: 0 !important;
 }
 
-.home-hero.home-hero {
+.VPHero {
   background: #F5F8F9;
-  margin-top: 0;
-  margin-bottom: 0;
-  padding-top: 4rem;
-  padding-bottom: 4rem;
 }
 
-.home-content.home-content {
-  max-width: 1080px;
-  padding-left:  1.25rem;
-  padding-right:  1.25rem;
-}
-
-.home-hero h1 {
+.VPHero .name {
   font-family: 'trocchiregular';
 }
 
-.home-hero .item.isExternal svg {
-  display: none;
-}
-
-.home-hero .item.isExternal {
+.VPHero .VPButton.brand {
   position: relative;
   padding-left: 2.5em;
 }
 
-.home-hero .item.isExternal:before {
+.VPHero .VPButton.brand:before {
   content: '';
-  background-image: url(/solarplexus/wp-logo.svg);
+  background-image: url(/wp-logo.svg);
+  background-size: contain;
   width: 20px;
   height: 20px;
   position: absolute;
   left: 1em;
-  top:  50%;
-  margin-top:  -10px;
+  top: 50%;
+  margin-top: -10px;
 }
 
-.home-content h2 {
+.VPHome > .vp-doc {
+  max-width: 1080px;
+  margin: 0 auto;
+  padding: 0 1.25rem;
+  font-size: 1.1rem;
+}
+
+.VPHome > .vp-doc h2 {
   border: 0;
   font-family: 'latolight';
   font-size: 2rem;
 }
 
-.home-content {
-  font-size: 1.1rem;
-}
-
-.home-content a {
+.VPHome > .vp-doc a {
   text-decoration: underline;
 }
 
