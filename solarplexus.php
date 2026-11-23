@@ -17,7 +17,7 @@
  * Plugin URI:        https://aventyret.github.io/solarplexus/
  * Description:       A plugin and developer tool to easily create dynamic display blocks.
  * Version:           1.21.0
- * Requires at least: 6.1
+ * Requires at least: 6.6
  * Requires PHP:			8.0
  * Author:            Äventyret
  * Author URI:        https://www.aventyret.com

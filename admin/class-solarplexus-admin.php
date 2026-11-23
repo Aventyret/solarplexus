@@ -131,6 +131,12 @@ class Solarplexus_Admin {
 				'wp-components',
 				'wp-i18n',
 				'wp-api-fetch',
+				'wp-block-editor',
+				'wp-data',
+				'wp-server-side-render',
+				'wp-primitives',
+				'react',
+				'react-jsx-runtime',
 			],
 			filemtime(SPLX_PLUGIN_PATH . 'build/index.js'),
 		);

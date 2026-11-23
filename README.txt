@@ -1,7 +1,7 @@
 === Solarplexus ===
 Contributors: joelbergqvist, fiwas, claracollman, perarnborg, akkilstrom, kinapersson, andreasbohman, fank1, hexelius
 Tags: layout, Gutenberg, blocks, dynamic, query loop, news
-Requires at least: 6.1
+Requires at least: 6.6
 Tested up to: 7.0
 Requires PHP: 8.0
 Stable tag: 1.21.0

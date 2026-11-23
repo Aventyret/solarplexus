@@ -8,7 +8,7 @@ hero:
     alt: Solarplexus logo
   actions:
     - theme: brand
-      text: Download for Wordpress >= 5.9
+      text: Download for Wordpress >= 6.6
       link: https://github.com/Aventyret/solarplexus/releases
 ---
 
