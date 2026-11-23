@@ -76,16 +76,6 @@ class Solarplexus_Helpers {
 		$classes_grid = [];
 		$classes_item = [];
 
-		foreach ($block_attributes as $key => $attribute) {
-			if (array_key_exists($key, $attrs_grid)) {
-				$attrs_grid[$key]['value'] = $attribute;
-			}
-
-			if (array_key_exists($key, $attrs_item)) {
-				$attrs_item[$key]['value'] = $attribute;
-			}
-		}
-
 		if (isset($block_config['noOfGridCols'])) {
 			// Set grid and item classes from attributes
 			$attrs_grid['cols'] = [
@@ -100,10 +90,12 @@ class Solarplexus_Helpers {
 			];
 		}
 
-		// Add itemLayout
-		// directly from config instead
-		// of from block attributes.
-		if (isset($attrs_grid['itemLayout'])) {
+		// Add itemLayout directly from config.
+		// Opt-in through the splx_enable_item_layout_class filter.
+		if (
+			isset($block_config['itemLayout']) &&
+			apply_filters('splx_enable_item_layout_class', false, $block_config)
+		) {
 			$attrs_item['itemLayout'] = [
 				'class_base' => 'splx-gridItemPost--layout',
 				'value' => $block_config['itemLayout'],

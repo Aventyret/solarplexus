@@ -223,7 +223,7 @@ _int_ - The number of columns (when screen width allows) the post grid will cons
 
 ### itemLayout
 
-_string_ - Can be either `imagebg`, `imagetop` or `imageleft`. Controls the layout within each post item in the list.
+_string_ - Can be either `imagebg`, `imagetop` or `imageleft`. Controls the layout within each post item in the list. The class `splx-gridItemPost--layout-<value>` is only added when the `splx_enable_item_layout_class` filter returns `true` (see [Customization](./customization.md)).
 
 ### showDate
 

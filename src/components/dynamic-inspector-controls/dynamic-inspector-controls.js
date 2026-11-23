@@ -305,7 +305,7 @@ const DynamicInspectorControls = ({ attributes, setAttributes, config }) => {
 				{['meta_value', 'meta_value_num'].includes(attributes.orderby) ? (
 					<TextControl
 						label={__('Meta field name', 'solarplexus')}
-						value={attributes.orderby_meta_key}
+						value={attributes.orderbyMetaKey}
 						onChange={onOrderbyMetaKeyChange}
 					/>
 				) : null}

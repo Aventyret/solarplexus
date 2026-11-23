@@ -82,3 +82,13 @@ add_filter('splx_enable_default_style', function() {
 	return true;
 });
 ```
+
+## Enable item layout class
+
+The class `splx-gridItemPost--layout-<itemLayout>` is only added to post items if you enable it. Add the following to your theme's `functions.php` file:
+
+```
+add_filter('splx_enable_item_layout_class', function($enabled, $block_config) {
+	return true;
+}, 10, 2);
+```

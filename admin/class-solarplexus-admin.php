@@ -288,66 +288,84 @@ class Solarplexus_Admin {
 					return new WP_REST_Response('Bad request', 400);
 				}
 
-				$s = strtolower(
-					$request->get_param('s') &&
-					strlen($request->get_param('s') > 2)
-						? $request->get_param('s')
-						: ''
-				);
-				if (!$s) {
-					throw new Exception('Search for a minimum of 2 characters');
-					wp_die();
+				$search = $request->get_param('s');
+				$search = is_string($search) ? trim($search) : '';
+				if (mb_strlen($search) < 3) {
+					return new WP_Error(
+						'splx_search_too_short',
+						'Search for a minimum of 3 characters',
+						['status' => 400],
+					);
 				}
-				$post_status = $request->get_param('status')
-					? explode(',', $request->get_param('status'))
-					: ['publish'];
+				$s = mb_strtolower($search);
+				$status_param = $request->get_param('status');
+				$post_status =
+					is_string($status_param) && $status_param
+						? array_map('sanitize_key', explode(',', $status_param))
+						: ['publish'];
+				$type_param = $request->get_param('post_type');
 				$post_type =
-					$request->get_param('post_type') &&
-					$request->get_param('post_type')
-						? explode(',', $request->get_param('post_type'))
+					is_string($type_param) && $type_param
+						? array_map('sanitize_key', explode(',', $type_param))
 						: 'any';
-				$posts_per_page = $request->get_param('per_page')
-					? $request->get_param('per_page')
+				$per_page_param = $request->get_param('per_page');
+				$posts_per_page = is_scalar($per_page_param)
+					? absint($per_page_param)
+					: 0;
+				$posts_per_page = $posts_per_page
+					? min($posts_per_page, 100)
 					: 30;
-				$posts = get_posts([
+				// Fetch up to 100 matches so the relevance sort
+				// applies before the result is limited.
+				$post_ids = get_posts([
 					's' => $s,
 					'post_status' => $post_status,
 					'post_type' => $post_type,
 					'posts_per_page' => 100,
+					'fields' => 'ids',
+					'no_found_rows' => true,
+					'update_post_meta_cache' => false,
+					'update_post_term_cache' => false,
 				]);
-				$posts = array_map(function ($p) {
-					return [
-						'id' => $p->ID,
-						'title' => $p->post_title,
-						'url' => get_permalink($p->ID),
-						'type' => $p->post_type,
-						'subtype' => $p->post_type,
+				if (!$post_ids) {
+					return [];
+				}
+				_prime_post_caches($post_ids, false, false);
+				$rank = function ($title) use ($s) {
+					if ($title === $s) {
+						return 0;
+					}
+					if (mb_strpos($title, $s) === 0) {
+						return 1;
+					}
+					return mb_strpos($title, $s) !== false ? 2 : 3;
+				};
+				$posts = [];
+				foreach ($post_ids as $index => $id) {
+					$post_type = get_post_type($id);
+					$title = get_post_field('post_title', $id, 'raw');
+					$posts[] = [
+						'rank' => $rank(mb_strtolower($title)),
+						'index' => $index,
+						'item' => [
+							'id' => $id,
+							'title' => $title,
+							'url' => get_permalink($id),
+							'type' => $post_type,
+							'subtype' => $post_type,
+						],
 					];
-				}, $posts);
-				usort($posts, function ($a, $b) use ($s) {
-					$titleA = strtolower($a['title']);
-					$titleB = strtolower($b['title']);
-					if ($titleA === $s) {
-						return -1;
-					}
-					if ($titleB === $s) {
-						return 1;
-					}
-					if ($titleA && strpos($titleA, $s) === 0) {
-						return -1;
-					}
-					if ($titleB && strpos($titleB, $s) === 0) {
-						return 1;
-					}
-					if (strpos($titleA, $s) !== false) {
-						return -1;
-					}
-					if (strpos($titleB, $s) !== false) {
-						return 1;
-					}
-					return 0;
+				}
+				usort($posts, function ($a, $b) {
+					return [$a['rank'], $a['index']] <=> [
+						$b['rank'],
+						$b['index'],
+					];
 				});
-				return array_slice($posts, 0, $posts_per_page);
+				return array_column(
+					array_slice($posts, 0, $posts_per_page),
+					'item',
+				);
 			},
 			'permission_callback' => function ($request) {
 				$can_search = current_user_can('edit_posts');
