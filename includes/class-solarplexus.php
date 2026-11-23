@@ -134,7 +134,7 @@ class Solarplexus {
 		$this->loader->add_action(
 			'plugins_loaded',
 			$plugin_i18n,
-			'load_plugin_textdomain'
+			'load_plugin_textdomain',
 		);
 	}
 
@@ -148,25 +148,25 @@ class Solarplexus {
 	private function define_admin_hooks() {
 		$plugin_admin = new Solarplexus_Admin(
 			$this->get_plugin_name(),
-			$this->get_version()
+			$this->get_version(),
 		);
 
 		$this->loader->add_action(
 			'enqueue_block_assets',
 			$plugin_admin,
-			'enqueue_styles'
+			'enqueue_styles',
 		);
 		$this->loader->add_action(
 			'enqueue_block_editor_assets',
 			$plugin_admin,
 			'register_scripts',
-			11
+			11,
 		);
 		$this->loader->add_action('init', $plugin_admin, 'register_block', 11);
 		$this->loader->add_action(
 			'rest_api_init',
 			$plugin_admin,
-			'register_endpoints'
+			'register_endpoints',
 		);
 	}
 
@@ -180,25 +180,25 @@ class Solarplexus {
 	private function define_public_hooks() {
 		$plugin_public = new Solarplexus_Public(
 			$this->get_plugin_name(),
-			$this->get_version()
+			$this->get_version(),
 		);
 
 		$this->loader->add_action(
 			'wp_enqueue_scripts',
 			$plugin_public,
-			'register_style'
+			'register_style',
 		);
 
 		$this->loader->add_action(
 			'query_vars',
 			$plugin_public,
-			'add_query_vars'
+			'add_query_vars',
 		);
 
 		$this->loader->add_action(
 			'pre_get_posts',
 			$plugin_public,
-			'alter_pre_get_posts'
+			'alter_pre_get_posts',
 		);
 	}
 
@@ -254,7 +254,7 @@ class Solarplexus {
 	public static function the_block_pagination(
 		$block_attributes_or_args,
 		$pagination = null,
-		$pagination_options = []
+		$pagination_options = [],
 	) {
 		$args = [];
 		if ($pagination === null) {
@@ -279,12 +279,12 @@ class Solarplexus {
 		foreach ($arg_properties as $property) {
 			if (!isset($args[$property]) || !$args[$property]) {
 				throw new Exception(
-					'Bad arguments for Solarplexus::the_block_pagination($args)'
+					'Bad arguments for Solarplexus::the_block_pagination($args)',
 				);
 			}
 		}
 		$pagination_base = Solarplexus_Helpers::block_pagination_base(
-			$args['block_attributes']
+			$args['block_attributes'],
 		);
 
 		$pagination_args = [
@@ -294,7 +294,7 @@ class Solarplexus {
 			'format' =>
 				'?' .
 				Solarplexus_Helpers::block_page_query_parameter(
-					$args['block_attributes']
+					$args['block_attributes'],
 				) .
 				'=%#%',
 			'type' => 'list',

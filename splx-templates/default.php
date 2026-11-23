@@ -20,7 +20,7 @@ if (!defined('ABSPATH')) {
 			<?php foreach ($args['posts'] as $post):
    	setup_postdata($post); ?>
 				<div class="splx-gridItemPost <?php echo esc_attr(
-    	$args['classes_item']
+    	$args['classes_item'],
     ); ?> <?php echo has_post_thumbnail()
  	? 'splx-gridItemPost--hasImg'
  	: ''; ?>">

@@ -41,7 +41,7 @@ class Solarplexus_Helpers {
 		// If there is no config at this point, use the plugin default blocks
 		if (empty($splx_config)) {
 			$splx_config = self::get_json_config(
-				SPLX_PLUGIN_PATH . 'splx-config.json'
+				SPLX_PLUGIN_PATH . 'splx-config.json',
 			);
 		}
 
@@ -108,7 +108,7 @@ class Solarplexus_Helpers {
 				'%s%s%s',
 				$attribute['class_base'],
 				$attribute['divider'],
-				$attribute['value']
+				$attribute['value'],
 			);
 		}
 
@@ -117,7 +117,7 @@ class Solarplexus_Helpers {
 				'%s%s%s',
 				$attribute['class_base'],
 				$attribute['divider'],
-				$attribute['value']
+				$attribute['value'],
 			);
 		}
 
@@ -211,7 +211,7 @@ class Solarplexus_Helpers {
 		if (array_key_exists('searchResults', $block_attributes)) {
 			$args['post__in'] = wp_list_pluck(
 				$block_attributes['searchResults'],
-				'id'
+				'id',
 			);
 			/**
 			 * @since    1.10.0
@@ -222,7 +222,7 @@ class Solarplexus_Helpers {
 				$block_attributes['hideDuplicates']
 			) {
 				$args['post__in'] = array_filter($args['post__in'], function (
-					$post_id
+					$post_id,
 				) {
 					if (in_array($post_id, self::$rendered_post_ids)) {
 						return false;
@@ -316,7 +316,7 @@ class Solarplexus_Helpers {
 			'splx_queryargs',
 			$args,
 			$block_config,
-			$block_attributes
+			$block_attributes,
 		);
 
 		$query = new WP_Query($args);
@@ -361,7 +361,7 @@ class Solarplexus_Helpers {
 			$permalink = get_permalink();
 			$next_url_permalink = apply_filters(
 				'splx_pagination_next_url_permalink',
-				$permalink
+				$permalink,
 			);
 
 			$pagination = [
@@ -372,7 +372,7 @@ class Solarplexus_Helpers {
 						? rtrim($next_url_permalink, '/') .
 							'?' .
 							self::block_page_query_parameter(
-								$block_attributes
+								$block_attributes,
 							) .
 							'=' .
 							(self::block_page($block_attributes) + 1)
@@ -404,7 +404,7 @@ class Solarplexus_Helpers {
 			$posts,
 			$block_config,
 			$block_attributes,
-			$pagination
+			$pagination,
 		);
 
 		// Keep track of rendered posts to avoid rendering same post multiple times on a page
@@ -441,17 +441,17 @@ class Solarplexus_Helpers {
 					'splx_grid_classes',
 					self::block_classes($classes_grid),
 					$block_config,
-					$block_attributes
+					$block_attributes,
 				),
 				'classes_item' => apply_filters(
 					'splx_item_classes',
 					self::block_classes($classes_item),
 					$block_config,
-					$block_attributes
+					$block_attributes,
 				),
 				'config' => $block_config,
 			],
-			$block_type_id
+			$block_type_id,
 		);
 	}
 
@@ -469,7 +469,7 @@ class Solarplexus_Helpers {
 			return self::template_loader_sage(
 				$sage_template,
 				$block_config,
-				$args
+				$args,
 			);
 		}
 
@@ -518,27 +518,27 @@ class Solarplexus_Helpers {
 			'splx_block_render_callback',
 			false,
 			$args,
-			$block_type_id
+			$block_type_id,
 		);
 	}
 
 	private static function template_loader_sage(
 		$template,
 		$block_config,
-		$args
+		$args,
 	) {
 		if (self::is_sage_sub_10()) {
 			return self::template_loader_sage_sub_10(
 				$template,
 				$block_config,
-				$args
+				$args,
 			);
 		}
 		if (self::is_sage_10()) {
 			return self::template_loader_sage_10(
 				$template,
 				$block_config,
-				$args
+				$args,
 			);
 		}
 		// NOTE: Possibly display admin notice here?
@@ -547,7 +547,7 @@ class Solarplexus_Helpers {
 	private static function template_loader_sage_sub_10(
 		$template,
 		$block_config,
-		$args
+		$args,
 	) {
 		// Get the Sage instance with
 		// the blade binding
@@ -570,7 +570,7 @@ class Solarplexus_Helpers {
 	private static function template_loader_sage_10(
 		$template,
 		$block_config,
-		$args
+		$args,
 	) {
 		// Get the rendered template as a string
 		$loaded_template = view($template, $args)->render();
@@ -583,7 +583,7 @@ class Solarplexus_Helpers {
 			get_stylesheet_directory(),
 			self::is_sage_10() ? '/resources' : '', // NOTE: get_stylesheet_directory() returns the /resources path in Sage 10, but not in Sage 9
 			SPLX_TEMPLATE_FOLDER,
-			$block_type_id
+			$block_type_id,
 		);
 	}
 
@@ -610,7 +610,7 @@ class Solarplexus_Helpers {
 		// regular PHP template in the current theme
 		if (!$template) {
 			$template = locate_template(
-				sprintf('%s/%s.php', SPLX_TEMPLATE_FOLDER, $block_type_id)
+				sprintf('%s/%s.php', SPLX_TEMPLATE_FOLDER, $block_type_id),
 			);
 		}
 
@@ -624,28 +624,28 @@ class Solarplexus_Helpers {
 					'%s%s/%s.php',
 					SPLX_PLUGIN_PATH,
 					SPLX_TEMPLATE_FOLDER,
-					'twentytwentythree'
+					'twentytwentythree',
 				);
 			} elseif (self::is_theme_twentytwentyfour()) {
 				$template = sprintf(
 					'%s%s/%s.php',
 					SPLX_PLUGIN_PATH,
 					SPLX_TEMPLATE_FOLDER,
-					'twentytwentyfour'
+					'twentytwentyfour',
 				);
 			} elseif (self::is_theme_twentytwentyfive()) {
 				$template = sprintf(
 					'%s%s/%s.php',
 					SPLX_PLUGIN_PATH,
 					SPLX_TEMPLATE_FOLDER,
-					'twentytwentyfive'
+					'twentytwentyfive',
 				);
 			} else {
 				$template = sprintf(
 					'%s%s/%s.php',
 					SPLX_PLUGIN_PATH,
 					SPLX_TEMPLATE_FOLDER,
-					'default'
+					'default',
 				);
 			}
 		}
@@ -683,7 +683,7 @@ class Solarplexus_Helpers {
 
 	public static function block_is_unpublished(
 		$block_config,
-		$block_attributes
+		$block_attributes,
 	) {
 		if (
 			!isset($block_config['allowScheduling']) ||
@@ -707,7 +707,7 @@ class Solarplexus_Helpers {
 			if (!empty($block['innerBlocks'])) {
 				$matching_blocks = array_merge(
 					$matching_blocks,
-					self::find_splx_blocks_in_content($block['innerBlocks'])
+					self::find_splx_blocks_in_content($block['innerBlocks']),
 				);
 			}
 		}
@@ -747,7 +747,7 @@ class Solarplexus_Helpers {
 		) {
 			if (is_array($_SESSION[$rendered_posts_key]['ids'])) {
 				return array_unique(
-					array_map('absint', $_SESSION[$rendered_posts_key]['ids'])
+					array_map('absint', $_SESSION[$rendered_posts_key]['ids']),
 				);
 			}
 		}
@@ -790,7 +790,7 @@ class Solarplexus_Helpers {
 		}
 
 		$args['post__not_in'] = array_unique(
-			array_merge($args['post__not_in'], self::get_rendered_post_ids())
+			array_merge($args['post__not_in'], self::get_rendered_post_ids()),
 		);
 
 		return $args;
@@ -820,13 +820,15 @@ class Solarplexus_Helpers {
 		$parsed_url = wp_parse_url(
 			isset($_SERVER['REQUEST_URI'])
 				? sanitize_url(wp_unslash($_SERVER['REQUEST_URI']))
-				: ''
+				: '',
 		);
 		$query = '';
 		if (isset($parsed_url['query'])) {
 			parse_str($parsed_url['query'], $query_args);
 			unset(
-				$query_args[self::block_page_query_parameter($block_attributes)]
+				$query_args[
+					self::block_page_query_parameter($block_attributes)
+				],
 			);
 			$query = http_build_query($query_args);
 		}
@@ -839,11 +841,11 @@ class Solarplexus_Helpers {
 
 	private static function add_editor_inline_script(
 		$data,
-		$before_or_after = 'after'
+		$before_or_after = 'after',
 	) {
 		add_action('splx_editor_script_registered', function () use (
 			$data,
-			$before_or_after
+			$before_or_after,
 		) {
 			wp_add_inline_script('solarplexus-script', $data, $before_or_after);
 		});
@@ -855,11 +857,11 @@ class Solarplexus_Helpers {
 		}
 		self::add_editor_inline_script(
 			'window.solarplexusOptions = window.solarplexusOptions || {}; window.solarplexusOptions.postponeBlockRegistration = true;',
-			'before'
+			'before',
 		);
 		self::add_editor_inline_script(
 			'window.setTimeout(() => window.dispatchEvent(new Event("splx_register_blocks")), 0);',
-			'after'
+			'after',
 		);
 		self::$did_use_custom_editor_ssr_component = true;
 	}

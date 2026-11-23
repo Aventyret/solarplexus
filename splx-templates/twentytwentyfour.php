@@ -32,7 +32,7 @@ if (!defined('ABSPATH')) {
 
 					<?php if (array_key_exists('showDate', $args['config'])): ?>
 						<time datetime="<?php echo the_date(
-      	'c'
+      	'c',
       ); ?>" class="wp-block-latest-posts__post-date">
 							<?php the_date(); ?>
 						</time>

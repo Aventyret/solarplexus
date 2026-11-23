@@ -70,8 +70,8 @@ class Solarplexus_Dynamic_Block_Attrs_Definition extends
 			'string',
 			$this->get_single_of_config_arr_or_single(
 				'allowedPostTypes',
-				'post'
-			)
+				'post',
+			),
 		);
 	}
 	// NOTE: Legacy from before allowing multiple taxonomies

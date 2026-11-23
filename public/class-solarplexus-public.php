@@ -51,7 +51,7 @@ class Solarplexus_Public {
 			'solarplexus-style',
 			SPLX_PLUGIN_DIR_URL . 'build/index.css',
 			[],
-			filemtime(SPLX_PLUGIN_PATH . 'build/index.css')
+			filemtime(SPLX_PLUGIN_PATH . 'build/index.css'),
 		);
 		if (Solarplexus_Helpers::is_theme_twentytwentythree()) {
 			wp_register_style(
@@ -59,8 +59,8 @@ class Solarplexus_Public {
 				SPLX_PLUGIN_DIR_URL . 'public/themes/twentytwentythree.css',
 				[],
 				filemtime(
-					SPLX_PLUGIN_PATH . 'public/themes/twentytwentythree.css'
-				)
+					SPLX_PLUGIN_PATH . 'public/themes/twentytwentythree.css',
+				),
 			);
 		}
 		if (Solarplexus_Helpers::is_theme_twentytwentyfour()) {
@@ -69,8 +69,8 @@ class Solarplexus_Public {
 				SPLX_PLUGIN_DIR_URL . 'public/themes/twentytwentyfour.css',
 				[],
 				filemtime(
-					SPLX_PLUGIN_PATH . 'public/themes/twentytwentyfour.css'
-				)
+					SPLX_PLUGIN_PATH . 'public/themes/twentytwentyfour.css',
+				),
 			);
 		}
 		if (Solarplexus_Helpers::is_theme_twentytwentyfive()) {
@@ -79,8 +79,8 @@ class Solarplexus_Public {
 				SPLX_PLUGIN_DIR_URL . 'public/themes/twentytwentyfive.css',
 				[],
 				filemtime(
-					SPLX_PLUGIN_PATH . 'public/themes/twentytwentyfive.css'
-				)
+					SPLX_PLUGIN_PATH . 'public/themes/twentytwentyfive.css',
+				),
 			);
 		}
 	}

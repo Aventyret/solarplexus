@@ -70,7 +70,7 @@ class Solarplexus_Block_Attrs_Definition {
 	protected function get_single_of_config_arr_or_single(
 		$config_key,
 		$fallback = null,
-		$get_last_if_array = false
+		$get_last_if_array = false,
 	) {
 		if (!array_key_exists($config_key, $this->config)) {
 			return $fallback;
@@ -99,7 +99,7 @@ class Solarplexus_Block_Attrs_Definition {
 	private function set_no_of_posts() {
 		$this->no_of_posts = self::build_attribute(
 			'integer',
-			$this->get_single_of_config_arr_or_single('noOfPosts', -1, true)
+			$this->get_single_of_config_arr_or_single('noOfPosts', -1, true),
 		);
 	}
 
@@ -113,12 +113,12 @@ class Solarplexus_Block_Attrs_Definition {
 			if (array_key_exists('choices', $control)) {
 				$custom_controls[$control['id']] = self::build_attribute(
 					'string',
-					$control['choices'][0]['value']
+					$control['choices'][0]['value'],
 				);
 			} else {
 				$custom_controls[$control['id']] = self::build_attribute(
 					'string',
-					''
+					'',
 				);
 			}
 		}

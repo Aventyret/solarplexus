@@ -53,7 +53,7 @@ class Solarplexus_Loader {
 		$component,
 		$callback,
 		$priority = 10,
-		$accepted_args = 1
+		$accepted_args = 1,
 	) {
 		$this->actions = $this->add(
 			$this->actions,
@@ -61,7 +61,7 @@ class Solarplexus_Loader {
 			$component,
 			$callback,
 			$priority,
-			$accepted_args
+			$accepted_args,
 		);
 	}
 
@@ -80,7 +80,7 @@ class Solarplexus_Loader {
 		$component,
 		$callback,
 		$priority = 10,
-		$accepted_args = 1
+		$accepted_args = 1,
 	) {
 		$this->filters = $this->add(
 			$this->filters,
@@ -88,7 +88,7 @@ class Solarplexus_Loader {
 			$component,
 			$callback,
 			$priority,
-			$accepted_args
+			$accepted_args,
 		);
 	}
 
@@ -112,7 +112,7 @@ class Solarplexus_Loader {
 		$component,
 		$callback,
 		$priority,
-		$accepted_args
+		$accepted_args,
 	) {
 		$hooks[] = [
 			'hook' => $hook,
@@ -136,7 +136,7 @@ class Solarplexus_Loader {
 				$hook['hook'],
 				[$hook['component'], $hook['callback']],
 				$hook['priority'],
-				$hook['accepted_args']
+				$hook['accepted_args'],
 			);
 		}
 
@@ -145,7 +145,7 @@ class Solarplexus_Loader {
 				$hook['hook'],
 				[$hook['component'], $hook['callback']],
 				$hook['priority'],
-				$hook['accepted_args']
+				$hook['accepted_args'],
 			);
 		}
 	}

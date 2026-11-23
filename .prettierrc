@@ -1,2 +1,4 @@
 singleQuote: true
 braceStyle: 1tbs
+plugins:
+  - '@prettier/plugin-php'
